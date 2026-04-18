@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+
+# uv (optional local overrides only; commit uv.lock)
+.python-version-local
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+
+# Tests / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Local vectorstores / large artifacts (adjust when paths are defined)
+# data/vectorstore/
