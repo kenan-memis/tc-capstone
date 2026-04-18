@@ -1,0 +1,8 @@
+# Runtime tunables (models, Streamlit chrome). Extend as the app grows.
+
+page_title: PlanMyBerlin
+page_icon: 🗺️
+layout: wide
+
+models:
+  openai_default: gpt-4o-mini

@@ -31,6 +31,15 @@ Guidance for AI coding agents and contributors. This file lives at the **git rep
 - **Single-day:** no default accommodation; include only if the user indicates need or enables it.  
 - **Never** booking — links and planning only.
 
+## Secrets and environment variables
+
+- **Never commit** `.env`. Commit **`.env.example`** only (with empty values).
+- **Variable names** match Sprint 2 PlanMyBerlin so the same code works locally and on GCP:
+  - `OPENAI_API_KEY`
+  - `GEMINI_API_KEY` **or** `GOOGLE_API_KEY` for Gemini (Sprint 2 accepts either in several code paths).
+- **Local dev:** copy `.env.example` → `.env` and fill keys. `main.py` calls `load_dotenv()` so a `.env` file is picked up automatically (Sprint 2 relied on `os.getenv` checks in the UI but did not call `load_dotenv` in-repo; we add `python-dotenv` here for the same filenames without changing production behavior).
+- **Production (Cloud Run + Secret Manager):** store secrets in Secret Manager and deploy with `--set-secrets` (or equivalent) so **cloud runtime env vars use the same names** — e.g. `OPENAI_API_KEY=OPENAI_API_KEY:latest`. No code branch should read secrets from disk in production.
+
 ## Commands (uv)
 
 ```bash
@@ -42,8 +51,7 @@ uv run python main.py
 
 ## When changing the LangGraph
 
-- Update or add exports under `docs/graphs/`.  
-- Prefer a small script (e.g. `scripts/export_graph_visuals.py`) once the graph module exists.
+- Regenerate docs: `uv run planmyberlin-export-graphs` (implementation: `planmyberlin/cli/export_graphs.py`).
 
 ## Out of scope
 

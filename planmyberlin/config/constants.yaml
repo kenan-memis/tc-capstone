@@ -1,0 +1,8 @@
+# UI copy and labels (avoid hard-coded strings in Python).
+
+hero_title: PlanMyBerlin
+hero_subtitle: Berlin trip planner — LangGraph scaffold (planner only; no booking).
+
+stub_banner: >-
+  This build proves Streamlit + YAML config + LangGraph conditional routing.
+  Full itinerary, RAG, and APIs are the next milestones.
