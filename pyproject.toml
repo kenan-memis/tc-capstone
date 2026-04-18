@@ -39,7 +39,7 @@ testpaths = ["tests"]
 
 [tool.ruff]
 target-version = "py311"
-src = ["planmyberlin", "tests", "scripts"]
+src = ["planmyberlin", "tests"]
 
 [tool.ruff.lint]
 select = ["F", "E9"]

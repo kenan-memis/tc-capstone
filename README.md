@@ -24,3 +24,19 @@ uv run pytest
 ```
 
 Copy `.env.example` to `.env` and set API keys (`OPENAI_API_KEY`, and optionally `GEMINI_API_KEY` or `GOOGLE_API_KEY`). For production on Google Cloud Run, inject the **same variable names** via Secret Manager.
+
+## Docker (local, same layout as Sprint 3)
+
+From this directory (`capstone-project/`), with `.env` present:
+
+```bash
+docker compose up --build
+```
+
+Open Streamlit at `http://localhost:8080`. Production images build with `INSTALL_DEV=false` (omit pytest/ruff); Compose sets `INSTALL_DEV=true` so you can optionally `docker compose run --rm app pytest` once a test command is wired into the image, or run tests on the host with `uv run pytest`.
+
+Build a production-style image locally:
+
+```bash
+docker build -t planmyberlin:prod .
+```

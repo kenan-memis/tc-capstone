@@ -1,0 +1,23 @@
+# Local environments
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Git / editor
+.git/
+.gitignore
+.cursor/
+
+# Secrets (never bake into the image)
+.env
+.env.local
+.env.*.local
+
+# Optional: local runtime data (add paths when used)
+# data/memory/
+# data/vectorstore/
+
+# Not needed in the image for running the app
+tests/
+docs/

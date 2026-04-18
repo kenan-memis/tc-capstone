@@ -1,0 +1,12 @@
+# Local development: Streamlit + optional API keys from `.env`.
+# Build includes dev dependencies (pytest, ruff) for compose-run commands.
+services:
+  app:
+    build:
+      context: .
+      args:
+        INSTALL_DEV: "true"
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
