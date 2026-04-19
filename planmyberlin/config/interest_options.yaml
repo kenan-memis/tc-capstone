@@ -1,0 +1,23 @@
+# Predefined interest tags (multiselect in UI). Add or reorder without code changes.
+items:
+  - Museums & galleries
+  - History & memorials
+  - Art & design
+  - Nightlife & clubs
+  - Food & dining
+  - Coffee & cafés
+  - Beer gardens & local beer
+  - Parks, gardens & nature
+  - Lakes, river & outdoor swim
+  - Shopping & markets
+  - Architecture & iconic sights
+  - Film & cinema
+  - Live music & concerts
+  - Family-friendly
+  - LGBTQ+ friendly venues & events
+  - Street art & urban culture
+  - Cycling & walking routes
+  - Photography spots
+  - Day trips nearby
+  - Wellness & spas
+  - Sports & wellness

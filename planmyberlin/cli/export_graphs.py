@@ -17,10 +17,10 @@ def main() -> None:
     app = build_planner_graph()
     graph = app.get_graph()
 
-    png_path = out_dir / "planner_stub.png"
+    png_path = out_dir / "planner_workflow.png"
     png_path.write_bytes(graph.draw_mermaid_png())
 
-    mmd_path = out_dir / "planner_stub.mmd"
+    mmd_path = out_dir / "planner_workflow.mmd"
     mmd_path.write_text(graph.draw_mermaid(), encoding="utf-8")
 
     print(f"Wrote {png_path}")

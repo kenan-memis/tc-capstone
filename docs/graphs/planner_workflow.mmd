@@ -1,0 +1,26 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	normalize_profile(normalize_profile)
+	multi_day_track(multi_day_track)
+	single_day_track(single_day_track)
+	merge(merge)
+	accommodation(accommodation)
+	skip_accommodation(skip_accommodation)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> normalize_profile;
+	merge -.-> accommodation;
+	merge -.-> skip_accommodation;
+	multi_day_track --> merge;
+	normalize_profile -. &nbsp;multi_day&nbsp; .-> multi_day_track;
+	normalize_profile -. &nbsp;single_day&nbsp; .-> single_day_track;
+	single_day_track --> merge;
+	accommodation --> __end__;
+	skip_accommodation --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

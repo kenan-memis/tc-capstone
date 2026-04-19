@@ -1,8 +1,36 @@
-# UI copy and labels (avoid hard-coded strings in Python).
+# UI copy for travelers (avoid internal / reviewer jargon).
 
 hero_title: PlanMyBerlin
-hero_subtitle: Berlin trip planner — LangGraph scaffold (planner only; no booking).
+hero_subtitle: Berlin trip planner (planner only, no booking)
 
-stub_banner: >-
-  This build proves Streamlit + YAML config + LangGraph conditional routing.
-  Full itinerary, RAG, and APIs are the next milestones.
+info_banner: >-
+  Choose the options that fit you. Use the box at the bottom only for anything that is not covered above.
+
+section_plan: Your trip
+
+label_days: How many days?
+label_party: How many people?
+label_interests: What interests you?
+help_interests: Choose everything that applies — you can select multiple.
+label_neighbourhoods: Which parts of Berlin?
+help_neighbourhoods: Choose areas you want to explore — you can select multiple.
+label_budget: Budget style
+label_pace: Daily pace
+label_dietary: Food & diet
+help_dietary: >-
+  Shapes restaurant and café suggestions. This is not medical or allergy advice — add allergies in extra details below.
+label_mobility: Walking & getting around
+help_mobility: >-
+  Helps us bias toward shorter walking days, fewer stairs, calmer routes, or step-free segments when possible. It is not a guarantee of accessibility for every venue.
+label_accommodation: Show hotel and guesthouse ideas (links only — we never book)
+help_accommodation: >-
+  For trips of two or more days we turn this on by default. For a single day we leave it off
+  unless you need an overnight stay.
+
+label_notes: Extra context / other details
+help_notes: >-
+  Allergies, specific must-sees, dates, mobility details not listed above, or anything else we should know.
+
+button_run: Build my plan (preview)
+
+section_result: Plan preview

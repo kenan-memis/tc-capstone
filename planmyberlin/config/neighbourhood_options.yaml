@@ -1,0 +1,35 @@
+# Berlin areas for multiselect (Bezirke + well-known Kieze). Trim later if the list feels long.
+items:
+  - Alexanderplatz & Mitte core
+  - Charlottenburg
+  - Charlottenburg-Wilmersdorf (overall)
+  - Dahlem & Zehlendorf south
+  - Friedrichshain
+  - Friedrichshain-Kreuzberg (overall)
+  - Grunewald
+  - Hellersdorf
+  - Hohenschönhausen
+  - Karlshorst
+  - Köpenick & Treptow
+  - Kreuzberg
+  - Lichtenberg
+  - Marzahn
+  - Mitte (overall)
+  - Moabit & Hansaviertel
+  - Neukölln
+  - Nord-Neukölln & Reuterkiez
+  - Niederschönhausen & Pankow north
+  - Pankow (overall)
+  - Prenzlauer Berg
+  - Reinickendorf (overall)
+  - Schöneberg
+  - Spandau (overall)
+  - Steglitz
+  - Tempelhof & Mariendorf
+  - Tempelhof-Schöneberg (overall)
+  - Tiergarten
+  - Treptow-Köpenick (overall)
+  - Wedding & Gesundbrunnen
+  - Weißensee
+  - Wilmersdorf
+  - Wittenau & Reinickendorf north

@@ -32,6 +32,10 @@ packages = ["planmyberlin"]
 [tool.hatch.build.targets.wheel.force-include]
 "planmyberlin/config/settings.yaml" = "planmyberlin/config/settings.yaml"
 "planmyberlin/config/constants.yaml" = "planmyberlin/config/constants.yaml"
+"planmyberlin/config/interest_options.yaml" = "planmyberlin/config/interest_options.yaml"
+"planmyberlin/config/neighbourhood_options.yaml" = "planmyberlin/config/neighbourhood_options.yaml"
+"planmyberlin/config/dietary_options.yaml" = "planmyberlin/config/dietary_options.yaml"
+"planmyberlin/config/mobility_options.yaml" = "planmyberlin/config/mobility_options.yaml"
 "planmyberlin/prompts/prompts.yaml" = "planmyberlin/prompts/prompts.yaml"
 
 [tool.pytest.ini_options]
