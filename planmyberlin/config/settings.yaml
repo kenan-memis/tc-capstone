@@ -16,3 +16,8 @@ retrieval:
   chroma_persist_dir: data/vectorstore/chroma
   chroma_collection: berlin_seed_v1
   chroma_force_rebuild: false
+
+weather:
+  city: Berlin
+  units: metric
+  timeout_seconds: 8

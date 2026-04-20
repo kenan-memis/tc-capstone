@@ -151,6 +151,14 @@ def main() -> None:
         if fallback_reason:
             st.warning(f"Retriever fallback: {fallback_reason}")
 
+        weather_summary = str(result.get("weather_summary", "")).strip()
+        if weather_summary:
+            st.markdown(f"**{constants.get('section_weather', 'Weather signal')}:** {weather_summary}")
+            st.caption(
+                f"{constants.get('label_weather_bias', 'Planning bias')}: "
+                f"{result.get('weather_bias', 'unknown')}"
+            )
+
         if retrieved_items:
             with st.expander("Retrieved places and restaurants", expanded=True):
                 for item in retrieved_items:

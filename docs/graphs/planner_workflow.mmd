@@ -7,6 +7,7 @@ graph TD;
 	__start__([<p>__start__</p>]):::first
 	normalize_profile(normalize_profile)
 	retrieve_context(retrieve_context)
+	fetch_weather(fetch_weather)
 	multi_day_track(multi_day_track)
 	single_day_track(single_day_track)
 	merge(merge)
@@ -14,12 +15,13 @@ graph TD;
 	skip_accommodation(skip_accommodation)
 	__end__([<p>__end__</p>]):::last
 	__start__ --> normalize_profile;
+	fetch_weather -. &nbsp;multi_day&nbsp; .-> multi_day_track;
+	fetch_weather -. &nbsp;single_day&nbsp; .-> single_day_track;
 	merge -.-> accommodation;
 	merge -.-> skip_accommodation;
 	multi_day_track --> merge;
 	normalize_profile --> retrieve_context;
-	retrieve_context -. &nbsp;multi_day&nbsp; .-> multi_day_track;
-	retrieve_context -. &nbsp;single_day&nbsp; .-> single_day_track;
+	retrieve_context --> fetch_weather;
 	single_day_track --> merge;
 	accommodation --> __end__;
 	skip_accommodation --> __end__;

@@ -34,3 +34,5 @@ help_notes: >-
 button_run: Build my plan (preview)
 
 section_result: Plan preview
+section_weather: Weather signal
+label_weather_bias: Planning bias

@@ -1,4 +1,4 @@
-"""LangGraph planner workflow — profile normalization, retrieval, routing, accommodation gate.
+"""LangGraph planner workflow — profile normalization, retrieval, weather bias, routing, accommodation gate.
 
 Retrieval prefers Chroma when configured and index is ready, and falls back to seed retrieval.
 """
@@ -12,6 +12,7 @@ from langgraph.graph import END, START, StateGraph
 from planmyberlin.config.loader import get_settings
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.rag import retrieve_context
+from planmyberlin.weather import fetch_weather_context
 
 
 class PlannerState(TypedDict, total=False):
@@ -22,11 +23,18 @@ class PlannerState(TypedDict, total=False):
     run_accommodation: bool
     routing_trace: list[str]
     accommodation_outcome: Literal["accommodation", "skip_accommodation"]
+
     retrieved_items: list[dict[str, Any]]
     retrieved_citations: list[str]
     retrieved_count: int
     retrieval_backend: Literal["seed", "chroma"]
     retrieval_fallback_reason: str
+
+    weather_status: Literal["ok", "unavailable"]
+    weather_summary: str
+    weather_condition_main: str
+    weather_temperature_c: float | None
+    weather_bias: Literal["indoor", "outdoor_or_mixed", "unknown"]
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -63,6 +71,26 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
 
     trace = list(out.get("routing_trace", []))
     trace.append(f"{out['retrieval_backend']}_retrieval:{out['retrieved_count']}")
+    out["routing_trace"] = trace
+    return out
+
+
+def _fetch_weather(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    cfg = get_settings().get("weather", {})
+    city = str(cfg.get("city", "Berlin"))
+    units = str(cfg.get("units", "metric"))
+    timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
+
+    payload = fetch_weather_context(city=city, units=units, timeout_seconds=timeout_seconds)
+    out["weather_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
+    out["weather_summary"] = str(payload.get("summary", "Weather unavailable."))
+    out["weather_condition_main"] = str(payload.get("condition_main", "unknown"))
+    out["weather_temperature_c"] = payload.get("temperature_c") if isinstance(payload.get("temperature_c"), (int, float)) else None
+    out["weather_bias"] = str(payload.get("bias", "unknown"))  # type: ignore[assignment]
+
+    trace = list(out.get("routing_trace", []))
+    trace.append(f"weather:{out['weather_condition_main']}:{out['weather_bias']}")
     out["routing_trace"] = trace
     return out
 
@@ -119,11 +147,12 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
 
 
 def build_planner_graph():
-    """Compile planner graph: normalize → retrieve → trip branch → accommodation branch."""
+    """Compile planner graph: normalize → retrieve → weather → trip branch → accommodation branch."""
     g = StateGraph(PlannerState)
 
     g.add_node("normalize_profile", _normalize_profile)
     g.add_node("retrieve_context", _retrieve_context)
+    g.add_node("fetch_weather", _fetch_weather)
     g.add_node("multi_day_track", _multi_day_track)
     g.add_node("single_day_track", _single_day_track)
     g.add_node("merge", _merge_identity)
@@ -132,8 +161,9 @@ def build_planner_graph():
 
     g.add_edge(START, "normalize_profile")
     g.add_edge("normalize_profile", "retrieve_context")
+    g.add_edge("retrieve_context", "fetch_weather")
     g.add_conditional_edges(
-        "retrieve_context",
+        "fetch_weather",
         _route_stay_length,
         {"multi_day": "multi_day_track", "single_day": "single_day_track"},
     )
