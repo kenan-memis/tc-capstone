@@ -1,7 +1,6 @@
 """LangGraph planner workflow — profile normalization, retrieval, routing, accommodation gate.
 
-Current retrieval is deterministic over curated seed YAML records. Later milestones can
-replace it with a vector retriever while keeping the same state contracts.
+Retrieval prefers Chroma when configured and index is ready, and falls back to seed retrieval.
 """
 
 from __future__ import annotations
@@ -12,7 +11,7 @@ from langgraph.graph import END, START, StateGraph
 
 from planmyberlin.config.loader import get_settings
 from planmyberlin.models.trip_profile import TripProfile
-from planmyberlin.rag import retrieve_seed_context
+from planmyberlin.rag import retrieve_context
 
 
 class PlannerState(TypedDict, total=False):
@@ -26,6 +25,8 @@ class PlannerState(TypedDict, total=False):
     retrieved_items: list[dict[str, Any]]
     retrieved_citations: list[str]
     retrieved_count: int
+    retrieval_backend: Literal["seed", "chroma"]
+    retrieval_fallback_reason: str
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -51,14 +52,17 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
 
     profile = TripProfile.model_validate(raw)
     retrieval_cfg = get_settings().get("retrieval", {})
-    limit = int(retrieval_cfg.get("seed_limit", 8))
-    payload = retrieve_seed_context(profile, limit=limit)
+    payload = retrieve_context(profile, retrieval_cfg=retrieval_cfg)
 
     out["retrieved_items"] = list(payload.get("items", []))
     out["retrieved_citations"] = list(payload.get("citations", []))
     out["retrieved_count"] = len(out["retrieved_items"])
+    out["retrieval_backend"] = str(payload.get("backend", "seed"))  # type: ignore[assignment]
+    if payload.get("fallback_reason"):
+        out["retrieval_fallback_reason"] = str(payload["fallback_reason"])
+
     trace = list(out.get("routing_trace", []))
-    trace.append(f"seed_retrieval:{out['retrieved_count']}")
+    trace.append(f"{out['retrieval_backend']}_retrieval:{out['retrieved_count']}")
     out["routing_trace"] = trace
     return out
 

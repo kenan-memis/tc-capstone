@@ -143,8 +143,14 @@ def main() -> None:
         result = graph.invoke({"profile": profile.model_dump()})
         st.subheader(str(constants.get("section_result", "Plan preview")))
 
+        backend = str(result.get("retrieval_backend", "seed"))
         retrieved_items = list(result.get("retrieved_items", []))
-        st.caption(f"Retrieved context items: {len(retrieved_items)}")
+        st.caption(f"Retrieved context items: {len(retrieved_items)} (backend: {backend})")
+
+        fallback_reason = str(result.get("retrieval_fallback_reason", "")).strip()
+        if fallback_reason:
+            st.warning(f"Retriever fallback: {fallback_reason}")
+
         if retrieved_items:
             with st.expander("Retrieved places and restaurants", expanded=True):
                 for item in retrieved_items:

@@ -2,7 +2,7 @@
 
 This project builds a **Berlin trip planning assistant** that combines curated knowledge with live APIs for transport, places, and weather. It uses **LangGraph** for agent-style orchestration (conditional routing and tool calls), **Streamlit** for the UI, and **YAML** for prompts and configuration. The assistant is **informational only**: it suggests where to go, how to move, what to eat, and where to stay using **links** — it does **not** perform bookings.
 
-The repository currently includes a **LangGraph workflow** (normalize profile → seed retrieval → multi-day vs single-day branches → accommodation gate), a Streamlit **preferences form** (YAML-driven copy; predefined interests and Berlin areas), and a **structured seed RAG corpus** under `data/raw/` for places/restaurants/transport context. Retrieved items are shown in the UI preview for transparency. Later milestones add external APIs (BVG, Places, weather), maps, and full itinerary generation.
+The repository currently includes a **LangGraph workflow** (normalize profile → retrieval → multi-day vs single-day branches → accommodation gate), a Streamlit **preferences form** (YAML-driven copy; predefined interests and Berlin areas), and a **structured seed RAG corpus** under `data/raw/` for places/restaurants/transport context. Retrieval backend is configurable: `auto` (prefer Chroma index if available, fallback to seed), `chroma`, or `seed`. Retrieved items are shown in the UI preview for transparency. Later milestones add external APIs (BVG, Places, weather), maps, and full itinerary generation.
 
 ## Run locally
 
@@ -16,6 +16,13 @@ Export graph visuals (PNG + Mermaid):
 ```bash
 uv run planmyberlin-export-graphs
 ```
+
+Build/update local Chroma index from seed data:
+
+```bash
+uv run planmyberlin-build-index
+```
+
 
 Tests:
 

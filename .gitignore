@@ -26,5 +26,5 @@ htmlcov/
 # Streamlit
 .streamlit/secrets.toml
 
-# Local vectorstores / large artifacts (adjust when paths are defined)
-# data/vectorstore/
+# Local vectorstores / large artifacts
+data/vectorstore/

@@ -8,4 +8,11 @@ models:
   openai_default: gpt-4o-mini
 
 retrieval:
+  # auto: use chroma if index exists, else seed fallback
+  # chroma: require chroma index (raise if unavailable)
+  # seed: deterministic metadata retriever only
+  backend: auto
   seed_limit: 8
+  chroma_persist_dir: data/vectorstore/chroma
+  chroma_collection: berlin_seed_v1
+  chroma_force_rebuild: false

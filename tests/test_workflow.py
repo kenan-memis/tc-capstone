@@ -29,6 +29,7 @@ def test_multi_day_with_accommodation() -> None:
     assert "multi_day_context" in out["routing_trace"]
     assert "accommodation_suggestions_on" in out["routing_trace"]
     assert out["retrieved_count"] >= 1
+    assert out["retrieval_backend"] in {"seed", "chroma"}
 
 
 def test_multi_day_without_accommodation() -> None:
@@ -57,7 +58,7 @@ def test_single_day_with_accommodation_when_requested() -> None:
 def test_retrieval_trace_marker_present() -> None:
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=2)})
-    assert any(str(x).startswith("seed_retrieval:") for x in out["routing_trace"])
+    assert any(str(x).endswith(f":{out['retrieved_count']}") for x in out["routing_trace"])
 
 
 def test_normalize_requires_profile() -> None:

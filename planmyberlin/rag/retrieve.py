@@ -1,7 +1,6 @@
 """Deterministic seed retrieval over structured YAML records.
 
-This is the first RAG step: metadata-aware retrieval from curated local content.
-A vector DB retriever can replace this module later without changing graph state shape.
+This remains the fallback path even after adding Chroma.
 """
 
 from __future__ import annotations
@@ -20,7 +19,8 @@ _TOKEN_RE = re.compile(r"[a-zA-Z0-9]+")
 
 
 @lru_cache
-def _load_seed_records() -> list[dict[str, Any]]:
+def load_seed_records() -> list[dict[str, Any]]:
+    """Load and normalize YAML records under `data/raw` into flat dictionaries."""
     records: list[dict[str, Any]] = []
     for path in sorted(_SEED_ROOT.glob("**/*.yaml")):
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -53,7 +53,6 @@ def _interest_keywords(profile: TripProfile) -> set[str]:
     kw: set[str] = set()
     for label in profile.interest_tags:
         kw.update(_tokens(label))
-    # Keep only meaningful keywords (drop tiny tokens)
     return {k for k in kw if len(k) >= 4}
 
 
@@ -79,7 +78,6 @@ def _score_record(rec: dict[str, Any], *, interest_kw: set[str], district_kw: se
     overlap = interest_kw.intersection(tag_kw.union(name_kw))
     score += float(len(overlap)) * 1.5
 
-    # slight category balancing bonus so results are not all one type
     category = str(rec.get("category", ""))
     if category in {"places", "restaurants"}:
         score += 0.3
@@ -88,13 +86,8 @@ def _score_record(rec: dict[str, Any], *, interest_kw: set[str], district_kw: se
 
 
 def retrieve_seed_context(profile: TripProfile, *, limit: int = 8) -> dict[str, Any]:
-    """Return ranked seed records with lightweight source metadata.
-
-    Output keys:
-    - items: ranked list of context records
-    - citations: compact strings for UI/debug
-    """
-    records = _load_seed_records()
+    """Return ranked seed records with lightweight source metadata."""
+    records = load_seed_records()
     interest_kw = _interest_keywords(profile)
     district_kw = _district_keywords(profile)
 
@@ -128,4 +121,9 @@ def retrieve_seed_context(profile: TripProfile, *, limit: int = 8) -> dict[str, 
         for it in top
     ]
 
-    return {"items": top, "citations": citations, "total_records": len(records)}
+    return {
+        "items": top,
+        "citations": citations,
+        "total_records": len(records),
+        "backend": "seed",
+    }
