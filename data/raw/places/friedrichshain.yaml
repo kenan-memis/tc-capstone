@@ -1,0 +1,27 @@
+district: Friedrichshain
+category: places
+items:
+  - id: place.friedrichshain.east_side_gallery
+    name: East Side Gallery
+    type: Street art / wall
+    tags: [history, street_art, outdoor, iconic]
+    indoor_outdoor: outdoor
+    typical_visit_minutes: 90
+    summary: Long open-air Berlin Wall section with murals; strong historical and visual value.
+    source_note: Seed curated dataset v1
+  - id: place.friedrichshain.boxhagener_platz
+    name: Boxhagener Platz
+    type: Square / market
+    tags: [local, market, relaxed, food]
+    indoor_outdoor: mixed
+    typical_visit_minutes: 75
+    summary: Neighborhood square known for local markets and nearby cafes.
+    source_note: Seed curated dataset v1
+  - id: place.friedrichshain.oberbaum_bridge
+    name: Oberbaum Bridge
+    type: Bridge / landmark
+    tags: [architecture, history, scenic, walking]
+    indoor_outdoor: outdoor
+    typical_visit_minutes: 45
+    summary: Iconic bridge connecting Friedrichshain and Kreuzberg; often used as a scenic transition point.
+    source_note: Seed curated dataset v1

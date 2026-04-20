@@ -1,0 +1,18 @@
+category: transport
+city: Berlin
+items:
+  - id: transport.berlin.general_pt
+    title: Public transport basics
+    tags: [transport, metro, bus, tram]
+    summary: Berlin public transport is centered around U-Bahn, S-Bahn, trams, and buses; short transfers often work best when planned around major hubs.
+    source_note: Seed curated dataset v1
+  - id: transport.berlin.walking_density
+    title: Walking density guidance
+    tags: [walking, pace, accessibility]
+    summary: Dense central neighborhoods are walkable, but combining too many districts in one day increases transit overhead and fatigue.
+    source_note: Seed curated dataset v1
+  - id: transport.berlin.rush_hours
+    title: Rush-hour caution
+    tags: [transport, timing]
+    summary: Morning and evening rush periods can increase transfer and platform congestion; add time buffers for fixed reservations or events.
+    source_note: Seed curated dataset v1

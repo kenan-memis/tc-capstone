@@ -1,0 +1,30 @@
+district: Kreuzberg
+category: restaurants
+items:
+  - id: restaurant.kreuzberg.mustafas_gemuse_kebap
+    name: Mustafa's Gemüse Kebap
+    type: Street food
+    cuisine: Turkish / döner
+    price_level: $
+    tags: [quick, popular, casual, food]
+    indoor_outdoor: outdoor
+    summary: Famous döner stop, usually with long queues but highly rated by visitors and locals.
+    source_note: Seed curated dataset v1
+  - id: restaurant.kreuzberg.burgermeister
+    name: Burgermeister
+    type: Street food
+    cuisine: Burgers
+    price_level: $
+    tags: [quick, casual, popular, food]
+    indoor_outdoor: mixed
+    summary: Strong quick-meal option in Kreuzberg, good for packed itineraries.
+    source_note: Seed curated dataset v1
+  - id: restaurant.kreuzberg.cafe_am_engelbecken
+    name: Café am Engelbecken
+    type: Café / brunch
+    cuisine: Café
+    price_level: $$
+    tags: [relaxed, scenic, brunch, coffee]
+    indoor_outdoor: mixed
+    summary: Waterside cafe suitable for slower pace mornings or afternoon breaks.
+    source_note: Seed curated dataset v1

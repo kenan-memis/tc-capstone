@@ -1,6 +1,7 @@
-"""LangGraph planner workflow — profile normalization, trip-length routing, accommodation gate.
+"""LangGraph planner workflow — profile normalization, retrieval, routing, accommodation gate.
 
-Later milestones attach RAG, Places, BVG, and synthesis nodes to this skeleton.
+Current retrieval is deterministic over curated seed YAML records. Later milestones can
+replace it with a vector retriever while keeping the same state contracts.
 """
 
 from __future__ import annotations
@@ -9,7 +10,9 @@ from typing import Any, Literal, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
+from planmyberlin.config.loader import get_settings
 from planmyberlin.models.trip_profile import TripProfile
+from planmyberlin.rag import retrieve_seed_context
 
 
 class PlannerState(TypedDict, total=False):
@@ -20,6 +23,9 @@ class PlannerState(TypedDict, total=False):
     run_accommodation: bool
     routing_trace: list[str]
     accommodation_outcome: Literal["accommodation", "skip_accommodation"]
+    retrieved_items: list[dict[str, Any]]
+    retrieved_citations: list[str]
+    retrieved_count: int
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -35,6 +41,26 @@ def _normalize_profile(state: PlannerState) -> PlannerState:
         "run_accommodation": profile.include_accommodation,
         "routing_trace": ["normalized"],
     }
+
+
+def _retrieve_context(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    raw = out.get("profile")
+    if not isinstance(raw, dict):
+        raise ValueError("profile must be present before retrieve_context")
+
+    profile = TripProfile.model_validate(raw)
+    retrieval_cfg = get_settings().get("retrieval", {})
+    limit = int(retrieval_cfg.get("seed_limit", 8))
+    payload = retrieve_seed_context(profile, limit=limit)
+
+    out["retrieved_items"] = list(payload.get("items", []))
+    out["retrieved_citations"] = list(payload.get("citations", []))
+    out["retrieved_count"] = len(out["retrieved_items"])
+    trace = list(out.get("routing_trace", []))
+    trace.append(f"seed_retrieval:{out['retrieved_count']}")
+    out["routing_trace"] = trace
+    return out
 
 
 def _multi_day_track(state: PlannerState) -> PlannerState:
@@ -89,10 +115,11 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
 
 
 def build_planner_graph():
-    """Compile the planner graph: normalize → trip length branch → accommodation branch."""
+    """Compile planner graph: normalize → retrieve → trip branch → accommodation branch."""
     g = StateGraph(PlannerState)
 
     g.add_node("normalize_profile", _normalize_profile)
+    g.add_node("retrieve_context", _retrieve_context)
     g.add_node("multi_day_track", _multi_day_track)
     g.add_node("single_day_track", _single_day_track)
     g.add_node("merge", _merge_identity)
@@ -100,8 +127,9 @@ def build_planner_graph():
     g.add_node("skip_accommodation", _skip_accommodation)
 
     g.add_edge(START, "normalize_profile")
+    g.add_edge("normalize_profile", "retrieve_context")
     g.add_conditional_edges(
-        "normalize_profile",
+        "retrieve_context",
         _route_stay_length,
         {"multi_day": "multi_day_track", "single_day": "single_day_track"},
     )

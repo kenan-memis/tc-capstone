@@ -1,0 +1,27 @@
+district: Kreuzberg
+category: places
+items:
+  - id: place.kreuzberg.gorlitzer_park
+    name: Görlitzer Park
+    type: Park
+    tags: [outdoor, local, relaxed, nature]
+    indoor_outdoor: outdoor
+    typical_visit_minutes: 90
+    summary: Lively local park with open space and casual atmosphere, especially popular in warmer months.
+    source_note: Seed curated dataset v1
+  - id: place.kreuzberg.markthalle_neun
+    name: Markthalle Neun
+    type: Food market
+    tags: [food, indoor, local, market]
+    indoor_outdoor: indoor
+    typical_visit_minutes: 90
+    summary: Historic market hall with diverse vendors and strong local food scene.
+    source_note: Seed curated dataset v1
+  - id: place.kreuzberg.viktoriapark
+    name: Viktoriapark
+    type: Park / viewpoint
+    tags: [nature, viewpoint, outdoor, walking]
+    indoor_outdoor: outdoor
+    typical_visit_minutes: 75
+    summary: Hilltop park with city views and a waterfall; calmer than busier central parks.
+    source_note: Seed curated dataset v1

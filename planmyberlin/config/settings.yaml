@@ -6,3 +6,6 @@ layout: wide
 
 models:
   openai_default: gpt-4o-mini
+
+retrieval:
+  seed_limit: 8

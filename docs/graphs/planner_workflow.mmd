@@ -6,6 +6,7 @@ config:
 graph TD;
 	__start__([<p>__start__</p>]):::first
 	normalize_profile(normalize_profile)
+	retrieve_context(retrieve_context)
 	multi_day_track(multi_day_track)
 	single_day_track(single_day_track)
 	merge(merge)
@@ -16,8 +17,9 @@ graph TD;
 	merge -.-> accommodation;
 	merge -.-> skip_accommodation;
 	multi_day_track --> merge;
-	normalize_profile -. &nbsp;multi_day&nbsp; .-> multi_day_track;
-	normalize_profile -. &nbsp;single_day&nbsp; .-> single_day_track;
+	normalize_profile --> retrieve_context;
+	retrieve_context -. &nbsp;multi_day&nbsp; .-> multi_day_track;
+	retrieve_context -. &nbsp;single_day&nbsp; .-> single_day_track;
 	single_day_track --> merge;
 	accommodation --> __end__;
 	skip_accommodation --> __end__;

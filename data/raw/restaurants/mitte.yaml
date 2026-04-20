@@ -1,0 +1,30 @@
+district: Mitte
+category: restaurants
+items:
+  - id: restaurant.mitte.monsieur_vuong
+    name: Monsieur Vuong
+    type: Sit-down
+    cuisine: Vietnamese
+    price_level: $$
+    tags: [casual, popular, quick, food]
+    indoor_outdoor: indoor
+    summary: Well-known Vietnamese restaurant with fresh dishes and fast table turnover.
+    source_note: Seed curated dataset v1
+  - id: restaurant.mitte.zur_letzten_instanz
+    name: Zur letzten Instanz
+    type: Sit-down
+    cuisine: German
+    price_level: $$
+    tags: [traditional, historic, cosy, food]
+    indoor_outdoor: indoor
+    summary: Historic German restaurant suitable for travelers seeking traditional dishes.
+    source_note: Seed curated dataset v1
+  - id: restaurant.mitte.curry_61
+    name: Curry 61
+    type: Street food
+    cuisine: German / currywurst
+    price_level: $
+    tags: [quick, casual, local, budget]
+    indoor_outdoor: mixed
+    summary: Fast and affordable currywurst option near central areas.
+    source_note: Seed curated dataset v1

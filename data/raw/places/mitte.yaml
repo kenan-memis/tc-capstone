@@ -1,0 +1,27 @@
+district: Mitte
+category: places
+items:
+  - id: place.mitte.brandenburg_gate
+    name: Brandenburg Gate
+    type: Landmark
+    tags: [history, iconic, outdoor, architecture]
+    indoor_outdoor: outdoor
+    typical_visit_minutes: 45
+    summary: Symbolic 18th-century gate and reunification landmark; best early morning or late evening.
+    source_note: Seed curated dataset v1
+  - id: place.mitte.museum_island
+    name: Museum Island
+    type: Museum cluster
+    tags: [museums, culture, history, indoor]
+    indoor_outdoor: indoor
+    typical_visit_minutes: 240
+    summary: UNESCO museum complex with multiple major collections; ideal for art and history-focused trips.
+    source_note: Seed curated dataset v1
+  - id: place.mitte.alexanderplatz
+    name: Alexanderplatz
+    type: Square / transport hub
+    tags: [urban, shopping, transport]
+    indoor_outdoor: mixed
+    typical_visit_minutes: 90
+    summary: Central square with shopping and major transit access; good anchor point for multi-stop routes.
+    source_note: Seed curated dataset v1

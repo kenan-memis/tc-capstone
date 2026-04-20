@@ -1,0 +1,30 @@
+district: Friedrichshain
+category: restaurants
+items:
+  - id: restaurant.friedrichshain.silo_coffee
+    name: Silo Coffee
+    type: Café / brunch
+    cuisine: Australian / brunch
+    price_level: $$
+    tags: [brunch, trendy, coffee, popular]
+    indoor_outdoor: indoor
+    summary: Popular brunch and specialty coffee option, often busy on weekends.
+    source_note: Seed curated dataset v1
+  - id: restaurant.friedrichshain.transit_restaurant
+    name: Transit Restaurant
+    type: Sit-down
+    cuisine: Asian fusion
+    price_level: $$
+    tags: [sharing, trendy, dinner, food]
+    indoor_outdoor: indoor
+    summary: Lively dinner venue with shareable plates and social atmosphere.
+    source_note: Seed curated dataset v1
+  - id: restaurant.friedrichshain.scheers_schnitzel
+    name: Scheers Schnitzel
+    type: Sit-down
+    cuisine: German / Austrian
+    price_level: $$
+    tags: [traditional, hearty, casual, food]
+    indoor_outdoor: indoor
+    summary: Hearty central-European dishes, often chosen for classic comfort food.
+    source_note: Seed curated dataset v1

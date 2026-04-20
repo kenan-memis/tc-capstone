@@ -142,6 +142,16 @@ def main() -> None:
         graph = build_planner_graph()
         result = graph.invoke({"profile": profile.model_dump()})
         st.subheader(str(constants.get("section_result", "Plan preview")))
+
+        retrieved_items = list(result.get("retrieved_items", []))
+        st.caption(f"Retrieved context items: {len(retrieved_items)}")
+        if retrieved_items:
+            with st.expander("Retrieved places and restaurants", expanded=True):
+                for item in retrieved_items:
+                    st.markdown(
+                        f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
+                        f" — {item.get('summary','')}"
+                    )
         st.json(result)
 
 
