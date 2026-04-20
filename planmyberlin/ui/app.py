@@ -151,6 +151,17 @@ def main() -> None:
         if fallback_reason:
             st.warning(f"Retriever fallback: {fallback_reason}")
 
+        places_status = str(result.get("places_status", "unavailable"))
+        places_backend = str(result.get("places_backend", "serpapi"))
+        enriched_items = list(result.get("enriched_items", []))
+        st.markdown(
+            f"**{constants.get('section_places', 'Place enrichment')}:** "
+            f"{places_status} ({places_backend}), {len(enriched_items)} items"
+        )
+        places_message = str(result.get("places_message", "")).strip()
+        if places_message and places_status != "ok":
+            st.caption(places_message)
+
         weather_summary = str(result.get("weather_summary", "")).strip()
         if weather_summary:
             st.markdown(f"**{constants.get('section_weather', 'Weather signal')}:** {weather_summary}")
@@ -159,12 +170,18 @@ def main() -> None:
                 f"{result.get('weather_bias', 'unknown')}"
             )
 
-        if retrieved_items:
+        shown_items = enriched_items if enriched_items else retrieved_items
+        if shown_items:
             with st.expander("Retrieved places and restaurants", expanded=True):
-                for item in retrieved_items:
+                for item in shown_items:
+                    coord = ""
+                    lat = item.get("latitude")
+                    lng = item.get("longitude")
+                    if isinstance(lat, (int, float)) and isinstance(lng, (int, float)):
+                        coord = f" [lat={lat:.4f}, lng={lng:.4f}]"
                     st.markdown(
                         f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
-                        f" — {item.get('summary','')}"
+                        f" — {item.get('summary','')}{coord}"
                     )
         st.json(result)
 

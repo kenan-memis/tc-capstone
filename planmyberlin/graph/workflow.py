@@ -1,7 +1,4 @@
-"""LangGraph planner workflow — profile normalization, retrieval, weather bias, routing, accommodation gate.
-
-Retrieval prefers Chroma when configured and index is ready, and falls back to seed retrieval.
-"""
+"""LangGraph planner workflow — profile normalization, retrieval, places enrichment, weather bias, routing, accommodation gate."""
 
 from __future__ import annotations
 
@@ -11,13 +8,12 @@ from langgraph.graph import END, START, StateGraph
 
 from planmyberlin.config.loader import get_settings
 from planmyberlin.models.trip_profile import TripProfile
+from planmyberlin.places import fetch_places_enrichment
 from planmyberlin.rag import retrieve_context
 from planmyberlin.weather import fetch_weather_context
 
 
 class PlannerState(TypedDict, total=False):
-    """State passed between nodes. `profile` is a serialized `TripProfile` dict."""
-
     profile: dict[str, Any]
     trip_track: Literal["multi_day", "single_day"]
     run_accommodation: bool
@@ -29,6 +25,12 @@ class PlannerState(TypedDict, total=False):
     retrieved_count: int
     retrieval_backend: Literal["seed", "chroma"]
     retrieval_fallback_reason: str
+
+    places_status: Literal["ok", "unavailable"]
+    places_backend: str
+    places_message: str
+    enriched_items: list[dict[str, Any]]
+    enriched_count: int
 
     weather_status: Literal["ok", "unavailable"]
     weather_summary: str
@@ -71,6 +73,34 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
 
     trace = list(out.get("routing_trace", []))
     trace.append(f"{out['retrieval_backend']}_retrieval:{out['retrieved_count']}")
+    out["routing_trace"] = trace
+    return out
+
+
+def _enrich_places(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    cfg = get_settings().get("places", {})
+    city = str(cfg.get("city", "Berlin"))
+    timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
+    max_items = int(cfg.get("max_items", 6))
+
+    payload = fetch_places_enrichment(
+        list(out.get("retrieved_items", [])),
+        city=city,
+        timeout_seconds=timeout_seconds,
+        max_items=max_items,
+    )
+
+    out["places_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
+    out["places_backend"] = str(payload.get("backend", "serpapi"))
+    out["places_message"] = str(payload.get("message", ""))
+
+    enriched_items = list(payload.get("enriched_items", []))
+    out["enriched_items"] = enriched_items
+    out["enriched_count"] = len(enriched_items)
+
+    trace = list(out.get("routing_trace", []))
+    trace.append(f"places:{out['places_status']}:{out['enriched_count']}")
     out["routing_trace"] = trace
     return out
 
@@ -147,11 +177,12 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
 
 
 def build_planner_graph():
-    """Compile planner graph: normalize → retrieve → weather → trip branch → accommodation branch."""
+    """Compile planner graph: normalize → retrieve → places → weather → trip branch → accommodation branch."""
     g = StateGraph(PlannerState)
 
     g.add_node("normalize_profile", _normalize_profile)
     g.add_node("retrieve_context", _retrieve_context)
+    g.add_node("enrich_places", _enrich_places)
     g.add_node("fetch_weather", _fetch_weather)
     g.add_node("multi_day_track", _multi_day_track)
     g.add_node("single_day_track", _single_day_track)
@@ -161,7 +192,8 @@ def build_planner_graph():
 
     g.add_edge(START, "normalize_profile")
     g.add_edge("normalize_profile", "retrieve_context")
-    g.add_edge("retrieve_context", "fetch_weather")
+    g.add_edge("retrieve_context", "enrich_places")
+    g.add_edge("enrich_places", "fetch_weather")
     g.add_conditional_edges(
         "fetch_weather",
         _route_stay_length,

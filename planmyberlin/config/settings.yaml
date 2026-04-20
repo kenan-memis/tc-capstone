@@ -17,6 +17,12 @@ retrieval:
   chroma_collection: berlin_seed_v1
   chroma_force_rebuild: false
 
+places:
+  backend: serpapi
+  city: Berlin
+  timeout_seconds: 8
+  max_items: 6
+
 weather:
   city: Berlin
   units: metric
