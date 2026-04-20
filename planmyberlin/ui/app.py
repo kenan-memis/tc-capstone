@@ -24,6 +24,21 @@ def _default_index(options: tuple[str, ...], prefer: str) -> int:
         return 0
 
 
+def _step_label(node_name: str) -> str:
+    labels = {
+        "normalize_profile": "Normalizing your trip preferences",
+        "retrieve_context": "Retrieving matching context",
+        "enrich_places": "Enriching places with live details",
+        "fetch_weather": "Checking current weather",
+        "multi_day_track": "Applying multi-day planning route",
+        "single_day_track": "Applying single-day planning route",
+        "merge": "Merging planning state",
+        "accommodation": "Adding accommodation suggestions",
+        "skip_accommodation": "Skipping accommodation suggestions",
+    }
+    return labels.get(node_name, f"Running {node_name}")
+
+
 def main() -> None:
     settings = get_settings()
     constants = get_constants()
@@ -140,7 +155,21 @@ def main() -> None:
             extra_details=extra_details,
         )
         graph = build_planner_graph()
-        result = graph.invoke({"profile": profile.model_dump()})
+        result: dict = {}
+        with st.status("Building your plan...", expanded=True) as status:
+            try:
+                for event in graph.stream({"profile": profile.model_dump()}, stream_mode="updates"):
+                    if not isinstance(event, dict):
+                        continue
+                    for node_name, delta in event.items():
+                        status.write(f"• {_step_label(str(node_name))}")
+                        if isinstance(delta, dict):
+                            result.update(delta)
+                status.update(label="Plan built", state="complete")
+            except Exception as exc:
+                status.update(label="Plan build failed", state="error")
+                st.error(f"Planning failed: {type(exc).__name__}")
+                return
         st.subheader(str(constants.get("section_result", "Plan preview")))
 
         backend = str(result.get("retrieval_backend", "seed"))
