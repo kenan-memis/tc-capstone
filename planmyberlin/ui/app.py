@@ -44,6 +44,15 @@ def _step_label(node_name: str) -> str:
     return labels.get(node_name, f"Running {node_name}")
 
 
+def _weather_recommendation_text(bias: str) -> str:
+    b = (bias or "").strip().lower()
+    if b == "indoor":
+        return "Based on expected conditions, indoor-focused activities are recommended."
+    if b == "outdoor_or_mixed":
+        return "Expected conditions support a balanced mix of outdoor and indoor activities."
+    return "Weather is uncertain, so keeping a flexible indoor/outdoor mix is recommended."
+
+
 def main() -> None:
     settings = get_settings()
     constants = get_constants()
@@ -177,80 +186,39 @@ def main() -> None:
                 return
         st.subheader(str(constants.get("section_result", "Plan preview")))
 
-        backend = str(result.get("retrieval_backend", "seed"))
         retrieved_items = list(result.get("retrieved_items", []))
-        st.caption(f"Retrieved context items: {len(retrieved_items)} (backend: {backend})")
-
-        fallback_reason = str(result.get("retrieval_fallback_reason", "")).strip()
-        if fallback_reason:
-            st.warning(f"Retriever fallback: {fallback_reason}")
-
-        places_status = str(result.get("places_status", "unavailable"))
-        places_backend = str(result.get("places_backend", "serpapi"))
         enriched_items = list(result.get("enriched_items", []))
-        st.markdown(
-            f"**{constants.get('section_places', 'Place enrichment')}:** "
-            f"{places_status} ({places_backend}), {len(enriched_items)} items"
-        )
-        places_message = str(result.get("places_message", "")).strip()
-        if places_message and places_status != "ok":
-            st.caption(places_message)
 
         weather_summary = str(result.get("weather_summary", "")).strip()
+        weather_bias = str(result.get("weather_bias", "unknown"))
         if weather_summary:
-            st.markdown(f"**{constants.get('section_weather', 'Weather signal')}:** {weather_summary}")
-            st.caption(
-                f"{constants.get('label_weather_bias', 'Planning bias')}: "
-                f"{result.get('weather_bias', 'unknown')}"
-            )
+            st.markdown(f"**Expected weather on trip days:** {weather_summary}")
+            st.caption(_weather_recommendation_text(weather_bias))
 
-        transport_status = str(result.get("transport_status", "unavailable"))
-        transport_backend = str(result.get("transport_backend", "bvg_rest"))
         transport_items = list(result.get("transport_items", []))
-        st.markdown(f"**Getting around:** {transport_status} ({transport_backend}), {len(transport_items)} suggestions")
-        transport_message = str(result.get("transport_message", "")).strip()
-        if transport_message and transport_status != "ok":
-            st.caption(transport_message)
-        if transport_items:
-            with st.expander("Transport suggestions", expanded=False):
-                for item in transport_items[:8]:
-                    distance = item.get("distance_m")
-                    distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
-                    st.markdown(
-                        f"- **{item.get('name','')}** ({item.get('type','')})"
-                        f" — near: {item.get('query','')}{distance_text}"
-                    )
-
-        accommodation_outcome = str(result.get("accommodation_outcome", "skip_accommodation"))
-        if accommodation_outcome == "accommodation":
-            accommodation_status = str(result.get("accommodation_status", "unavailable"))
-            accommodation_backend = str(result.get("accommodation_backend", "curated"))
-            accommodation_items = list(result.get("accommodation_items", []))
-            st.markdown(
-                f"**Where to stay (links only):** {accommodation_status} "
-                f"({accommodation_backend}), {len(accommodation_items)} suggestions"
-            )
-            accommodation_message = str(result.get("accommodation_message", "")).strip()
-            if accommodation_message:
-                st.caption(accommodation_message)
-            for item in accommodation_items[:5]:
-                st.markdown(
-                    f"- **{item.get('name','')}** ({item.get('type','')}, {item.get('district','')})"
-                    f" — {item.get('reason','')} [Open link]({item.get('url','')})"
-                )
+        accommodation_items = list(result.get("accommodation_items", []))
 
         map_points = list(result.get("map_points", []))
         map_status = str(result.get("map_status", "no_coordinates"))
-        st.markdown(f"**Map markers:** {len(map_points)}")
         if map_points:
             map_obj = build_preview_map(map_points)
             st_folium(map_obj, width=None, height=420, returned_objects=[])
         elif map_status != "ok":
             st.info("Map preview is unavailable because no coordinates were found for the current results.")
 
+        tabs = st.tabs(
+            [
+                "Places to Explore",
+                "How to Get Around",
+                "Stay Options",
+                "Developer Diagnostics",
+                "Raw Data",
+            ]
+        )
+
         shown_items = enriched_items if enriched_items else retrieved_items
-        if shown_items:
-            with st.expander("Retrieved places and restaurants", expanded=True):
+        with tabs[0]:
+            if shown_items:
                 for item in shown_items:
                     coord = ""
                     lat = item.get("latitude")
@@ -261,20 +229,68 @@ def main() -> None:
                         f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
                         f" — {item.get('summary','')}{coord}"
                     )
+            else:
+                st.caption("No places found for this run.")
 
-        with st.expander("Developer diagnostics", expanded=False):
+        with tabs[1]:
+            if transport_items:
+                for item in transport_items[:10]:
+                    distance = item.get("distance_m")
+                    distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
+                    st.markdown(
+                        f"- **{item.get('name','')}** ({item.get('type','')})"
+                        f" — near: {item.get('query','')}{distance_text}"
+                    )
+            else:
+                st.caption("No transport suggestions available for this run.")
+
+        with tabs[2]:
+            if accommodation_items:
+                for item in accommodation_items[:5]:
+                    st.markdown(
+                        f"- **{item.get('name','')}** ({item.get('type','')}, {item.get('district','')})"
+                        f" — {item.get('reason','')} [Open link]({item.get('url','')})"
+                    )
+            else:
+                st.caption("Accommodation suggestions are not enabled for this run.")
+
+        with tabs[3]:
             st.caption("Temporary build-time diagnostics. Remove before final presentation.")
             st.markdown(
                 "- Retrieval backend: "
                 f"`{result.get('retrieval_backend', 'unknown')}`\n"
+                "- Retrieved context items: "
+                f"`{len(retrieved_items)}`\n"
                 "- Places backend: "
                 f"`{result.get('places_backend', 'unknown')}`\n"
+                "- Place enrichment status: "
+                f"`{result.get('places_status', 'unknown')}` / items `{len(enriched_items)}`\n"
                 "- Transport backend: "
                 f"`{result.get('transport_backend', 'unknown')}`\n"
+                "- Transport status: "
+                f"`{result.get('transport_status', 'unknown')}` / suggestions `{len(transport_items)}`\n"
                 "- Accommodation backend: "
-                f"`{result.get('accommodation_backend', 'unknown')}`"
+                f"`{result.get('accommodation_backend', 'unknown')}`\n"
+                "- Accommodation status: "
+                f"`{result.get('accommodation_status', 'unknown')}` / suggestions `{len(accommodation_items)}`\n"
+                "- Weather bias: "
+                f"`{weather_bias}`"
             )
-        st.json(result)
+            places_message = str(result.get("places_message", "")).strip()
+            transport_message = str(result.get("transport_message", "")).strip()
+            accommodation_message = str(result.get("accommodation_message", "")).strip()
+            fallback_reason = str(result.get("retrieval_fallback_reason", "")).strip()
+            if fallback_reason:
+                st.caption(f"Retriever fallback: {fallback_reason}")
+            if places_message:
+                st.caption(f"Places message: {places_message}")
+            if transport_message:
+                st.caption(f"Transport message: {transport_message}")
+            if accommodation_message:
+                st.caption(f"Accommodation message: {accommodation_message}")
+
+        with tabs[4]:
+            st.json(result)
 
 
 if __name__ == "__main__":

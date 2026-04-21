@@ -4,7 +4,7 @@ hero_title: PlanMyBerlin
 hero_subtitle: Berlin trip planner (planner only, no booking)
 
 info_banner: >-
-  Choose the options that fit you. Use the box at the bottom only for anything that is not covered above.
+  Choose the options that fit you. Use the other details box at the bottom only for anything that is not covered above.
 
 section_plan: Your trip
 
@@ -27,7 +27,7 @@ help_accommodation: >-
   For trips of two or more days we turn this on by default. For a single day we leave it off
   unless you need an overnight stay.
 
-label_notes: Extra context / other details
+label_notes: Other details
 help_notes: >-
   Allergies, specific must-sees, dates, mobility details not listed above, or anything else we should know.
 
