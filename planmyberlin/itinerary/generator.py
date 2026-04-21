@@ -10,6 +10,12 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
 from planmyberlin.config.loader import get_settings
+from planmyberlin.itinerary.constraints import (
+    enforce_day_count,
+    format_constraint_instructions,
+    neighbourhood_coverage_note,
+    strip_itinerary_timing,
+)
 from planmyberlin.itinerary.grounding import (
     candidate_name_allowlist,
     find_grounding_violations,
@@ -19,18 +25,31 @@ from planmyberlin.itinerary.models import TripItinerary
 from planmyberlin.prompts.loader import render_prompt
 
 
-def _fallback_itinerary(*, days: int, weather_summary: str, candidates: list[dict[str, Any]]) -> TripItinerary:
+def _fallback_itinerary(
+    *,
+    days: int,
+    weather_summary: str,
+    candidates: list[dict[str, Any]],
+    profile: dict[str, Any],
+) -> TripItinerary:
     names = [str(x.get("name", "")).strip() for x in candidates if str(x.get("name", "")).strip()]
+    pace = str(profile.get("pace", "balanced"))
+    mobility = str(profile.get("mobility_choice", ""))
+    dietary = str(profile.get("dietary_choice", ""))
     title = f"{days}-day Berlin preview plan"
     out_days: list[dict[str, Any]] = []
     for d in range(1, max(1, days) + 1):
         act = []
         if names:
+            pace_note = {"relaxed": " slower pacing", "packed": " tighter pacing", "balanced": ""}.get(pace, "")
             act.append(
                 {
                     "time_of_day": "morning",
                     "title": f"Explore {names[(d - 1) % len(names)]}",
-                    "description": "Walk the area and visit nearby cafés or viewpoints.",
+                    "description": (
+                        f"Walk the area with{pace_note}; consider mobility preference ({mobility}). "
+                        f"For meals, respect dietary preference ({dietary}) when choosing candidates."
+                    ),
                     "place_name": names[(d - 1) % len(names)],
                 }
             )
@@ -43,7 +62,10 @@ def _fallback_itinerary(*, days: int, weather_summary: str, candidates: list[dic
             }
         )
         out_days.append({"day_number": d, "theme": f"Day {d} highlights", "activities": act})
-    notes = [f"Weather context: {weather_summary}"]
+    notes = [
+        f"Weather context: {weather_summary}",
+        f"Pace: {pace}; mobility hint: {mobility}; dietary: {dietary}.",
+    ]
     if not names:
         notes.append("No specific candidate places were available; add interests or neighbourhoods for tighter suggestions.")
     return TripItinerary.model_validate({"title": title, "days": out_days, "practical_notes": notes})
@@ -78,10 +100,12 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
         "accommodation_items": state.get("accommodation_items", []),
         "candidates": candidates[:12],
     }
+    constraint_bullets = format_constraint_instructions(profile)
     user_prompt = render_prompt(
         "itinerary",
         "user",
         profile_json=json.dumps(profile, ensure_ascii=False, indent=2),
+        constraint_bullets=constraint_bullets,
         context_json=json.dumps(payload, ensure_ascii=False, indent=2),
     )
     system_prompt = render_prompt("itinerary", "system")
@@ -91,7 +115,10 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
             days=days,
             weather_summary=str(state.get("weather_summary", "Weather unavailable.")),
             candidates=candidates,
+            profile=profile,
         )
+        it, _ = enforce_day_count(it, days)
+        it = neighbourhood_coverage_note(profile, it)
         return {
             "itinerary_status": "fallback",
             "itinerary": it.model_dump(),
@@ -104,6 +131,10 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
         out: TripItinerary = structured.invoke(
             [SystemMessage(content=system_prompt), HumanMessage(content=user_prompt)]
         )
+
+        out = strip_itinerary_timing(out)
+        out, _struct_changed = enforce_day_count(out, days)
+        out = neighbourhood_coverage_note(profile, out)
 
         violations = find_grounding_violations(out, allowed_norm)
         if violations:
@@ -131,6 +162,9 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
                     out = structured.invoke(
                         [SystemMessage(content=repair_system), HumanMessage(content=repair_user)]
                     )
+                    out = strip_itinerary_timing(out)
+                    out, _ = enforce_day_count(out, days)
+                    out = neighbourhood_coverage_note(profile, out)
                     violations = find_grounding_violations(out, allowed_norm)
                     if not violations:
                         return {
@@ -142,6 +176,9 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
                     pass
 
             out = sanitize_place_names(out, allowed_norm, norm_to_canonical)
+            out = strip_itinerary_timing(out)
+            out, _ = enforce_day_count(out, days)
+            out = neighbourhood_coverage_note(profile, out)
             return {
                 "itinerary_status": "grounded_sanitized",
                 "itinerary": out.model_dump(),
@@ -154,7 +191,10 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
             days=days,
             weather_summary=str(state.get("weather_summary", "Weather unavailable.")),
             candidates=candidates,
+            profile=profile,
         )
+        it, _ = enforce_day_count(it, days)
+        it = neighbourhood_coverage_note(profile, it)
         return {
             "itinerary_status": "fallback",
             "itinerary": it.model_dump(),

@@ -7,7 +7,14 @@ def test_itinerary_fallback_without_openai_key(monkeypatch: pytest.MonkeyPatch) 
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     out = generate_itinerary(
         {
-            "profile": {"days": 2, "pace": "balanced", "budget_tier": "moderate"},
+            "profile": {
+                "days": 2,
+                "pace": "balanced",
+                "budget_tier": "moderate",
+                "party_size": 2,
+                "dietary_choice": "Doesn't matter / no preference",
+                "mobility_choice": "No specific needs",
+            },
             "weather_summary": "Clear sky.",
             "weather_bias": "outdoor_or_mixed",
             "transport_items": [],
