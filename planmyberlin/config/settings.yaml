@@ -44,3 +44,4 @@ accommodation:
 itinerary:
   model: gpt-4o-mini
   temperature: 0.4
+  grounding_repair: true

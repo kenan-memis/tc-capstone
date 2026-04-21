@@ -20,3 +20,21 @@ itinerary:
 
     Full planning context (JSON — candidates, weather, transport, optional stays):
     {context_json}
+
+itinerary_repair:
+  system: >-
+    You repair a structured Berlin trip itinerary JSON.
+    The model may have used place_name values that are NOT in the allowed list.
+    Fix place_name fields so each non-null place_name exactly matches one string from allowed_place_names,
+    or set place_name to null if no candidate fits that activity.
+    Do not invent new venues. Keep day_number, themes, and activity structure consistent.
+    Preserve practical_notes but you may append one short note if you made corrections.
+  user: >-
+    Allowed place names (use exact spelling from this list when referring to a venue):
+    {allowed_names_json}
+
+    Grounding violations detected:
+    {violations_json}
+
+    Current itinerary JSON:
+    {itinerary_json}

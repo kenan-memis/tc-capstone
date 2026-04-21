@@ -1,4 +1,4 @@
-"""LLM-backed itinerary generation with structured output."""
+"""LLM-backed itinerary generation with structured output and grounding checks."""
 
 from __future__ import annotations
 
@@ -10,6 +10,11 @@ from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 
 from planmyberlin.config.loader import get_settings
+from planmyberlin.itinerary.grounding import (
+    candidate_name_allowlist,
+    find_grounding_violations,
+    sanitize_place_names,
+)
 from planmyberlin.itinerary.models import TripItinerary
 from planmyberlin.prompts.loader import render_prompt
 
@@ -50,6 +55,7 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
     llm_cfg = settings.get("itinerary", {})
     model = str(llm_cfg.get("model", "gpt-4o-mini"))
     temperature = float(llm_cfg.get("temperature", 0.4))
+    grounding_repair = bool(llm_cfg.get("grounding_repair", True))
 
     profile = state.get("profile", {})
     if not isinstance(profile, dict):
@@ -61,6 +67,9 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
 
     days = int(profile.get("days", 1))
     candidates = list(state.get("enriched_items", [])) or list(state.get("retrieved_items", []))
+    allowed_norm, norm_to_canonical = candidate_name_allowlist(candidates)
+    allowed_display = list(norm_to_canonical.values())
+
     payload = {
         "profile": profile,
         "weather_summary": state.get("weather_summary", ""),
@@ -95,6 +104,50 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
         out: TripItinerary = structured.invoke(
             [SystemMessage(content=system_prompt), HumanMessage(content=user_prompt)]
         )
+
+        violations = find_grounding_violations(out, allowed_norm)
+        if violations:
+            if grounding_repair and os.getenv("OPENAI_API_KEY"):
+                try:
+                    repair_user = render_prompt(
+                        "itinerary_repair",
+                        "user",
+                        allowed_names_json=json.dumps(allowed_display, ensure_ascii=False, indent=2),
+                        violations_json=json.dumps(
+                            [
+                                {
+                                    "day_number": v.day_number,
+                                    "activity_index": v.activity_index,
+                                    "place_name": v.place_name,
+                                }
+                                for v in violations
+                            ],
+                            ensure_ascii=False,
+                            indent=2,
+                        ),
+                        itinerary_json=json.dumps(out.model_dump(), ensure_ascii=False, indent=2),
+                    )
+                    repair_system = render_prompt("itinerary_repair", "system")
+                    out = structured.invoke(
+                        [SystemMessage(content=repair_system), HumanMessage(content=repair_user)]
+                    )
+                    violations = find_grounding_violations(out, allowed_norm)
+                    if not violations:
+                        return {
+                            "itinerary_status": "ok_repaired",
+                            "itinerary": out.model_dump(),
+                            "itinerary_message": "Venue names were aligned with retrieved candidates.",
+                        }
+                except Exception:
+                    pass
+
+            out = sanitize_place_names(out, allowed_norm, norm_to_canonical)
+            return {
+                "itinerary_status": "grounded_sanitized",
+                "itinerary": out.model_dump(),
+                "itinerary_message": "Some venue references were adjusted to match retrieved candidates only.",
+            }
+
         return {"itinerary_status": "ok", "itinerary": out.model_dump(), "itinerary_message": "ok"}
     except Exception as exc:
         it = _fallback_itinerary(

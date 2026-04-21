@@ -57,7 +57,7 @@ class PlannerState(TypedDict, total=False):
     accommodation_items: list[dict[str, Any]]
     accommodation_count: int
 
-    itinerary_status: Literal["ok", "fallback", "unavailable"]
+    itinerary_status: Literal["ok", "ok_repaired", "grounded_sanitized", "fallback", "unavailable"]
     itinerary: dict[str, Any]
     itinerary_message: str
 
