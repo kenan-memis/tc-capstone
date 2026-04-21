@@ -84,12 +84,14 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
 def _enrich_places(state: PlannerState) -> PlannerState:
     out = dict(state)
     cfg = get_settings().get("places", {})
+    backend = str(cfg.get("backend", "google_places"))
     city = str(cfg.get("city", "Berlin"))
     timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
     max_items = int(cfg.get("max_items", 6))
 
     payload = fetch_places_enrichment(
         list(out.get("retrieved_items", [])),
+        backend=backend,
         city=city,
         timeout_seconds=timeout_seconds,
         max_items=max_items,
