@@ -249,6 +249,9 @@ def _route_accommodation(state: PlannerState) -> Literal["accommodation", "skip_
 
 def _with_accommodation(state: PlannerState) -> PlannerState:
     out = dict(state)
+    cfg = get_settings().get("accommodation", {})
+    backend = str(cfg.get("backend", "curated"))
+    max_items = int(cfg.get("max_items", 4))
     profile = out.get("profile", {})
     neighbourhoods = profile.get("neighbourhoods", []) if isinstance(profile, dict) else []
     budget_tier = str(profile.get("budget_tier", "moderate")) if isinstance(profile, dict) else "moderate"
@@ -258,6 +261,8 @@ def _with_accommodation(state: PlannerState) -> PlannerState:
         neighbourhoods=list(neighbourhoods) if isinstance(neighbourhoods, list) else [],
         budget_tier=budget_tier,
         party_size=party_size,
+        backend=backend,
+        max_items=max_items,
     )
 
     out["accommodation_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]

@@ -49,9 +49,19 @@ def fetch_accommodation_suggestions(
     neighbourhoods: list[str],
     budget_tier: str,
     party_size: int,
+    backend: str = "curated",
     max_items: int = 4,
 ) -> dict[str, Any]:
-    """Return curated accommodation suggestions with links."""
+    """Return accommodation suggestions with links (no booking)."""
+    provider = backend.strip().lower()
+    if provider != "curated":
+        return {
+            "status": "unavailable",
+            "backend": provider or "unknown",
+            "message": f"Accommodation backend '{backend}' is not implemented yet.",
+            "accommodation_items": [],
+        }
+
     wanted = {str(x).strip().lower() for x in neighbourhoods if str(x).strip()}
     scored: list[tuple[int, dict[str, str]]] = []
     for item in _CATALOG:
@@ -70,7 +80,7 @@ def fetch_accommodation_suggestions(
     picks = [dict(x[1]) for x in scored[: max(1, max_items)]]
     return {
         "status": "ok",
-        "backend": "curated",
+        "backend": provider,
         "message": "Links only. No booking is performed.",
         "accommodation_items": picks,
     }

@@ -36,3 +36,7 @@ transport:
   max_queries: 3
   results_per_query: 2
   nearby_results: 2
+
+accommodation:
+  backend: curated
+  max_items: 4

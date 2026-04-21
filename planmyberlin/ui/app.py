@@ -261,6 +261,19 @@ def main() -> None:
                         f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
                         f" — {item.get('summary','')}{coord}"
                     )
+
+        with st.expander("Developer diagnostics", expanded=False):
+            st.caption("Temporary build-time diagnostics. Remove before final presentation.")
+            st.markdown(
+                "- Retrieval backend: "
+                f"`{result.get('retrieval_backend', 'unknown')}`\n"
+                "- Places backend: "
+                f"`{result.get('places_backend', 'unknown')}`\n"
+                "- Transport backend: "
+                f"`{result.get('transport_backend', 'unknown')}`\n"
+                "- Accommodation backend: "
+                f"`{result.get('accommodation_backend', 'unknown')}`"
+            )
         st.json(result)
 
 

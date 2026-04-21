@@ -12,3 +12,15 @@ def test_accommodation_suggestions_basic() -> None:
     assert len(out["accommodation_items"]) >= 1
     first = out["accommodation_items"][0]
     assert "name" in first and "url" in first
+
+
+def test_accommodation_backend_not_implemented() -> None:
+    out = fetch_accommodation_suggestions(
+        neighbourhoods=["Mitte"],
+        budget_tier="moderate",
+        party_size=2,
+        backend="future_api",
+    )
+    assert out["status"] == "unavailable"
+    assert out["backend"] == "future_api"
+    assert out["accommodation_items"] == []
