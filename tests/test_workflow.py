@@ -64,6 +64,8 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     assert out["weather_bias"] == "indoor"
     assert out["places_status"] == "ok"
     assert out["enriched_count"] == 1
+    assert out["map_status"] == "ok"
+    assert out["map_points_count"] == 1
 
 
 def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -95,6 +97,7 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
     assert "accommodation_suggestions_off" in out["routing_trace"]
     assert out["weather_bias"] == "outdoor_or_mixed"
     assert out["places_status"] == "unavailable"
+    assert out["map_status"] == "no_coordinates"
 
 
 def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -182,6 +185,7 @@ def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None
     assert any(str(x).endswith(f":{out['retrieved_count']}") for x in out["routing_trace"])
     assert any(str(x).startswith("weather:") for x in out["routing_trace"])
     assert any(str(x).startswith("places:") for x in out["routing_trace"])
+    assert any(str(x).startswith("map:") for x in out["routing_trace"])
 
 
 def test_normalize_requires_profile() -> None:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv
 import streamlit as st
+from streamlit_folium import st_folium
 
 from planmyberlin.config.loader import (
     get_constants,
@@ -14,7 +15,9 @@ from planmyberlin.config.loader import (
     get_settings,
 )
 from planmyberlin.graph.workflow import build_planner_graph
+from planmyberlin.map import build_preview_map
 from planmyberlin.models.trip_profile import TripProfile
+
 
 
 def _default_index(options: tuple[str, ...], prefer: str) -> int:
@@ -30,6 +33,7 @@ def _step_label(node_name: str) -> str:
         "retrieve_context": "Retrieving matching context",
         "enrich_places": "Enriching places with live details",
         "fetch_weather": "Checking current weather",
+        "build_map_points": "Preparing map markers",
         "multi_day_track": "Applying multi-day planning route",
         "single_day_track": "Applying single-day planning route",
         "merge": "Merging planning state",
@@ -198,6 +202,15 @@ def main() -> None:
                 f"{constants.get('label_weather_bias', 'Planning bias')}: "
                 f"{result.get('weather_bias', 'unknown')}"
             )
+
+        map_points = list(result.get("map_points", []))
+        map_status = str(result.get("map_status", "no_coordinates"))
+        st.markdown(f"**Map markers:** {len(map_points)}")
+        if map_points:
+            map_obj = build_preview_map(map_points)
+            st_folium(map_obj, width=None, height=420, returned_objects=[])
+        elif map_status != "ok":
+            st.info("Map preview is unavailable because no coordinates were found for the current results.")
 
         shown_items = enriched_items if enriched_items else retrieved_items
         if shown_items:

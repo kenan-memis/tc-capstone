@@ -1,4 +1,4 @@
-"""LangGraph planner workflow — profile normalization, retrieval, places enrichment, weather bias, routing, accommodation gate."""
+"""LangGraph planner workflow — profile normalization, retrieval, places enrichment, weather bias, map points, routing, accommodation gate."""
 
 from __future__ import annotations
 
@@ -37,6 +37,10 @@ class PlannerState(TypedDict, total=False):
     weather_condition_main: str
     weather_temperature_c: float | None
     weather_bias: Literal["indoor", "outdoor_or_mixed", "unknown"]
+
+    map_status: Literal["ok", "no_coordinates"]
+    map_points: list[dict[str, Any]]
+    map_points_count: int
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -125,6 +129,36 @@ def _fetch_weather(state: PlannerState) -> PlannerState:
     return out
 
 
+def _build_map_points(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    source = list(out.get("enriched_items", [])) or list(out.get("retrieved_items", []))
+
+    points: list[dict[str, Any]] = []
+    for item in source:
+        lat = item.get("latitude")
+        lng = item.get("longitude")
+        if isinstance(lat, (int, float)) and isinstance(lng, (int, float)):
+            points.append(
+                {
+                    "name": item.get("name", ""),
+                    "category": item.get("category", ""),
+                    "district": item.get("district", ""),
+                    "summary": item.get("summary", ""),
+                    "latitude": float(lat),
+                    "longitude": float(lng),
+                }
+            )
+
+    out["map_points"] = points
+    out["map_points_count"] = len(points)
+    out["map_status"] = "ok" if points else "no_coordinates"
+
+    trace = list(out.get("routing_trace", []))
+    trace.append(f"map:{out['map_status']}:{out['map_points_count']}")
+    out["routing_trace"] = trace
+    return out
+
+
 def _multi_day_track(state: PlannerState) -> PlannerState:
     out = dict(state)
     trace = list(out.get("routing_trace", []))
@@ -177,13 +211,14 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
 
 
 def build_planner_graph():
-    """Compile planner graph: normalize → retrieve → places → weather → trip branch → accommodation branch."""
+    """Compile planner graph: normalize → retrieve → places → weather → map → routing → accommodation."""
     g = StateGraph(PlannerState)
 
     g.add_node("normalize_profile", _normalize_profile)
     g.add_node("retrieve_context", _retrieve_context)
     g.add_node("enrich_places", _enrich_places)
     g.add_node("fetch_weather", _fetch_weather)
+    g.add_node("build_map_points", _build_map_points)
     g.add_node("multi_day_track", _multi_day_track)
     g.add_node("single_day_track", _single_day_track)
     g.add_node("merge", _merge_identity)
@@ -194,8 +229,9 @@ def build_planner_graph():
     g.add_edge("normalize_profile", "retrieve_context")
     g.add_edge("retrieve_context", "enrich_places")
     g.add_edge("enrich_places", "fetch_weather")
+    g.add_edge("fetch_weather", "build_map_points")
     g.add_conditional_edges(
-        "fetch_weather",
+        "build_map_points",
         _route_stay_length,
         {"multi_day": "multi_day_track", "single_day": "single_day_track"},
     )
