@@ -22,7 +22,12 @@ from planmyberlin.itinerary.grounding import (
     sanitize_place_names,
 )
 from planmyberlin.itinerary.models import TripItinerary
+from planmyberlin.itinerary.tool_loop import run_itinerary_tool_loop
+from planmyberlin.itinerary.tools import build_itinerary_tools
+from planmyberlin.observability import get_logger
 from planmyberlin.prompts.loader import render_prompt
+
+_log = get_logger(__name__)
 
 
 def _fallback_itinerary(
@@ -78,6 +83,8 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
     model = str(llm_cfg.get("model", "gpt-4o-mini"))
     temperature = float(llm_cfg.get("temperature", 0.4))
     grounding_repair = bool(llm_cfg.get("grounding_repair", True))
+    tool_use = bool(llm_cfg.get("tool_use", False))
+    tool_max_rounds = max(1, min(int(llm_cfg.get("tool_max_rounds", 6)), 16))
 
     profile = state.get("profile", {})
     if not isinstance(profile, dict):
@@ -127,9 +134,43 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
 
     try:
         llm = ChatOpenAI(model=model, temperature=temperature)
+
+        scratchpad = ""
+        if tool_use:
+            try:
+                tools = build_itinerary_tools(state)
+                tool_system = render_prompt("itinerary_tools", "system")
+                tool_human = render_prompt(
+                    "itinerary_tools",
+                    "user",
+                    profile_json=json.dumps(profile, ensure_ascii=False, indent=2),
+                    constraint_bullets=constraint_bullets,
+                )
+                scratchpad = run_itinerary_tool_loop(
+                    llm,
+                    tools,
+                    system=tool_system,
+                    human=tool_human,
+                    max_rounds=tool_max_rounds,
+                )
+            except Exception as exc:
+                _log.warning(
+                    "itinerary_tool_phase_failed exc_type=%s — continuing without scratchpad",
+                    type(exc).__name__,
+                    exc_info=True,
+                )
+
+        user_prompt_final = user_prompt
+        if scratchpad:
+            user_prompt_final = (
+                user_prompt
+                + "\n\n## Analyst checklist (tool-assisted — honor unless it conflicts with schema or constraints)\n"
+                + scratchpad
+            )
+
         structured = llm.with_structured_output(TripItinerary)
         out: TripItinerary = structured.invoke(
-            [SystemMessage(content=system_prompt), HumanMessage(content=user_prompt)]
+            [SystemMessage(content=system_prompt), HumanMessage(content=user_prompt_final)]
         )
 
         out = strip_itinerary_timing(out)
