@@ -221,6 +221,24 @@ def main() -> None:
                         f" — near: {item.get('query','')}{distance_text}"
                     )
 
+        accommodation_outcome = str(result.get("accommodation_outcome", "skip_accommodation"))
+        if accommodation_outcome == "accommodation":
+            accommodation_status = str(result.get("accommodation_status", "unavailable"))
+            accommodation_backend = str(result.get("accommodation_backend", "curated"))
+            accommodation_items = list(result.get("accommodation_items", []))
+            st.markdown(
+                f"**Where to stay (links only):** {accommodation_status} "
+                f"({accommodation_backend}), {len(accommodation_items)} suggestions"
+            )
+            accommodation_message = str(result.get("accommodation_message", "")).strip()
+            if accommodation_message:
+                st.caption(accommodation_message)
+            for item in accommodation_items[:5]:
+                st.markdown(
+                    f"- **{item.get('name','')}** ({item.get('type','')}, {item.get('district','')})"
+                    f" — {item.get('reason','')} [Open link]({item.get('url','')})"
+                )
+
         map_points = list(result.get("map_points", []))
         map_status = str(result.get("map_status", "no_coordinates"))
         st.markdown(f"**Map markers:** {len(map_points)}")

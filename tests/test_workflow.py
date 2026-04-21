@@ -46,6 +46,24 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     )
     monkeypatch.setattr(
         wf,
+        "fetch_accommodation_suggestions",
+        lambda **_: {
+            "status": "ok",
+            "backend": "curated",
+            "message": "Links only.",
+            "accommodation_items": [
+                {
+                    "name": "Test Hotel",
+                    "district": "Mitte",
+                    "type": "hotel",
+                    "reason": "Central",
+                    "url": "https://example.com",
+                }
+            ],
+        },
+    )
+    monkeypatch.setattr(
+        wf,
         "fetch_places_enrichment",
         lambda *_, **__: {
             "status": "ok",
@@ -68,7 +86,7 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     assert out["trip_track"] == "multi_day"
     assert out["accommodation_outcome"] == "accommodation"
     assert "multi_day_context" in out["routing_trace"]
-    assert "accommodation_suggestions_on" in out["routing_trace"]
+    assert any(str(x).startswith("accommodation_suggestions_on") for x in out["routing_trace"])
     assert out["retrieved_count"] >= 1
     assert out["retrieval_backend"] in {"seed", "chroma"}
     assert out["weather_bias"] == "indoor"
@@ -78,6 +96,8 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     assert out["map_points_count"] == 1
     assert out["transport_status"] == "ok"
     assert out["transport_count"] >= 1
+    assert out["accommodation_status"] == "ok"
+    assert out["accommodation_count"] == 1
 
 
 def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -112,6 +132,16 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
             "message": "SERPAPI_API_KEY not set",
         },
     )
+    monkeypatch.setattr(
+        wf,
+        "fetch_accommodation_suggestions",
+        lambda **_: {
+            "status": "ok",
+            "backend": "curated",
+            "message": "Links only.",
+            "accommodation_items": [{"name": "A", "url": "https://example.com"}],
+        },
+    )
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=4, include_accommodation=False)})
     assert out["trip_track"] == "multi_day"
@@ -121,6 +151,7 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
     assert out["places_status"] == "unavailable"
     assert out["map_status"] == "no_coordinates"
     assert out["transport_status"] == "unavailable"
+    assert out["accommodation_count"] == 0
 
 
 def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -153,6 +184,16 @@ def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.Monke
             "backend": "serpapi",
             "enriched_items": [],
             "message": "ok",
+        },
+    )
+    monkeypatch.setattr(
+        wf,
+        "fetch_accommodation_suggestions",
+        lambda **_: {
+            "status": "ok",
+            "backend": "curated",
+            "message": "Links only.",
+            "accommodation_items": [{"name": "A", "url": "https://example.com"}],
         },
     )
     app = build_planner_graph()
@@ -195,10 +236,21 @@ def test_single_day_with_accommodation_when_requested(monkeypatch: pytest.Monkey
             "message": "ok",
         },
     )
+    monkeypatch.setattr(
+        wf,
+        "fetch_accommodation_suggestions",
+        lambda **_: {
+            "status": "ok",
+            "backend": "curated",
+            "message": "Links only.",
+            "accommodation_items": [{"name": "A", "url": "https://example.com"}],
+        },
+    )
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=1, include_accommodation=True)})
     assert out["trip_track"] == "single_day"
     assert out["accommodation_outcome"] == "accommodation"
+    assert out["accommodation_count"] == 1
 
 
 def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None:

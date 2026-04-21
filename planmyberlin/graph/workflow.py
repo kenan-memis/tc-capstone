@@ -6,6 +6,7 @@ from typing import Any, Literal, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
+from planmyberlin.accommodation import fetch_accommodation_suggestions
 from planmyberlin.config.loader import get_settings
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.places import fetch_places_enrichment
@@ -48,6 +49,12 @@ class PlannerState(TypedDict, total=False):
     transport_message: str
     transport_items: list[dict[str, Any]]
     transport_count: int
+
+    accommodation_status: Literal["ok", "unavailable"]
+    accommodation_backend: str
+    accommodation_message: str
+    accommodation_items: list[dict[str, Any]]
+    accommodation_count: int
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -242,8 +249,26 @@ def _route_accommodation(state: PlannerState) -> Literal["accommodation", "skip_
 
 def _with_accommodation(state: PlannerState) -> PlannerState:
     out = dict(state)
+    profile = out.get("profile", {})
+    neighbourhoods = profile.get("neighbourhoods", []) if isinstance(profile, dict) else []
+    budget_tier = str(profile.get("budget_tier", "moderate")) if isinstance(profile, dict) else "moderate"
+    party_size = int(profile.get("party_size", 2)) if isinstance(profile, dict) else 2
+
+    payload = fetch_accommodation_suggestions(
+        neighbourhoods=list(neighbourhoods) if isinstance(neighbourhoods, list) else [],
+        budget_tier=budget_tier,
+        party_size=party_size,
+    )
+
+    out["accommodation_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
+    out["accommodation_backend"] = str(payload.get("backend", "curated"))
+    out["accommodation_message"] = str(payload.get("message", ""))
+    items = list(payload.get("accommodation_items", []))
+    out["accommodation_items"] = items
+    out["accommodation_count"] = len(items)
+
     trace = list(out.get("routing_trace", []))
-    trace.append("accommodation_suggestions_on")
+    trace.append(f"accommodation_suggestions_on:{out['accommodation_count']}")
     out["routing_trace"] = trace
     out["accommodation_outcome"] = "accommodation"
     return out
@@ -255,6 +280,11 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
     trace.append("accommodation_suggestions_off")
     out["routing_trace"] = trace
     out["accommodation_outcome"] = "skip_accommodation"
+    out["accommodation_status"] = "unavailable"
+    out["accommodation_backend"] = "curated"
+    out["accommodation_message"] = "Accommodation suggestions were skipped by preference."
+    out["accommodation_items"] = []
+    out["accommodation_count"] = 0
     return out
 
 
