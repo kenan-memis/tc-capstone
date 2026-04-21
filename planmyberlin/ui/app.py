@@ -34,6 +34,7 @@ def _step_label(node_name: str) -> str:
         "enrich_places": "Enriching places with live details",
         "fetch_weather": "Checking current weather",
         "build_map_points": "Preparing map markers",
+        "fetch_transport": "Checking transport options",
         "multi_day_track": "Applying multi-day planning route",
         "single_day_track": "Applying single-day planning route",
         "merge": "Merging planning state",
@@ -202,6 +203,21 @@ def main() -> None:
                 f"{constants.get('label_weather_bias', 'Planning bias')}: "
                 f"{result.get('weather_bias', 'unknown')}"
             )
+
+        transport_status = str(result.get("transport_status", "unavailable"))
+        transport_backend = str(result.get("transport_backend", "bvg_rest"))
+        transport_items = list(result.get("transport_items", []))
+        st.markdown(f"**Getting around:** {transport_status} ({transport_backend}), {len(transport_items)} suggestions")
+        transport_message = str(result.get("transport_message", "")).strip()
+        if transport_message and transport_status != "ok":
+            st.caption(transport_message)
+        if transport_items:
+            with st.expander("Transport suggestions", expanded=False):
+                for item in transport_items[:8]:
+                    st.markdown(
+                        f"- **{item.get('name','')}** ({item.get('type','')})"
+                        f" — from query: {item.get('query','')}"
+                    )
 
         map_points = list(result.get("map_points", []))
         map_status = str(result.get("map_status", "no_coordinates"))

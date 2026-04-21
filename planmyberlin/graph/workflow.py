@@ -10,6 +10,7 @@ from planmyberlin.config.loader import get_settings
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.places import fetch_places_enrichment
 from planmyberlin.rag import retrieve_context
+from planmyberlin.transport import fetch_transport_context
 from planmyberlin.weather import fetch_weather_context
 
 
@@ -41,6 +42,12 @@ class PlannerState(TypedDict, total=False):
     map_status: Literal["ok", "no_coordinates"]
     map_points: list[dict[str, Any]]
     map_points_count: int
+
+    transport_status: Literal["ok", "unavailable"]
+    transport_backend: str
+    transport_message: str
+    transport_items: list[dict[str, Any]]
+    transport_count: int
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -161,6 +168,42 @@ def _build_map_points(state: PlannerState) -> PlannerState:
     return out
 
 
+def _fetch_transport(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    cfg = get_settings().get("transport", {})
+    backend = str(cfg.get("backend", "bvg_rest"))
+    city = str(cfg.get("city", "Berlin"))
+    timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
+    base_url = str(cfg.get("base_url", "https://v6.bvg.transport.rest"))
+    max_queries = int(cfg.get("max_queries", 3))
+    results_per_query = int(cfg.get("results_per_query", 2))
+
+    profile = out.get("profile", {})
+    neighbourhoods = profile.get("neighbourhoods", []) if isinstance(profile, dict) else []
+    payload = fetch_transport_context(
+        items=list(out.get("enriched_items", [])) or list(out.get("retrieved_items", [])),
+        neighbourhoods=list(neighbourhoods) if isinstance(neighbourhoods, list) else [],
+        city=city,
+        timeout_seconds=timeout_seconds,
+        backend=backend,
+        base_url=base_url,
+        max_queries=max_queries,
+        results_per_query=results_per_query,
+    )
+
+    out["transport_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
+    out["transport_backend"] = str(payload.get("backend", backend))
+    out["transport_message"] = str(payload.get("message", ""))
+    items = list(payload.get("transport_items", []))
+    out["transport_items"] = items
+    out["transport_count"] = len(items)
+
+    trace = list(out.get("routing_trace", []))
+    trace.append(f"transport:{out['transport_status']}:{out['transport_count']}")
+    out["routing_trace"] = trace
+    return out
+
+
 def _multi_day_track(state: PlannerState) -> PlannerState:
     out = dict(state)
     trace = list(out.get("routing_trace", []))
@@ -213,7 +256,7 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
 
 
 def build_planner_graph():
-    """Compile planner graph: normalize → retrieve → places → weather → map → routing → accommodation."""
+    """Compile planner graph: normalize → retrieve → places → weather → map → transport → routing → accommodation."""
     g = StateGraph(PlannerState)
 
     g.add_node("normalize_profile", _normalize_profile)
@@ -221,6 +264,7 @@ def build_planner_graph():
     g.add_node("enrich_places", _enrich_places)
     g.add_node("fetch_weather", _fetch_weather)
     g.add_node("build_map_points", _build_map_points)
+    g.add_node("fetch_transport", _fetch_transport)
     g.add_node("multi_day_track", _multi_day_track)
     g.add_node("single_day_track", _single_day_track)
     g.add_node("merge", _merge_identity)
@@ -232,8 +276,9 @@ def build_planner_graph():
     g.add_edge("retrieve_context", "enrich_places")
     g.add_edge("enrich_places", "fetch_weather")
     g.add_edge("fetch_weather", "build_map_points")
+    g.add_edge("build_map_points", "fetch_transport")
     g.add_conditional_edges(
-        "build_map_points",
+        "fetch_transport",
         _route_stay_length,
         {"multi_day": "multi_day_track", "single_day": "single_day_track"},
     )

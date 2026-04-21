@@ -27,3 +27,11 @@ weather:
   city: Berlin
   units: metric
   timeout_seconds: 8
+
+transport:
+  backend: bvg_rest
+  city: Berlin
+  timeout_seconds: 8
+  base_url: https://v6.bvg.transport.rest
+  max_queries: 3
+  results_per_query: 2

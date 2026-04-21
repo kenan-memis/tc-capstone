@@ -36,6 +36,16 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     )
     monkeypatch.setattr(
         wf,
+        "fetch_transport_context",
+        lambda **_: {
+            "status": "ok",
+            "backend": "bvg_rest",
+            "transport_items": [{"query": "Mitte, Berlin", "name": "U Museumsinsel", "type": "stop"}],
+            "message": "ok",
+        },
+    )
+    monkeypatch.setattr(
+        wf,
         "fetch_places_enrichment",
         lambda *_, **__: {
             "status": "ok",
@@ -66,6 +76,8 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     assert out["enriched_count"] == 1
     assert out["map_status"] == "ok"
     assert out["map_points_count"] == 1
+    assert out["transport_status"] == "ok"
+    assert out["transport_count"] >= 1
 
 
 def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -78,6 +90,16 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
             "condition_main": "clear",
             "temperature_c": 21.0,
             "bias": "outdoor_or_mixed",
+        },
+    )
+    monkeypatch.setattr(
+        wf,
+        "fetch_transport_context",
+        lambda **_: {
+            "status": "unavailable",
+            "backend": "bvg_rest",
+            "transport_items": [],
+            "message": "Transport API unavailable",
         },
     )
     monkeypatch.setattr(
@@ -98,6 +120,7 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
     assert out["weather_bias"] == "outdoor_or_mixed"
     assert out["places_status"] == "unavailable"
     assert out["map_status"] == "no_coordinates"
+    assert out["transport_status"] == "unavailable"
 
 
 def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -110,6 +133,16 @@ def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.Monke
             "condition_main": "unknown",
             "temperature_c": None,
             "bias": "unknown",
+        },
+    )
+    monkeypatch.setattr(
+        wf,
+        "fetch_transport_context",
+        lambda **_: {
+            "status": "ok",
+            "backend": "bvg_rest",
+            "transport_items": [],
+            "message": "ok",
         },
     )
     monkeypatch.setattr(
@@ -144,6 +177,16 @@ def test_single_day_with_accommodation_when_requested(monkeypatch: pytest.Monkey
     )
     monkeypatch.setattr(
         wf,
+        "fetch_transport_context",
+        lambda **_: {
+            "status": "ok",
+            "backend": "bvg_rest",
+            "transport_items": [],
+            "message": "ok",
+        },
+    )
+    monkeypatch.setattr(
+        wf,
         "fetch_places_enrichment",
         lambda *_, **__: {
             "status": "ok",
@@ -172,6 +215,16 @@ def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None
     )
     monkeypatch.setattr(
         wf,
+        "fetch_transport_context",
+        lambda **_: {
+            "status": "ok",
+            "backend": "bvg_rest",
+            "transport_items": [],
+            "message": "ok",
+        },
+    )
+    monkeypatch.setattr(
+        wf,
         "fetch_places_enrichment",
         lambda *_, **__: {
             "status": "ok",
@@ -186,6 +239,7 @@ def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None
     assert any(str(x).startswith("weather:") for x in out["routing_trace"])
     assert any(str(x).startswith("places:") for x in out["routing_trace"])
     assert any(str(x).startswith("map:") for x in out["routing_trace"])
+    assert any(str(x).startswith("transport:") for x in out["routing_trace"])
 
 
 def test_normalize_requires_profile() -> None:
