@@ -5,8 +5,9 @@ from __future__ import annotations
 import html
 import json
 import os
+import uuid
 
-import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv
+import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv + logging
 import streamlit as st
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
@@ -23,7 +24,10 @@ from planmyberlin.config.loader import (
 from planmyberlin.graph.workflow import build_planner_graph
 from planmyberlin.map import build_preview_map
 from planmyberlin.models.trip_profile import TripProfile
+from planmyberlin.observability import bind_run_context, get_logger
 
+
+_ui_log = get_logger(__name__)
 
 
 def _default_index(options: tuple[str, ...], prefer: str) -> int:
@@ -228,18 +232,27 @@ def main() -> None:
         )
         graph = build_planner_graph()
         result: dict = {}
+        run_id = str(uuid.uuid4())
         with st.status("Building your plan...", expanded=True) as status:
             try:
-                for event in graph.stream({"profile": profile.model_dump()}, stream_mode="updates"):
-                    if not isinstance(event, dict):
-                        continue
-                    for node_name, delta in event.items():
-                        status.write(f"• {_step_label(str(node_name))}")
-                        if isinstance(delta, dict):
-                            result.update(delta)
+                with bind_run_context(run_id):
+                    _ui_log.info("streamlit planner_stream_started days=%d", profile.days)
+                    for event in graph.stream(
+                        {"profile": profile.model_dump()},
+                        {"metadata": {"run_id": run_id, "source": "streamlit"}},
+                        stream_mode="updates",
+                    ):
+                        if not isinstance(event, dict):
+                            continue
+                        for node_name, delta in event.items():
+                            status.write(f"• {_step_label(str(node_name))}")
+                            if isinstance(delta, dict):
+                                result.update(delta)
+                    _ui_log.info("streamlit planner_stream_finished itinerary_status=%s", result.get("itinerary_status"))
                 status.update(label="Plan built", state="complete")
             except Exception as exc:
                 status.update(label="Plan build failed", state="error")
+                _ui_log.warning("streamlit planner_stream_failed exc_type=%s", type(exc).__name__)
                 st.error(f"Planning failed: {type(exc).__name__}")
                 return
         st.subheader(str(constants.get("section_result", "Plan preview")))

@@ -9,11 +9,14 @@ from langgraph.graph import END, START, StateGraph
 from planmyberlin.accommodation import fetch_accommodation_suggestions
 from planmyberlin.config.loader import get_settings
 from planmyberlin.itinerary import generate_itinerary
+from planmyberlin.observability import get_logger
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.places import fetch_places_enrichment
 from planmyberlin.rag import retrieve_context
 from planmyberlin.transport import fetch_transport_context
 from planmyberlin.weather import fetch_weather_context
+
+_log = get_logger(__name__)
 
 
 class PlannerState(TypedDict, total=False):
@@ -69,6 +72,12 @@ def _normalize_profile(state: PlannerState) -> PlannerState:
     profile = TripProfile.model_validate(raw)
     days = profile.days
     trip_track: Literal["multi_day", "single_day"] = "multi_day" if days >= 2 else "single_day"
+    _log.info(
+        "graph node=normalize_profile trip_track=%s days=%d accommodation_requested=%s",
+        trip_track,
+        days,
+        profile.include_accommodation,
+    )
     return {
         "profile": profile.model_dump(),
         "trip_track": trip_track,
@@ -97,6 +106,12 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append(f"{out['retrieval_backend']}_retrieval:{out['retrieved_count']}")
     out["routing_trace"] = trace
+    _log.info(
+        "graph node=retrieve_context backend=%s items=%d fallback=%s",
+        out["retrieval_backend"],
+        out["retrieved_count"],
+        bool(out.get("retrieval_fallback_reason")),
+    )
     return out
 
 
@@ -127,6 +142,12 @@ def _enrich_places(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append(f"places:{out['places_status']}:{out['enriched_count']}")
     out["routing_trace"] = trace
+    _log.info(
+        "graph node=enrich_places backend=%s status=%s enriched=%d",
+        out["places_backend"],
+        out["places_status"],
+        out["enriched_count"],
+    )
     return out
 
 
@@ -147,6 +168,12 @@ def _fetch_weather(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append(f"weather:{out['weather_condition_main']}:{out['weather_bias']}")
     out["routing_trace"] = trace
+    _log.info(
+        "graph node=fetch_weather status=%s bias=%s temp_c=%s",
+        out["weather_status"],
+        out["weather_bias"],
+        out["weather_temperature_c"],
+    )
     return out
 
 
@@ -177,6 +204,11 @@ def _build_map_points(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append(f"map:{out['map_status']}:{out['map_points_count']}")
     out["routing_trace"] = trace
+    _log.info(
+        "graph node=build_map_points status=%s markers=%d",
+        out["map_status"],
+        out["map_points_count"],
+    )
     return out
 
 
@@ -216,6 +248,12 @@ def _fetch_transport(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append(f"transport:{out['transport_status']}:{out['transport_count']}")
     out["routing_trace"] = trace
+    _log.info(
+        "graph node=fetch_transport backend=%s status=%s suggestions=%d",
+        out["transport_backend"],
+        out["transport_status"],
+        out["transport_count"],
+    )
     return out
 
 
@@ -224,6 +262,7 @@ def _multi_day_track(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append("multi_day_context")
     out["routing_trace"] = trace
+    _log.info("graph node=multi_day_track")
     return out
 
 
@@ -232,6 +271,7 @@ def _single_day_track(state: PlannerState) -> PlannerState:
     trace = list(out.get("routing_trace", []))
     trace.append("single_day_context")
     out["routing_trace"] = trace
+    _log.info("graph node=single_day_track")
     return out
 
 
@@ -281,6 +321,12 @@ def _with_accommodation(state: PlannerState) -> PlannerState:
     trace.append(f"accommodation_suggestions_on:{out['accommodation_count']}")
     out["routing_trace"] = trace
     out["accommodation_outcome"] = "accommodation"
+    _log.info(
+        "graph node=accommodation backend=%s status=%s suggestions=%d",
+        out["accommodation_backend"],
+        out["accommodation_status"],
+        out["accommodation_count"],
+    )
     return out
 
 
@@ -295,6 +341,7 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
     out["accommodation_message"] = "Accommodation suggestions were skipped by preference."
     out["accommodation_items"] = []
     out["accommodation_count"] = 0
+    _log.info("graph node=skip_accommodation")
     return out
 
 
@@ -309,6 +356,11 @@ def _generate_itinerary(state: PlannerState) -> PlannerState:
     days = len(out.get("itinerary", {}).get("days", [])) if isinstance(out.get("itinerary"), dict) else 0
     trace.append(f"itinerary:{out['itinerary_status']}:{days}")
     out["routing_trace"] = trace
+    _log.info(
+        "graph node=generate_itinerary status=%s day_blocks=%d",
+        out["itinerary_status"],
+        days,
+    )
     return out
 
 
