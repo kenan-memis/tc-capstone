@@ -40,3 +40,7 @@ transport:
 accommodation:
   backend: curated
   max_items: 4
+
+itinerary:
+  model: gpt-4o-mini
+  temperature: 0.4

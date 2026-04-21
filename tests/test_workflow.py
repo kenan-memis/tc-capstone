@@ -22,6 +22,18 @@ def _base_profile(**kwargs: object) -> dict:
     return TripProfile.model_validate(base).model_dump()
 
 
+def _stub_itinerary() -> dict:
+    return {
+        "itinerary_status": "ok",
+        "itinerary": {
+            "title": "Test plan",
+            "days": [{"day_number": 1, "theme": "Day 1", "activities": []}],
+            "practical_notes": [],
+        },
+        "itinerary_message": "ok",
+    }
+
+
 def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(
         wf,
@@ -81,6 +93,7 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
             "message": "ok",
         },
     )
+    monkeypatch.setattr(wf, "generate_itinerary", lambda _state: _stub_itinerary())
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=3, include_accommodation=True)})
     assert out["trip_track"] == "multi_day"
@@ -98,6 +111,8 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     assert out["transport_count"] >= 1
     assert out["accommodation_status"] == "ok"
     assert out["accommodation_count"] == 1
+    assert out["itinerary_status"] == "ok"
+    assert any(str(x).startswith("itinerary:") for x in out["routing_trace"])
 
 
 def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -132,16 +147,7 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
             "message": "SERPAPI_API_KEY not set",
         },
     )
-    monkeypatch.setattr(
-        wf,
-        "fetch_accommodation_suggestions",
-        lambda **_: {
-            "status": "ok",
-            "backend": "curated",
-            "message": "Links only.",
-            "accommodation_items": [{"name": "A", "url": "https://example.com"}],
-        },
-    )
+    monkeypatch.setattr(wf, "generate_itinerary", lambda _state: _stub_itinerary())
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=4, include_accommodation=False)})
     assert out["trip_track"] == "multi_day"
@@ -152,6 +158,7 @@ def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> Non
     assert out["map_status"] == "no_coordinates"
     assert out["transport_status"] == "unavailable"
     assert out["accommodation_count"] == 0
+    assert out["itinerary_status"] == "ok"
 
 
 def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -186,22 +193,14 @@ def test_single_day_skip_accommodation_by_default_path(monkeypatch: pytest.Monke
             "message": "ok",
         },
     )
-    monkeypatch.setattr(
-        wf,
-        "fetch_accommodation_suggestions",
-        lambda **_: {
-            "status": "ok",
-            "backend": "curated",
-            "message": "Links only.",
-            "accommodation_items": [{"name": "A", "url": "https://example.com"}],
-        },
-    )
+    monkeypatch.setattr(wf, "generate_itinerary", lambda _state: _stub_itinerary())
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=1, include_accommodation=False)})
     assert out["trip_track"] == "single_day"
     assert out["accommodation_outcome"] == "skip_accommodation"
     assert "single_day_context" in out["routing_trace"]
     assert out["weather_bias"] == "unknown"
+    assert out["itinerary_status"] == "ok"
 
 
 def test_single_day_with_accommodation_when_requested(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -246,11 +245,13 @@ def test_single_day_with_accommodation_when_requested(monkeypatch: pytest.Monkey
             "accommodation_items": [{"name": "A", "url": "https://example.com"}],
         },
     )
+    monkeypatch.setattr(wf, "generate_itinerary", lambda _state: _stub_itinerary())
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=1, include_accommodation=True)})
     assert out["trip_track"] == "single_day"
     assert out["accommodation_outcome"] == "accommodation"
     assert out["accommodation_count"] == 1
+    assert out["itinerary_status"] == "ok"
 
 
 def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -285,6 +286,7 @@ def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None
             "message": "ok",
         },
     )
+    monkeypatch.setattr(wf, "generate_itinerary", lambda _state: _stub_itinerary())
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=2)})
     assert any(str(x).endswith(f":{out['retrieved_count']}") for x in out["routing_trace"])
@@ -292,6 +294,7 @@ def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None
     assert any(str(x).startswith("places:") for x in out["routing_trace"])
     assert any(str(x).startswith("map:") for x in out["routing_trace"])
     assert any(str(x).startswith("transport:") for x in out["routing_trace"])
+    assert any(str(x).startswith("itinerary:") for x in out["routing_trace"])
 
 
 def test_normalize_requires_profile() -> None:

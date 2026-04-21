@@ -8,6 +8,7 @@ from langgraph.graph import END, START, StateGraph
 
 from planmyberlin.accommodation import fetch_accommodation_suggestions
 from planmyberlin.config.loader import get_settings
+from planmyberlin.itinerary import generate_itinerary
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.places import fetch_places_enrichment
 from planmyberlin.rag import retrieve_context
@@ -55,6 +56,10 @@ class PlannerState(TypedDict, total=False):
     accommodation_message: str
     accommodation_items: list[dict[str, Any]]
     accommodation_count: int
+
+    itinerary_status: Literal["ok", "fallback", "unavailable"]
+    itinerary: dict[str, Any]
+    itinerary_message: str
 
 
 def _normalize_profile(state: PlannerState) -> PlannerState:
@@ -293,8 +298,22 @@ def _skip_accommodation(state: PlannerState) -> PlannerState:
     return out
 
 
+def _generate_itinerary(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    payload = generate_itinerary(out)
+    out["itinerary_status"] = str(payload.get("itinerary_status", "unavailable"))  # type: ignore[assignment]
+    out["itinerary"] = payload.get("itinerary", {}) if isinstance(payload.get("itinerary"), dict) else {}
+    out["itinerary_message"] = str(payload.get("itinerary_message", ""))
+
+    trace = list(out.get("routing_trace", []))
+    days = len(out.get("itinerary", {}).get("days", [])) if isinstance(out.get("itinerary"), dict) else 0
+    trace.append(f"itinerary:{out['itinerary_status']}:{days}")
+    out["routing_trace"] = trace
+    return out
+
+
 def build_planner_graph():
-    """Compile planner graph: normalize → retrieve → places → weather → map → transport → routing → accommodation."""
+    """Compile planner graph: normalize → retrieve → places → weather → map → transport → routing → accommodation → itinerary."""
     g = StateGraph(PlannerState)
 
     g.add_node("normalize_profile", _normalize_profile)
@@ -308,6 +327,7 @@ def build_planner_graph():
     g.add_node("merge", _merge_identity)
     g.add_node("accommodation", _with_accommodation)
     g.add_node("skip_accommodation", _skip_accommodation)
+    g.add_node("generate_itinerary", _generate_itinerary)
 
     g.add_edge(START, "normalize_profile")
     g.add_edge("normalize_profile", "retrieve_context")
@@ -327,7 +347,8 @@ def build_planner_graph():
         _route_accommodation,
         {"accommodation": "accommodation", "skip_accommodation": "skip_accommodation"},
     )
-    g.add_edge("accommodation", END)
-    g.add_edge("skip_accommodation", END)
+    g.add_edge("accommodation", "generate_itinerary")
+    g.add_edge("skip_accommodation", "generate_itinerary")
+    g.add_edge("generate_itinerary", END)
 
     return g.compile()
