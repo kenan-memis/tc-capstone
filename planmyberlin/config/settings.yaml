@@ -35,3 +35,4 @@ transport:
   base_url: https://v6.bvg.transport.rest
   max_queries: 3
   results_per_query: 2
+  nearby_results: 2

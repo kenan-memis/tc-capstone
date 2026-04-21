@@ -177,18 +177,21 @@ def _fetch_transport(state: PlannerState) -> PlannerState:
     base_url = str(cfg.get("base_url", "https://v6.bvg.transport.rest"))
     max_queries = int(cfg.get("max_queries", 3))
     results_per_query = int(cfg.get("results_per_query", 2))
+    nearby_results = int(cfg.get("nearby_results", 2))
 
     profile = out.get("profile", {})
     neighbourhoods = profile.get("neighbourhoods", []) if isinstance(profile, dict) else []
     payload = fetch_transport_context(
         items=list(out.get("enriched_items", [])) or list(out.get("retrieved_items", [])),
         neighbourhoods=list(neighbourhoods) if isinstance(neighbourhoods, list) else [],
+        map_points=list(out.get("map_points", [])),
         city=city,
         timeout_seconds=timeout_seconds,
         backend=backend,
         base_url=base_url,
         max_queries=max_queries,
         results_per_query=results_per_query,
+        nearby_results=nearby_results,
     )
 
     out["transport_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]

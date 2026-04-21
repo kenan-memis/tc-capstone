@@ -214,9 +214,11 @@ def main() -> None:
         if transport_items:
             with st.expander("Transport suggestions", expanded=False):
                 for item in transport_items[:8]:
+                    distance = item.get("distance_m")
+                    distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
                     st.markdown(
                         f"- **{item.get('name','')}** ({item.get('type','')})"
-                        f" — from query: {item.get('query','')}"
+                        f" — near: {item.get('query','')}{distance_text}"
                     )
 
         map_points = list(result.get("map_points", []))
