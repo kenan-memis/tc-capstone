@@ -112,3 +112,19 @@ def test_router_food_interest_guarantee_injects_food_items(monkeypatch: pytest.M
         },
     )
     assert any("restaurant" in str(x.get("category", "")) for x in payload["items"])
+
+
+def test_router_uses_wider_candidate_pool_for_food_interests(monkeypatch: pytest.MonkeyPatch) -> None:
+    calls: list[int] = []
+
+    def _fake_seed(_profile, *, limit: int):  # noqa: ANN001
+        calls.append(limit)
+        return {"items": [], "citations": []}
+
+    monkeypatch.setattr(router, "retrieve_seed_context", _fake_seed)
+    payload = router.retrieve_context(
+        _profile(),
+        retrieval_cfg={"backend": "seed", "seed_limit": 8, "food_interest_guarantee": True},
+    )
+    assert payload["backend"] == "seed"
+    assert calls and calls[0] >= 24

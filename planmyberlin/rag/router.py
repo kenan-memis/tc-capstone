@@ -121,11 +121,15 @@ def retrieve_context(profile: TripProfile, *, retrieval_cfg: dict[str, Any] | No
     cfg = retrieval_cfg or {}
     backend = str(cfg.get("backend", "auto")).lower()  # auto | seed | chroma
     limit = int(cfg.get("seed_limit", 8))
+    candidate_limit = limit
+    if bool(cfg.get("food_interest_guarantee", True)) and any(_is_food_interest(x) for x in profile.interest_tags):
+        # Pull a wider candidate pool first, then enforce final top-k after filtering/guarantees.
+        candidate_limit = max(limit * 4, 24)
     persist_dir = cfg.get("chroma_persist_dir")
     collection_name = str(cfg.get("chroma_collection", "berlin_seed_v1"))
 
     if backend == "seed":
-        payload = retrieve_seed_context(profile, limit=limit)
+        payload = retrieve_seed_context(profile, limit=candidate_limit)
         payload["backend"] = "seed"
         return _apply_area_filters(payload, profile, limit=limit, cfg=cfg)
 
@@ -134,7 +138,7 @@ def retrieve_context(profile: TripProfile, *, retrieval_cfg: dict[str, Any] | No
             if chroma_index_ready(persist_dir=persist_dir, collection_name=collection_name):
                 payload = retrieve_chroma_context(
                     profile,
-                    limit=limit,
+                    limit=candidate_limit,
                     persist_dir=persist_dir,
                     collection_name=collection_name,
                 )
@@ -145,11 +149,11 @@ def retrieve_context(profile: TripProfile, *, retrieval_cfg: dict[str, Any] | No
         except Exception as exc:
             if backend == "chroma":
                 raise
-            payload = retrieve_seed_context(profile, limit=limit)
+            payload = retrieve_seed_context(profile, limit=candidate_limit)
             payload["backend"] = "seed"
             payload["fallback_reason"] = str(exc)
             return _apply_area_filters(payload, profile, limit=limit, cfg=cfg)
 
-    payload = retrieve_seed_context(profile, limit=limit)
+    payload = retrieve_seed_context(profile, limit=candidate_limit)
     payload["backend"] = "seed"
     return _apply_area_filters(payload, profile, limit=limit, cfg=cfg)
