@@ -27,6 +27,30 @@ def test_build_preview_map_with_points() -> None:
     assert "Markthalle Neun" in html
 
 
+def test_build_preview_map_highlights_named_marker() -> None:
+    points = [
+        {
+            "name": "Museum Island",
+            "category": "places",
+            "district": "Mitte",
+            "summary": "UNESCO museum complex",
+            "latitude": 52.5169,
+            "longitude": 13.4010,
+        },
+        {
+            "name": "Elsewhere",
+            "category": "places",
+            "district": "X",
+            "summary": "Y",
+            "latitude": 52.50,
+            "longitude": 13.42,
+        },
+    ]
+    m = build_preview_map(points, highlight_name="museum island")
+    html = m.get_root().render()
+    assert "darkred" in html.lower()
+
+
 def test_build_preview_map_without_coordinates() -> None:
     points = [{"name": "No coords", "category": "places", "district": "Mitte", "summary": "x"}]
     m = build_preview_map(points)

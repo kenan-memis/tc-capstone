@@ -23,6 +23,7 @@ from planmyberlin.config.loader import (
 )
 from planmyberlin.graph.workflow import build_planner_graph
 from planmyberlin.map import build_preview_map
+from planmyberlin.map.interaction import itinerary_places_linked_to_map
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.observability import bind_run_context, get_logger
 
@@ -113,6 +114,23 @@ def _stream_itinerary_markdown(itinerary: dict, *, model: str, temperature: floa
             text += piece
             placeholder.markdown(text)
     return text.strip()
+
+
+def _map_highlight_option_list(linked: list[dict], map_points: list[dict]) -> list[str]:
+    """Dropdown options: itinerary-linked names first, then other markers; always includes ``(All places)``."""
+    ordered: list[str] = []
+    seen: set[str] = set()
+    for row in linked:
+        n = str(row.get("name", "")).strip()
+        if n and n not in seen:
+            ordered.append(n)
+            seen.add(n)
+    for p in map_points:
+        n = str(p.get("name", "")).strip()
+        if n and n not in seen:
+            ordered.append(n)
+            seen.add(n)
+    return ["(All places)"] + ordered
 
 
 def main() -> None:
@@ -217,7 +235,9 @@ def main() -> None:
         help=str(constants.get("help_notes", "")),
     )
 
-    if st.button(str(constants.get("button_run", "Run")), type="primary"):
+    run_clicked = st.button(str(constants.get("button_run", "Run")), type="primary")
+
+    if run_clicked:
         profile = TripProfile(
             days=days,
             party_size=party_size,
@@ -248,174 +268,219 @@ def main() -> None:
                             status.write(f"• {_step_label(str(node_name))}")
                             if isinstance(delta, dict):
                                 result.update(delta)
-                    _ui_log.info("streamlit planner_stream_finished itinerary_status=%s", result.get("itinerary_status"))
+                    _ui_log.info(
+                        "streamlit planner_stream_finished itinerary_status=%s",
+                        result.get("itinerary_status"),
+                    )
                 status.update(label="Plan built", state="complete")
             except Exception as exc:
                 status.update(label="Plan build failed", state="error")
                 _ui_log.warning("streamlit planner_stream_failed exc_type=%s", type(exc).__name__)
                 st.error(f"Planning failed: {type(exc).__name__}")
                 return
-        st.subheader(str(constants.get("section_result", "Plan preview")))
+        st.session_state["plan_result"] = result
+        st.session_state.pop("plan_narrative_md", None)
+        st.session_state["map_highlight_pick"] = "(All places)"
+        st.session_state["plan_map_version"] = str(uuid.uuid4())
 
-        retrieved_items = list(result.get("retrieved_items", []))
-        enriched_items = list(result.get("enriched_items", []))
+    plan_result = st.session_state.get("plan_result")
+    if not plan_result:
+        return
 
-        weather_summary = str(result.get("weather_summary", "")).strip()
-        weather_bias = str(result.get("weather_bias", "unknown"))
-        if weather_summary:
-            st.markdown(f"**Expected weather on trip days:** {weather_summary}")
-            st.caption(_weather_recommendation_text(weather_bias))
+    result = plan_result
+    st.subheader(str(constants.get("section_result", "Plan preview")))
 
-        itinerary = result.get("itinerary", {})
-        itinerary_status = str(result.get("itinerary_status", "unavailable"))
-        itinerary_message = str(result.get("itinerary_message", "")).strip()
-        if isinstance(itinerary, dict) and itinerary:
-            st.markdown("**Your trip plan**")
-            narrative_box = st.empty()
-            llm_cfg = settings.get("itinerary", {})
-            model = str(llm_cfg.get("model", "gpt-4o-mini"))
-            temperature = float(llm_cfg.get("temperature", 0.4))
-            if os.getenv("OPENAI_API_KEY"):
+    retrieved_items = list(result.get("retrieved_items", []))
+    enriched_items = list(result.get("enriched_items", []))
+
+    weather_summary = str(result.get("weather_summary", "")).strip()
+    weather_bias = str(result.get("weather_bias", "unknown"))
+    if weather_summary:
+        st.markdown(f"**Expected weather on trip days:** {weather_summary}")
+        st.caption(_weather_recommendation_text(weather_bias))
+
+    itinerary = result.get("itinerary", {})
+    itinerary_status = str(result.get("itinerary_status", "unavailable"))
+    itinerary_message = str(result.get("itinerary_message", "")).strip()
+    if isinstance(itinerary, dict) and itinerary:
+        st.markdown("**Your trip plan**")
+        llm_cfg = settings.get("itinerary", {})
+        model = str(llm_cfg.get("model", "gpt-4o-mini"))
+        temperature = float(llm_cfg.get("temperature", 0.4))
+        cached_narrative = st.session_state.get("plan_narrative_md")
+        if os.getenv("OPENAI_API_KEY"):
+            if cached_narrative:
+                st.markdown(cached_narrative)
+            else:
+                narrative_box = st.empty()
                 try:
                     text = _stream_itinerary_markdown(
                         itinerary, model=model, temperature=temperature, placeholder=narrative_box
                     )
                     if not text:
-                        narrative_box.markdown(_format_itinerary_markdown(itinerary))
+                        text = _format_itinerary_markdown(itinerary)
+                    st.session_state.plan_narrative_md = text
+                    narrative_box.markdown(text)
                 except Exception:
-                    narrative_box.markdown(_format_itinerary_markdown(itinerary))
-            else:
-                narrative_box.markdown(_format_itinerary_markdown(itinerary))
-            if itinerary_status != "ok" and itinerary_message:
-                st.caption(itinerary_message)
+                    fallback_md = _format_itinerary_markdown(itinerary)
+                    st.session_state.plan_narrative_md = fallback_md
+                    narrative_box.markdown(fallback_md)
+        else:
+            st.markdown(_format_itinerary_markdown(itinerary))
+        if itinerary_status != "ok" and itinerary_message:
+            st.caption(itinerary_message)
 
-        transport_items = list(result.get("transport_items", []))
-        accommodation_items = list(result.get("accommodation_items", []))
+    transport_items = list(result.get("transport_items", []))
+    accommodation_items = list(result.get("accommodation_items", []))
 
-        map_points = list(result.get("map_points", []))
-        map_status = str(result.get("map_status", "no_coordinates"))
-        if map_points:
-            map_obj = build_preview_map(map_points)
-            st_folium(map_obj, width=None, height=420, returned_objects=[])
-        elif map_status != "ok":
-            st.info("Map preview is unavailable because no coordinates were found for the current results.")
+    map_points = list(result.get("map_points", []))
+    map_status = str(result.get("map_status", "no_coordinates"))
+    linked = itinerary_places_linked_to_map(itinerary, map_points) if isinstance(itinerary, dict) else []
+    linked_days = {row["name"]: row["days"] for row in linked}
+    highlight_opts = _map_highlight_option_list(linked, map_points)
 
-        tabs = st.tabs(
-            [
-                "Your Trip Plan",
-                "Places to Explore",
-                "How to Get Around",
-                "Stay Options",
-                "Developer Diagnostics",
-                "Raw Data",
-                "Structured itinerary (JSON)",
-            ]
+    if map_points:
+        st.markdown("##### Map")
+        st.caption(
+            "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
+            "Itinerary-linked stops are listed first."
         )
+        sel = st.selectbox("Focus marker", options=highlight_opts, key="map_highlight_pick")
+        hl = None if sel == "(All places)" else sel
+        pv = st.session_state.get("plan_map_version", "1")
+        map_obj = build_preview_map(map_points, highlight_name=hl)
+        map_out = st_folium(
+            map_obj,
+            width=None,
+            height=420,
+            returned_objects=["last_object_clicked_tooltip"],
+            key=f"plan_map_{pv}",
+        )
+        tip = map_out.get("last_object_clicked_tooltip") if isinstance(map_out, dict) else None
+        if tip and tip in highlight_opts and tip != sel:
+            st.session_state.map_highlight_pick = tip
+            st.rerun()
+    elif map_status != "ok":
+        st.info("Map preview is unavailable because no coordinates were found for the current results.")
 
-        with tabs[0]:
-            if isinstance(itinerary, dict) and itinerary:
-                st.markdown(_format_itinerary_markdown(itinerary))
-            else:
-                st.caption("No itinerary was generated for this run.")
+    st.caption("Use the tabs below for places, transport, and stay details. The main itinerary stays above the map.")
+    tabs = st.tabs(
+        [
+            "Places to Explore",
+            "How to Get Around",
+            "Stay Options",
+            "Developer Diagnostics",
+            "Raw Data",
+            "Structured itinerary (JSON)",
+        ]
+    )
 
-        shown_items = enriched_items if enriched_items else retrieved_items
-        with tabs[1]:
-            if shown_items:
-                for item in shown_items:
-                    st.markdown(
-                        f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
-                        f" — {item.get('summary','')}"
+    shown_items = enriched_items if enriched_items else retrieved_items
+    with tabs[0]:
+        if shown_items:
+            for item in shown_items:
+                nm = str(item.get("name", "")).strip()
+                extra = ""
+                if nm in linked_days:
+                    extra = (
+                        f" · *Itinerary days: {', '.join(str(d) for d in linked_days[nm])}*"
                     )
-            else:
-                st.caption("No places found for this run.")
+                st.markdown(
+                    f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
+                    f" — {item.get('summary','')}{extra}"
+                )
+        else:
+            st.caption("No places found for this run.")
 
-        with tabs[2]:
-            if transport_items:
-                for item in transport_items[:10]:
-                    distance = item.get("distance_m")
-                    distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
-                    st.markdown(
-                        f"- **{item.get('name','')}** ({item.get('type','')})"
-                        f" — near: {item.get('query','')}{distance_text}"
-                    )
-            else:
-                st.caption("No transport suggestions available for this run.")
+    with tabs[1]:
+        if transport_items:
+            for item in transport_items[:10]:
+                distance = item.get("distance_m")
+                distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
+                st.markdown(
+                    f"- **{item.get('name','')}** ({item.get('type','')})"
+                    f" — near: {item.get('query','')}{distance_text}"
+                )
+        else:
+            st.caption("No transport suggestions available for this run.")
 
-        with tabs[3]:
-            if accommodation_items:
-                for item in accommodation_items[:5]:
-                    name = html.escape(str(item.get("name", "")))
-                    typ = html.escape(str(item.get("type", "")))
-                    district = html.escape(str(item.get("district", "")))
-                    reason = html.escape(str(item.get("reason", "")))
-                    url = str(item.get("url", "")).strip()
-                    icon = (
-                        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" '
-                        'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
-                        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-                        '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'
-                        '<polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>'
-                        "</svg>"
-                    )
-                    link = (
-                        f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener noreferrer" '
-                        f'title="Open in new tab" style="text-decoration:none;margin-left:6px;">{icon}</a>'
-                    )
-                    st.markdown(
-                        f"- **{name}** ({typ}, {district}) — {reason} {link}",
-                        unsafe_allow_html=True,
-                    )
-            else:
-                st.caption("Accommodation suggestions are not enabled for this run.")
+    with tabs[2]:
+        if accommodation_items:
+            for item in accommodation_items[:5]:
+                name = html.escape(str(item.get("name", "")))
+                typ = html.escape(str(item.get("type", "")))
+                district = html.escape(str(item.get("district", "")))
+                reason = html.escape(str(item.get("reason", "")))
+                url = str(item.get("url", "")).strip()
+                icon = (
+                    '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" '
+                    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+                    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+                    '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'
+                    '<polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>'
+                    "</svg>"
+                )
+                link = (
+                    f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener noreferrer" '
+                    f'title="Open in new tab" style="text-decoration:none;margin-left:6px;">{icon}</a>'
+                )
+                st.markdown(
+                    f"- **{name}** ({typ}, {district}) — {reason} {link}",
+                    unsafe_allow_html=True,
+                )
+        else:
+            st.caption("Accommodation suggestions are not enabled for this run.")
 
-        with tabs[4]:
-            st.caption("Temporary build-time diagnostics. Remove before final presentation.")
-            st.markdown(
-                "- Retrieval backend: "
-                f"`{result.get('retrieval_backend', 'unknown')}`\n"
-                "- Retrieved context items: "
-                f"`{len(retrieved_items)}`\n"
-                "- Places backend: "
-                f"`{result.get('places_backend', 'unknown')}`\n"
-                "- Place enrichment status: "
-                f"`{result.get('places_status', 'unknown')}` / items `{len(enriched_items)}`\n"
-                "- Transport backend: "
-                f"`{result.get('transport_backend', 'unknown')}`\n"
-                "- Transport status: "
-                f"`{result.get('transport_status', 'unknown')}` / suggestions `{len(transport_items)}`\n"
-                "- Accommodation backend: "
-                f"`{result.get('accommodation_backend', 'unknown')}`\n"
-                "- Accommodation status: "
-                f"`{result.get('accommodation_status', 'unknown')}` / suggestions `{len(accommodation_items)}`\n"
-                "- Itinerary status: "
-                f"`{itinerary_status}`\n"
-                "- Weather bias: "
-                f"`{weather_bias}`"
-            )
-            places_message = str(result.get("places_message", "")).strip()
-            transport_message = str(result.get("transport_message", "")).strip()
-            accommodation_message = str(result.get("accommodation_message", "")).strip()
-            fallback_reason = str(result.get("retrieval_fallback_reason", "")).strip()
-            if fallback_reason:
-                st.caption(f"Retriever fallback: {fallback_reason}")
-            if places_message:
-                st.caption(f"Places message: {places_message}")
-            if transport_message:
-                st.caption(f"Transport message: {transport_message}")
-            if accommodation_message:
-                st.caption(f"Accommodation message: {accommodation_message}")
-            if itinerary_message:
-                st.caption(f"Itinerary message: {itinerary_message}")
+    with tabs[3]:
+        st.caption("Temporary build-time diagnostics. Remove before final presentation.")
+        st.markdown(
+            "- Retrieval backend: "
+            f"`{result.get('retrieval_backend', 'unknown')}`\n"
+            "- Retrieved context items: "
+            f"`{len(retrieved_items)}`\n"
+            "- Places backend: "
+            f"`{result.get('places_backend', 'unknown')}`\n"
+            "- Place enrichment status: "
+            f"`{result.get('places_status', 'unknown')}` / items `{len(enriched_items)}`\n"
+            "- Transport backend: "
+            f"`{result.get('transport_backend', 'unknown')}`\n"
+            "- Transport status: "
+            f"`{result.get('transport_status', 'unknown')}` / suggestions `{len(transport_items)}`\n"
+            "- Accommodation backend: "
+            f"`{result.get('accommodation_backend', 'unknown')}`\n"
+            "- Accommodation status: "
+            f"`{result.get('accommodation_status', 'unknown')}` / suggestions `{len(accommodation_items)}`\n"
+            "- Itinerary status: "
+            f"`{itinerary_status}`\n"
+            "- Weather bias: "
+            f"`{weather_bias}`"
+        )
+        places_message = str(result.get("places_message", "")).strip()
+        transport_message = str(result.get("transport_message", "")).strip()
+        accommodation_message = str(result.get("accommodation_message", "")).strip()
+        fallback_reason = str(result.get("retrieval_fallback_reason", "")).strip()
+        if fallback_reason:
+            st.caption(f"Retriever fallback: {fallback_reason}")
+        if places_message:
+            st.caption(f"Places message: {places_message}")
+        if transport_message:
+            st.caption(f"Transport message: {transport_message}")
+        if accommodation_message:
+            st.caption(f"Accommodation message: {accommodation_message}")
+        if itinerary_message:
+            st.caption(f"Itinerary message: {itinerary_message}")
 
-        with tabs[5]:
-            st.json(result)
+    with tabs[4]:
+        st.json(result)
 
-        with tabs[6]:
-            st.caption("Developer-oriented structured itinerary. Remove before final presentation.")
-            if isinstance(itinerary, dict) and itinerary:
-                st.json(itinerary)
-            else:
-                st.caption("No itinerary JSON for this run.")
+    with tabs[5]:
+        st.caption("Developer-oriented structured itinerary. Remove before final presentation.")
+        if isinstance(itinerary, dict) and itinerary:
+            st.json(itinerary)
+        else:
+            st.caption("No itinerary JSON for this run.")
+
+
 
 
 if __name__ == "__main__":
