@@ -11,11 +11,13 @@ from planmyberlin.map.interaction import normalize_place_label
 
 def _category_color(category: str) -> str:
     c = (category or "").lower()
+    if "hotel" in c or "accommodation" in c or "stay" in c:
+        return "green"
     if "restaurant" in c:
         return "red"
     if "place" in c:
         return "blue"
-    return "green"
+    return "blue"
 
 
 def build_preview_map(

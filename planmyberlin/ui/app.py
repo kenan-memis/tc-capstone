@@ -31,6 +31,20 @@ from planmyberlin.observability import bind_run_context, get_logger
 _ui_log = get_logger(__name__)
 
 
+_BUILD_STEP_ORDER = [
+    "normalize_profile",
+    "retrieve_context",
+    "enrich_places",
+    "fetch_weather",
+    "build_map_points",
+    "fetch_transport",
+    "route_track",
+    "merge",
+    "accommodation_route",
+    "generate_itinerary",
+]
+
+
 def _default_index(options: tuple[str, ...], prefer: str) -> int:
     try:
         return options.index(prefer)
@@ -48,9 +62,11 @@ def _step_label(node_name: str) -> str:
         "fetch_transport": "Checking transport options",
         "multi_day_track": "Applying multi-day planning route",
         "single_day_track": "Applying single-day planning route",
+        "route_track": "Applying planning route",
         "merge": "Merging planning state",
         "accommodation": "Adding accommodation suggestions",
         "skip_accommodation": "Skipping accommodation suggestions",
+        "accommodation_route": "Handling accommodation preferences",
         "generate_itinerary": "Drafting your day-by-day plan",
     }
     return labels.get(node_name, f"Running {node_name}")
@@ -133,6 +149,28 @@ def _map_highlight_option_list(linked: list[dict], map_points: list[dict]) -> li
     return ["(All places)"] + ordered
 
 
+def _is_food_item(item: dict) -> bool:
+    category = str(item.get("category", "")).strip().lower()
+    return any(k in category for k in ("restaurant", "cafe", "bar", "food"))
+
+
+def _build_steps_markdown(completed_nodes: set[str]) -> str:
+    derived = set(completed_nodes)
+    if "multi_day_track" in completed_nodes or "single_day_track" in completed_nodes:
+        derived.add("route_track")
+    if "accommodation" in completed_nodes or "skip_accommodation" in completed_nodes:
+        derived.add("accommodation_route")
+
+    lines: list[str] = []
+    for node in _BUILD_STEP_ORDER:
+        label = _step_label(node)
+        if node in derived:
+            lines.append(f"- ✅ {label}")
+        else:
+            lines.append(f"- ⬜ {label}")
+    return "\n".join(lines)
+
+
 def main() -> None:
     settings = get_settings()
     constants = get_constants()
@@ -155,6 +193,7 @@ def main() -> None:
 
     st.session_state.setdefault("plan_build_phase", "idle")
     st.session_state.setdefault("plan_build_steps", [])
+    st.session_state.setdefault("plan_build_nodes", [])
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
@@ -244,14 +283,18 @@ def main() -> None:
     with top_right:
         st.subheader("Plan builder list")
         latest_result = st.session_state.get("plan_result", {})
+        latest_items = list(latest_result.get("enriched_items", [])) or list(latest_result.get("retrieved_items", []))
+        latest_place_count = sum(1 for x in latest_items if not _is_food_item(x))
+        latest_food_count = sum(1 for x in latest_items if _is_food_item(x))
         stat_1, stat_2, stat_3 = st.columns(3)
         with stat_1:
-            st.metric("Places", int(latest_result.get("enriched_count", latest_result.get("retrieved_count", 0)) or 0))
+            st.metric("Places", latest_place_count)
         with stat_2:
-            st.metric("Transport", int(latest_result.get("transport_count", 0) or 0))
+            st.metric("Food", latest_food_count)
         with stat_3:
             st.metric("Stay", int(latest_result.get("accommodation_count", 0) or 0))
         status_panel = st.empty()
+        steps_panel = st.empty()
         phase = str(st.session_state.get("plan_build_phase", "idle"))
         if phase == "building":
             status_panel.info("Building plan...")
@@ -263,17 +306,16 @@ def main() -> None:
             status_panel.error("Plan build failed.")
         else:
             status_panel.caption("Run the planner to see build progress and step logs.")
-        steps = list(st.session_state.get("plan_build_steps", []))
-        with st.container(height=260, border=True):
-            if steps:
-                for idx, line in enumerate(steps[-20:], start=max(1, len(steps) - 19)):
-                    st.caption(f"{idx}. {line}")
-            else:
-                st.caption("No build steps yet.")
+        completed_nodes = set(st.session_state.get("plan_build_nodes", []))
+        if phase in {"building", "rendering", "ready", "error"}:
+            steps_panel.markdown(_build_steps_markdown(completed_nodes))
+        else:
+            steps_panel.empty()
 
     if run_clicked:
         st.session_state["plan_build_phase"] = "building"
         st.session_state["plan_build_steps"] = []
+        st.session_state["plan_build_nodes"] = []
         profile = TripProfile(
             days=days,
             party_size=party_size,
@@ -292,6 +334,7 @@ def main() -> None:
         try:
             with bind_run_context(run_id):
                 _ui_log.info("streamlit planner_stream_started days=%d", profile.days)
+                status_panel.info("Building plan...")
                 for event in graph.stream(
                     {"profile": profile.model_dump()},
                     {"metadata": {"run_id": run_id, "source": "streamlit"}},
@@ -302,6 +345,9 @@ def main() -> None:
                     for node_name, delta in event.items():
                         label = _step_label(str(node_name))
                         st.session_state["plan_build_steps"].append(label)
+                        if str(node_name) not in st.session_state["plan_build_nodes"]:
+                            st.session_state["plan_build_nodes"].append(str(node_name))
+                        steps_panel.markdown(_build_steps_markdown(set(st.session_state["plan_build_nodes"])))
                         if isinstance(delta, dict):
                             result.update(delta)
                 _ui_log.info(
@@ -309,6 +355,7 @@ def main() -> None:
                     result.get("itinerary_status"),
                 )
             st.session_state["plan_build_phase"] = "rendering"
+            status_panel.info("Preparing map and detail panels...")
         except Exception as exc:
             st.session_state["plan_build_phase"] = "error"
             _ui_log.warning("streamlit planner_stream_failed exc_type=%s", type(exc).__name__)
@@ -319,6 +366,7 @@ def main() -> None:
         st.session_state["map_highlight_pick"] = "(All places)"
         st.session_state["plan_map_version"] = str(uuid.uuid4())
         st.session_state["plan_build_phase"] = "ready"
+        st.rerun()
 
     plan_result = st.session_state.get("plan_result")
     if not plan_result:
@@ -382,6 +430,7 @@ def main() -> None:
                 "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
                 "Itinerary-linked stops are listed first."
             )
+            st.caption("Marker colors: blue = places, red = food & drink, green = stays/hotels (when available).")
             pending_tip = st.session_state.pop("pending_map_highlight_pick", None)
             if pending_tip in highlight_opts:
                 st.session_state["map_highlight_pick"] = pending_tip
@@ -406,6 +455,7 @@ def main() -> None:
         tabs = st.tabs(
             [
                 "Places to Explore",
+                "Food & Drink",
                 "How to Get Around",
                 "Stay Options",
                 "Developer Diagnostics",
@@ -415,9 +465,11 @@ def main() -> None:
         )
 
         shown_items = enriched_items if enriched_items else retrieved_items
+        place_items = [x for x in shown_items if not _is_food_item(x)]
+        food_items = [x for x in shown_items if _is_food_item(x)]
         with tabs[0]:
-            if shown_items:
-                for item in shown_items:
+            if place_items:
+                for item in place_items:
                     nm = str(item.get("name", "")).strip()
                     extra = ""
                     if nm in linked_days:
@@ -429,9 +481,25 @@ def main() -> None:
                         f" — {item.get('summary','')}{extra}"
                     )
             else:
-                st.caption("No places found for this run.")
+                st.caption("No visit places found for this run.")
 
         with tabs[1]:
+            if food_items:
+                for item in food_items:
+                    nm = str(item.get("name", "")).strip()
+                    extra = ""
+                    if nm in linked_days:
+                        extra = (
+                            f" · *Itinerary days: {', '.join(str(d) for d in linked_days[nm])}*"
+                        )
+                    st.markdown(
+                        f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
+                        f" — {item.get('summary','')}{extra}"
+                    )
+            else:
+                st.caption("No food & drink suggestions found for this run.")
+
+        with tabs[2]:
             if transport_items:
                 for item in transport_items[:10]:
                     distance = item.get("distance_m")
@@ -443,7 +511,7 @@ def main() -> None:
             else:
                 st.caption("No transport suggestions available for this run.")
 
-        with tabs[2]:
+        with tabs[3]:
             if accommodation_items:
                 for item in accommodation_items[:5]:
                     name = html.escape(str(item.get("name", "")))
@@ -470,7 +538,7 @@ def main() -> None:
             else:
                 st.caption("Accommodation suggestions are not enabled for this run.")
 
-        with tabs[3]:
+        with tabs[4]:
             st.caption("Temporary build-time diagnostics. Remove before final presentation.")
             st.markdown(
                 "- Retrieval backend: "
@@ -511,11 +579,11 @@ def main() -> None:
             if itinerary_message:
                 st.caption(f"Itinerary message: {itinerary_message}")
 
-        with tabs[4]:
+        with tabs[5]:
             with st.expander("Raw result payload", expanded=False):
                 st.json(result)
 
-        with tabs[5]:
+        with tabs[6]:
             st.caption("Developer-oriented structured itinerary. Remove before final presentation.")
             if isinstance(itinerary, dict) and itinerary:
                 with st.expander("Structured itinerary JSON", expanded=False):
