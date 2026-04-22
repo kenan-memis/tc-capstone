@@ -305,10 +305,11 @@ def main() -> None:
     if isinstance(itinerary, dict) and itinerary:
         st.markdown("**Your trip plan**")
         llm_cfg = settings.get("itinerary", {})
-        model = str(llm_cfg.get("model", "gpt-4o-mini"))
-        temperature = float(llm_cfg.get("temperature", 0.4))
-        cached_narrative = st.session_state.get("plan_narrative_md")
-        if os.getenv("OPENAI_API_KEY"):
+        narrative_stream = bool(llm_cfg.get("narrative_stream", False))
+        if narrative_stream and os.getenv("OPENAI_API_KEY"):
+            model = str(llm_cfg.get("model", "gpt-4o-mini"))
+            temperature = float(llm_cfg.get("temperature", 0.4))
+            cached_narrative = st.session_state.get("plan_narrative_md")
             if cached_narrative:
                 st.markdown(cached_narrative)
             else:
@@ -345,6 +346,9 @@ def main() -> None:
             "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
             "Itinerary-linked stops are listed first."
         )
+        pending_tip = st.session_state.pop("pending_map_highlight_pick", None)
+        if pending_tip in highlight_opts:
+            st.session_state["map_highlight_pick"] = pending_tip
         sel = st.selectbox("Focus marker", options=highlight_opts, key="map_highlight_pick")
         hl = None if sel == "(All places)" else sel
         pv = st.session_state.get("plan_map_version", "1")
@@ -358,7 +362,7 @@ def main() -> None:
         )
         tip = map_out.get("last_object_clicked_tooltip") if isinstance(map_out, dict) else None
         if tip and tip in highlight_opts and tip != sel:
-            st.session_state.map_highlight_pick = tip
+            st.session_state["pending_map_highlight_pick"] = tip
             st.rerun()
     elif map_status != "ok":
         st.info("Map preview is unavailable because no coordinates were found for the current results.")

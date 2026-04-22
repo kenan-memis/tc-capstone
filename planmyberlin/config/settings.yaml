@@ -45,6 +45,8 @@ itinerary:
   model: gpt-4o-mini
   temperature: 0.4
   grounding_repair: true
+  # Keep the UI smooth: default to rendering structured itinerary directly.
+  narrative_stream: false
   # Agent-style tool phase before structured itinerary JSON (LangChain bind_tools).
   tool_use: true
   tool_max_rounds: 6
