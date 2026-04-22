@@ -425,8 +425,9 @@ def main() -> None:
     map_points = list(result.get("map_points", []))
     map_status = str(result.get("map_status", "no_coordinates"))
     linked = itinerary_places_linked_to_map(itinerary, map_points) if isinstance(itinerary, dict) else []
+    map_display_points = linked if linked else []
     linked_days = {row["name"]: row["days"] for row in linked}
-    highlight_opts = _map_highlight_option_list(linked, map_points)
+    highlight_opts = _map_highlight_option_list(linked, map_display_points)
 
     bottom_left, bottom_right = st.columns([0.52, 0.48], gap="large")
     with bottom_left:
@@ -467,7 +468,7 @@ def main() -> None:
 
     with bottom_right:
         st.subheader("Map with tabs")
-        if map_points:
+        if map_display_points:
             st.caption(
                 "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
                 "Itinerary-linked stops are listed first."
@@ -479,7 +480,7 @@ def main() -> None:
             sel = st.selectbox("Focus marker", options=highlight_opts, key="map_highlight_pick")
             hl = None if sel == "(All places)" else sel
             pv = st.session_state.get("plan_map_version", "1")
-            map_obj = build_preview_map(map_points, highlight_name=hl)
+            map_obj = build_preview_map(map_display_points, highlight_name=hl)
             map_out = st_folium(
                 map_obj,
                 width=None,
@@ -493,6 +494,8 @@ def main() -> None:
                 st.rerun()
         elif map_status != "ok":
             st.info("Map preview is unavailable because no coordinates were found for the current results.")
+        else:
+            st.info("Map currently shows only itinerary places; no itinerary locations had coordinates for this run.")
 
         tabs = st.tabs(
             [
