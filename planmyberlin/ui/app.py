@@ -416,6 +416,7 @@ def main() -> None:
     result = plan_result
     retrieved_items = list(result.get("retrieved_items", []))
     enriched_items = list(result.get("enriched_items", []))
+    retrieval_notice = str(result.get("retrieval_notice", "")).strip()
     itinerary = result.get("itinerary", {})
     itinerary_status = str(result.get("itinerary_status", "unavailable"))
     itinerary_message = str(result.get("itinerary_message", "")).strip()
@@ -437,6 +438,8 @@ def main() -> None:
         if weather_summary:
             st.markdown(f"**Expected weather on trip days:** {weather_summary}")
             st.caption(_weather_recommendation_text(weather_bias))
+        if retrieval_notice:
+            st.caption(retrieval_notice)
         if isinstance(itinerary, dict) and itinerary:
             st.markdown("**Your trip plan**")
             llm_cfg = settings.get("itinerary", {})

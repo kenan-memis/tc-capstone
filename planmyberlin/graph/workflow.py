@@ -31,6 +31,7 @@ class PlannerState(TypedDict, total=False):
     retrieved_count: int
     retrieval_backend: Literal["seed", "chroma"]
     retrieval_mode: Literal["citywide", "strict", "nearby_fallback"]
+    retrieval_notice: str
     retrieval_fallback_reason: str
 
     places_status: Literal["ok", "unavailable"]
@@ -103,6 +104,7 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
     out["retrieved_count"] = len(out["retrieved_items"])
     out["retrieval_backend"] = str(payload.get("backend", "seed"))  # type: ignore[assignment]
     out["retrieval_mode"] = str(payload.get("retrieval_mode", "citywide"))  # type: ignore[assignment]
+    out["retrieval_notice"] = str(payload.get("retrieval_notice", ""))
     if payload.get("fallback_reason"):
         out["retrieval_fallback_reason"] = str(payload["fallback_reason"])
 

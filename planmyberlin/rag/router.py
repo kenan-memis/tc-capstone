@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from planmyberlin.kb import canonical_borough, nearby_boroughs
+from planmyberlin.config.loader import get_interest_coverage_matrix
 from planmyberlin.models import TripProfile
 from planmyberlin.rag.chroma_store import chroma_index_ready, retrieve_chroma_context
 from planmyberlin.rag.retrieve import retrieve_seed_context
@@ -69,6 +70,26 @@ def _apply_food_guarantee(
     return payload
 
 
+def _build_retrieval_notice(profile: TripProfile, items: list[dict[str, Any]], retrieval_mode: str) -> str:
+    parts: list[str] = []
+    if retrieval_mode == "nearby_fallback":
+        parts.append("Limited matches in selected areas; nearby alternatives were included.")
+
+    matrix = get_interest_coverage_matrix()
+    missing: list[str] = []
+    for label in profile.interest_tags:
+        rule = matrix.get(label, {})
+        categories = {str(x).lower() for x in rule.get("categories", [])}
+        if not categories:
+            continue
+        has_match = any(str(it.get("category", "")).lower() in categories for it in items)
+        if not has_match:
+            missing.append(label)
+    if missing:
+        parts.append(f"Limited matches for interests: {', '.join(missing[:3])}.")
+    return " ".join(parts).strip()
+
+
 def _apply_area_filters(payload: dict[str, Any], profile: TripProfile, *, limit: int, cfg: dict[str, Any]) -> dict[str, Any]:
     items = list(payload.get("items", []))
     if not items:
@@ -80,7 +101,13 @@ def _apply_area_filters(payload: dict[str, Any], profile: TripProfile, *, limit:
         payload["retrieval_mode"] = "citywide"
         payload["items"] = items[: max(1, limit)]
         payload["citations"] = [_item_citation(it) for it in payload["items"]]
-        return _apply_food_guarantee(payload, profile=profile, cfg=cfg, limit=limit, base_pool=items)
+        payload = _apply_food_guarantee(payload, profile=profile, cfg=cfg, limit=limit, base_pool=items)
+        payload["retrieval_notice"] = _build_retrieval_notice(
+            profile,
+            list(payload.get("items", [])),
+            str(payload.get("retrieval_mode", "citywide")),
+        )
+        return payload
 
     strict_enabled = bool(cfg.get("strict_area_filter", True))
     allow_nearby = bool(cfg.get("nearby_fallback", True))
@@ -90,7 +117,13 @@ def _apply_area_filters(payload: dict[str, Any], profile: TripProfile, *, limit:
         payload["retrieval_mode"] = "citywide"
         payload["items"] = items[: max(1, limit)]
         payload["citations"] = [_item_citation(it) for it in payload["items"]]
-        return _apply_food_guarantee(payload, profile=profile, cfg=cfg, limit=limit, base_pool=items)
+        payload = _apply_food_guarantee(payload, profile=profile, cfg=cfg, limit=limit, base_pool=items)
+        payload["retrieval_notice"] = _build_retrieval_notice(
+            profile,
+            list(payload.get("items", [])),
+            str(payload.get("retrieval_mode", "citywide")),
+        )
+        return payload
 
     selected_boroughs = {canonical_borough(x) for x in selected if canonical_borough(x) != "unknown"}
     strict_items = [it for it in items if _item_borough(it) in selected_boroughs]
@@ -114,7 +147,13 @@ def _apply_area_filters(payload: dict[str, Any], profile: TripProfile, *, limit:
         payload["retrieval_mode"] = "nearby_fallback"
         base_pool = strict_items + nearby_fill
 
-    return _apply_food_guarantee(payload, profile=profile, cfg=cfg, limit=limit, base_pool=base_pool)
+    payload = _apply_food_guarantee(payload, profile=profile, cfg=cfg, limit=limit, base_pool=base_pool)
+    payload["retrieval_notice"] = _build_retrieval_notice(
+        profile,
+        list(payload.get("items", [])),
+        str(payload.get("retrieval_mode", "citywide")),
+    )
+    return payload
 
 
 def retrieve_context(profile: TripProfile, *, retrieval_cfg: dict[str, Any] | None = None) -> dict[str, Any]:

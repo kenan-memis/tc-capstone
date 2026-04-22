@@ -85,6 +85,7 @@ def test_router_nearby_fallback_when_strict_insufficient(monkeypatch: pytest.Mon
     )
     assert payload["retrieval_mode"] == "nearby_fallback"
     assert len(payload["items"]) >= 2
+    assert "nearby alternatives" in str(payload.get("retrieval_notice", "")).lower()
 
 
 def test_router_food_interest_guarantee_injects_food_items(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -128,3 +129,19 @@ def test_router_uses_wider_candidate_pool_for_food_interests(monkeypatch: pytest
     )
     assert payload["backend"] == "seed"
     assert calls and calls[0] >= 24
+
+
+def test_router_interest_coverage_notice_when_missing_categories(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        router,
+        "retrieve_seed_context",
+        lambda *_args, **_kwargs: {
+            "items": [{"name": "Museum A", "category": "places", "district": "Kreuzberg", "source_file": "x"}],
+            "citations": [],
+        },
+    )
+    payload = router.retrieve_context(
+        _profile(),
+        retrieval_cfg={"backend": "seed", "seed_limit": 4, "strict_area_filter": False, "nearby_fallback": False},
+    )
+    assert "limited matches for interests" in str(payload.get("retrieval_notice", "")).lower()
