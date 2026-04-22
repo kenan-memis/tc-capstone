@@ -7,9 +7,11 @@ from planmyberlin.kb.google_places_seed import (
 )
 from planmyberlin.kb.district_resolver import (
     borough_from_postal_code,
+    borough_distance_km,
     canonical_borough,
     candidate_matches_area,
     extract_postal_code,
+    nearby_boroughs,
 )
 
 __all__ = [
@@ -20,6 +22,8 @@ __all__ = [
     "canonical_borough",
     "extract_postal_code",
     "borough_from_postal_code",
+    "borough_distance_km",
+    "nearby_boroughs",
     "candidate_matches_area",
     "slugify",
 ]

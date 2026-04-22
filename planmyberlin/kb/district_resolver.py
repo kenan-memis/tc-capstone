@@ -120,6 +120,25 @@ def _haversine_km(lat1: float, lon1: float, lat2: float, lon2: float) -> float:
     return 2 * r * math.asin(math.sqrt(a))
 
 
+def borough_distance_km(a: str, b: str) -> float | None:
+    ah = BOROUGH_GEO_HINTS.get(a)
+    bh = BOROUGH_GEO_HINTS.get(b)
+    if not ah or not bh:
+        return None
+    return _haversine_km(ah[0], ah[1], bh[0], bh[1])
+
+
+def nearby_boroughs(boroughs: set[str], *, max_distance_km: float = 6.5) -> set[str]:
+    out = set(boroughs)
+    known = set(BOROUGH_GEO_HINTS)
+    for b in list(out):
+        for candidate in known:
+            dist = borough_distance_km(b, candidate)
+            if dist is not None and dist <= max_distance_km:
+                out.add(candidate)
+    return out
+
+
 def candidate_matches_area(
     area: str,
     *,

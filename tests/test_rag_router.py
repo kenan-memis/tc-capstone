@@ -37,3 +37,51 @@ def test_router_chroma_backend_raises_if_unavailable(monkeypatch: pytest.MonkeyP
     monkeypatch.setattr(router, "chroma_index_ready", lambda **_: False)
     with pytest.raises(Exception):
         router.retrieve_context(_profile(), retrieval_cfg={"backend": "chroma", "seed_limit": 3})
+
+
+def test_router_strict_area_filter_keeps_selected_borough(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        router,
+        "retrieve_seed_context",
+        lambda *_args, **_kwargs: {
+            "items": [
+                {"name": "A", "category": "places", "district": "Kreuzberg", "source_file": "x"},
+                {"name": "B", "category": "places", "district": "Mitte (overall)", "source_file": "y"},
+            ],
+            "citations": [],
+        },
+    )
+    payload = router.retrieve_context(
+        _profile(),
+        retrieval_cfg={"backend": "seed", "seed_limit": 8, "strict_area_filter": True, "nearby_fallback": False},
+    )
+    assert payload["retrieval_mode"] == "strict"
+    assert len(payload["items"]) == 1
+    assert payload["items"][0]["district"] == "Kreuzberg"
+
+
+def test_router_nearby_fallback_when_strict_insufficient(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        router,
+        "retrieve_seed_context",
+        lambda *_args, **_kwargs: {
+            "items": [
+                {"name": "A", "category": "places", "district": "Kreuzberg", "source_file": "x"},
+                {"name": "B", "category": "places", "district": "Mitte (overall)", "source_file": "y"},
+                {"name": "C", "category": "places", "district": "Friedrichshain", "source_file": "z"},
+            ],
+            "citations": [],
+        },
+    )
+    payload = router.retrieve_context(
+        _profile(),
+        retrieval_cfg={
+            "backend": "seed",
+            "seed_limit": 8,
+            "strict_area_filter": True,
+            "strict_min_items": 3,
+            "nearby_fallback": True,
+        },
+    )
+    assert payload["retrieval_mode"] == "nearby_fallback"
+    assert len(payload["items"]) >= 2

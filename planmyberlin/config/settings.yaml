@@ -16,6 +16,10 @@ retrieval:
   chroma_persist_dir: data/vectorstore/chroma
   chroma_collection: berlin_seed_v1
   chroma_force_rebuild: false
+  # If neighbourhoods are selected, keep results area-faithful first.
+  strict_area_filter: true
+  strict_min_items: 4
+  nearby_fallback: true
 
 places:
   backend: google_places

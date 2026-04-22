@@ -30,6 +30,7 @@ class PlannerState(TypedDict, total=False):
     retrieved_citations: list[str]
     retrieved_count: int
     retrieval_backend: Literal["seed", "chroma"]
+    retrieval_mode: Literal["citywide", "strict", "nearby_fallback"]
     retrieval_fallback_reason: str
 
     places_status: Literal["ok", "unavailable"]
@@ -100,6 +101,7 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
     out["retrieved_citations"] = list(payload.get("citations", []))
     out["retrieved_count"] = len(out["retrieved_items"])
     out["retrieval_backend"] = str(payload.get("backend", "seed"))  # type: ignore[assignment]
+    out["retrieval_mode"] = str(payload.get("retrieval_mode", "citywide"))  # type: ignore[assignment]
     if payload.get("fallback_reason"):
         out["retrieval_fallback_reason"] = str(payload["fallback_reason"])
 
@@ -107,8 +109,9 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
     trace.append(f"{out['retrieval_backend']}_retrieval:{out['retrieved_count']}")
     out["routing_trace"] = trace
     _log.info(
-        "graph node=retrieve_context backend=%s items=%d fallback=%s",
+        "graph node=retrieve_context backend=%s mode=%s items=%d fallback=%s",
         out["retrieval_backend"],
+        out["retrieval_mode"],
         out["retrieved_count"],
         bool(out.get("retrieval_fallback_reason")),
     )

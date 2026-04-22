@@ -290,6 +290,7 @@ def test_retrieval_trace_marker_present(monkeypatch: pytest.MonkeyPatch) -> None
     app = build_planner_graph()
     out = app.invoke({"profile": _base_profile(days=2)})
     assert any(str(x).endswith(f":{out['retrieved_count']}") for x in out["routing_trace"])
+    assert out["retrieval_mode"] in {"citywide", "strict", "nearby_fallback"}
     assert any(str(x).startswith("weather:") for x in out["routing_trace"])
     assert any(str(x).startswith("places:") for x in out["routing_trace"])
     assert any(str(x).startswith("map:") for x in out["routing_trace"])

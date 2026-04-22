@@ -440,6 +440,8 @@ def main() -> None:
         st.markdown(
             "- Retrieval backend: "
             f"`{result.get('retrieval_backend', 'unknown')}`\n"
+            "- Retrieval mode: "
+            f"`{result.get('retrieval_mode', 'unknown')}`\n"
             "- Retrieved context items: "
             f"`{len(retrieved_items)}`\n"
             "- Places backend: "
