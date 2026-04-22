@@ -85,3 +85,30 @@ def test_router_nearby_fallback_when_strict_insufficient(monkeypatch: pytest.Mon
     )
     assert payload["retrieval_mode"] == "nearby_fallback"
     assert len(payload["items"]) >= 2
+
+
+def test_router_food_interest_guarantee_injects_food_items(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(
+        router,
+        "retrieve_seed_context",
+        lambda *_args, **_kwargs: {
+            "items": [
+                {"name": "Museum A", "category": "places", "district": "Kreuzberg", "source_file": "x", "tags": ["museum"]},
+                {"name": "Museum B", "category": "places", "district": "Kreuzberg", "source_file": "x", "tags": ["art"]},
+                {"name": "Cafe C", "category": "restaurants", "district": "Kreuzberg", "source_file": "x", "tags": ["cafe"]},
+            ],
+            "citations": [],
+        },
+    )
+    payload = router.retrieve_context(
+        _profile(),
+        retrieval_cfg={
+            "backend": "seed",
+            "seed_limit": 2,
+            "strict_area_filter": True,
+            "nearby_fallback": False,
+            "food_interest_guarantee": True,
+            "food_interest_min_items": 1,
+        },
+    )
+    assert any("restaurant" in str(x.get("category", "")) for x in payload["items"])

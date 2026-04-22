@@ -20,6 +20,8 @@ retrieval:
   strict_area_filter: true
   strict_min_items: 4
   nearby_fallback: true
+  food_interest_guarantee: true
+  food_interest_min_items: 2
 
 places:
   backend: google_places
