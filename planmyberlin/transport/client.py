@@ -7,6 +7,30 @@ from typing import Any
 import httpx
 
 
+def _by_place_summary(items: list[dict[str, Any]], *, limit_per_place: int = 2) -> list[dict[str, Any]]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for row in items:
+        place = str(row.get("query", "")).strip() or "Selected area"
+        grouped.setdefault(place, []).append(row)
+
+    out: list[dict[str, Any]] = []
+    for place, rows in grouped.items():
+        rows_sorted = sorted(
+            rows,
+            key=lambda r: r.get("distance_m") if isinstance(r.get("distance_m"), (int, float)) else 10**9,
+        )
+        top = rows_sorted[: max(1, limit_per_place)]
+        out.append(
+            {
+                "place_name": place,
+                "options": top,
+                "option_count": len(rows),
+                "nearest_distance_m": top[0].get("distance_m") if top else None,
+            }
+        )
+    return out
+
+
 def fetch_transport_context(
     *,
     items: list[dict[str, Any]],
@@ -28,6 +52,7 @@ def fetch_transport_context(
             "backend": provider or "unknown",
             "message": f"Unsupported transport backend: {backend}",
             "transport_items": [],
+            "transport_by_place": [],
         }
 
     seeds: list[str] = []
@@ -63,6 +88,7 @@ def fetch_transport_context(
                 lng = point.get("longitude")
                 if not isinstance(lat, (int, float)) or not isinstance(lng, (int, float)):
                     continue
+                place_name = str(point.get("name", "map_point")).strip() or "map_point"
                 try:
                     resp = client.get(
                         f"{base_url.rstrip('/')}/locations/nearby",
@@ -85,7 +111,7 @@ def fetch_transport_context(
                         loc = row.get("location") if isinstance(row.get("location"), dict) else {}
                         out.append(
                             {
-                                "query": str(point.get("name", "map_point")),
+                                "query": place_name,
                                 "name": str(row.get("name", "")).strip(),
                                 "type": str(row.get("type", "")).strip(),
                                 "distance_m": row.get("distance")
@@ -99,11 +125,13 @@ def fetch_transport_context(
                     continue
 
             if out:
+                by_place = _by_place_summary(out, limit_per_place=2)
                 return {
                     "status": "ok",
                     "backend": "bvg_rest",
                     "message": "ok",
                     "transport_items": out,
+                    "transport_by_place": by_place,
                 }
 
             # Fallback to text-query lookup when coordinate nearby search is unavailable.
@@ -141,6 +169,7 @@ def fetch_transport_context(
             "backend": "bvg_rest",
             "message": f"Transport API HTTP {exc.response.status_code}",
             "transport_items": [],
+            "transport_by_place": [],
         }
     except Exception as exc:
         return {
@@ -148,11 +177,14 @@ def fetch_transport_context(
             "backend": "bvg_rest",
             "message": f"Transport API unavailable ({type(exc).__name__})",
             "transport_items": [],
+            "transport_by_place": [],
         }
 
+    by_place = _by_place_summary(out, limit_per_place=2)
     return {
         "status": "ok",
         "backend": "bvg_rest",
         "message": "ok",
         "transport_items": out,
+        "transport_by_place": by_place,
     }

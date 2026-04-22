@@ -5,12 +5,14 @@ def test_transport_unsupported_backend() -> None:
     out = fetch_transport_context(items=[], neighbourhoods=[], backend="unknown")
     assert out["status"] == "unavailable"
     assert out["transport_items"] == []
+    assert out["transport_by_place"] == []
 
 
 def test_transport_fallback_seed_query() -> None:
     out = fetch_transport_context(items=[], neighbourhoods=[], timeout_seconds=0.001)
     assert out["backend"] == "bvg_rest"
     assert "transport_items" in out
+    assert "transport_by_place" in out
 
 
 def test_transport_prefers_nearby_lookup(monkeypatch) -> None:
@@ -53,3 +55,4 @@ def test_transport_prefers_nearby_lookup(monkeypatch) -> None:
     assert out["status"] == "ok"
     assert len(out["transport_items"]) == 1
     assert out["transport_items"][0]["distance_m"] == 180
+    assert out["transport_by_place"][0]["place_name"] == "Museum Island"

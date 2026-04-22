@@ -53,6 +53,7 @@ class PlannerState(TypedDict, total=False):
     transport_backend: str
     transport_message: str
     transport_items: list[dict[str, Any]]
+    transport_by_place: list[dict[str, Any]]
     transport_count: int
 
     accommodation_status: Literal["ok", "unavailable"]
@@ -246,6 +247,7 @@ def _fetch_transport(state: PlannerState) -> PlannerState:
     out["transport_message"] = str(payload.get("message", ""))
     items = list(payload.get("transport_items", []))
     out["transport_items"] = items
+    out["transport_by_place"] = list(payload.get("transport_by_place", []))
     out["transport_count"] = len(items)
 
     trace = list(out.get("routing_trace", []))

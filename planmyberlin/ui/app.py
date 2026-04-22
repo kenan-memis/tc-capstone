@@ -379,6 +379,7 @@ def main() -> None:
     itinerary_status = str(result.get("itinerary_status", "unavailable"))
     itinerary_message = str(result.get("itinerary_message", "")).strip()
     transport_items = list(result.get("transport_items", []))
+    transport_by_place = list(result.get("transport_by_place", []))
     accommodation_items = list(result.get("accommodation_items", []))
     map_points = list(result.get("map_points", []))
     map_status = str(result.get("map_status", "no_coordinates"))
@@ -500,7 +501,25 @@ def main() -> None:
                 st.caption("No food & drink suggestions found for this run.")
 
         with tabs[2]:
-            if transport_items:
+            if transport_by_place:
+                for row in transport_by_place:
+                    if not isinstance(row, dict):
+                        continue
+                    place_name = str(row.get("place_name", "")).strip() or "Selected area"
+                    options = row.get("options", [])
+                    st.markdown(f"**For `{place_name}`**")
+                    if isinstance(options, list) and options:
+                        for opt in options:
+                            if not isinstance(opt, dict):
+                                continue
+                            distance = opt.get("distance_m")
+                            distance_text = f" (~{int(distance)}m walk)" if isinstance(distance, (int, float)) else ""
+                            st.markdown(
+                                f"- {opt.get('name','Unknown stop')} ({opt.get('type','stop')}){distance_text}"
+                            )
+                    else:
+                        st.caption("No nearby stop details available for this place.")
+            elif transport_items:
                 for item in transport_items[:10]:
                     distance = item.get("distance_m")
                     distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
