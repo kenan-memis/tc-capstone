@@ -154,6 +154,47 @@ def _is_food_item(item: dict) -> bool:
     return any(k in category for k in ("restaurant", "cafe", "bar", "food"))
 
 
+def _merge_display_items(retrieved_items: list[dict], enriched_items: list[dict]) -> list[dict]:
+    """Merge retrieval + enrichment rows so partial enrichment does not hide categories."""
+    out: list[dict] = []
+    by_key: dict[str, int] = {}
+
+    def _keys(item: dict) -> list[str]:
+        keys: list[str] = []
+        pid = str(item.get("place_id", "")).strip().lower()
+        if pid:
+            keys.append(f"pid:{pid}")
+        nm = " ".join(str(item.get("name", "")).lower().split())
+        if nm:
+            keys.append(f"name:{nm}")
+        return keys
+
+    for row in retrieved_items:
+        if not isinstance(row, dict):
+            continue
+        idx = len(out)
+        out.append(dict(row))
+        for k in _keys(row):
+            by_key.setdefault(k, idx)
+
+    for row in enriched_items:
+        if not isinstance(row, dict):
+            continue
+        keys = _keys(row)
+        match_idx = next((by_key[k] for k in keys if k in by_key), None)
+        if match_idx is None:
+            match_idx = len(out)
+            out.append(dict(row))
+        else:
+            merged = dict(out[match_idx])
+            merged.update(dict(row))
+            out[match_idx] = merged
+        for k in keys:
+            by_key[k] = match_idx
+
+    return out
+
+
 def _build_steps_markdown(completed_nodes: set[str]) -> str:
     derived = set(completed_nodes)
     if "multi_day_track" in completed_nodes or "single_day_track" in completed_nodes:
@@ -465,7 +506,7 @@ def main() -> None:
             ]
         )
 
-        shown_items = enriched_items if enriched_items else retrieved_items
+        shown_items = _merge_display_items(retrieved_items, enriched_items)
         place_items = [x for x in shown_items if not _is_food_item(x)]
         food_items = [x for x in shown_items if _is_food_item(x)]
         with tabs[0]:
