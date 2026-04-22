@@ -12,6 +12,7 @@ from typing import Any
 
 import yaml
 
+from planmyberlin.config.loader import get_interest_coverage_matrix
 from planmyberlin.models import TripProfile
 
 _SEED_ROOT = Path(__file__).resolve().parents[2] / "data" / "raw"
@@ -63,7 +64,22 @@ def _district_keywords(profile: TripProfile) -> set[str]:
     return {k for k in kw if len(k) >= 4}
 
 
-def _score_record(rec: dict[str, Any], *, interest_kw: set[str], district_kw: set[str]) -> float:
+def _interest_intent(profile: TripProfile) -> dict[str, set[str]]:
+    matrix = get_interest_coverage_matrix()
+    cats: set[str] = set()
+    tags: set[str] = set()
+    for label in profile.interest_tags:
+        row = matrix.get(label, {})
+        cats.update(str(x).lower() for x in row.get("categories", []))
+        tags.update(str(x).lower() for x in row.get("tags", []))
+        # fallback to tokenized interest words for unseen labels
+        tags.update(_tokens(label))
+    return {"categories": cats, "tags": {t for t in tags if len(t) >= 3}}
+
+
+def _score_record(
+    rec: dict[str, Any], *, interest_kw: set[str], district_kw: set[str], intent: dict[str, set[str]]
+) -> float:
     score = 0.0
     record_district_tokens = _tokens(rec.get("district", ""))
     if district_kw:
@@ -78,6 +94,14 @@ def _score_record(rec: dict[str, Any], *, interest_kw: set[str], district_kw: se
     overlap = interest_kw.intersection(tag_kw.union(name_kw))
     score += float(len(overlap)) * 1.5
 
+    # Explicit interest coverage matrix boosts.
+    category = str(rec.get("category", "")).lower()
+    if intent["categories"] and category in intent["categories"]:
+        score += 1.0
+    if intent["tags"]:
+        tag_overlap = intent["tags"].intersection(tag_kw.union(name_kw))
+        score += float(len(tag_overlap)) * 0.8
+
     category = str(rec.get("category", ""))
     if category in {"places", "restaurants"}:
         score += 0.3
@@ -90,9 +114,10 @@ def retrieve_seed_context(profile: TripProfile, *, limit: int = 8) -> dict[str, 
     records = load_seed_records()
     interest_kw = _interest_keywords(profile)
     district_kw = _district_keywords(profile)
+    intent = _interest_intent(profile)
 
     ranked = sorted(
-        ((rec, _score_record(rec, interest_kw=interest_kw, district_kw=district_kw)) for rec in records),
+        ((rec, _score_record(rec, interest_kw=interest_kw, district_kw=district_kw, intent=intent)) for rec in records),
         key=lambda x: x[1],
         reverse=True,
     )

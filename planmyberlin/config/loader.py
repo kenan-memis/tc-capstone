@@ -65,3 +65,23 @@ def get_dietary_options() -> tuple[str, ...]:
 def get_mobility_options() -> tuple[str, ...]:
     """Single-choice mobility/accessibility hints (`mobility_options.yaml`)."""
     return tuple(_read_yaml_list("mobility_options.yaml"))
+
+
+@lru_cache
+def get_interest_coverage_matrix() -> dict[str, dict[str, list[str]]]:
+    """Interest -> preferred categories/tags mapping (`interest_coverage.yaml`)."""
+    raw = _read_yaml("interest_coverage.yaml")
+    block = raw.get("matrix")
+    if not isinstance(block, dict):
+        return {}
+    out: dict[str, dict[str, list[str]]] = {}
+    for label, row in block.items():
+        if not isinstance(row, dict):
+            continue
+        cats = row.get("categories", [])
+        tags = row.get("tags", [])
+        out[str(label)] = {
+            "categories": [str(x).strip().lower() for x in cats if str(x).strip()] if isinstance(cats, list) else [],
+            "tags": [str(x).strip().lower() for x in tags if str(x).strip()] if isinstance(tags, list) else [],
+        }
+    return out

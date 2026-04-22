@@ -1,0 +1,64 @@
+matrix:
+  "Museums & galleries":
+    categories: ["places"]
+    tags: ["museum", "gallery", "art", "culture", "history"]
+  "History & memorials":
+    categories: ["places"]
+    tags: ["history", "memorial", "historic", "monument"]
+  "Art & design":
+    categories: ["places"]
+    tags: ["art", "design", "gallery", "museum", "architecture"]
+  "Nightlife & clubs":
+    categories: ["restaurants"]
+    tags: ["bar", "club", "night", "cocktail", "music"]
+  "Food & dining":
+    categories: ["restaurants"]
+    tags: ["restaurant", "food", "dining", "eat", "meal"]
+  "Coffee & cafés":
+    categories: ["restaurants"]
+    tags: ["cafe", "coffee", "brunch", "bakery"]
+  "Beer gardens & local beer":
+    categories: ["restaurants"]
+    tags: ["beer", "brewery", "biergarten", "bar", "pub"]
+  "Parks, gardens & nature":
+    categories: ["places"]
+    tags: ["park", "garden", "nature", "green", "outdoor"]
+  "Lakes, river & outdoor swim":
+    categories: ["places"]
+    tags: ["lake", "river", "swim", "water", "outdoor"]
+  "Shopping & markets":
+    categories: ["places", "restaurants"]
+    tags: ["market", "shopping", "mall", "bazaar"]
+  "Architecture & iconic sights":
+    categories: ["places"]
+    tags: ["architecture", "iconic", "landmark", "viewpoint"]
+  "Film & cinema":
+    categories: ["places"]
+    tags: ["cinema", "film", "movie", "theater"]
+  "Live music & concerts":
+    categories: ["places", "restaurants"]
+    tags: ["music", "concert", "live", "venue", "club"]
+  "Family-friendly":
+    categories: ["places"]
+    tags: ["family", "kids", "play", "zoo", "park"]
+  "LGBTQ+ friendly venues & events":
+    categories: ["restaurants", "places"]
+    tags: ["lgbtq", "queer", "inclusive", "bar", "club", "event"]
+  "Street art & urban culture":
+    categories: ["places"]
+    tags: ["street", "art", "urban", "graffiti", "culture"]
+  "Cycling & walking routes":
+    categories: ["places"]
+    tags: ["cycling", "walking", "route", "trail", "park"]
+  "Photography spots":
+    categories: ["places"]
+    tags: ["photography", "viewpoint", "skyline", "architecture", "landmark", "bridge"]
+  "Day trips nearby":
+    categories: ["places"]
+    tags: ["day", "trip", "excursion", "nearby"]
+  "Wellness & spas":
+    categories: ["places", "restaurants"]
+    tags: ["spa", "wellness", "sauna", "relax"]
+  "Sports & wellness":
+    categories: ["places"]
+    tags: ["sports", "fitness", "wellness", "activity"]

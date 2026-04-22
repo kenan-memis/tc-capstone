@@ -43,6 +43,7 @@ packages = ["planmyberlin"]
 "planmyberlin/config/neighbourhood_options.yaml" = "planmyberlin/config/neighbourhood_options.yaml"
 "planmyberlin/config/dietary_options.yaml" = "planmyberlin/config/dietary_options.yaml"
 "planmyberlin/config/mobility_options.yaml" = "planmyberlin/config/mobility_options.yaml"
+"planmyberlin/config/interest_coverage.yaml" = "planmyberlin/config/interest_coverage.yaml"
 "planmyberlin/prompts/prompts.yaml" = "planmyberlin/prompts/prompts.yaml"
 
 [tool.pytest.ini_options]

@@ -34,3 +34,15 @@ def test_retrieve_seed_prefers_selected_district() -> None:
     )
     districts = [str(it.get("district", "")).lower() for it in payload["items"]]
     assert any("kreuzberg" in d for d in districts)
+
+
+def test_retrieve_seed_photography_interest_returns_places() -> None:
+    payload = retrieve_seed_context(
+        _profile(
+            neighbourhoods=["Alexanderplatz & Mitte core"],
+            interest_tags=["Photography spots"],
+        ),
+        limit=8,
+    )
+    assert payload["items"]
+    assert any(str(it.get("category", "")).lower() == "places" for it in payload["items"])
