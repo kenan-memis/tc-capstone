@@ -1,0 +1,149 @@
+district: Wedding
+category: places
+items:
+- id: place.wedding.mitte_museum
+  name: Mitte Museum
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Pankstraße 47, 13357 Berlin, Germany
+  address: Pankstraße 47, 13357 Berlin, Germany
+  rating: 4.6
+  reviews: 145
+  latitude: 52.5510975
+  longitude: 13.3798968
+  place_id: ChIJhcYlgyZSqEcRYya2D7MHIJI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.anti_kriegs_museum
+  name: Anti-Kriegs-Museum
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Brüsseler Str. 21, 13353 Berlin, Germany
+  address: Brüsseler Str. 21, 13353 Berlin, Germany
+  rating: 4.7
+  reviews: 168
+  latitude: 52.5460018
+  longitude: 13.3479864
+  place_id: ChIJZ8GyPnxRqEcRQavOVXnsJPA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.labyrinth_kindermuseum_berlin
+  name: Labyrinth Kindermuseum Berlin
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Osloer Str. 12, 13359 Berlin, Germany
+  address: Osloer Str. 12, 13359 Berlin, Germany
+  rating: 4.1
+  reviews: 1692
+  latitude: 52.5560743
+  longitude: 13.3860014
+  place_id: ChIJ2zjLrTxSqEcRto7al4INieQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.the_sounding_museum_berlin
+  name: The Sounding Museum Berlin
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - educational_institution
+  - point_of_interest
+  - service
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Behmstraße 13, 13357 Berlin, Germany
+  address: Behmstraße 13, 13357 Berlin, Germany
+  rating: 4.6
+  reviews: 87
+  latitude: 52.5503778
+  longitude: 13.388450899999999
+  place_id: ChIJdQ9pPiJSqEcR7Cf3nrDis4s
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.mini_eiffel_tower
+  name: Mini Eiffel Tower
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Müllerstraße 75, 13349 Berlin, Germany
+  address: Müllerstraße 75, 13349 Berlin, Germany
+  rating: 4
+  reviews: 241
+  latitude: 52.5583988
+  longitude: 13.3384948
+  place_id: ChIJ4UDrZtxTqEcRxrF1yHqGsGk
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.schillerpark
+  name: Schillerpark
+  type: park
+  tags:
+  - park
+  - state_park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: 13349 Berlin, Germany
+  address: 13349 Berlin, Germany
+  rating: 4.3
+  reviews: 3202
+  latitude: 52.5560791
+  longitude: 13.352495900000001
+  place_id: ChIJcRuIitZTqEcRXjddge00hls
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.goethepark
+  name: Goethepark
+  type: park
+  tags:
+  - park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Ugandastraße 17, 13351 Berlin, Germany
+  address: Ugandastraße 17, 13351 Berlin, Germany
+  rating: 4.4
+  reviews: 464
+  latitude: 52.546801599999995
+  longitude: 13.337238
+  place_id: ChIJ4Sh1gmRRqEcRnK2EQhkTdzQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding.berlin_wall_memorial
+  name: Berlin Wall Memorial
+  type: park
+  tags:
+  - tourist_attraction
+  - museum
+  - park
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Bernauer Str. 111, 13355 Berlin, Germany
+  address: Bernauer Str. 111, 13355 Berlin, Germany
+  rating: 4.6
+  reviews: 45603
+  latitude: 52.535052099999994
+  longitude: 13.3901898
+  place_id: ChIJZ0KxF_JRqEcRrLHB-4r-U-o
+  source_note: Google Places seed build (2026-04-22)

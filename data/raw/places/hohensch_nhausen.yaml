@@ -1,0 +1,57 @@
+district: Hohenschönhausen
+category: places
+items:
+- id: place.hohensch_nhausen.berlin_hohensch_nhausen_memorial
+  name: Berlin-Hohenschönhausen Memorial
+  type: museum
+  tags:
+  - tourist_attraction
+  - history_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Genslerstraße 66, 13055 Berlin, Germany
+  address: Genslerstraße 66, 13055 Berlin, Germany
+  rating: 4.6
+  reviews: 10841
+  latitude: 52.5418336
+  longitude: 13.500239899999999
+  place_id: ChIJ77YYxyRMqEcRVsFfdJghinM
+  source_note: Google Places seed build (2026-04-22)
+- id: place.hohensch_nhausen.stasi_museum
+  name: Stasi Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  address: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  rating: 4.5
+  reviews: 9183
+  latitude: 52.514527
+  longitude: 13.4872818
+  place_id: ChIJKeccmpNOqEcRHQ7hqU7JhnY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.hohensch_nhausen.mies_van_der_rohe_haus
+  name: Mies van der Rohe Haus
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Oberseestraße 60, 13053 Berlin, Germany
+  address: Oberseestraße 60, 13053 Berlin, Germany
+  rating: 4.6
+  reviews: 456
+  latitude: 52.549268
+  longitude: 13.490801399999999
+  place_id: ChIJO0QYVTFMqEcRtbrMKNW1GNs
+  source_note: Google Places seed build (2026-04-22)

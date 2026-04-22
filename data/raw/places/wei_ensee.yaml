@@ -1,0 +1,60 @@
+district: Weißensee
+category: places
+items:
+- id: place.wei_ensee.museum_at_the_kulturbrauerei
+  name: Museum at the Kulturbrauerei
+  type: museum
+  tags:
+  - museum
+  - history_museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Knaackstraße 97, 10435 Berlin, Germany
+  address: Knaackstraße 97, 10435 Berlin, Germany
+  rating: 4.5
+  reviews: 1905
+  latitude: 52.540383
+  longitude: 13.414097
+  place_id: ChIJ74Sex_9RqEcRrg4jC_emII0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wei_ensee.deja_vu_museum
+  name: DeJa Vu Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - amusement_center
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Rochstraße 14c, 10178 Berlin, Germany
+  address: Rochstraße 14c, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 9292
+  latitude: 52.522798599999994
+  longitude: 13.4075043
+  place_id: ChIJd65mbYlPqEcRlDrFKwi3Yzw
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wei_ensee.people_museum_the_first_museum_of_body_worlds
+  name: People Museum - The first museum of BODY WORLDS
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - educational_institution
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Panoramastraße 1A, 10178 Berlin, Germany
+  address: Panoramastraße 1A, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 4711
+  latitude: 52.5203065
+  longitude: 13.408868
+  place_id: ChIJdTjciR9OqEcRUqH4IwUnsBo
+  source_note: Google Places seed build (2026-04-22)

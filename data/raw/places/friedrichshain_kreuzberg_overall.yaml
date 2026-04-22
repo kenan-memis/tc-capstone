@@ -1,0 +1,63 @@
+district: Friedrichshain-Kreuzberg (overall)
+category: places
+items:
+- id: place.friedrichshain_kreuzberg_overall.synthesizer_museum_berlin
+  name: Synthesizer Museum Berlin
+  type: museum
+  tags:
+  - museum
+  - cafe
+  - food
+  - service
+  - event_venue
+  - point_of_interest
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Eingang REWE, Stahltür rechts, Klingel - REWE supermarket entrance, steel
+    door at the right, doorbell, Skalitzer Str. 135a, 10999 Berlin, Germany
+  address: Eingang REWE, Stahltür rechts, Klingel - REWE supermarket entrance, steel
+    door at the right, doorbell, Skalitzer Str. 135a, 10999 Berlin, Germany
+  rating: 5
+  reviews: 271
+  latitude: 52.4993428
+  longitude: 13.4187692
+  place_id: ChIJ9YKw7ANPqEcR_Gxab6T2N_s
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain_kreuzberg_overall.fhxb_friedrichshain_kreuzberg_museum
+  name: FHXB Friedrichshain-Kreuzberg Museum
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Adalbertstraße 95A, 10999 Berlin, Germany
+  address: Adalbertstraße 95A, 10999 Berlin, Germany
+  rating: 4.3
+  reviews: 304
+  latitude: 52.5006146
+  longitude: 13.418253199999999
+  place_id: ChIJ0xpVdTNOqEcRW22FiVSWFX0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain_kreuzberg_overall.topography_of_terror
+  name: Topography of Terror
+  type: history_museum
+  tags:
+  - history_museum
+  - tourist_attraction
+  - museum
+  - association_or_organization
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Niederkirchnerstraße 8, 10963 Berlin, Germany
+  address: Niederkirchnerstraße 8, 10963 Berlin, Germany
+  rating: 4.6
+  reviews: 39954
+  latitude: 52.506747
+  longitude: 13.3837099
+  place_id: ChIJx3iXOMxRqEcRSGbJBczVSzc
+  source_note: Google Places seed build (2026-04-22)

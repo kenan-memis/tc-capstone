@@ -1,0 +1,106 @@
+district: Lichtenberg
+category: restaurants
+items:
+- id: restaurant.lichtenberg.gasthaus_siegfriedshof_gastst_tte
+  name: Gasthaus Siegfriedshof Gaststätte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Siegfriedstraße 204, 10365 Berlin, Germany
+  address: Siegfriedstraße 204, 10365 Berlin, Germany
+  rating: 4.6
+  reviews: 962
+  latitude: 52.514680299999995
+  longitude: 13.4974712
+  place_id: ChIJucABIb5OqEcRBZNlCwDmIIc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.lichtenberg.il_mondo
+  name: Il Mondo
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rathausstraße 6, 10367 Berlin, Germany
+  address: Rathausstraße 6, 10367 Berlin, Germany
+  rating: 4.5
+  reviews: 1506
+  latitude: 52.5143984
+  longitude: 13.4819415
+  place_id: ChIJcaw_mI1OqEcR14nhwtfUZSo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.lichtenberg.rossini_quattro
+  name: Rossini Quattro
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Frankfurter Allee 151, Rathausstraße 1, 10365 Berlin, Germany
+  address: Frankfurter Allee 151, Rathausstraße 1, 10365 Berlin, Germany
+  rating: 4.6
+  reviews: 1484
+  latitude: 52.513225299999995
+  longitude: 13.4818871
+  place_id: ChIJ3yzxu5JOqEcRqwwxE4Xjlxo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.lichtenberg.restaurant_yuumi
+  name: Restaurant YUUMI
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fusion_restaurant
+  - european_restaurant
+  - japanese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Emanuelstraße 1, 10317 Berlin, Germany
+  address: Emanuelstraße 1, 10317 Berlin, Germany
+  rating: 5
+  reviews: 260
+  latitude: 52.501538499999995
+  longitude: 13.490784399999999
+  place_id: ChIJm_vsxmhPqEcRN4tgfQl7BxQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.lichtenberg.jel_nger_jelieber
+  name: Jelänger Jelieber
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - family_restaurant
+  - pub
+  - european_restaurant
+  - coffee_shop
+  - cafe
+  indoor_outdoor: mixed
+  summary: Kaskelstraße 49, 10317 Berlin, Germany
+  address: Kaskelstraße 49, 10317 Berlin, Germany
+  rating: 4.5
+  reviews: 392
+  latitude: 52.50385
+  longitude: 13.48177
+  place_id: ChIJW8VRIu9OqEcRdYGW7U14okc
+  source_note: Google Places seed build (2026-04-22)

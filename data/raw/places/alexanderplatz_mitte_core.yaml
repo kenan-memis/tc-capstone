@@ -1,0 +1,287 @@
+district: Alexanderplatz & Mitte core
+category: places
+items:
+- id: place.alexanderplatz_mitte_core.people_museum_the_first_museum_of_body_worlds
+  name: People Museum - The first museum of BODY WORLDS
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - educational_institution
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Panoramastraße 1A, 10178 Berlin, Germany
+  address: Panoramastraße 1A, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 4711
+  latitude: 52.5203065
+  longitude: 13.408868
+  place_id: ChIJdTjciR9OqEcRUqH4IwUnsBo
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.deja_vu_museum
+  name: DeJa Vu Museum
+  type: museum
+  tags:
+  - museum
+  - amusement_center
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Rochstraße 14c, 10178 Berlin, Germany
+  address: Rochstraße 14c, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 9292
+  latitude: 52.522798599999994
+  longitude: 13.4075043
+  place_id: ChIJd65mbYlPqEcRlDrFKwi3Yzw
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.illuseum_berlin
+  name: Illuseum Berlin
+  type: museum
+  tags:
+  - museum
+  - art_museum
+  - amusement_center
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Karl-Liebknecht-Str. 9, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 9, 10178 Berlin, Germany
+  rating: 4
+  reviews: 6487
+  latitude: 52.521437899999995
+  longitude: 13.406528199999999
+  place_id: ChIJo3gW2ONRqEcR_PqiOrtD-XU
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.unesco_weltkulturerbe_museumsinsel
+  name: UNESCO Weltkulturerbe Museumsinsel
+  type: museum
+  tags:
+  - historical_landmark
+  - tourist_attraction
+  - museum
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Bodestraße, 10178 Berlin, Germany
+  address: Bodestraße, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 3191
+  latitude: 52.5195605
+  longitude: 13.3988917
+  place_id: ChIJE9AVed5RqEcRht4HHiMNiYg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.deutschlandmuseum
+  name: Deutschlandmuseum
+  type: museum
+  tags:
+  - museum
+  - adventure_sports_center
+  - history_museum
+  - amusement_park
+  - tourist_attraction
+  - sports_complex
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Leipziger Pl. 7, 10117 Berlin, Germany
+  address: Leipziger Pl. 7, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 4140
+  latitude: 52.5087602
+  longitude: 13.3783615
+  place_id: ChIJ6w8lPm5RqEcRqAOszOrK_dA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.altes_museum
+  name: Altes Museum
+  type: history_museum
+  tags:
+  - history_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Bodestraße 1-3, 10178 Berlin, Germany
+  address: Bodestraße 1-3, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 5880
+  latitude: 52.5194665
+  longitude: 13.398744500000001
+  place_id: ChIJM28dat1RqEcRu_1H_QZRHrY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.alte_nationalgalerie
+  name: Alte Nationalgalerie
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Bodestraße 1-3, 10178 Berlin, Germany
+  address: Bodestraße 1-3, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 9647
+  latitude: 52.520810399999995
+  longitude: 13.398352899999999
+  place_id: ChIJM28dat1RqEcRC0AVNUpwAuk
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.ddr_museum
+  name: DDR Museum
+  type: museum
+  tags:
+  - museum
+  - history_museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Vera Britain Ufer, Karl-Liebknecht-Str. 1, 10178 Berlin, Germany
+  address: Vera Britain Ufer, Karl-Liebknecht-Str. 1, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 27265
+  latitude: 52.5192243
+  longitude: 13.402636999999999
+  place_id: ChIJVzpGU95RqEcRZJgnyr-ZDC0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.futurium
+  name: Futurium
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alexanderufer 2, 10117 Berlin, Germany
+  address: Alexanderufer 2, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 12740
+  latitude: 52.524087599999994
+  longitude: 13.374350699999999
+  place_id: ChIJExpfyL9RqEcROQaM3Ff0a7A
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.bode_museum
+  name: Bode-Museum
+  type: museum
+  tags:
+  - museum
+  - history_museum
+  - art_museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Am Kupfergraben 3, 10178 Berlin, Germany
+  address: Am Kupfergraben 3, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 7329
+  latitude: 52.5219816
+  longitude: 13.394398299999999
+  place_id: ChIJM28dat1RqEcRTsl_gN7v4jk
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.ethnological_museum_of_berlin
+  name: Ethnological Museum of Berlin
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßpl. 1, 10178 Berlin, Germany
+  address: Schloßpl. 1, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 130
+  latitude: 52.517388499999996
+  longitude: 13.4007319
+  place_id: ChIJd1qjbfdRqEcRuUaDFJ-iMmI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.samurai_museum_berlin
+  name: Samurai Museum Berlin
+  type: museum
+  tags:
+  - museum
+  - history_museum
+  - art_museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Auguststraße 68, 10117 Berlin, Germany
+  address: Auguststraße 68, 10117 Berlin, Germany
+  rating: 4.8
+  reviews: 3130
+  latitude: 52.5268094
+  longitude: 13.3952948
+  place_id: ChIJJ7T1BFVQqEcR1Xze1phIANg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.german_historical_museum
+  name: German Historical Museum
+  type: history_museum
+  tags:
+  - history_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Unter den Linden 2, 10117 Berlin, Germany
+  address: Unter den Linden 2, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 10542
+  latitude: 52.5186138
+  longitude: 13.396359799999999
+  place_id: ChIJnZP4HtxRqEcRw0epcRGQ-_k
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.bud_spencer_museum
+  name: Bud Spencer Museum
+  type: museum
+  tags:
+  - museum
+  - movie_theater
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Unter den Linden 10, 10117 Berlin, Germany
+  address: Unter den Linden 10, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 3230
+  latitude: 52.5173839
+  longitude: 13.3904917
+  place_id: ChIJW-GxDmpRqEcRVKZADjaXB2w
+  source_note: Google Places seed build (2026-04-22)
+- id: place.alexanderplatz_mitte_core.gem_ldegalerie
+  name: Gemäldegalerie
+  type: art_museum
+  tags:
+  - art_museum
+  - art_gallery
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Johanna und Eduard Arnhold Platz, 10785 Berlin, Germany
+  address: Johanna und Eduard Arnhold Platz, 10785 Berlin, Germany
+  rating: 4.7
+  reviews: 5395
+  latitude: 52.5084982
+  longitude: 13.3651754
+  place_id: ChIJc3DkFbRRqEcRrUuZhztJVVg
+  source_note: Google Places seed build (2026-04-22)

@@ -1,0 +1,58 @@
+district: Nord-Neukölln & Reuterkiez
+category: places
+items:
+- id: place.nord_neuk_lln_reuterkiez.museum_neuk_lln
+  name: Museum Neukölln
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alt-Britz 81, 12359 Berlin, Germany
+  address: Alt-Britz 81, 12359 Berlin, Germany
+  rating: 4.4
+  reviews: 239
+  latitude: 52.4460657
+  longitude: 13.4375336
+  place_id: ChIJkVxJYYFFqEcRyw94bag9PrI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.nord_neuk_lln_reuterkiez.kindl_zentrum_f_r_zeitgen_ssische_kunst
+  name: KINDL - Zentrum für zeitgenössische Kunst
+  type: art_museum
+  tags:
+  - tourist_attraction
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Am Sudhaus 3, 12053 Berlin, Germany
+  address: Am Sudhaus 3, 12053 Berlin, Germany
+  rating: 4.5
+  reviews: 1008
+  latitude: 52.479447
+  longitude: 13.430764199999999
+  place_id: ChIJ98cmwbxPqEcRn1lPpQfVT9U
+  source_note: Google Places seed build (2026-04-22)
+- id: place.nord_neuk_lln_reuterkiez.dark_matter
+  name: DARK MATTER
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Köpenicker Ch 46, 10317 Berlin, Germany
+  address: Köpenicker Ch 46, 10317 Berlin, Germany
+  rating: 4.6
+  reviews: 6097
+  latitude: 52.4927414
+  longitude: 13.492695399999999
+  place_id: ChIJqc2JIkRPqEcRLdpX7ohXL0U
+  source_note: Google Places seed build (2026-04-22)

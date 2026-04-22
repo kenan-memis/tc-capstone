@@ -1,0 +1,511 @@
+district: Wedding
+category: restaurants
+items:
+- id: restaurant.wedding.don_pasquale
+  name: Don Pasquale
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Triftstraße 38, 13353 Berlin, Germany
+  address: Triftstraße 38, 13353 Berlin, Germany
+  rating: 4.8
+  reviews: 1026
+  latitude: 52.5419614
+  longitude: 13.3506675
+  place_id: ChIJyatDG3lRqEcRlSIL7vcz7z0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.khatoon_restaurant
+  name: Khatoon Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - persian_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Turiner Str. 50, 13347 Berlin, Germany
+  address: Turiner Str. 50, 13347 Berlin, Germany
+  rating: 4.8
+  reviews: 727
+  latitude: 52.5516458
+  longitude: 13.3554794
+  place_id: ChIJ7ZgrwJxTqEcRIyXn0E3ugs8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.la_dolce_vita
+  name: La Dolce Vita
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Seestraße 106, 13353 Berlin, Germany
+  address: Seestraße 106, 13353 Berlin, Germany
+  rating: 4.8
+  reviews: 228
+  latitude: 52.5486515
+  longitude: 13.3473279
+  place_id: ChIJVQtC5t9RqEcRgy9yz0Re3Q0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.umi_x_gendai_no_kaishaku_restaurant
+  name: UMI x Gendai No Kaishaku Restaurant
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - sushi_restaurant
+  - gastropub
+  - bar
+  - japanese_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Müllerstraße 55a, 13349 Berlin, Germany
+  address: Müllerstraße 55a, 13349 Berlin, Germany
+  rating: 4.9
+  reviews: 1327
+  latitude: 52.553657799999996
+  longitude: 13.3467468
+  place_id: ChIJ28MOm7dTqEcRrpvQUnB8bQI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.dukki
+  name: DUKKI
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - korean_restaurant
+  - bistro
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Burgsdorfstraße 14, 13353 Berlin, Germany
+  address: Burgsdorfstraße 14, 13353 Berlin, Germany
+  rating: 4.7
+  reviews: 201
+  latitude: 52.542927999999996
+  longitude: 13.363040199999999
+  place_id: ChIJXafjhQhRqEcRPzx9aOkvkvQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.lei_s_k_che
+  name: Lei's Küche
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - chinese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Seestraße 41, 13353 Berlin, Germany
+  address: Seestraße 41, 13353 Berlin, Germany
+  rating: 4.7
+  reviews: 910
+  latitude: 52.549644799999996
+  longitude: 13.351225399999999
+  place_id: ChIJg4ZeB9ZTqEcRtIMR4pCEGiw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.naveena_path
+  name: Naveena Path
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Tegeler Str. 22, 13353 Berlin, Germany
+  address: Tegeler Str. 22, 13353 Berlin, Germany
+  rating: 4.6
+  reviews: 1161
+  latitude: 52.541866
+  longitude: 13.357426
+  place_id: ChIJtz8pP4JRqEcRTeVscMLBtd0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.dastoor_restaurant
+  name: Dastoor Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  - halal_restaurant
+  - pakistani_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Maxstraße 14, 13347 Berlin, Germany
+  address: Maxstraße 14, 13347 Berlin, Germany
+  rating: 4.8
+  reviews: 1029
+  latitude: 52.550721599999996
+  longitude: 13.3629008
+  place_id: ChIJ4WQAEXRTqEcRYV9h6DzdJDc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.uuu
+  name: UUU
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Sprengelstraße 15, 13353 Berlin, Germany
+  address: Sprengelstraße 15, 13353 Berlin, Germany
+  rating: 4.7
+  reviews: 97
+  latitude: 52.5419292
+  longitude: 13.3548347
+  place_id: ChIJ_ck298hRqEcRi-TOdMtNGhI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.szechuan_k_che_wedding
+  name: SzeChuan Küche Wedding
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - chinese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Seestraße 101, 13353 Berlin, Germany
+  address: Seestraße 101, 13353 Berlin, Germany
+  rating: 4.8
+  reviews: 176
+  latitude: 52.549443399999994
+  longitude: 13.3492818
+  place_id: ChIJu6lqRFRTqEcReSdKcLiC3io
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.taverna_hellas_wedding
+  name: Taverna Hellas Wedding
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - fine_dining_restaurant
+  - mediterranean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Utrechter Str. 22, 13347 Berlin, Germany
+  address: Utrechter Str. 22, 13347 Berlin, Germany
+  rating: 4.6
+  reviews: 1280
+  latitude: 52.5497965
+  longitude: 13.357940099999999
+  place_id: ChIJ2fbxONVTqEcR8fx_6csfHfE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.valle_dei_templi
+  name: Valle dei Templi
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - pizza_restaurant
+  - wine_bar
+  - seafood_restaurant
+  - vegetarian_restaurant
+  - liquor_store
+  indoor_outdoor: mixed
+  summary: Brüsseler Str. 10, 13353 Berlin, Germany
+  address: Brüsseler Str. 10, 13353 Berlin, Germany
+  rating: 4.7
+  reviews: 766
+  latitude: 52.5476898
+  longitude: 13.351017299999999
+  place_id: ChIJncnfc-JRqEcRsd1ZawjjeYI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.smash_zone
+  name: smash zone
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - hamburger_restaurant
+  - american_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Müllerstraße 47A, 13349 Berlin, Germany
+  address: Müllerstraße 47A, 13349 Berlin, Germany
+  rating: 4.8
+  reviews: 178
+  latitude: 52.55196910000001
+  longitude: 13.3498702
+  place_id: ChIJaRkzFwBTqEcRhHc29u6ztK4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.stranero
+  name: Stranero
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pizza_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Liebenwalder Str. 11, 13347 Berlin, Germany
+  address: Liebenwalder Str. 11, 13347 Berlin, Germany
+  rating: 4.5
+  reviews: 2012
+  latitude: 52.5521869
+  longitude: 13.363923999999999
+  place_id: ChIJESmCditSqEcR74o1AUk6yoA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.khan_baba_restaurant
+  name: Khan Baba Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pakistani_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Amsterdamer Str. 12, 13347 Berlin, Germany
+  address: Amsterdamer Str. 12, 13347 Berlin, Germany
+  rating: 4.9
+  reviews: 576
+  latitude: 52.5513641
+  longitude: 13.3573077
+  place_id: ChIJjxTsMnVTqEcRelsFk5lUZ-k
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.flop_caf
+  name: Flop Café
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Otawistraße 11, 13351 Berlin, Germany
+  address: Otawistraße 11, 13351 Berlin, Germany
+  rating: 4.9
+  reviews: 250
+  latitude: 52.555165599999995
+  longitude: 13.3412815
+  place_id: ChIJZ_FEjHhTqEcRHebdKAGFsKs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.sarajevo_berlin
+  name: Sarajevo Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - eastern_european_restaurant
+  - fast_food_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Triftstraße 8, 13353 Berlin, Germany
+  address: Triftstraße 8, 13353 Berlin, Germany
+  rating: 4.8
+  reviews: 2355
+  latitude: 52.5442897
+  longitude: 13.359353299999999
+  place_id: ChIJS9jOtvdRqEcRAkXB75o6PJs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.homey
+  name: Homey
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Müllerstraße 70, 13349 Berlin, Germany
+  address: Müllerstraße 70, 13349 Berlin, Germany
+  rating: 4.5
+  reviews: 502
+  latitude: 52.5571203
+  longitude: 13.3407449
+  place_id: ChIJPRVUbjlJqEcRA6BMMcSbT20
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.coffee_circle_wedding
+  name: Coffee Circle Wedding
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Lindower Str. 18, 13347 Berlin, Germany
+  address: Lindower Str. 18, 13347 Berlin, Germany
+  rating: 4.5
+  reviews: 839
+  latitude: 52.543856299999995
+  longitude: 13.367783099999999
+  place_id: ChIJbWfOdXxRqEcRKCLNv17EYv0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.soul_of_coffee
+  name: Soul of Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coworking_space
+  - pastry_shop
+  - coffee_shop
+  - meal_takeaway
+  - dessert_shop
+  indoor_outdoor: mixed
+  summary: Reinickendorfer Str. 66, 13347 Berlin, Germany
+  address: Reinickendorfer Str. 66, 13347 Berlin, Germany
+  rating: 4.7
+  reviews: 640
+  latitude: 52.552880900000005
+  longitude: 13.3663414
+  place_id: ChIJ-dSqQGlTqEcR45EIBck9on8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.chamelion_coffee
+  name: Chamelion Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - catering_service
+  - food_delivery
+  - food
+  - service
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Torfstraße 25, 13353 Berlin, Germany
+  address: Torfstraße 25, 13353 Berlin, Germany
+  rating: 4.7
+  reviews: 286
+  latitude: 52.540636
+  longitude: 13.3511829
+  place_id: ChIJCTFyHqVRqEcRsXlgXdcMOO8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.oslo_kaffebar
+  name: Oslo Kaffebar
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - food
+  - store
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Eichendorffstraße 13, 10115 Berlin, Germany
+  address: Eichendorffstraße 13, 10115 Berlin, Germany
+  rating: 4.5
+  reviews: 1510
+  latitude: 52.530989399999996
+  longitude: 13.3867522
+  place_id: ChIJb4gZN-xRqEcRBgNOzFMM55A
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.spazio_antik_nippes_italian_bistrot_seit_2017
+  name: Spazio Antik & Nippes Italian Bistrot seit 2017
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - cafe
+  - restaurant
+  - food
+  - bar
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Torfstraße 15, 13353 Berlin, Germany
+  address: Torfstraße 15, 13353 Berlin, Germany
+  rating: 4.6
+  reviews: 251
+  latitude: 52.5413661
+  longitude: 13.3509462
+  place_id: ChIJlT68AXlRqEcRUEOmfnhC5g4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.black_wedding_bar
+  name: BLACK WEDDING BAR
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - wine_bar
+  - beer_garden
+  - cocktail_bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Badstraße 38-39, 13357 Berlin, Germany
+  address: Badstraße 38-39, 13357 Berlin, Germany
+  rating: 4.8
+  reviews: 118
+  latitude: 52.5534116
+  longitude: 13.3787307
+  place_id: ChIJuRCRCQZTqEcRoAGdEBuhiD4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding.basalt
+  name: Basalt
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Utrechter Str. 38, 13347 Berlin, Germany
+  address: Utrechter Str. 38, 13347 Berlin, Germany
+  rating: 4.5
+  reviews: 498
+  latitude: 52.5506167
+  longitude: 13.3608213
+  place_id: ChIJKZS02SpSqEcRM0MKaTQPhkw
+  source_note: Google Places seed build (2026-04-22)

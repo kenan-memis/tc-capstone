@@ -1,0 +1,102 @@
+district: Dahlem & Zehlendorf south
+category: restaurants
+items:
+- id: restaurant.dahlem_zehlendorf_south.landgasthaus_dom_ne_dahlem
+  name: Landgasthaus Domäne Dahlem
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Königin-Luise-Straße 49, 14195 Berlin, Germany
+  address: Königin-Luise-Straße 49, 14195 Berlin, Germany
+  rating: 4.3
+  reviews: 99
+  latitude: 52.459146
+  longitude: 13.2892064
+  place_id: ChIJ0eG3S8tbqEcRVgKF86wbZAA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.dahlem_zehlendorf_south.eierschale_dahlem
+  name: Eierschale Dahlem
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - meal_takeaway
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Podbielskiallee 50, 14195 Berlin, Germany
+  address: Podbielskiallee 50, 14195 Berlin, Germany
+  rating: 4.5
+  reviews: 1786
+  latitude: 52.464484399999996
+  longitude: 13.2976181
+  place_id: ChIJ0by4QRVaqEcRsud28bbOnTQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.dahlem_zehlendorf_south.note_del_gusto
+  name: Note del Gusto
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Sophie-Charlotte-Straße 29, 14169 Berlin, Germany
+  address: Sophie-Charlotte-Straße 29, 14169 Berlin, Germany
+  rating: 4.8
+  reviews: 73
+  latitude: 52.444473699999996
+  longitude: 13.261286199999999
+  place_id: ChIJW2NwpNpbqEcRMYmPx9ySgAw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.dahlem_zehlendorf_south.trattoria_toscana_clayallee
+  name: Trattoria Toscana Clayallee
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Clayallee 146, 14195 Berlin, Germany
+  address: Clayallee 146, 14195 Berlin, Germany
+  rating: 4.6
+  reviews: 2029
+  latitude: 52.454254299999995
+  longitude: 13.273128999999999
+  place_id: ChIJf6gLpBZaqEcRLTwD9ACUBEA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.dahlem_zehlendorf_south.ch_let_suisse
+  name: Châlet Suisse
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - swiss_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Clayallee 99, Im Jagen 5, 14195 Berlin, Germany
+  address: Clayallee 99, Im Jagen 5, 14195 Berlin, Germany
+  rating: 4.3
+  reviews: 1487
+  latitude: 52.4618815
+  longitude: 13.2691524
+  place_id: ChIJw99ykRFaqEcR8XUlW7fwv2w
+  source_note: Google Places seed build (2026-04-22)

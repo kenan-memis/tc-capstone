@@ -1,0 +1,57 @@
+district: Steglitz
+category: places
+items:
+- id: place.steglitz.allied_museum
+  name: Allied Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Clayallee 135, 14195 Berlin, Germany
+  address: Clayallee 135, 14195 Berlin, Germany
+  rating: 4.5
+  reviews: 2153
+  latitude: 52.4559789
+  longitude: 13.272485999999999
+  place_id: ChIJmeYJsBZaqEcR-QWdLduGpm4
+  source_note: Google Places seed build (2026-04-22)
+- id: place.steglitz.br_cke_museum
+  name: Brücke Museum
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Bussardsteig 9, 14195 Berlin, Germany
+  address: Bussardsteig 9, 14195 Berlin, Germany
+  rating: 4.4
+  reviews: 1147
+  latitude: 52.466932799999995
+  longitude: 13.2748894
+  place_id: ChIJOSbF2whaqEcRu_nEH5iMy60
+  source_note: Google Places seed build (2026-04-22)
+- id: place.steglitz.gew_chsh_user_botanischer_garten_berlin
+  name: Gewächshäuser Botanischer Garten Berlin
+  type: botanical_garden
+  tags:
+  - botanical_garden
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Botanical Garden and Botanical Museum, 14195 Berlin, Germany
+  address: Botanical Garden and Botanical Museum, 14195 Berlin, Germany
+  rating: 4.7
+  reviews: 189
+  latitude: 52.456588599999996
+  longitude: 13.3074303
+  place_id: ChIJ5YUEKIhbqEcRqCsGqRBZ_T0
+  source_note: Google Places seed build (2026-04-22)

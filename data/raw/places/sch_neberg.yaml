@@ -1,0 +1,183 @@
+district: Schöneberg
+category: places
+items:
+- id: place.sch_neberg.urban_nation
+  name: Urban Nation
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Bülowstraße 7, 10783 Berlin, Germany
+  address: Bülowstraße 7, 10783 Berlin, Germany
+  rating: 4.7
+  reviews: 4595
+  latitude: 52.4987058
+  longitude: 13.356503600000002
+  place_id: ChIJC7tHUElQqEcRJ13PfQTtpcg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.museum_of_unheard_of_things
+  name: Museum of Unheard (of) Things
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Crellestraße 5-6, 10827 Berlin, Germany
+  address: Crellestraße 5-6, 10827 Berlin, Germany
+  rating: 4.5
+  reviews: 109
+  latitude: 52.4870458
+  longitude: 13.358679299999999
+  place_id: ChIJ6VomnEBQqEcR22RgcbggjLY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.berlin_story_bunker
+  name: Berlin Story Bunker
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - historical_landmark
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schöneberger Str. 23A, 10963 Berlin, Germany
+  address: Schöneberger Str. 23A, 10963 Berlin, Germany
+  rating: 4.7
+  reviews: 6851
+  latitude: 52.5029008
+  longitude: 13.3803901
+  place_id: ChIJi0F9Ns1RqEcRi_7TluGaXTM
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.c_o_berlin
+  name: C/O Berlin
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  address: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 3446
+  latitude: 52.506633699999995
+  longitude: 13.330547
+  place_id: ChIJ3_95c_5QqEcRbKo0_TzdGC8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.sch_neberg_museum
+  name: Schöneberg Museum
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Hauptstraße 40-42, 10827 Berlin, Germany
+  address: Hauptstraße 40-42, 10827 Berlin, Germany
+  rating: 4.5
+  reviews: 120
+  latitude: 52.483911799999994
+  longitude: 13.350976699999999
+  place_id: ChIJPVKHw28jZUERK0pDQDo0Uog
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.new_national_gallery
+  name: New National Gallery
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Potsdamer Str. 50, 10785 Berlin, Germany
+  address: Potsdamer Str. 50, 10785 Berlin, Germany
+  rating: 4.6
+  reviews: 6076
+  latitude: 52.5069946
+  longitude: 13.367604
+  place_id: ChIJP5ILdrVRqEcR3N9mlK-56sE
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.haus_am_kleistpark
+  name: Haus am Kleistpark
+  type: art_gallery
+  tags:
+  - art_gallery
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Grunewaldstraße 6-7, 10823 Berlin, Germany
+  address: Grunewaldstraße 6-7, 10823 Berlin, Germany
+  rating: 4.4
+  reviews: 149
+  latitude: 52.4905542
+  longitude: 13.357216099999999
+  place_id: ChIJg8A4HEdQqEcRjQ1cq7yf59E
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.john_f_kennedy_platz
+  name: John-F.-Kennedy-Platz
+  type: historical_landmark
+  tags:
+  - historical_landmark
+  - tourist_attraction
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: John-F.-Kennedy-Platz 1, 10825 Berlin, Germany
+  address: John-F.-Kennedy-Platz 1, 10825 Berlin, Germany
+  rating: 4.4
+  reviews: 148
+  latitude: 52.4850049
+  longitude: 13.3445591
+  place_id: ChIJk9o7oEJQqEcRGzx8204HJbg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.springbrunnen_viktoria_luise_platz
+  name: Springbrunnen Viktoria-Luise-Platz
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Viktoria-Luise-Platz, 10777 Berlin, Germany
+  address: Viktoria-Luise-Platz, 10777 Berlin, Germany
+  rating: 4.6
+  reviews: 432
+  latitude: 52.495725199999995
+  longitude: 13.341867599999999
+  place_id: ChIJfaKiC1pQqEcR7h5XExJr43M
+  source_note: Google Places seed build (2026-04-22)
+- id: place.sch_neberg.david_bowie_s_former_apartment
+  name: David Bowie's former apartment
+  type: point_of_interest
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Hauptstraße 155, 10827 Berlin, Germany
+  address: Hauptstraße 155, 10827 Berlin, Germany
+  rating: 4.4
+  reviews: 442
+  latitude: 52.4891952
+  longitude: 13.359493200000001
+  place_id: ChIJAQCQUEdQqEcRuj2ZF5PPSIY
+  source_note: Google Places seed build (2026-04-22)

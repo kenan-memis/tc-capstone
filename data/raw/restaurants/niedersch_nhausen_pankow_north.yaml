@@ -1,0 +1,106 @@
+district: Niederschönhausen & Pankow north
+category: restaurants
+items:
+- id: restaurant.niedersch_nhausen_pankow_north.auszeit
+  name: auszeit
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - beer_garden
+  - coffee_shop
+  - cafe
+  - hamburger_restaurant
+  - american_restaurant
+  - cocktail_bar
+  indoor_outdoor: mixed
+  summary: Hermann-Hesse-Straße 15, 13156 Berlin, Germany
+  address: Hermann-Hesse-Straße 15, 13156 Berlin, Germany
+  rating: 4.6
+  reviews: 2360
+  latitude: 52.5802495
+  longitude: 13.4010172
+  place_id: ChIJhUN_b3hRqEcR0IdRG-Gf9dg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.niedersch_nhausen_pankow_north.friedrich
+  name: friedrich
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hermann-Hesse-Straße 20, 13156 Berlin, Germany
+  address: Hermann-Hesse-Straße 20, 13156 Berlin, Germany
+  rating: 4.7
+  reviews: 745
+  latitude: 52.580577299999995
+  longitude: 13.3997719
+  place_id: ChIJ21oyPlxSqEcReg1QQDx5qUs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.niedersch_nhausen_pankow_north.com_me_restaurant
+  name: Com Me Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Tschaikowskistraße 30, Grabbeallee 55, 13156 Berlin, Germany
+  address: Tschaikowskistraße 30, Grabbeallee 55, 13156 Berlin, Germany
+  rating: 4.8
+  reviews: 56
+  latitude: 52.5769181
+  longitude: 13.397831
+  place_id: ChIJf1x5jyVTqEcRJZfFuFvVgCA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.niedersch_nhausen_pankow_north.zum_torhaus
+  name: Zum Torhaus
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Nordendstraße 46, 13156 Berlin, Germany
+  address: Nordendstraße 46, 13156 Berlin, Germany
+  rating: 4.5
+  reviews: 316
+  latitude: 52.588462899999996
+  longitude: 13.3872722
+  place_id: ChIJ04qUHVZSqEcRtR0l2NxhrUw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.niedersch_nhausen_pankow_north.pho_bowl
+  name: Pho Bowl
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hermann-Hesse-Straße 2, 13156 Berlin, Germany
+  address: Hermann-Hesse-Straße 2, 13156 Berlin, Germany
+  rating: 4.8
+  reviews: 216
+  latitude: 52.580949
+  longitude: 13.403036499999999
+  place_id: ChIJb0b81ARTqEcR6P5EZmSOVvw
+  source_note: Google Places seed build (2026-04-22)

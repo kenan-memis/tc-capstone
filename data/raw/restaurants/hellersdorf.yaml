@@ -1,0 +1,102 @@
+district: Hellersdorf
+category: restaurants
+items:
+- id: restaurant.hellersdorf.restaurant_syrtaki
+  name: Restaurant Syrtaki
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Fritz-Lang-Platz 5, 12627 Berlin, Germany
+  address: Fritz-Lang-Platz 5, 12627 Berlin, Germany
+  rating: 4.6
+  reviews: 164
+  latitude: 52.537470899999995
+  longitude: 13.6022936
+  place_id: ChIJi6ufuDRKqEcRej1bdqJH_rY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hellersdorf.restaurant_nante_kaulsdorf
+  name: Restaurant Nante Kaulsdorf
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Cecilienpl. 7, 12619 Berlin, Germany
+  address: Cecilienpl. 7, 12619 Berlin, Germany
+  rating: 4.7
+  reviews: 1378
+  latitude: 52.520784799999994
+  longitude: 13.5912542
+  place_id: ChIJfWnW539JqEcRy4AC8kISdZE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hellersdorf.trattoria_la_stalla
+  name: Trattoria La Stalla
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hönower Str. 14, 12623 Berlin, Germany
+  address: Hönower Str. 14, 12623 Berlin, Germany
+  rating: 4.8
+  reviews: 1608
+  latitude: 52.5064808
+  longitude: 13.613857
+  place_id: ChIJB4Ch3ZJJqEcRpc656j-2kes
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hellersdorf.fresh
+  name: Fresh!
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Fritz-Lang-Straße 8, 12627 Berlin, Germany
+  address: Fritz-Lang-Straße 8, 12627 Berlin, Germany
+  rating: 4.9
+  reviews: 25
+  latitude: 52.538168
+  longitude: 13.602836799999999
+  place_id: ChIJw_U7oHxLqEcRtSNOmpSg-Cc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hellersdorf.restaurant_la_paz_in_hellersdorf
+  name: Restaurant La Paz in Hellersdorf
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mexican_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kurt-Weill-Gasse 7, 12627 Berlin, Germany
+  address: Kurt-Weill-Gasse 7, 12627 Berlin, Germany
+  rating: 4.3
+  reviews: 1681
+  latitude: 52.5377734
+  longitude: 13.603276999999999
+  place_id: ChIJX0ajvzRKqEcRBUNJ3U_Edu0
+  source_note: Google Places seed build (2026-04-22)

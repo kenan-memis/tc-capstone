@@ -1,0 +1,108 @@
+district: Wilmersdorf
+category: restaurants
+items:
+- id: restaurant.wilmersdorf.bellucci
+  name: Bellucci
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - mediterranean_restaurant
+  - italian_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kurfürstendamm, Brandenburgische Str. 35, 10707 Berlin, Germany
+  address: Kurfürstendamm, Brandenburgische Str. 35, 10707 Berlin, Germany
+  rating: 4.7
+  reviews: 1512
+  latitude: 52.499466999999996
+  longitude: 13.306778200000002
+  place_id: ChIJNZ52e-hQqEcRhTkVAtxjL6w
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wilmersdorf.byblos_restaurant_berlin_by_nassib_fadel
+  name: Byblos Restaurant Berlin by Nassib Fadel
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - lebanese_restaurant
+  - halal_restaurant
+  - wine_bar
+  - bar_and_grill
+  - cocktail_bar
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Spichernstraße 24, 10777 Berlin, Germany
+  address: Spichernstraße 24, 10777 Berlin, Germany
+  rating: 4.9
+  reviews: 2760
+  latitude: 52.49768170000001
+  longitude: 13.3340756
+  place_id: ChIJlywkys9RqEcR-E9kCez9oM0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wilmersdorf.la_marini_re
+  name: La Marinière
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - french_restaurant
+  - wine_bar
+  - bar
+  - deli
+  - food_store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Fechnerstraße 30, 10717 Berlin, Germany
+  address: Fechnerstraße 30, 10717 Berlin, Germany
+  rating: 4.9
+  reviews: 239
+  latitude: 52.4894514
+  longitude: 13.3197744
+  place_id: ChIJScmtM9NRqEcRs_BL2JFqE0s
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wilmersdorf.luardi_cucina_della_mamma
+  name: Luardi Cucina della mamma
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Meinekestraße 24, 10719 Berlin, Germany
+  address: Meinekestraße 24, 10719 Berlin, Germany
+  rating: 4.8
+  reviews: 8519
+  latitude: 52.5020659
+  longitude: 13.3292767
+  place_id: ChIJFZgIRvlQqEcR7DFdQkJvNrE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wilmersdorf.restaurant_berliner_hof
+  name: Restaurant Berliner Hof
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hildegardstraße 14, 10715 Berlin, Germany
+  address: Hildegardstraße 14, 10715 Berlin, Germany
+  rating: 4.6
+  reviews: 1234
+  latitude: 52.4819388
+  longitude: 13.322558800000001
+  place_id: ChIJ4xP-KopQqEcRjdeoLco1CiM
+  source_note: Google Places seed build (2026-04-22)

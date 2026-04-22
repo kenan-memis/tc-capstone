@@ -1,0 +1,106 @@
+district: Treptow-Köpenick (overall)
+category: restaurants
+items:
+- id: restaurant.treptow_k_penick_overall.restaurant_asteria_k_penick
+  name: Restaurant Asteria Köpenick
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Köpenick 6, 12555 Berlin, Germany
+  address: Alt-Köpenick 6, 12555 Berlin, Germany
+  rating: 4.8
+  reviews: 2277
+  latitude: 52.4470851
+  longitude: 13.575304299999999
+  place_id: ChIJN3sjK3BIqEcR3XYQNS3mgFQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.treptow_k_penick_overall.amor_restaurant_altstadt_k_penick
+  name: Amor Restaurant - Altstadt Köpenick
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mexican_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Köpenick 10, 12555 Berlin, Germany
+  address: Alt-Köpenick 10, 12555 Berlin, Germany
+  rating: 4.7
+  reviews: 544
+  latitude: 52.446831599999996
+  longitude: 13.575088299999999
+  place_id: ChIJt3veMBxJqEcRfy0JCVLJq1c
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.treptow_k_penick_overall.ratskeller_kopenick
+  name: Ratskeller Kopenick
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Köpenick 21, 12555 Berlin, Germany
+  address: Alt-Köpenick 21, 12555 Berlin, Germany
+  rating: 4.5
+  reviews: 3020
+  latitude: 52.4454935
+  longitude: 13.5745972
+  place_id: ChIJLaOsTHBIqEcRI2uaviOsOEQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.treptow_k_penick_overall.wieduwilt_und_krause_alpenl_ndische_haute_cuisine_catering_und_lieferservice
+  name: Wieduwilt und Krause | Alpenländische Haute Cuisine | Catering und Lieferservice
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - snack_bar
+  - catering_service
+  - food_delivery
+  - meal_takeaway
+  - food
+  indoor_outdoor: mixed
+  summary: Rudower Str. 7, 12557 Berlin, Germany
+  address: Rudower Str. 7, 12557 Berlin, Germany
+  rating: 4.9
+  reviews: 344
+  latitude: 52.4440946
+  longitude: 13.567783499999999
+  place_id: ChIJJyYTFv9JqEcRthNdEhQ2qg4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.treptow_k_penick_overall.restaurant_k_penicker_seeterrassen
+  name: Restaurant Köpenicker Seeterrassen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Müggelheimer Str. 1, A, 12555 Berlin, Germany
+  address: Müggelheimer Str. 1, A, 12555 Berlin, Germany
+  rating: 4.4
+  reviews: 1950
+  latitude: 52.44402720000001
+  longitude: 13.576897899999999
+  place_id: ChIJs9nNe3FIqEcRkqHh_5mKkSw
+  source_note: Google Places seed build (2026-04-22)

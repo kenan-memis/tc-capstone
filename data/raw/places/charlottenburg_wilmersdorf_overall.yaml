@@ -1,0 +1,58 @@
+district: Charlottenburg-Wilmersdorf (overall)
+category: places
+items:
+- id: place.charlottenburg_wilmersdorf_overall.c_o_berlin
+  name: C/O Berlin
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  address: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 3446
+  latitude: 52.506633699999995
+  longitude: 13.330547
+  place_id: ChIJ3_95c_5QqEcRbKo0_TzdGC8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg_wilmersdorf_overall.villa_oppenheim_museum_charlottenburg_wilmersdorf
+  name: Villa Oppenheim - Museum Charlottenburg-Wilmersdorf
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßstraße 55, 14059 Berlin, Germany
+  address: Schloßstraße 55, 14059 Berlin, Germany
+  rating: 4.4
+  reviews: 472
+  latitude: 52.5160114
+  longitude: 13.2980222
+  place_id: ChIJSRooayZRqEcRU7NRQ2TKyqA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg_wilmersdorf_overall.k_the_kollwitz_museum
+  name: Käthe Kollwitz Museum
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Theaterbau am Schloss, Spandauer Damm 10, 14059 Berlin, Germany
+  address: Theaterbau am Schloss, Spandauer Damm 10, 14059 Berlin, Germany
+  rating: 4.5
+  reviews: 472
+  latitude: 52.5205765
+  longitude: 13.2921487
+  place_id: ChIJE_dF5PtQqEcRdRM8kTXCsTM
+  source_note: Google Places seed build (2026-04-22)

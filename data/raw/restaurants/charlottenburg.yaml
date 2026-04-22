@@ -1,0 +1,727 @@
+district: Charlottenburg
+category: restaurants
+items:
+- id: restaurant.charlottenburg.luardi_cucina_della_mamma
+  name: Luardi Cucina della mamma
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Meinekestraße 24, 10719 Berlin, Germany
+  address: Meinekestraße 24, 10719 Berlin, Germany
+  rating: 4.8
+  reviews: 8519
+  latitude: 52.5020659
+  longitude: 13.3292767
+  place_id: ChIJFZgIRvlQqEcR7DFdQkJvNrE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.byblos_restaurant_berlin_by_nassib_fadel
+  name: Byblos Restaurant Berlin by Nassib Fadel
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - lebanese_restaurant
+  - wine_bar
+  - halal_restaurant
+  - bar_and_grill
+  - mediterranean_restaurant
+  - cocktail_bar
+  indoor_outdoor: mixed
+  summary: Spichernstraße 24, 10777 Berlin, Germany
+  address: Spichernstraße 24, 10777 Berlin, Germany
+  rating: 4.9
+  reviews: 2760
+  latitude: 52.49768170000001
+  longitude: 13.3340756
+  place_id: ChIJlywkys9RqEcR-E9kCez9oM0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.dicke_wirtin
+  name: Dicke Wirtin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Carmerstraße 9, 10623 Berlin, Germany
+  address: Carmerstraße 9, 10623 Berlin, Germany
+  rating: 4.5
+  reviews: 5776
+  latitude: 52.506526799999996
+  longitude: 13.3235691
+  place_id: ChIJb6AiJv1QqEcRQuhkF6bzTIg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.ristorante_arlecchino_cucina_italiana
+  name: RISTORANTE ARLECCHINO CUCINA & ITALIANA
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Meinekestraße 25, 10719 Berlin, Germany
+  address: Meinekestraße 25, 10719 Berlin, Germany
+  rating: 4.8
+  reviews: 2953
+  latitude: 52.502306499999996
+  longitude: 13.329292899999999
+  place_id: ChIJnZ0hT_lQqEcRWtKdwA8XPhI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.das_k_stlich_berlin_charlottenburg
+  name: DAS KÖSTLICH-Berlin Charlottenburg
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - german_restaurant
+  - european_restaurant
+  - bar
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Gervinusstraße 43, 10629 Berlin, Germany
+  address: Gervinusstraße 43, 10629 Berlin, Germany
+  rating: 4.8
+  reviews: 155
+  latitude: 52.504216799999995
+  longitude: 13.3042591
+  place_id: ChIJnz_eQBdRqEcRtXOWUr2xm7A
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.la_sepia
+  name: La Sepia
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mediterranean_restaurant
+  - spanish_restaurant
+  - seafood_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Marburger Str. 2, 10789 Berlin, Germany
+  address: Marburger Str. 2, 10789 Berlin, Germany
+  rating: 4.8
+  reviews: 1188
+  latitude: 52.503325399999994
+  longitude: 13.336948099999999
+  place_id: ChIJUaCLklVQqEcRZCoHXrGCAFM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.upper_burger_grill
+  name: Upper Burger Grill
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - hamburger_restaurant
+  - american_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rankestraße 3, 10789 Berlin, Germany
+  address: Rankestraße 3, 10789 Berlin, Germany
+  rating: 4.7
+  reviews: 7348
+  latitude: 52.5033326
+  longitude: 13.334299399999999
+  place_id: ChIJGxLgPv9QqEcRMkXmI44cAd4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.enoiteca_il_calice
+  name: Enoiteca Il Calice
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Walter-Benjamin-Platz 4, 10629 Berlin, Germany
+  address: Walter-Benjamin-Platz 4, 10629 Berlin, Germany
+  rating: 4.7
+  reviews: 540
+  latitude: 52.50215
+  longitude: 13.31491
+  place_id: ChIJmaKrTuRQqEcRTd-qhvrd0jI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.casa_bellucci_restaurant_berlin_charlottenburg
+  name: Casa Bellucci Restaurant - Berlin Charlottenburg
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - breakfast_restaurant
+  - italian_restaurant
+  - bar
+  - cafe
+  - food
+  indoor_outdoor: mixed
+  summary: Kurfürstendamm 63, 10707 Berlin, Germany
+  address: Kurfürstendamm 63, 10707 Berlin, Germany
+  rating: 4.5
+  reviews: 253
+  latitude: 52.5007367
+  longitude: 13.3112327
+  place_id: ChIJJSICZ2hRqEcRZ2In56YtR60
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.schnitzelei
+  name: Schnitzelei
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - tapas_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Röntgenstraße 7b, 10587 Berlin, Germany
+  address: Röntgenstraße 7b, 10587 Berlin, Germany
+  rating: 4.5
+  reviews: 4628
+  latitude: 52.519662
+  longitude: 13.314516999999999
+  place_id: ChIJgQjUEhhRqEcRK1_fKG29co8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.loxa
+  name: Loxa
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - wine_bar
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Suarezstraße 49, 14057 Berlin, Germany
+  address: Suarezstraße 49, 14057 Berlin, Germany
+  rating: 4.9
+  reviews: 204
+  latitude: 52.5075923
+  longitude: 13.2958334
+  place_id: ChIJLV-MndlQqEcRGA4Vv9f7xhk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.buschbeck_s_restaurant
+  name: Buschbeck's Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Trendelenburgstraße 14, 14057 Berlin, Germany
+  address: Trendelenburgstraße 14, 14057 Berlin, Germany
+  rating: 4.8
+  reviews: 460
+  latitude: 52.505687699999996
+  longitude: 13.2920637
+  place_id: ChIJe4iIctpQqEcRl0UFMInQG0M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.ottenthal
+  name: Ottenthal
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - austrian_restaurant
+  - wine_bar
+  - european_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Kantstraße 153, 10623 Berlin, Germany
+  address: Kantstraße 153, 10623 Berlin, Germany
+  rating: 4.7
+  reviews: 1263
+  latitude: 52.505400599999994
+  longitude: 13.3269158
+  place_id: ChIJwZePTvxQqEcRqc_BrpiJGfU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.cao_cao
+  name: Cao Cao
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Marburger Str. 2, 10789 Berlin, Germany
+  address: Marburger Str. 2, 10789 Berlin, Germany
+  rating: 4.4
+  reviews: 2746
+  latitude: 52.5031719
+  longitude: 13.336945199999999
+  place_id: ChIJuati81VQqEcR5x5X6_lUcaM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.gasthaus_kater_alex
+  name: Gasthaus Kater Alex
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kaiser-Friedrich-Straße 29, 10585 Berlin, Germany
+  address: Kaiser-Friedrich-Straße 29, 10585 Berlin, Germany
+  rating: 4.7
+  reviews: 867
+  latitude: 52.511786099999995
+  longitude: 13.301165099999999
+  place_id: ChIJrw7kUydRqEcRk74ep1f6kuE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.levant_caf_haus
+  name: Levant Caféhaus
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Trautenaustraße 5, 10717 Berlin, Germany
+  address: Trautenaustraße 5, 10717 Berlin, Germany
+  rating: 4.9
+  reviews: 186
+  latitude: 52.4933493
+  longitude: 13.3298352
+  place_id: ChIJEcKi0IdRqEcRTFJmcB-TpxA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.marjellchen
+  name: Marjellchen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Mommsenstraße 9, 10629 Berlin, Germany
+  address: Mommsenstraße 9, 10629 Berlin, Germany
+  rating: 4.6
+  reviews: 2230
+  latitude: 52.503168699999996
+  longitude: 13.317755799999999
+  place_id: ChIJ7zM0jORQqEcRm1bUReSc7jg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.neni_berlin
+  name: NENI Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mediterranean_restaurant
+  - israeli_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Budapester Str. 40, 10787 Berlin, Germany
+  address: Budapester Str. 40, 10787 Berlin, Germany
+  rating: 4.3
+  reviews: 4621
+  latitude: 52.505658100000005
+  longitude: 13.337894799999999
+  place_id: ChIJ-RAVYVVQqEcRIfxE6EjRZ38
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.963
+  name: '963'
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - lebanese_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Marburger Str. 14, 10789 Berlin, Germany
+  address: Marburger Str. 14, 10789 Berlin, Germany
+  rating: 4.7
+  reviews: 691
+  latitude: 52.502467499999995
+  longitude: 13.3368381
+  place_id: ChIJ16RJPMtRqEcRR5fcHmD8Kk8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.893_ry_tei_japanese_restaurant
+  name: 893 Ryōtei Japanese Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - japanese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kantstraße 135/136, 10625 Berlin, Germany
+  address: Kantstraße 135/136, 10625 Berlin, Germany
+  rating: 4.6
+  reviews: 2225
+  latitude: 52.505890799999996
+  longitude: 13.316971
+  place_id: ChIJU7-KvONQqEcRkNDBMGGDTs4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.caf_au_lait
+  name: Café au Lait
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - cocktail_bar
+  - coffee_shop
+  - bar
+  - food_store
+  indoor_outdoor: mixed
+  summary: Kantstraße 110, 10627 Berlin, Germany
+  address: Kantstraße 110, 10627 Berlin, Germany
+  rating: 4.4
+  reviews: 2976
+  latitude: 52.5065558
+  longitude: 13.305673200000001
+  place_id: ChIJA9gUEd5QqEcRs4nLEouSnjE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.caf_1love4_ku_damm_coffeeshop
+  name: Café 1love4 Ku'damm Coffeeshop
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - brunch_restaurant
+  - breakfast_restaurant
+  - cafe
+  - food_store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Kurfürstendamm 104, 10711 Berlin, Germany
+  address: Kurfürstendamm 104, 10711 Berlin, Germany
+  rating: 4.9
+  reviews: 446
+  latitude: 52.4980318
+  longitude: 13.2950831
+  place_id: ChIJp7qENdVRqEcRW_7Fl_rOMsw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.lumara_caf
+  name: Lumara Café
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Knesebeckstraße 29, 10623 Berlin, Germany
+  address: Knesebeckstraße 29, 10623 Berlin, Germany
+  rating: 4.7
+  reviews: 208
+  latitude: 52.5039362
+  longitude: 13.3217454
+  place_id: ChIJYfe45BtRqEcRqqnrk64Wb4A
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.audrey_coffee
+  name: Audrey coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - store
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Holtzendorffstraße 18, 14057 Berlin, Germany
+  address: Holtzendorffstraße 18, 14057 Berlin, Germany
+  rating: 4.7
+  reviews: 393
+  latitude: 52.5060126
+  longitude: 13.2958442
+  place_id: ChIJUdwk7x9RqEcR1dXHzPBMOrs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.caf_friedrichs
+  name: Café Friedrichs
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - catering_service
+  - meal_takeaway
+  - food_store
+  - food_delivery
+  indoor_outdoor: mixed
+  summary: Mierendorffpl. 2, 10589 Berlin, Germany
+  address: Mierendorffpl. 2, 10589 Berlin, Germany
+  rating: 4.8
+  reviews: 1442
+  latitude: 52.524808799999995
+  longitude: 13.3041433
+  place_id: ChIJo3kuVTpRqEcRvi1INUkKt7o
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.schwarzes_cafe
+  name: Schwarzes Cafe
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - breakfast_restaurant
+  - cocktail_bar
+  - cafe
+  - bar
+  - food
+  indoor_outdoor: mixed
+  summary: Kantstraße 148, 10623 Berlin, Germany
+  address: Kantstraße 148, 10623 Berlin, Germany
+  rating: 4.4
+  reviews: 6019
+  latitude: 52.5055292
+  longitude: 13.324220799999999
+  place_id: ChIJq1vO5fxQqEcRq29raPLZpKg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.a_never_ever_ending_love_story
+  name: A Never Ever Ending Love Story
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - cafe
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kantstraße 25, 10623 Berlin, Germany
+  address: Kantstraße 25, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 2669
+  latitude: 52.5062095
+  longitude: 13.3199559
+  place_id: ChIJNTpKHONQqEcRbsghqnfronQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.cafe_pik
+  name: Cafe PiK
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Uhlandstraße 61, 10719 Berlin, Germany
+  address: Uhlandstraße 61, 10719 Berlin, Germany
+  rating: 5
+  reviews: 53
+  latitude: 52.4945843
+  longitude: 13.3233445
+  place_id: ChIJ11lQHRdRqEcRvWshu1Cv6NI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.windback
+  name: Windback
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - store
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Windscheidstraße 19, 10627 Berlin, Germany
+  address: Windscheidstraße 19, 10627 Berlin, Germany
+  rating: 4.7
+  reviews: 702
+  latitude: 52.5054661
+  longitude: 13.2993518
+  place_id: ChIJfx3s-NtQqEcRHkAjPlxxNMI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.ormado_kaffeehaus_wilma_shoppen
+  name: Ormado Kaffeehaus Wilma Shoppen
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - store
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Wilmersdorfer Str. 46, 10627 Berlin, Germany
+  address: Wilmersdorfer Str. 46, 10627 Berlin, Germany
+  rating: 4.8
+  reviews: 193
+  latitude: 52.509249
+  longitude: 13.304609
+  place_id: ChIJu4264v1RqEcRzorjpfUktXs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.what_do_you_fancy_love
+  name: What do you fancy love?
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - bagel_shop
+  - juice_shop
+  - breakfast_restaurant
+  - cake_shop
+  - brunch_restaurant
+  indoor_outdoor: mixed
+  summary: Knesebeckstraße 68-69, 10623 Berlin, Germany
+  address: Knesebeckstraße 68-69, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 1563
+  latitude: 52.5029842
+  longitude: 13.3223114
+  place_id: ChIJE7g7Q_tQqEcRhFn-9UlxOdo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.caf_day_date
+  name: Café Day Date
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - store
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Sophie-Charlotten-Straße 49, 14059 Berlin, Germany
+  address: Sophie-Charlotten-Straße 49, 14059 Berlin, Germany
+  rating: 4.8
+  reviews: 139
+  latitude: 52.511882199999995
+  longitude: 13.2884722
+  place_id: ChIJo9r3PgBRqEcRu9lmg2NoyBY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.caf_kudika
+  name: Café Kudika
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Charlottenburger Ufer 1, 10587 Berlin, Germany
+  address: Charlottenburger Ufer 1, 10587 Berlin, Germany
+  rating: 4.8
+  reviews: 348
+  latitude: 52.5210412
+  longitude: 13.3001317
+  place_id: ChIJnwnK1v9RqEcRP6geCH9cAbs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.amo_coffee_shop
+  name: Amo Coffee Shop
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - store
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Trautenaustraße 16, 10717 Berlin, Germany
+  address: Trautenaustraße 16, 10717 Berlin, Germany
+  rating: 4.9
+  reviews: 123
+  latitude: 52.492007099999995
+  longitude: 13.3277115
+  place_id: ChIJrXlbXgBRqEcRF8GHg0xnhsM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.charlottenburg.frau_behrens_torten_charlottenburg
+  name: Frau Behrens Torten Charlottenburg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - pastry_shop
+  - dessert_shop
+  - confectionery
+  - bakery
+  - food_store
+  indoor_outdoor: mixed
+  summary: Wilmersdorfer Str. 96, 10629 Berlin, Germany
+  address: Wilmersdorfer Str. 96, 10629 Berlin, Germany
+  rating: 4.3
+  reviews: 932
+  latitude: 52.5017687
+  longitude: 13.3080603
+  place_id: ChIJz6NPsudQqEcRiiN7zuoS0u4
+  source_note: Google Places seed build (2026-04-22)

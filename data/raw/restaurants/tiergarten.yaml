@@ -1,0 +1,415 @@
+district: Tiergarten
+category: restaurants
+items:
+- id: restaurant.tiergarten.alpha_house_berlin
+  name: Alpha House Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - greek_restaurant
+  - italian_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kurfürstenstraße 79, 10787 Berlin, Germany
+  address: Kurfürstenstraße 79, 10787 Berlin, Germany
+  rating: 4.9
+  reviews: 203
+  latitude: 52.504074499999994
+  longitude: 13.346583299999999
+  place_id: ChIJXYVvawBRqEcRvXEIf7KyHN0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.byblos_restaurant_berlin_by_nassib_fadel
+  name: Byblos Restaurant Berlin by Nassib Fadel
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - lebanese_restaurant
+  - halal_restaurant
+  - wine_bar
+  - mediterranean_restaurant
+  - bar_and_grill
+  - cocktail_bar
+  indoor_outdoor: mixed
+  summary: Spichernstraße 24, 10777 Berlin, Germany
+  address: Spichernstraße 24, 10777 Berlin, Germany
+  rating: 4.9
+  reviews: 2760
+  latitude: 52.49768170000001
+  longitude: 13.3340756
+  place_id: ChIJlywkys9RqEcR-E9kCez9oM0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.tra_di_noi
+  name: Tra Di Noi
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Lützowpl. 5, 10785 Berlin, Germany
+  address: Lützowpl. 5, 10785 Berlin, Germany
+  rating: 4.6
+  reviews: 896
+  latitude: 52.5047462
+  longitude: 13.3537095
+  place_id: ChIJj8qHRU1QqEcRZQNQPS-_-sA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.patio
+  name: Patio
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - catering_service
+  - german_restaurant
+  - wedding_venue
+  - food_delivery
+  - european_restaurant
+  indoor_outdoor: mixed
+  summary: Kirchstraße, Ecke, Helgoländer Ufer 13 a, 10557 Berlin, Germany
+  address: Kirchstraße, Ecke, Helgoländer Ufer 13 a, 10557 Berlin, Germany
+  rating: 4.7
+  reviews: 981
+  latitude: 52.52190050000001
+  longitude: 13.348264299999999
+  place_id: ChIJVfwOMqdRqEcRtaX8geFPWzk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.schleusenkrug
+  name: Schleusenkrug
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - beer_garden
+  - german_restaurant
+  - coffee_shop
+  - cafe
+  - european_restaurant
+  - bar
+  indoor_outdoor: mixed
+  summary: Müller-Breslau-Straße 14b, 10623 Berlin, Germany
+  address: Müller-Breslau-Straße 14b, 10623 Berlin, Germany
+  rating: 4.3
+  reviews: 6731
+  latitude: 52.511276099999996
+  longitude: 13.335852099999999
+  place_id: ChIJ7YCzHQFRqEcRkSQ6-XarVLw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.caf_am_neuen_see
+  name: Café am Neuen See
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - beer_garden
+  - cafe
+  - event_venue
+  - bar
+  - food
+  indoor_outdoor: mixed
+  summary: Lichtensteinallee 2, 10787 Berlin, Germany
+  address: Lichtensteinallee 2, 10787 Berlin, Germany
+  rating: 4.3
+  reviews: 11070
+  latitude: 52.5103772
+  longitude: 13.344486199999999
+  place_id: ChIJ3bFmt6tRqEcR5H-FijiDrvc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.restaurant_facil
+  name: Restaurant Facil
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Potsdamer Str. 3, 10785 Berlin, Germany
+  address: Potsdamer Str. 3, 10785 Berlin, Germany
+  rating: 4.8
+  reviews: 1228
+  latitude: 52.5089804
+  longitude: 13.37369
+  place_id: ChIJA-K5lEpQqEcRHGv7ScsVIXs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.tiergarten_quelle
+  name: Tiergarten-Quelle
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - pub
+  - european_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: S-Bahnbogen, Bachstraße 482, 10555 Berlin, Germany
+  address: S-Bahnbogen, Bachstraße 482, 10555 Berlin, Germany
+  rating: 4.5
+  reviews: 3722
+  latitude: 52.5151878
+  longitude: 13.3369127
+  place_id: ChIJH-GkOQZRqEcRUeX5yw_FXsA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.ja_niko_ja
+  name: Ja! Niko Ja!
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Budapester Str. 13, 10787 Berlin, Germany
+  address: Budapester Str. 13, 10787 Berlin, Germany
+  rating: 4.7
+  reviews: 1698
+  latitude: 52.5064856
+  longitude: 13.3461229
+  place_id: ChIJo8ypraxRqEcRe1DSMHgmQeo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.levant_caf_haus
+  name: Levant Caféhaus
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Trautenaustraße 5, 10717 Berlin, Germany
+  address: Trautenaustraße 5, 10717 Berlin, Germany
+  rating: 4.9
+  reviews: 186
+  latitude: 52.4933493
+  longitude: 13.3298352
+  place_id: ChIJEcKi0IdRqEcRTFJmcB-TpxA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.il_sorriso
+  name: Il Sorriso
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kurfürstenstraße 76, 10787 Berlin, Germany
+  address: Kurfürstenstraße 76, 10787 Berlin, Germany
+  rating: 4.6
+  reviews: 685
+  latitude: 52.5038333
+  longitude: 13.347716199999999
+  place_id: ChIJs_dwAVNQqEcRJDxQhSKEu8I
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.luardi_cucina_della_mamma
+  name: Luardi Cucina della mamma
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Meinekestraße 24, 10719 Berlin, Germany
+  address: Meinekestraße 24, 10719 Berlin, Germany
+  rating: 4.8
+  reviews: 8519
+  latitude: 52.5020659
+  longitude: 13.3292767
+  place_id: ChIJFZgIRvlQqEcR7DFdQkJvNrE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.caytre_restaurant
+  name: CAYTRE Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kurfürstenstraße 112, 10787 Berlin, Germany
+  address: Kurfürstenstraße 112, 10787 Berlin, Germany
+  rating: 4.8
+  reviews: 296
+  latitude: 52.503739599999996
+  longitude: 13.346422299999999
+  place_id: ChIJxy6-qKBRqEcRgkiQKBLR4Rw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.hugos
+  name: Hugos
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Budapester Str. 2, 10787 Berlin, Germany
+  address: Budapester Str. 2, 10787 Berlin, Germany
+  rating: 4.7
+  reviews: 337
+  latitude: 52.507134799999996
+  longitude: 13.3449058
+  place_id: ChIJF6VjuqxRqEcRiTGE53QfKHE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.1987_xigon
+  name: 1987 Xigon
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - japanese_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Nürnberger Str. 46, 10789 Berlin, Germany
+  address: Nürnberger Str. 46, 10789 Berlin, Germany
+  rating: 4.7
+  reviews: 1201
+  latitude: 52.5005259
+  longitude: 13.3369187
+  place_id: ChIJL1yKEMJNqEcRTT64gL0kz0M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.joseph_roth_diele
+  name: Joseph-Roth-Diele
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - cafe
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Potsdamer Str. 75, 10785 Berlin, Germany
+  address: Potsdamer Str. 75, 10785 Berlin, Germany
+  rating: 4.4
+  reviews: 1551
+  latitude: 52.5025657
+  longitude: 13.3656326
+  place_id: ChIJN89il0pQqEcRnj_fG-XYIUM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.the_alchemist
+  name: The Alchemist
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Linkstraße 4, 10785 Berlin, Germany
+  address: Linkstraße 4, 10785 Berlin, Germany
+  rating: 4.4
+  reviews: 1553
+  latitude: 52.507389599999996
+  longitude: 13.374795899999999
+  place_id: ChIJd4VL-s5RqEcRSqgyWJgRAms
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.neni_berlin
+  name: NENI Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mediterranean_restaurant
+  - israeli_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Budapester Str. 40, 10787 Berlin, Germany
+  address: Budapester Str. 40, 10787 Berlin, Germany
+  rating: 4.3
+  reviews: 4621
+  latitude: 52.505658100000005
+  longitude: 13.337894799999999
+  place_id: ChIJ-RAVYVVQqEcRIfxE6EjRZ38
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.noodle_point
+  name: Noodle Point 想见面
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Uhlandstraße 142, 10719 Berlin, Germany
+  address: Uhlandstraße 142, 10719 Berlin, Germany
+  rating: 5
+  reviews: 138
+  latitude: 52.494946
+  longitude: 13.3242309
+  place_id: ChIJUa-oMQBRqEcR3AxAAO2BkM0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tiergarten.caf_minouche
+  name: Café Minouche
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - cake_shop
+  - coffee_shop
+  - bakery
+  indoor_outdoor: mixed
+  summary: Budapester Str. 6, 10787 Berlin, Germany
+  address: Budapester Str. 6, 10787 Berlin, Germany
+  rating: 4.9
+  reviews: 572
+  latitude: 52.506411899999996
+  longitude: 13.343678599999999
+  place_id: ChIJy9w5tFRQqEcRBDU9V9ZDOug
+  source_note: Google Places seed build (2026-04-22)

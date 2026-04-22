@@ -1,0 +1,57 @@
+district: Marzahn
+category: places
+items:
+- id: place.marzahn.museum_marzahn_hellersdorf
+  name: Museum Marzahn-Hellersdorf
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alt-Marzahn 51, 12685 Berlin, Germany
+  address: Alt-Marzahn 51, 12685 Berlin, Germany
+  rating: 4.5
+  reviews: 62
+  latitude: 52.543150399999995
+  longitude: 13.5610137
+  place_id: ChIJN5xls-1LqEcRul2qt8rWxnw
+  source_note: Google Places seed build (2026-04-22)
+- id: place.marzahn.dark_matter
+  name: DARK MATTER
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Köpenicker Ch 46, 10317 Berlin, Germany
+  address: Köpenicker Ch 46, 10317 Berlin, Germany
+  rating: 4.6
+  reviews: 6097
+  latitude: 52.4927414
+  longitude: 13.492695399999999
+  place_id: ChIJqc2JIkRPqEcRLdpX7ohXL0U
+  source_note: Google Places seed build (2026-04-22)
+- id: place.marzahn.stasi_museum
+  name: Stasi Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  address: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  rating: 4.5
+  reviews: 9183
+  latitude: 52.514527
+  longitude: 13.4872818
+  place_id: ChIJKeccmpNOqEcRHQ7hqU7JhnY
+  source_note: Google Places seed build (2026-04-22)

@@ -1,0 +1,107 @@
+district: Marzahn
+category: restaurants
+items:
+- id: restaurant.marzahn.landhaus_marzahner_krug
+  name: Landhaus Marzahner Krug
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Marzahn 49, 12685 Berlin, Germany
+  address: Alt-Marzahn 49, 12685 Berlin, Germany
+  rating: 4.1
+  reviews: 2993
+  latitude: 52.5434968
+  longitude: 13.5611079
+  place_id: ChIJySOtpu1LqEcRNweASd-eh7g
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.marzahn.restaurant_syrtaki
+  name: Restaurant Syrtaki
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - mediterranean_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Märkische Allee 210, A, 12679 Berlin, Germany
+  address: Märkische Allee 210, A, 12679 Berlin, Germany
+  rating: 4.8
+  reviews: 961
+  latitude: 52.548570899999994
+  longitude: 13.547056699999999
+  place_id: ChIJRbg504pLqEcRaCjdJW0QFlM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.marzahn.sakura_garten
+  name: Sakura Garten
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - thai_restaurant
+  - sushi_restaurant
+  - japanese_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Alt-Marzahn 70, 12685 Berlin, Germany
+  address: Alt-Marzahn 70, 12685 Berlin, Germany
+  rating: 4.6
+  reviews: 1719
+  latitude: 52.5421437
+  longitude: 13.5632581
+  place_id: ChIJRaxFFOxLqEcR42Ugdffj48k
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.marzahn.ristorante_bellini
+  name: Ristorante Bellini
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Marzahner Ch 87, 12681 Berlin, Germany
+  address: Marzahner Ch 87, 12681 Berlin, Germany
+  rating: 4.8
+  reviews: 465
+  latitude: 52.516942699999994
+  longitude: 13.527662
+  place_id: ChIJkeYDjShPqEcRyb9ye5-78CE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.marzahn.restaurant_nante_kaulsdorf
+  name: Restaurant Nante Kaulsdorf
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Cecilienpl. 7, 12619 Berlin, Germany
+  address: Cecilienpl. 7, 12619 Berlin, Germany
+  rating: 4.7
+  reviews: 1378
+  latitude: 52.520784799999994
+  longitude: 13.5912542
+  place_id: ChIJfWnW539JqEcRy4AC8kISdZE
+  source_note: Google Places seed build (2026-04-22)

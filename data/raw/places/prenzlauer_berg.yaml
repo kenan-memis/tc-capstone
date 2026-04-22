@@ -1,0 +1,225 @@
+district: Prenzlauer Berg
+category: places
+items:
+- id: place.prenzlauer_berg.museum_at_the_kulturbrauerei
+  name: Museum at the Kulturbrauerei
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - history_museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Knaackstraße 97, 10435 Berlin, Germany
+  address: Knaackstraße 97, 10435 Berlin, Germany
+  rating: 4.5
+  reviews: 1905
+  latitude: 52.540383
+  longitude: 13.414097
+  place_id: ChIJ74Sex_9RqEcRrg4jC_emII0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.pankow_museum_prenzlauer_allee_location
+  name: Pankow Museum - Prenzlauer Allee location
+  type: museum
+  tags:
+  - tourist_attraction
+  - history_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Prenzlauer Allee 227-228, 10405 Berlin, Germany
+  address: Prenzlauer Allee 227-228, 10405 Berlin, Germany
+  rating: 4.4
+  reviews: 128
+  latitude: 52.533502999999996
+  longitude: 13.419197299999999
+  place_id: ChIJYYd0gQNOqEcR1oa2fFGHS4Q
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.deja_vu_museum
+  name: DeJa Vu Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - amusement_center
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Rochstraße 14c, 10178 Berlin, Germany
+  address: Rochstraße 14c, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 9292
+  latitude: 52.522798599999994
+  longitude: 13.4075043
+  place_id: ChIJd65mbYlPqEcRlDrFKwi3Yzw
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.machmit_museum_for_children
+  name: MACHmit! Museum for Children
+  type: museum
+  tags:
+  - tourist_attraction
+  - movie_theater
+  - indoor_playground
+  - playground
+  - child_care_agency
+  - library
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Senefelderstraße 5, 10437 Berlin, Germany
+  address: Senefelderstraße 5, 10437 Berlin, Germany
+  rating: 4
+  reviews: 784
+  latitude: 52.5405533
+  longitude: 13.422700299999999
+  place_id: ChIJQ3V_oQBOqEcRaw77Bywr4P4
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.museumswohnung_zimmermeister_brunzel_baut_ein_mietshaus
+  name: Museumswohnung Zimmermeister Brunzel baut ein Mietshaus
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Dunckerstraße 77, 10437 Berlin, Germany
+  address: Dunckerstraße 77, 10437 Berlin, Germany
+  rating: 4.6
+  reviews: 103
+  latitude: 52.54362
+  longitude: 13.421389999999999
+  place_id: ChIJWc90rP9NqEcRXMTcmOmGH6M
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.anne_frank_center
+  name: Anne Frank Center
+  type: history_museum
+  tags:
+  - history_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Rosenthaler Str. 39, 10178 Berlin, Germany
+  address: Rosenthaler Str. 39, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 1428
+  latitude: 52.524260999999996
+  longitude: 13.4026214
+  place_id: ChIJRyQVKOFRqEcRjDujTBBGgS8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.tchoban_foundation_museum_of_architectural_drawing
+  name: Tchoban Foundation - Museum of architectural drawing
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Christinenstraße 18a, 10119 Berlin, Germany
+  address: Christinenstraße 18a, 10119 Berlin, Germany
+  rating: 4.4
+  reviews: 245
+  latitude: 52.5321182
+  longitude: 13.4100018
+  place_id: ChIJjRbDOf1RqEcRNoyAtT2-8P0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.berlin_underworld
+  name: Berlin Underworld
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Brunnenstraße 105, 13355 Berlin, Germany
+  address: Brunnenstraße 105, 13355 Berlin, Germany
+  rating: 4.7
+  reviews: 12591
+  latitude: 52.5477911
+  longitude: 13.3889929
+  place_id: ChIJT0u41SFSqEcRoksggYtajcA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.bauen_und_wohnen_in_prenzlauer_berg_um_1900
+  name: Bauen und Wohnen in Prenzlauer Berg um 1900
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Dunckerstraße 77, 10437 Berlin, Germany
+  address: Dunckerstraße 77, 10437 Berlin, Germany
+  rating: 4.5
+  reviews: 2
+  latitude: 52.54362
+  longitude: 13.421389999999999
+  place_id: ChIJWQXhq_9NqEcRD_2R4IIDat0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.wasserturm_prenzlauer_berg
+  name: Wasserturm Prenzlauer Berg
+  type: historical_landmark
+  tags:
+  - historical_landmark
+  - tourist_attraction
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Knaackstraße 23, 10405 Berlin, Germany
+  address: Knaackstraße 23, 10405 Berlin, Germany
+  rating: 4.5
+  reviews: 741
+  latitude: 52.534193699999996
+  longitude: 13.4186129
+  place_id: ChIJbzTAuwNOqEcRdMcHSLMweSo
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.ernst_th_lmann_park
+  name: Ernst-Thälmann- Park
+  type: park
+  tags:
+  - park
+  - state_park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Lilli-Henoch-Straße, 10405 Berlin, Germany
+  address: Lilli-Henoch-Straße, 10405 Berlin, Germany
+  rating: 4
+  reviews: 1428
+  latitude: 52.5386387
+  longitude: 13.433436400000001
+  place_id: ChIJhXndRwhOqEcR1nHs0YmFYog
+  source_note: Google Places seed build (2026-04-22)
+- id: place.prenzlauer_berg.wolf_in_the_city_mural_by_alaniz
+  name: Wolf in the city Mural by Alaniz
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Prenzlauer Berg, 10119 Berlin, Germany
+  address: Prenzlauer Berg, 10119 Berlin, Germany
+  rating: 5
+  reviews: 1
+  latitude: 52.533431199999995
+  longitude: 13.4096244
+  place_id: ChIJ_S739v1RqEcRQ0yJZ4IxywY
+  source_note: Google Places seed build (2026-04-22)

@@ -1,0 +1,57 @@
+district: Moabit & Hansaviertel
+category: places
+items:
+- id: place.moabit_hansaviertel.bilmuseum
+  name: Bilmuseum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Wiebestraße 36-37, 10553 Berlin, Germany
+  address: Wiebestraße 36-37, 10553 Berlin, Germany
+  rating: 4.9
+  reviews: 391
+  latitude: 52.5306425
+  longitude: 13.318625899999999
+  place_id: ChIJ2_tp_T9RqEcREuRRohl6Z1Y
+  source_note: Google Places seed build (2026-04-22)
+- id: place.moabit_hansaviertel.hamburger_bahnhof_contemporary_art_national_gallery
+  name: Hamburger Bahnhof - Contemporary Art National Gallery
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Invalidenstraße 50, 10557 Berlin, Germany
+  address: Invalidenstraße 50, 10557 Berlin, Germany
+  rating: 4.2
+  reviews: 7275
+  latitude: 52.5283411
+  longitude: 13.372136999999999
+  place_id: ChIJx7_rLZRRqEcRygvqvAT9lWg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.moabit_hansaviertel.futurium
+  name: Futurium
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alexanderufer 2, 10117 Berlin, Germany
+  address: Alexanderufer 2, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 12740
+  latitude: 52.524087599999994
+  longitude: 13.374350699999999
+  place_id: ChIJExpfyL9RqEcROQaM3Ff0a7A
+  source_note: Google Places seed build (2026-04-22)

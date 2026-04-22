@@ -1,0 +1,106 @@
+district: Weißensee
+category: restaurants
+items:
+- id: restaurant.wei_ensee.granat_restaurant_am_wei_ensee
+  name: Granat Restaurant am Weißensee
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - eastern_european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Parkstraße 31, 13086 Berlin, Germany
+  address: Parkstraße 31, 13086 Berlin, Germany
+  rating: 4.8
+  reviews: 248
+  latitude: 52.554914700000005
+  longitude: 13.4583952
+  place_id: ChIJl-fXbABNqEcRiAMfn_2hSvk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wei_ensee.la_casa_buena_vista_berlin_bar_restaurant
+  name: La Casa Buena Vista Berlin , Bar & Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cuban_restaurant
+  - caribbean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Bizetstraße 136, 13088 Berlin, Germany
+  address: Bizetstraße 136, 13088 Berlin, Germany
+  rating: 4.7
+  reviews: 719
+  latitude: 52.550018599999994
+  longitude: 13.465035499999999
+  place_id: ChIJGSXfpcVNqEcR1HQnh-W66J8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wei_ensee.chimi_berlin
+  name: ChiMi Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - steak_house
+  - fusion_restaurant
+  - asian_restaurant
+  - vietnamese_restaurant
+  - sushi_restaurant
+  indoor_outdoor: mixed
+  summary: Behaimstraße 64, 13086 Berlin, Germany
+  address: Behaimstraße 64, 13086 Berlin, Germany
+  rating: 4.8
+  reviews: 497
+  latitude: 52.5523084
+  longitude: 13.448708000000002
+  place_id: ChIJr1nY2GBNqEcRvSk3TfsAmbQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wei_ensee.moon_cuisine_wei_ensee
+  name: Moon Cuisine Weißensee
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Langhansstraße 153, 13086 Berlin, Germany
+  address: Langhansstraße 153, 13086 Berlin, Germany
+  rating: 4.6
+  reviews: 690
+  latitude: 52.5485486
+  longitude: 13.450304599999999
+  place_id: ChIJX9Hk4udNqEcRJ2VE-I3nEI8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wei_ensee.ormos_by_milchh_uschen
+  name: Ormos by Milchhäuschen
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - cafe
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Parkstraße 33 a, 13086 Berlin, Germany
+  address: Parkstraße 33 a, 13086 Berlin, Germany
+  rating: 4.7
+  reviews: 1377
+  latitude: 52.554562399999995
+  longitude: 13.4610294
+  place_id: ChIJz4owqMFNqEcRh4OsHhFpGDE
+  source_note: Google Places seed build (2026-04-22)

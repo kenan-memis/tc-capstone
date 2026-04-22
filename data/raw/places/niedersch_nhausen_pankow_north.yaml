@@ -1,0 +1,58 @@
+district: Niederschönhausen & Pankow north
+category: places
+items:
+- id: place.niedersch_nhausen_pankow_north.torh_user_der_schlossanlage_sch_nhausen_ausstellung
+  name: Torhäuser der Schlossanlage Schönhausen - Ausstellung
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Ossietzkystraße 44, 13187 Berlin, Germany
+  address: Ossietzkystraße 44, 13187 Berlin, Germany
+  rating: 4.4
+  reviews: 8
+  latitude: 52.576357099999996
+  longitude: 13.4064102
+  place_id: ChIJVwAEXa9TqEcRqYGhvVMeUSQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.niedersch_nhausen_pankow_north.pankow_museum_heynstra_e_location
+  name: Pankow Museum - Heynstraße location
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Heynstraße 8, 13187 Berlin, Germany
+  address: Heynstraße 8, 13187 Berlin, Germany
+  rating: 4.7
+  reviews: 155
+  latitude: 52.5643052
+  longitude: 13.402545199999999
+  place_id: ChIJG9m5xRRSqEcRyguskzHE16w
+  source_note: Google Places seed build (2026-04-22)
+- id: place.niedersch_nhausen_pankow_north.sch_nhausen_palace
+  name: Schönhausen Palace
+  type: castle
+  tags:
+  - castle
+  - historical_landmark
+  - historical_place
+  - museum
+  - event_venue
+  - point_of_interest
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Tschaikowskistraße 1, 13156 Berlin, Germany
+  address: Tschaikowskistraße 1, 13156 Berlin, Germany
+  rating: 4.5
+  reviews: 1196
+  latitude: 52.578345
+  longitude: 13.405702
+  place_id: ChIJm6npdWdSqEcRPDMYhH2JjeI
+  source_note: Google Places seed build (2026-04-22)

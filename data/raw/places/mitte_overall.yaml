@@ -1,0 +1,59 @@
+district: Mitte (overall)
+category: places
+items:
+- id: place.mitte_overall.deutschlandmuseum
+  name: Deutschlandmuseum
+  type: museum
+  tags:
+  - museum
+  - adventure_sports_center
+  - tourist_attraction
+  - history_museum
+  - amusement_park
+  - sports_complex
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Leipziger Pl. 7, 10117 Berlin, Germany
+  address: Leipziger Pl. 7, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 4140
+  latitude: 52.5087602
+  longitude: 13.3783615
+  place_id: ChIJ6w8lPm5RqEcRqAOszOrK_dA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.mitte_overall.futurium
+  name: Futurium
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alexanderufer 2, 10117 Berlin, Germany
+  address: Alexanderufer 2, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 12740
+  latitude: 52.524087599999994
+  longitude: 13.374350699999999
+  place_id: ChIJExpfyL9RqEcROQaM3Ff0a7A
+  source_note: Google Places seed build (2026-04-22)
+- id: place.mitte_overall.samurai_museum_berlin
+  name: Samurai Museum Berlin
+  type: museum
+  tags:
+  - museum
+  - history_museum
+  - art_museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Auguststraße 68, 10117 Berlin, Germany
+  address: Auguststraße 68, 10117 Berlin, Germany
+  rating: 4.8
+  reviews: 3130
+  latitude: 52.5268094
+  longitude: 13.3952948
+  place_id: ChIJJ7T1BFVQqEcR1Xze1phIANg
+  source_note: Google Places seed build (2026-04-22)

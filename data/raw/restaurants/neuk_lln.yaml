@@ -1,0 +1,806 @@
+district: Neukölln
+category: restaurants
+items:
+- id: restaurant.neuk_lln.mabel_restaurant_bar
+  name: MABEL Restaurant-Bar
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Marx-Straße 283, 12057 Berlin, Germany
+  address: Karl-Marx-Straße 283, 12057 Berlin, Germany
+  rating: 4.8
+  reviews: 91
+  latitude: 52.4640169
+  longitude: 13.4443527
+  place_id: ChIJLTusBXxPqEcRM-_EaUHFm60
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.sorrel
+  name: Sorrel
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - brunch_restaurant
+  - wine_bar
+  - coffee_shop
+  - cafe
+  - bar
+  indoor_outdoor: mixed
+  summary: Pannierstraße 40, 12047 Berlin, Germany
+  address: Pannierstraße 40, 12047 Berlin, Germany
+  rating: 4.6
+  reviews: 1016
+  latitude: 52.490120999999995
+  longitude: 13.4337898
+  place_id: ChIJCZkLVBNPqEcRboy-xt4ynyM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.la_terrazza
+  name: La Terrazza
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Steinbockstraße 20, 12057 Berlin, Germany
+  address: Steinbockstraße 20, 12057 Berlin, Germany
+  rating: 4.7
+  reviews: 1923
+  latitude: 52.4705556
+  longitude: 13.4683333
+  place_id: ChIJxd5HsxRPqEcRV9IUVxDrM-s
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.kai_maison
+  name: Kai Maison
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Maybachufer 23, 12047 Berlin, Germany
+  address: Maybachufer 23, 12047 Berlin, Germany
+  rating: 4.7
+  reviews: 1057
+  latitude: 52.4932039
+  longitude: 13.4285448
+  place_id: ChIJyS7uxctPqEcRFB5ezLucyFU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.kotti_dang
+  name: Kotti Dang
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - vietnamese_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kottbusserdamm 73 Ecke, Lenaustraße 27, 12047 Berlin, Germany
+  address: Kottbusserdamm 73 Ecke, Lenaustraße 27, 12047 Berlin, Germany
+  rating: 4.8
+  reviews: 1494
+  latitude: 52.4901753
+  longitude: 13.424805699999999
+  place_id: ChIJK_lRF45PqEcRy3aWPsX_9xI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.azzam_restaurant
+  name: Azzam Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - middle_eastern_restaurant
+  - falafel_restaurant
+  - lebanese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Sonnenallee 54, 12045 Berlin, Germany
+  address: Sonnenallee 54, 12045 Berlin, Germany
+  rating: 4.8
+  reviews: 6450
+  latitude: 52.4849569
+  longitude: 13.4328568
+  place_id: ChIJoZb9AL1PqEcR42lBeVYEdSs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.amrsari_restaurant_berlin
+  name: Amrsari Restaurant Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - cocktail_bar
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Neuköllner Str. 243, 12357 Berlin, Germany
+  address: Neuköllner Str. 243, 12357 Berlin, Germany
+  rating: 4.8
+  reviews: 835
+  latitude: 52.426963199999996
+  longitude: 13.4821677
+  place_id: ChIJESZuqR9FqEcRdBO9KTd9hes
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.oliveto_ristorante_pizzeria
+  name: Oliveto · Ristorante & Pizzeria
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Pannierstraße 9a, 12047 Berlin, Germany
+  address: Pannierstraße 9a, 12047 Berlin, Germany
+  rating: 5
+  reviews: 3373
+  latitude: 52.4872282
+  longitude: 13.4316353
+  place_id: ChIJnwPwAYBPqEcRTiuqJt7jwI0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.la_maison_bleue
+  name: La maison bleue
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Pannierstraße 26, 12047 Berlin, Germany
+  address: Pannierstraße 26, 12047 Berlin, Germany
+  rating: 4.8
+  reviews: 1101
+  latitude: 52.4901202
+  longitude: 13.4343971
+  place_id: ChIJs9rm1EdPqEcRDY3XhW5wQ3A
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.burro_unchained
+  name: BURRO UNCHAINED
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - brunch_restaurant
+  - fine_dining_restaurant
+  - bar
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Allerstraße 11, 12049 Berlin, Germany
+  address: Allerstraße 11, 12049 Berlin, Germany
+  rating: 4.8
+  reviews: 408
+  latitude: 52.474988499999995
+  longitude: 13.4239201
+  place_id: ChIJH9VH-KhPqEcRPjfEoJRRXss
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.hallmann_und_klee
+  name: Hallmann und Klee
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Böhmische Str. 13, 12055 Berlin, Germany
+  address: Böhmische Str. 13, 12055 Berlin, Germany
+  rating: 4.6
+  reviews: 818
+  latitude: 52.4738085
+  longitude: 13.449695
+  place_id: ChIJa6BtJAtPqEcRfVVCtKgmXAA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.karabach
+  name: Karabach
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hermannstraße 198, 12049 Berlin, Germany
+  address: Hermannstraße 198, 12049 Berlin, Germany
+  rating: 4.8
+  reviews: 751
+  latitude: 52.474963200000005
+  longitude: 13.4275998
+  place_id: ChIJKRLV2ZdPqEcR5skGAOO-oPU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.caf_botanico
+  name: Café Botanico
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - botanical_garden
+  - garden
+  - farm
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Richardstraße 100, 12043 Berlin, Germany
+  address: Richardstraße 100, 12043 Berlin, Germany
+  rating: 4.5
+  reviews: 677
+  latitude: 52.477215
+  longitude: 13.441144999999999
+  place_id: ChIJA368baFPqEcRj9E442NIT08
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.vorwerck_restaurant_dine_show
+  name: Vorwerck Restaurant - Dine & Show
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - fine_dining_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Marx-Straße 131, 12043 Berlin, Germany
+  address: Karl-Marx-Straße 131, 12043 Berlin, Germany
+  rating: 4.9
+  reviews: 841
+  latitude: 52.477581900000004
+  longitude: 13.4391316
+  place_id: ChIJoVJVtDhPqEcRqdDVp5yCxfA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.myxa_berlin
+  name: Myxa Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - bistro
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Lenaustraße 22, 12047 Berlin, Germany
+  address: Lenaustraße 22, 12047 Berlin, Germany
+  rating: 4.6
+  reviews: 953
+  latitude: 52.4902776
+  longitude: 13.4267148
+  place_id: ChIJn6jqirZPqEcRSTM-cJbVGAY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.mann_o_salwa
+  name: Mann - o - Salwa
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - halal_restaurant
+  - vegan_restaurant
+  - pakistani_restaurant
+  - chicken_restaurant
+  - vegetarian_restaurant
+  - korean_restaurant
+  indoor_outdoor: mixed
+  summary: Karl-Marx-Straße 223, 12055 Berlin, Germany
+  address: Karl-Marx-Straße 223, 12055 Berlin, Germany
+  rating: 4.9
+  reviews: 579
+  latitude: 52.4701077
+  longitude: 13.4418823
+  place_id: ChIJ1XT3VHBPqEcRz_ZUYOQxYas
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.simran_restaurant_neuk_lln
+  name: Simran Restaurant Neukölln
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Innstraße 47, 12045 Berlin, Germany
+  address: Innstraße 47, 12045 Berlin, Germany
+  rating: 4.7
+  reviews: 613
+  latitude: 52.483218799999996
+  longitude: 13.4467888
+  place_id: ChIJs2Iw9ZhPqEcRoxrYZ8FKaU4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.kn_delwirtschaft
+  name: Knödelwirtschaft
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Fuldastraße 33, 12045 Berlin, Germany
+  address: Fuldastraße 33, 12045 Berlin, Germany
+  rating: 4.6
+  reviews: 1260
+  latitude: 52.4866815
+  longitude: 13.4393703
+  place_id: ChIJz1wKsK9PqEcRwm7UaCJ95pM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.kramer_restaurant
+  name: Kramer Restaurant
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Pannierstraße 41, 12047 Berlin, Germany
+  address: Pannierstraße 41, 12047 Berlin, Germany
+  rating: 4.7
+  reviews: 547
+  latitude: 52.489793299999995
+  longitude: 13.4336165
+  place_id: ChIJn_BifkJPqEcRt-DVnK6wu-Y
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.caf_pilz
+  name: Café Pilz
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Weisestraße 58, 12049 Berlin, Germany
+  address: Weisestraße 58, 12049 Berlin, Germany
+  rating: 4.8
+  reviews: 1091
+  latitude: 52.478628
+  longitude: 13.4237258
+  place_id: ChIJYwhx7T1PqEcR0wfX-4tDsQg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.two_planets
+  name: Two Planets
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - juice_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  indoor_outdoor: mixed
+  summary: Hermannstraße 230, 12049 Berlin, Germany
+  address: Hermannstraße 230, 12049 Berlin, Germany
+  rating: 4.6
+  reviews: 722
+  latitude: 52.481432299999994
+  longitude: 13.4256227
+  place_id: ChIJO4SaUblPqEcRwV7C90i47qM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.caf_augusta
+  name: Café Augusta
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - store
+  indoor_outdoor: mixed
+  summary: Jonasstraße 22, 12053 Berlin, Germany
+  address: Jonasstraße 22, 12053 Berlin, Germany
+  rating: 4.8
+  reviews: 595
+  latitude: 52.471511899999996
+  longitude: 13.433660699999999
+  place_id: ChIJy1XbiVlPqEcRfKHnIBK-M0I
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.espera_caf_bar
+  name: ESPERA Cafébar
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Pannierstraße 6, 12045 Berlin, Germany
+  address: Pannierstraße 6, 12045 Berlin, Germany
+  rating: 4.7
+  reviews: 464
+  latitude: 52.4866348
+  longitude: 13.4310786
+  place_id: ChIJBbIknLBPqEcR6n9VyOjje0k
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.warawul_coffee
+  name: Warawul Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Karl-Marx-Straße 162, 12043 Berlin, Germany
+  address: Karl-Marx-Straße 162, 12043 Berlin, Germany
+  rating: 4.8
+  reviews: 119
+  latitude: 52.4753957
+  longitude: 13.439474599999999
+  place_id: ChIJV7ckN9FPqEcRxu74yvA-Qn4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.kaffeebar_jacobi
+  name: Kaffeebar Jacobi
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Marx-Straße 4, 12043 Berlin, Germany
+  address: Karl-Marx-Straße 4, 12043 Berlin, Germany
+  rating: 4.8
+  reviews: 337
+  latitude: 52.485604099999996
+  longitude: 13.425269700000001
+  place_id: ChIJxRQMxblPqEcRsjs_siXc2O4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.leuchtstoff_kaffeebar_und_bakery
+  name: Leuchtstoff - Kaffeebar und Bakery
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - tea_house
+  - coffee_shop
+  - food_store
+  - store
+  indoor_outdoor: mixed
+  summary: Siegfriedstraße 18, 12051 Berlin, Germany
+  address: Siegfriedstraße 18, 12051 Berlin, Germany
+  rating: 4.5
+  reviews: 759
+  latitude: 52.468209599999994
+  longitude: 13.432750599999999
+  place_id: ChIJXaMnx5tPqEcRGOVrSo2iSQ0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.caf_brick_time
+  name: Café Brick Time
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - brunch_restaurant
+  - bistro
+  - cafe
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Lenaustraße 1, 12047 Berlin, Germany
+  address: Lenaustraße 1, 12047 Berlin, Germany
+  rating: 4.7
+  reviews: 1169
+  latitude: 52.48988610000001
+  longitude: 13.424695499999999
+  place_id: ChIJU_obRrZPqEcRwiFttUrvpmU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.harvest
+  name: Harvest
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Böhmische Str. 46, 12055 Berlin, Germany
+  address: Böhmische Str. 46, 12055 Berlin, Germany
+  rating: 4.6
+  reviews: 614
+  latitude: 52.4737364
+  longitude: 13.4490368
+  place_id: ChIJkYikhNRPqEcRA-CPDYDwC0U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.isla
+  name: Isla
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - breakfast_restaurant
+  - cafe
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Hermannstraße 37, 12049 Berlin, Germany
+  address: Hermannstraße 37, 12049 Berlin, Germany
+  rating: 4.5
+  reviews: 943
+  latitude: 52.480337899999995
+  longitude: 13.4249654
+  place_id: ChIJ_XCNpb5PqEcRYfAKK-5ZtHA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.that_pink_caf_ehemals_geschwister_nothaft
+  name: That Pink Café (ehemals Geschwister Nothaft)
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - internet_cafe
+  - coffee_stand
+  - breakfast_restaurant
+  - sandwich_shop
+  - coffee_shop
+  indoor_outdoor: mixed
+  summary: Schwarzastraße 9, 12055 Berlin, Germany
+  address: Schwarzastraße 9, 12055 Berlin, Germany
+  rating: 4.7
+  reviews: 599
+  latitude: 52.472729
+  longitude: 13.454635
+  place_id: ChIJX2MutgxPqEcR2nvgHiQ0ojE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.satt_gl_cklich_cafe_und_bistro
+  name: satt & glücklich - Cafe und Bistro
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Richardpl. 21, 12055 Berlin, Germany
+  address: Richardpl. 21, 12055 Berlin, Germany
+  rating: 4.8
+  reviews: 144
+  latitude: 52.474035699999995
+  longitude: 13.447414199999999
+  place_id: ChIJuzdcAzhPqEcRXVt_ZO4R078
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.holy_coffee
+  name: Holy Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Sonnenallee 132, 12059 Berlin, Germany
+  address: Sonnenallee 132, 12059 Berlin, Germany
+  rating: 4.2
+  reviews: 500
+  latitude: 52.4797982
+  longitude: 13.4434796
+  place_id: ChIJDVn9xKZPqEcRr2pdonZiAew
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.21_gramm
+  name: 21 gramm
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hermannstraße 179, 12049 Berlin, Germany
+  address: Hermannstraße 179, 12049 Berlin, Germany
+  rating: 4.5
+  reviews: 1257
+  latitude: 52.4721919
+  longitude: 13.4292133
+  place_id: ChIJy6JdnBJPqEcRh3f7bcB2cdY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.the_barn_caf_neuk_lln
+  name: The Barn Café Neukölln
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - coffee_shop
+  - food_store
+  - store
+  - food
+  indoor_outdoor: mixed
+  summary: Friedelstraße 27, 12047 Berlin, Germany
+  address: Friedelstraße 27, 12047 Berlin, Germany
+  rating: 4.3
+  reviews: 509
+  latitude: 52.4924161
+  longitude: 13.4281993
+  place_id: ChIJuXYkUWlPqEcRcDMdWvWizCw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.katie_s_blue_cat
+  name: Katie's Blue Cat
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - bakery
+  - food_store
+  - store
+  - food
+  indoor_outdoor: mixed
+  summary: Friedelstraße 31, 12047 Berlin, Germany
+  address: Friedelstraße 31, 12047 Berlin, Germany
+  rating: 4.4
+  reviews: 745
+  latitude: 52.4929667
+  longitude: 13.4282694
+  place_id: ChIJUWl_SbRPqEcRxlHNQ38kfpk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.du_ich
+  name: Du & Ich
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Altenbraker Str. 22, 12053 Berlin, Germany
+  address: Altenbraker Str. 22, 12053 Berlin, Germany
+  rating: 4.8
+  reviews: 100
+  latitude: 52.4697892
+  longitude: 13.4323795
+  place_id: ChIJSfbgDaNPqEcRVq_OwONGEoA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.refugio_caf
+  name: Refugio Café
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Lenaustraße 4, 12047 Berlin, Germany
+  address: Lenaustraße 4, 12047 Berlin, Germany
+  rating: 4.7
+  reviews: 266
+  latitude: 52.489912499999996
+  longitude: 13.4250977
+  place_id: ChIJfbSiRLZPqEcRj-_ODETVPHA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.zosse_bar_biergarten
+  name: Zosse • Bar / Biergarten
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Richardstraße 37, 12043 Berlin, Germany
+  address: Richardstraße 37, 12043 Berlin, Germany
+  rating: 4.7
+  reviews: 567
+  latitude: 52.475004899999995
+  longitude: 13.443744299999999
+  place_id: ChIJIzn7BchPqEcRF5uxEeEl-JE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.honey_lou_bar
+  name: Honey Lou Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Anzengruberstraße 3, 12043 Berlin, Germany
+  address: Anzengruberstraße 3, 12043 Berlin, Germany
+  rating: 4.9
+  reviews: 388
+  latitude: 52.480142
+  longitude: 13.4380694
+  place_id: ChIJ84OcmV1PqEcRP-99fakpAMk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.neuk_lln.velvet
+  name: Velvet
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Ganghoferstraße 1, 12043 Berlin, Germany
+  address: Ganghoferstraße 1, 12043 Berlin, Germany
+  rating: 4.7
+  reviews: 614
+  latitude: 52.4789825
+  longitude: 13.4384567
+  place_id: ChIJiTWu86NPqEcRDpAVl4UgmGA
+  source_note: Google Places seed build (2026-04-22)

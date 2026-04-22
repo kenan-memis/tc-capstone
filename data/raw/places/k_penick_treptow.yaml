@@ -1,0 +1,57 @@
+district: Köpenick & Treptow
+category: places
+items:
+- id: place.k_penick_treptow.museen_treptow_k_penick
+  name: Museen Treptow-Köpenick
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alter Markt 1, 12555 Berlin, Germany
+  address: Alter Markt 1, 12555 Berlin, Germany
+  rating: 4.2
+  reviews: 98
+  latitude: 52.4452917
+  longitude: 13.5790001
+  place_id: ChIJfwpMQgJGqEcR0UfLHjdgvO8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.k_penick_treptow.kunstgewerbemuseum_im_schloss_k_penick
+  name: Kunstgewerbemuseum im Schloss Köpenick
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßinsel Köpenick, 12557 Berlin, Germany
+  address: Schloßinsel Köpenick, 12557 Berlin, Germany
+  rating: 4.8
+  reviews: 24
+  latitude: 52.443874099999995
+  longitude: 13.5727457
+  place_id: ChIJsy_G4nBIqEcRr2-u82md9qc
+  source_note: Google Places seed build (2026-04-22)
+- id: place.k_penick_treptow.k_penick_palace
+  name: Köpenick Palace
+  type: castle
+  tags:
+  - castle
+  - history_museum
+  - tourist_attraction
+  - museum
+  - historical_place
+  - point_of_interest
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schlossinsel 1, 12557 Berlin, Germany
+  address: Schlossinsel 1, 12557 Berlin, Germany
+  rating: 4.6
+  reviews: 2488
+  latitude: 52.4436225
+  longitude: 13.573333499999999
+  place_id: ChIJ11yF3yNOqEcRU4MuuNKEC9k
+  source_note: Google Places seed build (2026-04-22)

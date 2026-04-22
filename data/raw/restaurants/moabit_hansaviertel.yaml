@@ -1,0 +1,107 @@
+district: Moabit & Hansaviertel
+category: restaurants
+items:
+- id: restaurant.moabit_hansaviertel.restaurant_qu_choa
+  name: Restaurant Quê Choa
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Moabit 96D, 10559 Berlin, Germany
+  address: Alt-Moabit 96D, 10559 Berlin, Germany
+  rating: 4.9
+  reviews: 2579
+  latitude: 52.52486880000001
+  longitude: 13.3455479
+  place_id: ChIJF4DkyFxRqEcRL0mOx8NY8nA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.moabit_hansaviertel.chez_emil_franz_sisches_restaurant_und_catering
+  name: Chez Emil Französisches Restaurant und Catering
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - french_restaurant
+  - cafe
+  - catering_service
+  - food_delivery
+  - meal_takeaway
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Dortmunder Str. 12, 10555 Berlin, Germany
+  address: Dortmunder Str. 12, 10555 Berlin, Germany
+  rating: 4.9
+  reviews: 652
+  latitude: 52.5212803
+  longitude: 13.337416399999999
+  place_id: ChIJeeZ7fjJRqEcRUYpnM8O5aec
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.moabit_hansaviertel.comhome_restaurant
+  name: Comhome Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Moabit 108A, 10559 Berlin, Germany
+  address: Alt-Moabit 108A, 10559 Berlin, Germany
+  rating: 4.9
+  reviews: 1945
+  latitude: 52.5242155
+  longitude: 13.350088
+  place_id: ChIJ9xB-tn5RqEcRrZkwC22K3To
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.moabit_hansaviertel.gujrat_spice_restaurant
+  name: Gujrat Spice Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pakistani_restaurant
+  - indian_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Rathenower Str. 6, 10559 Berlin, Germany
+  address: Rathenower Str. 6, 10559 Berlin, Germany
+  rating: 4.9
+  reviews: 1502
+  latitude: 52.525000000000006
+  longitude: 13.357159999999999
+  place_id: ChIJoVZHeaJRqEcR-pY1_zVOhKE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.moabit_hansaviertel.mokka
+  name: Mokka
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - mediterranean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Dortmunder Str. 9, 10555 Berlin, Germany
+  address: Dortmunder Str. 9, 10555 Berlin, Germany
+  rating: 4.9
+  reviews: 1311
+  latitude: 52.521620000000006
+  longitude: 13.33625
+  place_id: ChIJX0LOYltRqEcRqGZk7gQdpFE
+  source_note: Google Places seed build (2026-04-22)

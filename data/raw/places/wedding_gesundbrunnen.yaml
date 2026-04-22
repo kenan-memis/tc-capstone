@@ -1,0 +1,58 @@
+district: Wedding & Gesundbrunnen
+category: places
+items:
+- id: place.wedding_gesundbrunnen.mitte_museum
+  name: Mitte Museum
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Pankstraße 47, 13357 Berlin, Germany
+  address: Pankstraße 47, 13357 Berlin, Germany
+  rating: 4.6
+  reviews: 145
+  latitude: 52.5510975
+  longitude: 13.3798968
+  place_id: ChIJhcYlgyZSqEcRYya2D7MHIJI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding_gesundbrunnen.labyrinth_kindermuseum_berlin
+  name: Labyrinth Kindermuseum Berlin
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Osloer Str. 12, 13359 Berlin, Germany
+  address: Osloer Str. 12, 13359 Berlin, Germany
+  rating: 4.1
+  reviews: 1692
+  latitude: 52.5560743
+  longitude: 13.3860014
+  place_id: ChIJ2zjLrTxSqEcRto7al4INieQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.wedding_gesundbrunnen.the_sounding_museum_berlin
+  name: The Sounding Museum Berlin
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - educational_institution
+  - service
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Behmstraße 13, 13357 Berlin, Germany
+  address: Behmstraße 13, 13357 Berlin, Germany
+  rating: 4.6
+  reviews: 87
+  latitude: 52.5503778
+  longitude: 13.388450899999999
+  place_id: ChIJdQ9pPiJSqEcR7Cf3nrDis4s
+  source_note: Google Places seed build (2026-04-22)

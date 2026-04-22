@@ -1,30 +1,797 @@
 district: Friedrichshain
 category: restaurants
 items:
-  - id: restaurant.friedrichshain.silo_coffee
-    name: Silo Coffee
-    type: Café / brunch
-    cuisine: Australian / brunch
-    price_level: $$
-    tags: [brunch, trendy, coffee, popular]
-    indoor_outdoor: indoor
-    summary: Popular brunch and specialty coffee option, often busy on weekends.
-    source_note: Seed curated dataset v1
-  - id: restaurant.friedrichshain.transit_restaurant
-    name: Transit Restaurant
-    type: Sit-down
-    cuisine: Asian fusion
-    price_level: $$
-    tags: [sharing, trendy, dinner, food]
-    indoor_outdoor: indoor
-    summary: Lively dinner venue with shareable plates and social atmosphere.
-    source_note: Seed curated dataset v1
-  - id: restaurant.friedrichshain.scheers_schnitzel
-    name: Scheers Schnitzel
-    type: Sit-down
-    cuisine: German / Austrian
-    price_level: $$
-    tags: [traditional, hearty, casual, food]
-    indoor_outdoor: indoor
-    summary: Hearty central-European dishes, often chosen for classic comfort food.
-    source_note: Seed curated dataset v1
+- id: restaurant.friedrichshain.silo_coffee
+  name: Silo Coffee
+  type: Café / brunch
+  cuisine: Australian / brunch
+  price_level: $$
+  tags:
+  - brunch
+  - trendy
+  - coffee
+  - popular
+  indoor_outdoor: indoor
+  summary: Popular brunch and specialty coffee option, often busy on weekends.
+  source_note: Seed curated dataset v1
+- id: restaurant.friedrichshain.transit_restaurant
+  name: Transit Restaurant
+  type: Sit-down
+  cuisine: Asian fusion
+  price_level: $$
+  tags:
+  - sharing
+  - trendy
+  - dinner
+  - food
+  indoor_outdoor: indoor
+  summary: Lively dinner venue with shareable plates and social atmosphere.
+  source_note: Seed curated dataset v1
+- id: restaurant.friedrichshain.scheers_schnitzel
+  name: Scheers Schnitzel
+  type: Sit-down
+  cuisine: German / Austrian
+  price_level: $$
+  tags:
+  - traditional
+  - hearty
+  - casual
+  - food
+  indoor_outdoor: indoor
+  summary: Hearty central-European dishes, often chosen for classic comfort food.
+  source_note: Seed curated dataset v1
+- id: restaurant.friedrichshain.restaurant_trattoria_portofino
+  name: Restaurant Trattoria Portofino
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - pizza_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Gubener Str. 48, 10243 Berlin, Germany
+  address: Gubener Str. 48, 10243 Berlin, Germany
+  rating: 4.7
+  reviews: 3329
+  latitude: 52.5123562
+  longitude: 13.448413599999999
+  place_id: ChIJl8laNkNOqEcR_cP9hIHMPlE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.a_mano
+  name: A Mano
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - seafood_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Strausberger Pl. 2, 10243 Berlin, Germany
+  address: Strausberger Pl. 2, 10243 Berlin, Germany
+  rating: 4.8
+  reviews: 4062
+  latitude: 52.5193916
+  longitude: 13.427386499999999
+  place_id: ChIJy3mwIxZOqEcRbFYNqFP7VaM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.milja_sch_fa
+  name: Milja & Schäfa
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - brunch_restaurant
+  - fusion_restaurant
+  - german_restaurant
+  - european_restaurant
+  - coffee_shop
+  indoor_outdoor: mixed
+  summary: Sonntagstraße 1, 10245 Berlin, Germany
+  address: Sonntagstraße 1, 10245 Berlin, Germany
+  rating: 4.7
+  reviews: 1790
+  latitude: 52.5045699
+  longitude: 13.468107400000001
+  place_id: ChIJ-bgINvdOqEcR_YzyFckV97I
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.j_ger_lustig
+  name: Jäger & Lustig
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Grünberger Str. 1, 10243 Berlin, Germany
+  address: Grünberger Str. 1, 10243 Berlin, Germany
+  rating: 4.6
+  reviews: 3039
+  latitude: 52.5134052
+  longitude: 13.4480361
+  place_id: ChIJjc-rNeZPqEcRlZTaa4h6iKA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.steakhouse_restaurant_las_malvinas
+  name: Steakhouse & Restaurant Las Malvinas
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - steak_house
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Barnimstraße 18, 10249 Berlin, Germany
+  address: Barnimstraße 18, 10249 Berlin, Germany
+  rating: 4.7
+  reviews: 5274
+  latitude: 52.5261636
+  longitude: 13.4229177
+  place_id: ChIJJeoYQBpOqEcRG2UWet0d1vE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.akkawy
+  name: Akkawy
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vegetarian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kopernikusstraße 8, 10245 Berlin, Germany
+  address: Kopernikusstraße 8, 10245 Berlin, Germany
+  rating: 4.9
+  reviews: 1099
+  latitude: 52.510421199999996
+  longitude: 13.4528048
+  place_id: ChIJXcGacwhPqEcRf2EVX3Z39l4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.vegano_mezo
+  name: Vegano Mezo
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rigaer Str. 2, 10247 Berlin, Germany
+  address: Rigaer Str. 2, 10247 Berlin, Germany
+  rating: 4.9
+  reviews: 1441
+  latitude: 52.518224
+  longitude: 13.4544801
+  place_id: ChIJc7ZKekBPqEcRgWZaK3UbLWA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.tat_restaurant
+  name: TAT Restaurant
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - cocktail_bar
+  - vietnamese_restaurant
+  - hawaiian_restaurant
+  - tea_house
+  - sushi_restaurant
+  indoor_outdoor: mixed
+  summary: Niederbarnimstraße 17, 10247 Berlin, Germany
+  address: Niederbarnimstraße 17, 10247 Berlin, Germany
+  rating: 4.9
+  reviews: 892
+  latitude: 52.513349299999994
+  longitude: 13.458706999999999
+  place_id: ChIJXaSlnEtPqEcR5fc0hKdFAFo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.home_of_burger
+  name: Home of Burger
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - hamburger_restaurant
+  - fusion_restaurant
+  - vegetarian_restaurant
+  - american_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: EG Rechts, Gabriel-Max-Straße 17, 10245 Berlin, Germany
+  address: EG Rechts, Gabriel-Max-Straße 17, 10245 Berlin, Germany
+  rating: 4.8
+  reviews: 511
+  latitude: 52.5109115
+  longitude: 13.458392499999999
+  place_id: ChIJiexz27NPqEcRe91_1TORIM8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.zaitoun_restaurant
+  name: Zaitoun restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - middle_eastern_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Boxhagener Str. 121, 10245 Berlin, Germany
+  address: Boxhagener Str. 121, 10245 Berlin, Germany
+  rating: 4.9
+  reviews: 881
+  latitude: 52.5140434
+  longitude: 13.4544301
+  place_id: ChIJc1s4yPlPqEcRQSW3eLtIYH8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.golden_fleece_restaurant_friedrichshain
+  name: Golden Fleece Restaurant Friedrichshain
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - eastern_european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Mainzer Str. 20, 10247 Berlin, Germany
+  address: Mainzer Str. 20, 10247 Berlin, Germany
+  rating: 4.7
+  reviews: 778
+  latitude: 52.513298899999995
+  longitude: 13.462525699999999
+  place_id: ChIJ3XkNQypPqEcRE7O8hhVe8Vc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.fire_tiger
+  name: Fire Tiger
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - asian_restaurant
+  - sushi_restaurant
+  - japanese_restaurant
+  - meal_takeaway
+  indoor_outdoor: mixed
+  summary: Revaler Str. 7, 10245 Berlin, Germany
+  address: Revaler Str. 7, 10245 Berlin, Germany
+  rating: 4.6
+  reviews: 2506
+  latitude: 52.5085671
+  longitude: 13.451991699999999
+  place_id: ChIJrxrOultOqEcRKoSUsxzVYLg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.trattoria_la_bruschetta
+  name: Trattoria La Bruschetta
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Andreasstraße 66, 10243 Berlin, Germany
+  address: Andreasstraße 66, 10243 Berlin, Germany
+  rating: 4.7
+  reviews: 1875
+  latitude: 52.5133985
+  longitude: 13.4310849
+  place_id: ChIJSTDULz9OqEcR1zoGQzd7sCI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.suigyo_izakaya_japanisches_restaurant_friedrichshain
+  name: Suigyo Izakaya - Japanisches Restaurant Friedrichshain
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - japanese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Neue Bahnhofstraße 26, 10245 Berlin, Germany
+  address: Neue Bahnhofstraße 26, 10245 Berlin, Germany
+  rating: 4.7
+  reviews: 942
+  latitude: 52.506644599999994
+  longitude: 13.4704667
+  place_id: ChIJ31Tc_f9PqEcRBCB0eSGf-Bc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.new_day_vietnam_heritage_food
+  name: New Day Vietnam Heritage Food
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Newday Restaurant, Niederbarnimstraße 25, 10247 Berlin, Germany
+  address: Newday Restaurant, Niederbarnimstraße 25, 10247 Berlin, Germany
+  rating: 4.6
+  reviews: 1629
+  latitude: 52.514606
+  longitude: 13.4598804
+  place_id: ChIJhwuBIl5OqEcR1iKtrg8Hk8g
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.fatoush
+  name: Fatoush
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Simon-Dach-Straße 41a, 10245 Berlin, Germany
+  address: Simon-Dach-Straße 41a, 10245 Berlin, Germany
+  rating: 4.5
+  reviews: 1803
+  latitude: 52.511472299999994
+  longitude: 13.457225699999999
+  place_id: ChIJO63Ym15OqEcRVwNrPImV2VM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.vietland
+  name: Vietland
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - thai_restaurant
+  - tapas_restaurant
+  - asian_restaurant
+  - vietnamese_restaurant
+  indoor_outdoor: mixed
+  summary: Holteistraße 13, 10245 Berlin, Germany
+  address: Holteistraße 13, 10245 Berlin, Germany
+  rating: 4.8
+  reviews: 845
+  latitude: 52.5082221
+  longitude: 13.4662261
+  place_id: ChIJ_Whn6RtPqEcR9zP0vaV6CYQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.iro_izakaya_vegan
+  name: IRO Izakaya Vegan
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - japanese_restaurant
+  - ramen_restaurant
+  - sushi_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Simon-Dach-Straße 15, 10245 Berlin, Germany
+  address: Simon-Dach-Straße 15, 10245 Berlin, Germany
+  rating: 4.8
+  reviews: 1737
+  latitude: 52.509857499999995
+  longitude: 13.4558618
+  place_id: ChIJR6jSOjNPqEcRCuAI91iQN0M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.jeta_ime_restaurant_berlin_friedrichshain
+  name: Jeta ime Restaurant Berlin Friedrichshain
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - brunch_restaurant
+  - breakfast_restaurant
+  - wine_bar
+  - european_restaurant
+  - cafe
+  indoor_outdoor: mixed
+  summary: Richard-Sorge-Straße 25, 10249 Berlin, Germany
+  address: Richard-Sorge-Straße 25, 10249 Berlin, Germany
+  rating: 4.8
+  reviews: 393
+  latitude: 52.520630499999996
+  longitude: 13.447251
+  place_id: ChIJbYTZ5opPqEcRM6os-mgNEmA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.milano_vice_pizza_friedrichshain
+  name: Milano Vice Pizza Friedrichshain
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pizza_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Krossener Str. 12, 10245 Berlin, Germany
+  address: Krossener Str. 12, 10245 Berlin, Germany
+  rating: 4.8
+  reviews: 592
+  latitude: 52.5108122
+  longitude: 13.457742699999999
+  place_id: ChIJfSswNdZPqEcRap5tAC42FGo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.calm_coffee
+  name: Calm Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Wühlischstraße 38, 10245 Berlin, Germany
+  address: Wühlischstraße 38, 10245 Berlin, Germany
+  rating: 4.6
+  reviews: 643
+  latitude: 52.5090704
+  longitude: 13.4591171
+  place_id: ChIJab5vzbJPqEcRBviUo5JM3W0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.coffee_karros
+  name: Coffee Karros
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Proskauer Str. 8, 10247 Berlin, Germany
+  address: Proskauer Str. 8, 10247 Berlin, Germany
+  rating: 4.8
+  reviews: 457
+  latitude: 52.5166286
+  longitude: 13.461141099999999
+  place_id: ChIJVc3etA1PqEcRUhCNZRy2uIY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.stilbruch_kaffee
+  name: Stilbruch Kaffee
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: rechts, Revaler Str. 9, 10245 Berlin, Germany
+  address: rechts, Revaler Str. 9, 10245 Berlin, Germany
+  rating: 4.7
+  reviews: 1912
+  latitude: 52.508311799999994
+  longitude: 13.4534577
+  place_id: ChIJa37y1FFPqEcRxjFduZjl_Gs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.cafe_jiro
+  name: Cafe Jiro
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - coffee_shop
+  - breakfast_restaurant
+  - pastry_shop
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Libauer Str. 13, 10245 Berlin, Germany
+  address: Libauer Str. 13, 10245 Berlin, Germany
+  rating: 4.7
+  reviews: 840
+  latitude: 52.5086191
+  longitude: 13.453376700000002
+  place_id: ChIJFZE-BpJPqEcR-A26DNb4XmA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.silo_coffee
+  name: Silo Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - brunch_restaurant
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  indoor_outdoor: mixed
+  summary: Gabriel-Max-Straße 4, 10245 Berlin, Germany
+  address: Gabriel-Max-Straße 4, 10245 Berlin, Germany
+  rating: 4.5
+  reviews: 3207
+  latitude: 52.510075300000004
+  longitude: 13.458378
+  place_id: ChIJsWhkzl5OqEcRG60IDmyoIYU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.kala_cafe
+  name: KALA Cafe
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Warschauer Str. 71, 10243 Berlin, Germany
+  address: Warschauer Str. 71, 10243 Berlin, Germany
+  rating: 4.6
+  reviews: 818
+  latitude: 52.511872200000006
+  longitude: 13.452802400000001
+  place_id: ChIJt-WubjBPqEcRbuW53swkL8Y
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.caf_tasso_das_andere_antiquariat
+  name: Café Tasso - Das andere Antiquariat
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - book_store
+  - non_profit_organization
+  - food_store
+  - association_or_organization
+  indoor_outdoor: mixed
+  summary: Frankfurter Allee 11, 10247 Berlin, Germany
+  address: Frankfurter Allee 11, 10247 Berlin, Germany
+  rating: 4.6
+  reviews: 1028
+  latitude: 52.516072199999996
+  longitude: 13.4569722
+  place_id: ChIJ5wq6XGdOqEcRkgSEMZhHvFk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.neumanns_caf
+  name: Neumanns Café
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - breakfast_restaurant
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Gabriel-Max-Straße 18, 10245 Berlin, Germany
+  address: Gabriel-Max-Straße 18, 10245 Berlin, Germany
+  rating: 4.4
+  reviews: 1258
+  latitude: 52.510305599999995
+  longitude: 13.4580857
+  place_id: ChIJ2c3KyF5OqEcRIYVxKgKuu-M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.this_is_coco
+  name: This Is Coco
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - bistro
+  - coffee_shop
+  - cafe
+  - pastry_shop
+  - vegan_restaurant
+  indoor_outdoor: mixed
+  summary: Gabriel-Max-Straße 15A, 10245 Berlin, Germany
+  address: Gabriel-Max-Straße 15A, 10245 Berlin, Germany
+  rating: 4.8
+  reviews: 189
+  latitude: 52.5111166
+  longitude: 13.4585003
+  place_id: ChIJ18TbpnxPqEcRVNmtYINs6Sw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.om_coffee_brunch
+  name: OM Coffee & Brunch
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - brunch_restaurant
+  - coffee_shop
+  - cake_shop
+  - cafe
+  - bakery
+  indoor_outdoor: mixed
+  summary: Karl-Marx-Allee 136, 10243 Berlin, Germany
+  address: Karl-Marx-Allee 136, 10243 Berlin, Germany
+  rating: 4.5
+  reviews: 738
+  latitude: 52.5158055
+  longitude: 13.451487199999999
+  place_id: ChIJa3SoV11OqEcRzz-wd9IAPOc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.troy_bar_berlin
+  name: Troy Bar Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - snack_bar
+  - hamburger_restaurant
+  - meal_takeaway
+  - bar
+  - american_restaurant
+  indoor_outdoor: mixed
+  summary: Simon-Dach-Straße 14, 10245 Berlin, Germany
+  address: Simon-Dach-Straße 14, 10245 Berlin, Germany
+  rating: 4.8
+  reviews: 1137
+  latitude: 52.510149299999995
+  longitude: 13.455948099999999
+  place_id: ChIJBXH6vqxPqEcRzozAR7IHBKw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.milch_zucker
+  name: Milch&Zucker
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Warschauer Str. 70, 10243 Berlin, Germany
+  address: Warschauer Str. 70, 10243 Berlin, Germany
+  rating: 4.4
+  reviews: 986
+  latitude: 52.5116969
+  longitude: 13.452632999999999
+  place_id: ChIJwwQUYFxOqEcRKUCk5Hivnb8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.wahrhaft_nahrhaft
+  name: Wahrhaft Nahrhaft
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - bagel_shop
+  - juice_shop
+  - dog_cafe
+  - bakery
+  - food_store
+  indoor_outdoor: mixed
+  summary: Revaler Str. 16, 10245 Berlin, Germany
+  address: Revaler Str. 16, 10245 Berlin, Germany
+  rating: 4.5
+  reviews: 839
+  latitude: 52.507606700000004
+  longitude: 13.4562564
+  place_id: ChIJ24V_dFlOqEcR6h35JlT_hts
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.aprilkind_berlin
+  name: Aprilkind Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - breakfast_restaurant
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Simon-Dach-Straße 15, 10245 Berlin, Germany
+  address: Simon-Dach-Straße 15, 10245 Berlin, Germany
+  rating: 4.1
+  reviews: 859
+  latitude: 52.509653699999994
+  longitude: 13.455800799999999
+  place_id: ChIJRXYNVFlOqEcRCbo5LvS4s3w
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.cebe_coffee_roasters_coffeeshop_berlin
+  name: CEBE COFFEE ROASTERS coffeeshop berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - coffee_roastery
+  - food_store
+  - store
+  - food
+  indoor_outdoor: mixed
+  summary: Voigtstraße 35, 10247 Berlin, Germany
+  address: Voigtstraße 35, 10247 Berlin, Germany
+  rating: 4.6
+  reviews: 830
+  latitude: 52.5165012
+  longitude: 13.468283399999999
+  place_id: ChIJz64Ni4pOqEcRCzcmKFbYkeE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.tucker_brunch_bar
+  name: Tucker Brunch Bar
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Wühlischstraße 1, 10245 Berlin, Germany
+  address: Wühlischstraße 1, 10245 Berlin, Germany
+  rating: 4.6
+  reviews: 996
+  latitude: 52.5073642
+  longitude: 13.467456300000002
+  place_id: ChIJ1eH4aMFPqEcROjo-4iXWeqg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain.the_boat_kaffee
+  name: The Boat Kaffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Falckensteinstraße 33, 10997 Berlin, Germany
+  address: Falckensteinstraße 33, 10997 Berlin, Germany
+  rating: 4.8
+  reviews: 271
+  latitude: 52.4979406
+  longitude: 13.4419083
+  place_id: ChIJpbpJwlxOqEcRuFNZWh61hpM
+  source_note: Google Places seed build (2026-04-22)

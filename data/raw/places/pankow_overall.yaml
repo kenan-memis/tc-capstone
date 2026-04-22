@@ -1,0 +1,59 @@
+district: Pankow (overall)
+category: places
+items:
+- id: place.pankow_overall.pankow_museum_heynstra_e_location
+  name: Pankow Museum - Heynstraße location
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Heynstraße 8, 13187 Berlin, Germany
+  address: Heynstraße 8, 13187 Berlin, Germany
+  rating: 4.7
+  reviews: 155
+  latitude: 52.5643052
+  longitude: 13.402545199999999
+  place_id: ChIJG9m5xRRSqEcRyguskzHE16w
+  source_note: Google Places seed build (2026-04-22)
+- id: place.pankow_overall.museum_at_the_kulturbrauerei
+  name: Museum at the Kulturbrauerei
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - history_museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Knaackstraße 97, 10435 Berlin, Germany
+  address: Knaackstraße 97, 10435 Berlin, Germany
+  rating: 4.5
+  reviews: 1905
+  latitude: 52.540383
+  longitude: 13.414097
+  place_id: ChIJ74Sex_9RqEcRrg4jC_emII0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.pankow_overall.pankow_museum_prenzlauer_allee_location
+  name: Pankow Museum - Prenzlauer Allee location
+  type: museum
+  tags:
+  - tourist_attraction
+  - history_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Prenzlauer Allee 227-228, 10405 Berlin, Germany
+  address: Prenzlauer Allee 227-228, 10405 Berlin, Germany
+  rating: 4.4
+  reviews: 128
+  latitude: 52.533502999999996
+  longitude: 13.419197299999999
+  place_id: ChIJYYd0gQNOqEcR1oa2fFGHS4Q
+  source_note: Google Places seed build (2026-04-22)

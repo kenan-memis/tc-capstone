@@ -1,0 +1,105 @@
+district: Wedding & Gesundbrunnen
+category: restaurants
+items:
+- id: restaurant.wedding_gesundbrunnen.baba_ocakbasi_berlin
+  name: Baba Ocakbasi Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Prinzenallee 18, 13357 Berlin, Germany
+  address: Prinzenallee 18, 13357 Berlin, Germany
+  rating: 4.8
+  reviews: 120
+  latitude: 52.5547057
+  longitude: 13.3838101
+  place_id: ChIJs7xhC_xTqEcR94_wh75A774
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding_gesundbrunnen.mmaah_eat_korean
+  name: Mmaah! - Eat Korean
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - korean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Gerichtstraße 47, 13347 Berlin, Germany
+  address: Gerichtstraße 47, 13347 Berlin, Germany
+  rating: 4.7
+  reviews: 118
+  latitude: 52.5450489
+  longitude: 13.362113899999999
+  place_id: ChIJoUGi0UdRqEcRvNAzBEvZma8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding_gesundbrunnen.lichtburg
+  name: Lichtburg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - mediterranean_restaurant
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Behmstraße 9, 13357 Berlin, Germany
+  address: Behmstraße 9, 13357 Berlin, Germany
+  rating: 4.5
+  reviews: 1283
+  latitude: 52.550314699999994
+  longitude: 13.3880667
+  place_id: ChIJ22W8iyFSqEcRNita0x7CoUc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding_gesundbrunnen.taverna_hellas_wedding
+  name: Taverna Hellas Wedding
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - mediterranean_restaurant
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Utrechter Str. 22, 13347 Berlin, Germany
+  address: Utrechter Str. 22, 13347 Berlin, Germany
+  rating: 4.6
+  reviews: 1280
+  latitude: 52.5497965
+  longitude: 13.357940099999999
+  place_id: ChIJ2fbxONVTqEcR8fx_6csfHfE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wedding_gesundbrunnen.stad_n_yeri
+  name: Üstadın Yeri
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - turkish_restaurant
+  - falafel_restaurant
+  - family_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Prinzenallee 33, 13359 Berlin, Germany
+  address: Prinzenallee 33, 13359 Berlin, Germany
+  rating: 4.8
+  reviews: 874
+  latitude: 52.5578972
+  longitude: 13.3859863
+  place_id: ChIJCTi4YztSqEcRtrgN5S2y3LI
+  source_note: Google Places seed build (2026-04-22)

@@ -1,0 +1,107 @@
+district: Spandau (overall)
+category: restaurants
+items:
+- id: restaurant.spandau_overall.restaurant_alt_spandau
+  name: Restaurant Alt-Spandau
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - croatian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Moritzstraße 7, 13597 Berlin, Germany
+  address: Moritzstraße 7, 13597 Berlin, Germany
+  rating: 4.5
+  reviews: 1028
+  latitude: 52.538198599999994
+  longitude: 13.202080899999999
+  place_id: ChIJ9yK8JkdWqEcR_0oeC8yzMJc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.spandau_overall.brauhaus_spandau
+  name: Brauhaus Spandau
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - european_restaurant
+  - brewery
+  - brewpub
+  - pub
+  - inn
+  - beer_garden
+  indoor_outdoor: mixed
+  summary: Neuendorfer Str. 1, 13585 Berlin, Germany
+  address: Neuendorfer Str. 1, 13585 Berlin, Germany
+  rating: 4.3
+  reviews: 2578
+  latitude: 52.540718299999995
+  longitude: 13.2066083
+  place_id: ChIJLeHqc0FWqEcRpbsmTg4T_cI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.spandau_overall.il_passetto
+  name: Il Passetto
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - bar_and_grill
+  - pizza_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Am Pichelssee 22, 13595 Berlin, Germany
+  address: Am Pichelssee 22, 13595 Berlin, Germany
+  rating: 4.7
+  reviews: 1155
+  latitude: 52.507549
+  longitude: 13.1975892
+  place_id: ChIJM5VqqSVXqEcRPEhnNxBEyd0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.spandau_overall.jagdhaus_spandau
+  name: Jagdhaus Spandau
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - wedding_venue
+  - catering_service
+  - beer_garden
+  - food_delivery
+  - bar
+  indoor_outdoor: mixed
+  summary: Niederneuendorfer Allee 80, 13587 Berlin, Germany
+  address: Niederneuendorfer Allee 80, 13587 Berlin, Germany
+  rating: 4.7
+  reviews: 1474
+  latitude: 52.585565499999994
+  longitude: 13.2108821
+  place_id: ChIJE9565-xVqEcRVb_QYDcvVjQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.spandau_overall.javi_92_restaurant
+  name: JaVi 92 Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - japanese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Havelstraße 17A, 13597 Berlin, Germany
+  address: Havelstraße 17A, 13597 Berlin, Germany
+  rating: 4.7
+  reviews: 314
+  latitude: 52.53873180000001
+  longitude: 13.2059994
+  place_id: ChIJVYXyAdJXqEcRdfOYpyyAk_s
+  source_note: Google Places seed build (2026-04-22)

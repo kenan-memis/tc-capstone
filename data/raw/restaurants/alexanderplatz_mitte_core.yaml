@@ -1,0 +1,1031 @@
+district: Alexanderplatz & Mitte core
+category: restaurants
+items:
+- id: restaurant.alexanderplatz_mitte_core.beast_berlin
+  name: Beast Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - barbecue_restaurant
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 29, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 29, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 1710
+  latitude: 52.524768699999996
+  longitude: 13.4121757
+  place_id: ChIJV5veJQBPqEcRbBXEeGnCPoE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.burger_inn
+  name: Burger Inn
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - hamburger_restaurant
+  - american_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alexanderpl. 8, 10178 Berlin, Germany
+  address: Alexanderpl. 8, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 2541
+  latitude: 52.5230792
+  longitude: 13.411997099999999
+  place_id: ChIJK6sRzwBPqEcRSKKN3fhGGYg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.block_house_am_alexanderplatz
+  name: BLOCK HOUSE Am Alexanderplatz
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - steak_house
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 7, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 7, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 11053
+  latitude: 52.520946099999996
+  longitude: 13.405497599999999
+  place_id: ChIJYwCr5N9RqEcRdstaBFfAYko
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.hofbr_u_wirtshaus_berlin
+  name: Hofbräu Wirtshaus Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - bavarian_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 30, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 30, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 29381
+  latitude: 52.5247247
+  longitude: 13.4137705
+  place_id: ChIJA3tAkR5OqEcRHQ3BP-tASds
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.vincenzo_italian_restaurant_bar_am_alexanderplatz_berlin
+  name: Vincenzo - Italian Restaurant & Bar am Alexanderplatz Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - bar_and_grill
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Rathausstraße 1, 10178 Berlin, Germany
+  address: Rathausstraße 1, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 2396
+  latitude: 52.520234200000004
+  longitude: 13.4117439
+  place_id: ChIJGQAAwB9OqEcRLl5VlO71x7g
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.mio_berlin
+  name: Mio Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - ice_cream_shop
+  - italian_restaurant
+  - event_venue
+  - dessert_shop
+  - cafe
+  indoor_outdoor: mixed
+  summary: Panoramastraße 1a, 10179 Berlin, Germany
+  address: Panoramastraße 1a, 10179 Berlin, Germany
+  rating: 4.3
+  reviews: 4356
+  latitude: 52.5208357
+  longitude: 13.4094084
+  place_id: ChIJZ5QEJ19PqEcR0ciT7zE11sE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.sphere_tim_raue
+  name: Sphere Tim Raue
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alexanderplatz, Panoramastraße 1A, 10178 Berlin, Germany
+  address: Alexanderplatz, Panoramastraße 1A, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 8898
+  latitude: 52.5208204
+  longitude: 13.409367699999999
+  place_id: ChIJZ4w__M8jZUERE7WaomeuxqU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.upper_grill_bar
+  name: Upper Grill & Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - hamburger_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  - barbecue_restaurant
+  - steak_house
+  indoor_outdoor: mixed
+  summary: Oranienburger Str. 4, 10178 Berlin, Germany
+  address: Oranienburger Str. 4, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 3757
+  latitude: 52.5238777
+  longitude: 13.400953399999999
+  place_id: ChIJlXHHz5xRqEcRgl7PRtlkPPU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.aapka_indisches_restaurant
+  name: Aapka - Indisches Restaurant
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - cocktail_bar
+  - asian_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Memhardstrasse 3, Karl-Liebknecht-Str. 23, 10178 Berlin, Germany
+  address: Memhardstrasse 3, Karl-Liebknecht-Str. 23, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 2179
+  latitude: 52.523567799999995
+  longitude: 13.4109261
+  place_id: ChIJtXCWcH1PqEcRvvLOooYKwdo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.curry61_alexanderplatz
+  name: CURRY61 - Alexanderplatz
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fast_food_restaurant
+  - german_restaurant
+  - european_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Alexanderpl. 2, 10178 Berlin, Germany
+  address: Alexanderpl. 2, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 1855
+  latitude: 52.5209301
+  longitude: 13.4143405
+  place_id: ChIJrbe5DupPqEcRtH5H4eyXnUI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.carambar
+  name: Carambar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - sports_club
+  - bar
+  - association_or_organization
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Rathausstraße 1, 10178 Berlin, Germany
+  address: Rathausstraße 1, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 7978
+  latitude: 52.520387500000005
+  longitude: 13.412139999999999
+  place_id: ChIJp3qb2CFOqEcRCaDa2RaTYsY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.eataly_inn
+  name: Eataly Inn
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - pizza_restaurant
+  - pizza_delivery
+  - meal_delivery
+  - food_delivery
+  - meal_takeaway
+  indoor_outdoor: mixed
+  summary: Alexanderpl. 8, 10178 Berlin, Germany
+  address: Alexanderpl. 8, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 936
+  latitude: 52.5231779
+  longitude: 13.4120159
+  place_id: ChIJjShAColPqEcRqe7R5uhmGDk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.alex_berlin_am_alex
+  name: ALEX Berlin am Alex
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - breakfast_restaurant
+  - brunch_restaurant
+  - snack_bar
+  - meal_takeaway
+  - cafe
+  indoor_outdoor: mixed
+  summary: Panoramastraße 1A, 10178 Berlin, Germany
+  address: Panoramastraße 1A, 10178 Berlin, Germany
+  rating: 4
+  reviews: 5262
+  latitude: 52.520767199999995
+  longitude: 13.409125399999999
+  place_id: ChIJ9zdKhh9OqEcREQ8xG_bPypQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.canc_n
+  name: Cancún
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - latin_american_restaurant
+  - cocktail_bar
+  - coffee_shop
+  - taco_restaurant
+  - lounge_bar
+  - mexican_restaurant
+  indoor_outdoor: mixed
+  summary: Rathausstraße 5-13, 10178 Berlin, Germany
+  address: Rathausstraße 5-13, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 4303
+  latitude: 52.5191386
+  longitude: 13.409507099999999
+  place_id: ChIJV7UwuiFOqEcRGG1YwkLg1N4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.tapas_berlin_el_colmado_alexanderplatz
+  name: Tapas Berlin El Colmado Alexanderplatz
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - catering_service
+  - food_delivery
+  - spanish_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Rathausstraße 13, 10178 Berlin, Germany
+  address: Rathausstraße 13, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 1957
+  latitude: 52.5192842
+  longitude: 13.4096955
+  place_id: ChIJ4x9OtSFOqEcR-pidbDSXzZg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.madami_mom_s_viet_kitchen
+  name: Madami - Mom's Viet Kitchen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 3, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 3, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 3996
+  latitude: 52.5233652
+  longitude: 13.408945399999999
+  place_id: ChIJOT7j0R9OqEcRDQKqIivIJj4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.piazza_rossa
+  name: Piazza Rossa
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - pizza_restaurant
+  - meal_takeaway
+  - event_venue
+  - cafe
+  - bar
+  indoor_outdoor: mixed
+  summary: Rathausstraße 13, 10178 Berlin, Germany
+  address: Rathausstraße 13, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 2848
+  latitude: 52.519015599999996
+  longitude: 13.4092823
+  place_id: ChIJRfWwuCFOqEcR4AGuSbY3Jg8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.schl_gl_s_altberliner_gastst_tte
+  name: Schlögl's - Altberliner Gaststätte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 9, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 9, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 2060
+  latitude: 52.5214284
+  longitude: 13.405922799999999
+  place_id: ChIJwYRWG9AjZUERapYyHV_utkw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.indian_village_berlin_central
+  name: Indian Village Berlin central
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Dircksenstraße 94, 10178 Berlin, Germany
+  address: Dircksenstraße 94, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 1591
+  latitude: 52.5181294
+  longitude: 13.4153431
+  place_id: ChIJhbGp8CFOqEcRhBRFJWlUCyw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.curry_inn
+  name: Curry INN
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - snack_bar
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alexanderpl. 8, 10178 Berlin, Germany
+  address: Alexanderpl. 8, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 974
+  latitude: 52.52309220000001
+  longitude: 13.4116097
+  place_id: ChIJceJIzNlPqEcRYm80Cxb4rgE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.einstein_kaffee
+  name: Einstein Kaffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Alexanderpl. 3, 10178 Berlin, Germany
+  address: Alexanderpl. 3, 10178 Berlin, Germany
+  rating: 4
+  reviews: 4097
+  latitude: 52.521153
+  longitude: 13.4149712
+  place_id: ChIJS1yRsxhOqEcR_ZHPJO2OtVw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.wine_coffee_house_caf_bar_spirituosengesch_ft
+  name: Wine & Coffee House (Café, Bar & Spirituosengeschäft)
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - liquor_store
+  - bar
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 7, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 7, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 1181
+  latitude: 52.520843400000004
+  longitude: 13.405795800000002
+  place_id: ChIJx4-Y-99RqEcR66q0YGmzwiU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.koro_caf_berlin
+  name: KoRo Café Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 7, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 7, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 1669
+  latitude: 52.523942
+  longitude: 13.4093456
+  place_id: ChIJLSMbiLdPqEcR2VUSBbA0PAw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.caf_oliv
+  name: Café Oliv
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Münzstraße 8, 10178 Berlin, Germany
+  address: Münzstraße 8, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 1106
+  latitude: 52.5243824
+  longitude: 13.408680299999999
+  place_id: ChIJCxevJx5OqEcRwbqpyRUJmKg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.pressecaf_am_alexanderplatz
+  name: Pressecafé am Alexanderplatz
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 29, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 29, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 188
+  latitude: 52.5243183
+  longitude: 13.411785700000001
+  place_id: ChIJz_z-PetPqEcRChAbkzfCM4c
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.exclusive_coffee_alexanderplatz_gontardstr_10_10178_berlin
+  name: Exclusive Coffee Alexanderplatz,Gontardstr.10 10178 Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Gontardstraße 10, 10178 Berlin, Germany
+  address: Gontardstraße 10, 10178 Berlin, Germany
+  rating: 4.1
+  reviews: 233
+  latitude: 52.5208784
+  longitude: 13.4112315
+  place_id: ChIJTfgf-5FPqEcR1Lr6OkHL1kE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.father_carpenter
+  name: Father Carpenter
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - coffee_roastery
+  - cafe
+  - meal_takeaway
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Münzstraße 21, 10178 Berlin, Germany
+  address: Münzstraße 21, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 4389
+  latitude: 52.5244875
+  longitude: 13.406528199999999
+  place_id: ChIJtRsiyuFRqEcRsw5mphvL8Jw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.19grams_alex_coffee_roastery
+  name: 19grams Alex – Coffee Roastery
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - coffee_shop
+  - food_store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 13, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 13, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 1280
+  latitude: 52.5227717
+  longitude: 13.4075961
+  place_id: ChIJ_xJY4R9OqEcRBGbhAaDjCuU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.coffee_circle_rosa_luxemburg
+  name: Coffee Circle Rosa-Luxemburg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 19, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 19, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 524
+  latitude: 52.5253399
+  longitude: 13.4103461
+  place_id: ChIJHdyZOjZPqEcR1WH4p1G0Y0Q
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.spreegold_mitte
+  name: Spreegold Mitte
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 2, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 2, 10178 Berlin, Germany
+  rating: 4.2
+  reviews: 2960
+  latitude: 52.5231605
+  longitude: 13.4092636
+  place_id: ChIJJdTMVw5OqEcRajmwtdn7TNU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.coffee_fellows
+  name: Coffee Fellows
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 2, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 2, 10178 Berlin, Germany
+  rating: 3.9
+  reviews: 1914
+  latitude: 52.523164099999995
+  longitude: 13.409312199999999
+  place_id: ChIJQfcMuB9OqEcRf5a9j4bG-g0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.domcaf_im_berliner_dom
+  name: Domcafé im Berliner Dom
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Berliner Dom, Am Lustgarten 1, 10178 Berlin, Germany
+  address: Berliner Dom, Am Lustgarten 1, 10178 Berlin, Germany
+  rating: 4.1
+  reviews: 365
+  latitude: 52.519224699999995
+  longitude: 13.401574199999999
+  place_id: ChIJg2E7WcZRqEcRUABymSfUJh0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.distrikt_coffee
+  name: Distrikt coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Bergstraße 68, 10115 Berlin, Germany
+  address: Bergstraße 68, 10115 Berlin, Germany
+  rating: 4.4
+  reviews: 2629
+  latitude: 52.531603
+  longitude: 13.3941146
+  place_id: ChIJ--YdvO9RqEcRWbP6iaXaoew
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.tigert_rtchen_caf_berlin_cupcakes
+  name: tigertörtchen Café - Berlin Cupcakes
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - cake_shop
+  - coffee_shop
+  - catering_service
+  - food_delivery
+  - dessert_shop
+  indoor_outdoor: mixed
+  summary: Spandauer Str. 25, 10178 Berlin, Germany
+  address: Spandauer Str. 25, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 1055
+  latitude: 52.517258
+  longitude: 13.408010599999999
+  place_id: ChIJxW1v5iBOqEcRdbabcDNw-wQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.wall_coffee
+  name: Wall Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Wallstraße 18, 10179 Berlin, Germany
+  address: Wallstraße 18, 10179 Berlin, Germany
+  rating: 4.8
+  reviews: 197
+  latitude: 52.511340499999996
+  longitude: 13.4072407
+  place_id: ChIJdVV--R1PqEcRS5uNJR0IeCo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.cafe_latrio_berlin_monbijouplatz_4
+  name: Cafe Latrio-Berlin monbijouplatz 4
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Monbijoupl. 4, 10178 Berlin, Germany
+  address: Monbijoupl. 4, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 2677
+  latitude: 52.5233415
+  longitude: 13.3990792
+  place_id: ChIJVWePR-dRqEcRra5k78bQudk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.caf_n_nom
+  name: Café Nénom
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Charlottenstraße 34, 10117 Berlin, Germany
+  address: Charlottenstraße 34, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 429
+  latitude: 52.5154366
+  longitude: 13.391216900000002
+  place_id: ChIJDWiJqzdRqEcRwwtvhtmxS7U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.segafredo_coffee_house_breakfast_brunch_coffee_ice_cream
+  name: Segafredo Coffee House - Breakfast, Brunch, Coffee & Ice-Cream
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - ice_cream_shop
+  - coffee_shop
+  - cafe
+  - pastry_shop
+  - dessert_shop
+  indoor_outdoor: mixed
+  summary: Rathausstraße 5, 10178 Berlin, Germany
+  address: Rathausstraße 5, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 473
+  latitude: 52.5199666
+  longitude: 13.4111528
+  place_id: ChIJA3B1AyJOqEcRY_iZvm4xfS4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.rooftop_one_bar_berlin_alexanderplatz
+  name: Rooftop One Bar Berlin-Alexanderplatz
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Grunerstraße 11, 10179 Berlin, Germany
+  address: Grunerstraße 11, 10179 Berlin, Germany
+  rating: 4.5
+  reviews: 216
+  latitude: 52.519846099999995
+  longitude: 13.412348300000001
+  place_id: ChIJ8SVc_NJPqEcRj54opetzQEg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.oase_deluxe_i_cocktailbar_alexanderplatz
+  name: Oase Deluxe I Cocktailbar Alexanderplatz
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - karaoke
+  - lounge_bar
+  - dance_hall
+  - night_club
+  - bar
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 11, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 11, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 1577
+  latitude: 52.5217594
+  longitude: 13.407391899999999
+  place_id: ChIJBZen5B9OqEcRuS401DOfy1U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.the_pub
+  name: The Pub
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pub
+  - gastropub
+  - hamburger_restaurant
+  - bar
+  - american_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Rochstraße 14, 10178 Berlin, Germany
+  address: Rochstraße 14, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 2520
+  latitude: 52.522999999999996
+  longitude: 13.4073341
+  place_id: ChIJlczQJOBRqEcRXVYk4DrcCSo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.vault_bar
+  name: Vault Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - live_music_venue
+  - bar
+  - event_venue
+  - sports_club
+  - association_or_organization
+  indoor_outdoor: mixed
+  summary: Oranienburger Str. 4, 10178 Berlin, Germany
+  address: Oranienburger Str. 4, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 392
+  latitude: 52.5238344
+  longitude: 13.401085499999999
+  place_id: ChIJf9MwMwBRqEcRod0rqZrj7d8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.le_jardin_bar
+  name: Le Jardin - Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - cocktail_bar
+  - event_venue
+  - point_of_interest
+  - service
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kleine Präsidentenstraße 4, 10178 Berlin, Germany
+  address: Kleine Präsidentenstraße 4, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 144
+  latitude: 52.5226225
+  longitude: 13.3999726
+  place_id: ChIJsfu0HZdRqEcR-F9vIMT9I4o
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.berlin_icebar
+  name: Berlin Icebar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - tourist_attraction
+  - cocktail_bar
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Spandauer Str. 2, 10178 Berlin, Germany
+  address: Spandauer Str. 2, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 3175
+  latitude: 52.521417199999995
+  longitude: 13.4036875
+  place_id: ChIJC6j4EPtRqEcR2dg2YzQ8AOA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.bonbon_bar_berlin
+  name: BonBon Bar Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - cocktail_bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Torstraße 133, 10119 Berlin, Germany
+  address: Torstraße 133, 10119 Berlin, Germany
+  rating: 4.7
+  reviews: 396
+  latitude: 52.529705199999995
+  longitude: 13.3998392
+  place_id: ChIJt4cTU-RRqEcRw3f8ubaEYrM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.house_of_weekend
+  name: House of Weekend
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - night_club
+  - bar
+  - event_venue
+  - point_of_interest
+  - service
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alexanderstraße 7, 10178 Berlin, Germany
+  address: Alexanderstraße 7, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 978
+  latitude: 52.5229352
+  longitude: 13.416346299999999
+  place_id: ChIJQe1grhhOqEcRaQ3gJPyp0TE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.azem_cocktailbar
+  name: AZEM Cocktailbar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rathausstraße 17, 10178 Berlin, Germany
+  address: Rathausstraße 17, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 30
+  latitude: 52.5181316
+  longitude: 13.4071024
+  place_id: ChIJV294IRdPqEcRxfdBcbeEgS0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.belushi_s_berlin_alexanderplatz
+  name: Belushi's Berlin (Alexanderplatz)
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - sports_bar
+  - cocktail_bar
+  - fast_food_restaurant
+  - live_music_venue
+  - bar
+  - event_venue
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 41, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 41, 10178 Berlin, Germany
+  rating: 4.1
+  reviews: 2874
+  latitude: 52.5268599
+  longitude: 13.410582800000002
+  place_id: ChIJiZMv8B1OqEcRIofsaDMsMsw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.thecoven_bar
+  name: TheCoven Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kleine Präsidentenstraße 3, 10178 Berlin, Germany
+  address: Kleine Präsidentenstraße 3, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 809
+  latitude: 52.522712299999995
+  longitude: 13.4003482
+  place_id: ChIJtc_bs-BRqEcRx6WVxgpKr0Q
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.alexanderplatz_mitte_core.palm_beach
+  name: Palm Beach
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - western_restaurant
+  - cafe
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Spandauer Str. 4, 10178 Berlin, Germany
+  address: Spandauer Str. 4, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 1329
+  latitude: 52.520705799999995
+  longitude: 13.4046972
+  place_id: ChIJDSOfwt9RqEcRhBzKFvAn_cM
+  source_note: Google Places seed build (2026-04-22)

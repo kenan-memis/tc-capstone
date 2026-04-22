@@ -1,0 +1,101 @@
+district: Nord-Neukölln & Reuterkiez
+category: restaurants
+items:
+- id: restaurant.nord_neuk_lln_reuterkiez.nara_restaurant
+  name: Nara Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Sonnenallee 1, 12047 Berlin, Germany
+  address: Sonnenallee 1, 12047 Berlin, Germany
+  rating: 4.8
+  reviews: 1545
+  latitude: 52.4879398
+  longitude: 13.425657399999999
+  place_id: ChIJ0yj16XtPqEcRzLiWpcJSUek
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.nord_neuk_lln_reuterkiez.oliveto_ristorante_pizzeria
+  name: Oliveto · Ristorante & Pizzeria
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Pannierstraße 9a, 12047 Berlin, Germany
+  address: Pannierstraße 9a, 12047 Berlin, Germany
+  rating: 5
+  reviews: 3373
+  latitude: 52.4872282
+  longitude: 13.4316353
+  place_id: ChIJnwPwAYBPqEcRTiuqJt7jwI0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.nord_neuk_lln_reuterkiez.mr_grill_berlin
+  name: Mr. Grill Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - barbecue_restaurant
+  - shawarma_restaurant
+  - kebab_shop
+  - middle_eastern_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Weichselstraße 61, 12043 Berlin, Germany
+  address: Weichselstraße 61, 12043 Berlin, Germany
+  rating: 4.9
+  reviews: 2154
+  latitude: 52.484773399999995
+  longitude: 13.4333916
+  place_id: ChIJN2vm7OpPqEcR2g3eNOsC6-c
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.nord_neuk_lln_reuterkiez.kai_maison
+  name: Kai Maison
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Maybachufer 23, 12047 Berlin, Germany
+  address: Maybachufer 23, 12047 Berlin, Germany
+  rating: 4.7
+  reviews: 1057
+  latitude: 52.4932039
+  longitude: 13.4285448
+  place_id: ChIJyS7uxctPqEcRFB5ezLucyFU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.nord_neuk_lln_reuterkiez.la_maison_bleue
+  name: La maison bleue
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Pannierstraße 26, 12047 Berlin, Germany
+  address: Pannierstraße 26, 12047 Berlin, Germany
+  rating: 4.8
+  reviews: 1101
+  latitude: 52.4901202
+  longitude: 13.4343971
+  place_id: ChIJs9rm1EdPqEcRDY3XhW5wQ3A
+  source_note: Google Places seed build (2026-04-22)

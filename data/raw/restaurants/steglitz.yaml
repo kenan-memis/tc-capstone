@@ -1,0 +1,104 @@
+district: Steglitz
+category: restaurants
+items:
+- id: restaurant.steglitz.porta_nova_berlin
+  name: Porta Nova Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Steglitzer Damm 1, 12169 Berlin, Germany
+  address: Steglitzer Damm 1, 12169 Berlin, Germany
+  rating: 4.9
+  reviews: 171
+  latitude: 52.4515428
+  longitude: 13.335745699999999
+  place_id: ChIJq1KhoqNbqEcR2GR7UTnOWTo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.steglitz.osteria_maria
+  name: Osteria Maria
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - wedding_venue
+  - event_venue
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Leydenallee 79, 12167 Berlin, Germany
+  address: Leydenallee 79, 12167 Berlin, Germany
+  rating: 4.7
+  reviews: 2022
+  latitude: 52.453227
+  longitude: 13.3245278
+  place_id: ChIJ90Z8vY9aqEcRU9Vbgtr3RDc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.steglitz.sale_e_pane_berlin
+  name: Sale e Pane - Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Markelstraße 52, 12163 Berlin, Germany
+  address: Markelstraße 52, 12163 Berlin, Germany
+  rating: 4.7
+  reviews: 992
+  latitude: 52.464425299999995
+  longitude: 13.3233508
+  place_id: ChIJa9WdmYlbqEcRYgZd_pTa3NI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.steglitz.ristorante_la_marianna
+  name: Ristorante La Marianna
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Feuerbachstraße 63, 12163 Berlin, Germany
+  address: Feuerbachstraße 63, 12163 Berlin, Germany
+  rating: 4.6
+  reviews: 1163
+  latitude: 52.4646555
+  longitude: 13.338629399999999
+  place_id: ChIJrQITF3ZQqEcRYnq-_E5b2pA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.steglitz.jungbluth
+  name: Jungbluth
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Lepsiusstraße 63, 12163 Berlin, Germany
+  address: Lepsiusstraße 63, 12163 Berlin, Germany
+  rating: 4.7
+  reviews: 830
+  latitude: 52.460357699999996
+  longitude: 13.317290799999999
+  place_id: ChIJRRo5NodaqEcRD2ZhNk7HXHc
+  source_note: Google Places seed build (2026-04-22)

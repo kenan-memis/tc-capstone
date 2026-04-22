@@ -1,0 +1,102 @@
+district: Friedrichshain-Kreuzberg (overall)
+category: restaurants
+items:
+- id: restaurant.friedrichshain_kreuzberg_overall.umami
+  name: Umami
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schlesische Str. 5, 10997 Berlin, Germany
+  address: Schlesische Str. 5, 10997 Berlin, Germany
+  rating: 4.6
+  reviews: 3461
+  latitude: 52.5002766
+  longitude: 13.442929
+  place_id: ChIJafBhcoVPqEcRb7rHEy3G0L8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain_kreuzberg_overall.omdur_sudanese_streetfood_restaurant
+  name: Omdur - Sudanese Streetfood Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schlesische Str. 38, 10997 Berlin, Germany
+  address: Schlesische Str. 38, 10997 Berlin, Germany
+  rating: 4.9
+  reviews: 1051
+  latitude: 52.499987999999995
+  longitude: 13.4443823
+  place_id: ChIJcxGZ4I5PqEcRb-4YP450Qf4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain_kreuzberg_overall.home_of_dumplings
+  name: Home of Dumplings
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Skalitzer Str. 103, 10997 Berlin, Germany
+  address: Skalitzer Str. 103, 10997 Berlin, Germany
+  rating: 4.8
+  reviews: 2643
+  latitude: 52.499475999999994
+  longitude: 13.427807399999999
+  place_id: ChIJA_cK9f5PqEcRam2Cg0F9GTQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain_kreuzberg_overall.fourty_years_kitchen
+  name: Fourty Years Kitchen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Dieffenbachstraße 52, 10967 Berlin, Germany
+  address: Dieffenbachstraße 52, 10967 Berlin, Germany
+  rating: 4.8
+  reviews: 1080
+  latitude: 52.492335499999996
+  longitude: 13.418363399999999
+  place_id: ChIJ59m7wBFPqEcRtu_vSPsf5Lw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.friedrichshain_kreuzberg_overall.j_ger_lustig
+  name: Jäger & Lustig
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Grünberger Str. 1, 10243 Berlin, Germany
+  address: Grünberger Str. 1, 10243 Berlin, Germany
+  rating: 4.6
+  reviews: 3039
+  latitude: 52.5134052
+  longitude: 13.4480361
+  place_id: ChIJjc-rNeZPqEcRlZTaa4h6iKA
+  source_note: Google Places seed build (2026-04-22)

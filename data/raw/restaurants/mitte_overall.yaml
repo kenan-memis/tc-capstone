@@ -1,0 +1,110 @@
+district: Mitte (overall)
+category: restaurants
+items:
+- id: restaurant.mitte_overall.bless_restaurant
+  name: BLESS Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - vietnamese_restaurant
+  - french_restaurant
+  - fusion_restaurant
+  - indonesian_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Hausvogteipl. 10, 10117 Berlin, Germany
+  address: Hausvogteipl. 10, 10117 Berlin, Germany
+  rating: 4.8
+  reviews: 2032
+  latitude: 52.5124086
+  longitude: 13.396790399999999
+  place_id: ChIJKe1GVI5RqEcRNkufK3YES0E
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte_overall.schnitzelei_mitte
+  name: Schnitzelei Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - tapas_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: 'Chausseestr. 8 Hinterhof erreichbar über: Chausseestr. 8 oder, Novalisstraße
+    11, 10115 Berlin, Germany'
+  address: 'Chausseestr. 8 Hinterhof erreichbar über: Chausseestr. 8 oder, Novalisstraße
+    11, 10115 Berlin, Germany'
+  rating: 4.5
+  reviews: 7274
+  latitude: 52.5285831
+  longitude: 13.387885299999999
+  place_id: ChIJywdI5etRqEcRUVD-ycuGL6M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte_overall.restaurant_dae_mon
+  name: Restaurant Dae Mon
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fusion_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Monbijoupl. 11, 10178 Berlin, Germany
+  address: Monbijoupl. 11, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 781
+  latitude: 52.52276990000001
+  longitude: 13.399358
+  place_id: ChIJMSwDTudRqEcRz6qTF1A-3CU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte_overall.restaurant_maximilians_berlin
+  name: Restaurant Maximilians Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bavarian_restaurant
+  - beer_garden
+  - german_restaurant
+  - european_restaurant
+  - bar
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Friedrichstraße 185-190, 10117 Berlin, Germany
+  address: Friedrichstraße 185-190, 10117 Berlin, Germany
+  rating: 4.5
+  reviews: 12890
+  latitude: 52.511405499999995
+  longitude: 13.3892688
+  place_id: ChIJzfw4cNBRqEcR7fwXfYYScu4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte_overall.peterpaul
+  name: PeterPaul
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Torstraße 99, 10119 Berlin, Germany
+  address: Torstraße 99, 10119 Berlin, Germany
+  rating: 4.7
+  reviews: 1296
+  latitude: 52.529979399999995
+  longitude: 13.404265899999999
+  place_id: ChIJbTLweuNRqEcRiaNAPjuqhB4
+  source_note: Google Places seed build (2026-04-22)

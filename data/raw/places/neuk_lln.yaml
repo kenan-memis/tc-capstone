@@ -1,0 +1,223 @@
+district: Neukölln
+category: places
+items:
+- id: place.neuk_lln.kindl_zentrum_f_r_zeitgen_ssische_kunst
+  name: KINDL - Zentrum für zeitgenössische Kunst
+  type: art_museum
+  tags:
+  - tourist_attraction
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Am Sudhaus 3, 12053 Berlin, Germany
+  address: Am Sudhaus 3, 12053 Berlin, Germany
+  rating: 4.5
+  reviews: 1008
+  latitude: 52.479447
+  longitude: 13.430764199999999
+  place_id: ChIJ98cmwbxPqEcRn1lPpQfVT9U
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.ramones_museum_berlin
+  name: RAMONES MUSEUM BERLIN
+  type: bar
+  tags:
+  - bar
+  - beer_garden
+  - vegan_restaurant
+  - vegetarian_restaurant
+  - cafe
+  - event_venue
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: '@1977 - Corner of Weser+Finow, Weserstr. 159, 12045 Berlin, Germany'
+  address: '@1977 - Corner of Weser+Finow, Weserstr. 159, 12045 Berlin, Germany'
+  rating: 4.6
+  reviews: 1578
+  latitude: 52.4823156
+  longitude: 13.4430869
+  place_id: ChIJY28fU-ZRqEcRRA1cS-e-3qY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.puppentheater_museum
+  name: Puppentheater-Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - performing_arts_theater
+  - event_venue
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Karl-Marx-Straße 135, 12043 Berlin, Germany
+  address: Karl-Marx-Straße 135, 12043 Berlin, Germany
+  rating: 4.5
+  reviews: 65
+  latitude: 52.4774429
+  longitude: 13.439017999999999
+  place_id: ChIJveA716NPqEcRRYZeOvuM51k
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.k_rnerpark
+  name: Körnerpark
+  type: park
+  tags:
+  - park
+  - state_park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schierker Str., 12051 Berlin, Germany
+  address: Schierker Str., 12051 Berlin, Germany
+  rating: 4.6
+  reviews: 4010
+  latitude: 52.471517
+  longitude: 13.4382048
+  place_id: ChIJTRJ0JZ9PqEcRABns9MHCtoA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.tierpark_neuk_lln_in_der_hasenheide
+  name: Tierpark Neukölln in der Hasenheide
+  type: zoo
+  tags:
+  - zoo
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Hasenheide 82, 10967 Berlin, Germany
+  address: Hasenheide 82, 10967 Berlin, Germany
+  rating: 4.5
+  reviews: 1160
+  latitude: 52.486765999999996
+  longitude: 13.417117999999999
+  place_id: ChIJOfPq0sdPqEcRtoJdnWY60w4
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.the_toads
+  name: The Toads
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Weserstr. 21-25, 12045 Berlin, Germany
+  address: Weserstr. 21-25, 12045 Berlin, Germany
+  rating: 4.8
+  reviews: 59
+  latitude: 52.486835899999996
+  longitude: 13.43362
+  place_id: ChIJZVfNabBPqEcRS7OVfDQv7e8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.historischer_wasserbrunnen
+  name: historischer Wasserbrunnen
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Richardpl. 16, 12055 Berlin, Germany
+  address: Richardpl. 16, 12055 Berlin, Germany
+  rating: 5
+  reviews: 2
+  latitude: 52.474053000000005
+  longitude: 13.445031
+  place_id: ChIJf3ggoplPqEcRJzVav3fa66U
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.von_der_schulenburg_park
+  name: Von-der-Schulenburg-Park
+  type: park
+  tags:
+  - park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Drosselbartstraße 6, 12057 Berlin, Germany
+  address: Drosselbartstraße 6, 12057 Berlin, Germany
+  rating: 4.6
+  reviews: 422
+  latitude: 52.468300299999996
+  longitude: 13.4695751
+  place_id: ChIJLx_pAmtPqEcRurPe9AB5KQk
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.comenius_garten
+  name: Comenius-Garten
+  type: garden
+  tags:
+  - garden
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Richardstraße 35, 12043 Berlin, Germany
+  address: Richardstraße 35, 12043 Berlin, Germany
+  rating: 4.6
+  reviews: 454
+  latitude: 52.475257299999996
+  longitude: 13.444123399999999
+  place_id: ChIJ31MDQKBPqEcRySz9dj60j7M
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.hasenheide_park
+  name: Hasenheide Park
+  type: park
+  tags:
+  - park
+  - state_park
+  - city_park
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Columbiadamm 160, 12049 Berlin, Germany
+  address: Columbiadamm 160, 12049 Berlin, Germany
+  rating: 4.2
+  reviews: 4658
+  latitude: 52.4842015
+  longitude: 13.4167277
+  place_id: ChIJq6qqasRPqEcRXNfStONfLpI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.m_rchenbrunnen_im_schulenburgpark
+  name: Märchenbrunnen im Schulenburgpark
+  type: park
+  tags:
+  - park
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Von-der-Schulenburg-Park, Drosselbartstraße 30, 12057 Berlin, Germany
+  address: Von-der-Schulenburg-Park, Drosselbartstraße 30, 12057 Berlin, Germany
+  rating: 4.5
+  reviews: 96
+  latitude: 52.4673476
+  longitude: 13.470989999999999
+  place_id: ChIJTVNXXmpPqEcRxkVxEenqn7w
+  source_note: Google Places seed build (2026-04-22)
+- id: place.neuk_lln.park_am_buschkrug
+  name: Park am Buschkrug
+  type: park
+  tags:
+  - park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Neukölln, 12347 Berlin, Germany
+  address: Neukölln, 12347 Berlin, Germany
+  rating: 4.4
+  reviews: 3171
+  latitude: 52.4534409
+  longitude: 13.4493273
+  place_id: ChIJAU_W3nxPqEcRKvq7V87C24w
+  source_note: Google Places seed build (2026-04-22)

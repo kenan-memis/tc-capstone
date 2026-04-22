@@ -1,0 +1,55 @@
+district: Tempelhof-Schöneberg (overall)
+category: places
+items:
+- id: place.tempelhof_sch_neberg_overall.museum_of_unheard_of_things
+  name: Museum of Unheard (of) Things
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Crellestraße 5-6, 10827 Berlin, Germany
+  address: Crellestraße 5-6, 10827 Berlin, Germany
+  rating: 4.5
+  reviews: 109
+  latitude: 52.4870458
+  longitude: 13.358679299999999
+  place_id: ChIJ6VomnEBQqEcR22RgcbggjLY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tempelhof_sch_neberg_overall.tempelhof_museum
+  name: Tempelhof Museum
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alt-Mariendorf 43, 12107 Berlin, Germany
+  address: Alt-Mariendorf 43, 12107 Berlin, Germany
+  rating: 4.5
+  reviews: 70
+  latitude: 52.4396
+  longitude: 13.385309999999999
+  place_id: ChIJ_2JHUUZFqEcRYGSzuZWVmCo
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tempelhof_sch_neberg_overall.sch_neberg_museum
+  name: Schöneberg Museum
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Hauptstraße 40-42, 10827 Berlin, Germany
+  address: Hauptstraße 40-42, 10827 Berlin, Germany
+  rating: 4.5
+  reviews: 120
+  latitude: 52.483911799999994
+  longitude: 13.350976699999999
+  place_id: ChIJPVKHw28jZUERK0pDQDo0Uog
+  source_note: Google Places seed build (2026-04-22)

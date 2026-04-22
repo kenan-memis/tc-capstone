@@ -1,27 +1,260 @@
 district: Friedrichshain
 category: places
 items:
-  - id: place.friedrichshain.east_side_gallery
-    name: East Side Gallery
-    type: Street art / wall
-    tags: [history, street_art, outdoor, iconic]
-    indoor_outdoor: outdoor
-    typical_visit_minutes: 90
-    summary: Long open-air Berlin Wall section with murals; strong historical and visual value.
-    source_note: Seed curated dataset v1
-  - id: place.friedrichshain.boxhagener_platz
-    name: Boxhagener Platz
-    type: Square / market
-    tags: [local, market, relaxed, food]
-    indoor_outdoor: mixed
-    typical_visit_minutes: 75
-    summary: Neighborhood square known for local markets and nearby cafes.
-    source_note: Seed curated dataset v1
-  - id: place.friedrichshain.oberbaum_bridge
-    name: Oberbaum Bridge
-    type: Bridge / landmark
-    tags: [architecture, history, scenic, walking]
-    indoor_outdoor: outdoor
-    typical_visit_minutes: 45
-    summary: Iconic bridge connecting Friedrichshain and Kreuzberg; often used as a scenic transition point.
-    source_note: Seed curated dataset v1
+- id: place.friedrichshain.east_side_gallery
+  name: East Side Gallery
+  type: Street art / wall
+  tags:
+  - history
+  - street_art
+  - outdoor
+  - iconic
+  indoor_outdoor: outdoor
+  typical_visit_minutes: 90
+  summary: Long open-air Berlin Wall section with murals; strong historical and visual
+    value.
+  source_note: Seed curated dataset v1
+- id: place.friedrichshain.boxhagener_platz
+  name: Boxhagener Platz
+  type: Square / market
+  tags:
+  - local
+  - market
+  - relaxed
+  - food
+  indoor_outdoor: mixed
+  typical_visit_minutes: 75
+  summary: Neighborhood square known for local markets and nearby cafes.
+  source_note: Seed curated dataset v1
+- id: place.friedrichshain.oberbaum_bridge
+  name: Oberbaum Bridge
+  type: Bridge / landmark
+  tags:
+  - architecture
+  - history
+  - scenic
+  - walking
+  indoor_outdoor: outdoor
+  typical_visit_minutes: 45
+  summary: Iconic bridge connecting Friedrichshain and Kreuzberg; often used as a
+    scenic transition point.
+  source_note: Seed curated dataset v1
+- id: place.friedrichshain.computer_games_museum
+  name: Computer Games Museum
+  type: museum
+  tags:
+  - tourist_attraction
+  - gift_shop
+  - museum
+  - store
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Karl-Marx-Allee 93a, 10243 Berlin, Germany
+  address: Karl-Marx-Allee 93a, 10243 Berlin, Germany
+  rating: 4.5
+  reviews: 10597
+  latitude: 52.5174697
+  longitude: 13.4419545
+  place_id: ChIJlQBPDWpOqEcRuHogjEmANio
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.the_wall_museum
+  name: The Wall Museum
+  type: museum
+  tags:
+  - tourist_attraction
+  - history_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Mühlenstraße 78-80, 10243 Berlin, Germany
+  address: Mühlenstraße 78-80, 10243 Berlin, Germany
+  rating: 4.2
+  reviews: 2022
+  latitude: 52.5026556
+  longitude: 13.445263899999999
+  place_id: ChIJO8pczFFOqEcRLvo9iiZJnM4
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.east_side_gallery
+  name: East Side Gallery
+  type: point_of_interest
+  tags:
+  - tourist_attraction
+  - landmark
+  - art_gallery
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Mühlenstraße, 10243 Berlin, Germany
+  address: Mühlenstraße, 10243 Berlin, Germany
+  rating: 4.6
+  reviews: 63737
+  latitude: 52.505022399999994
+  longitude: 13.439695299999999
+  place_id: ChIJS6_t9aZHqEcRGCiRSnvpm94
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.stasi_museum
+  name: Stasi Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  address: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  rating: 4.5
+  reviews: 9183
+  latitude: 52.514527
+  longitude: 13.4872818
+  place_id: ChIJKeccmpNOqEcRHQ7hqU7JhnY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.new_media_art_center_ausstellungshaus_exhibition_center
+  name: New Media Art Center – Ausstellungshaus (Exhibition Center)
+  type: event_venue
+  tags:
+  - event_venue
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Revaler Str. 99, 10245 Berlin, Germany
+  address: Revaler Str. 99, 10245 Berlin, Germany
+  rating: 4.5
+  reviews: 276
+  latitude: 52.5074683
+  longitude: 13.4536191
+  place_id: ChIJgVOUcnBPqEcRdE95lnBlwYc
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.volkspark_friedrichshain
+  name: Volkspark Friedrichshain
+  type: state_park
+  tags:
+  - state_park
+  - tourist_attraction
+  - park
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: 10249 Berlin, Germany
+  address: 10249 Berlin, Germany
+  rating: 4.6
+  reviews: 15844
+  latitude: 52.5280353
+  longitude: 13.436393400000002
+  place_id: ChIJ_S5uaxJOqEcRdg-gu1fEgcI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.m_rchenbrunnen
+  name: Märchenbrunnen
+  type: historical_landmark
+  tags:
+  - historical_landmark
+  - fountain
+  - tourist_attraction
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Am Friedrichshain, 10249 Berlin, Germany
+  address: Am Friedrichshain, 10249 Berlin, Germany
+  rating: 4.6
+  reviews: 4128
+  latitude: 52.5278966
+  longitude: 13.426660199999999
+  place_id: ChIJe9YabhBOqEcRRC8z1E50QtI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.gro_er_bunkerberg_flakturm_ii_g_volkspark_friedrichshain
+  name: Großer Bunkerberg - Flakturm II G Volkspark Friedrichshain
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Friedenstraße 101, 10249 Berlin, Germany
+  address: Friedenstraße 101, 10249 Berlin, Germany
+  rating: 4
+  reviews: 202
+  latitude: 52.526382399999996
+  longitude: 13.4321624
+  place_id: ChIJJW0FghFOqEcRqneJ2vsjkQY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.boxhagener_platz
+  name: Boxhagener Platz
+  type: park
+  tags:
+  - park
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Boxhagener Platz, 10245 Berlin, Germany
+  address: Boxhagener Platz, 10245 Berlin, Germany
+  rating: 4.4
+  reviews: 10847
+  latitude: 52.51087640000001
+  longitude: 13.459713200000001
+  place_id: ChIJOZG7315OqEcRVs8ZP5sx0mQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.springbrunnen
+  name: Springbrunnen
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Friedrichshain, 10243 Berlin, Germany
+  address: Friedrichshain, 10243 Berlin, Germany
+  rating: 5
+  reviews: 7
+  latitude: 52.5174989
+  longitude: 13.4346167
+  place_id: ChIJdeX-D4NPqEcR307nvU79bzY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.mitte_lookout
+  name: Mitte Lookout
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: B96a, 10243 Berlin, Germany
+  address: B96a, 10243 Berlin, Germany
+  rating: 4.3
+  reviews: 15
+  latitude: 52.506566199999995
+  longitude: 13.4493812
+  place_id: ChIJDwXfPwBPqEcRKn58z0xUKDQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.friedrichshain.vidam_mural
+  name: Vidam Mural
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Revaler Str. 99, 10245 Berlin, Germany
+  address: Revaler Str. 99, 10245 Berlin, Germany
+  rating: 4.5
+  reviews: 2
+  latitude: 52.5069095
+  longitude: 13.4540419
+  place_id: ChIJx-MVAFZPqEcRlYj0PVOGvZs
+  source_note: Google Places seed build (2026-04-22)

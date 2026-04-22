@@ -1,0 +1,58 @@
+district: Spandau (overall)
+category: places
+items:
+- id: place.spandau_overall.museum_im_kommandantenhaus
+  name: Museum im Kommandantenhaus
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Am Juliusturm 64, 13599 Berlin, Germany
+  address: Am Juliusturm 64, 13599 Berlin, Germany
+  rating: 4.9
+  reviews: 25
+  latitude: 52.5401795
+  longitude: 13.2125078
+  place_id: ChIJ9RhzG0NWqEcRCWEam2FWFoQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.spandau_overall.gotisches_haus_museum
+  name: Gotisches Haus Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Breite Str. 32, 13597 Berlin, Germany
+  address: Breite Str. 32, 13597 Berlin, Germany
+  rating: 4.6
+  reviews: 171
+  latitude: 52.5377419
+  longitude: 13.2065053
+  place_id: ChIJYZ9_G0RWqEcRzu3fEwGBHtA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.spandau_overall.unveiled_berlin_and_its_monuments
+  name: Unveiled, Berlin and its monuments
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Am Juliusturm 64, 13599 Berlin, Germany
+  address: Am Juliusturm 64, 13599 Berlin, Germany
+  rating: 4.8
+  reviews: 31
+  latitude: 52.540903699999994
+  longitude: 13.2139761
+  place_id: ChIJv5AN3EJWqEcROw0obXXQ2jo
+  source_note: Google Places seed build (2026-04-22)

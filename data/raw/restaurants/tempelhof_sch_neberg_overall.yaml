@@ -1,0 +1,105 @@
+district: Tempelhof-Schöneberg (overall)
+category: restaurants
+items:
+- id: restaurant.tempelhof_sch_neberg_overall.dalchini
+  name: Dalchini
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - garden
+  - brunch_restaurant
+  - ice_cream_shop
+  - kebab_shop
+  - meal_takeaway
+  indoor_outdoor: mixed
+  summary: Baumeisterstraße 1, 12159 Berlin, Germany
+  address: Baumeisterstraße 1, 12159 Berlin, Germany
+  rating: 4.9
+  reviews: 777
+  latitude: 52.4707826
+  longitude: 13.3405797
+  place_id: ChIJTZZOf85RqEcRKmE7FNkGhuU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_sch_neberg_overall.attila
+  name: Attila
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - croatian_restaurant
+  - catering_service
+  - barbecue_restaurant
+  - food_delivery
+  - wedding_venue
+  - event_venue
+  indoor_outdoor: mixed
+  summary: Burgemeisterstraße 32-34, 12103 Berlin, Germany
+  address: Burgemeisterstraße 32-34, 12103 Berlin, Germany
+  rating: 4.7
+  reviews: 1916
+  latitude: 52.4582043
+  longitude: 13.373914399999999
+  place_id: ChIJN80uwKpaqEcRRoBP6Z3bBpk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_sch_neberg_overall.trattoria_da_nicoletta_ristorante
+  name: Trattoria da Nicoletta Ristorante
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Friedrich-Wilhelm-Straße 68, 12103 Berlin, Germany
+  address: Friedrich-Wilhelm-Straße 68, 12103 Berlin, Germany
+  rating: 4.6
+  reviews: 122
+  latitude: 52.458559099999995
+  longitude: 13.3788897
+  place_id: ChIJe_2yHABFqEcRsVNyeg8LmFY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_sch_neberg_overall.amera
+  name: Amera
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Borussiastraße 62, 12103 Berlin, Germany
+  address: Borussiastraße 62, 12103 Berlin, Germany
+  rating: 4.7
+  reviews: 1154
+  latitude: 52.4672963
+  longitude: 13.382445899999999
+  place_id: ChIJvW4UuVkjZUERdcnR_fLjDHY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_sch_neberg_overall.aaina_tempelhof_indisches_restaurant_cocktailbar
+  name: Aaina Tempelhof | Indisches Restaurant | Cocktailbar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - cocktail_bar
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Tempelhofer Damm 216, 12099 Berlin, Germany
+  address: Tempelhofer Damm 216, 12099 Berlin, Germany
+  rating: 4.6
+  reviews: 1916
+  latitude: 52.456852600000005
+  longitude: 13.3835245
+  place_id: ChIJh5QVcVZFqEcRaVxgCcOljBc
+  source_note: Google Places seed build (2026-04-22)

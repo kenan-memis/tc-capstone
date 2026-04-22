@@ -1,30 +1,1018 @@
 district: Mitte
 category: restaurants
 items:
-  - id: restaurant.mitte.monsieur_vuong
-    name: Monsieur Vuong
-    type: Sit-down
-    cuisine: Vietnamese
-    price_level: $$
-    tags: [casual, popular, quick, food]
-    indoor_outdoor: indoor
-    summary: Well-known Vietnamese restaurant with fresh dishes and fast table turnover.
-    source_note: Seed curated dataset v1
-  - id: restaurant.mitte.zur_letzten_instanz
-    name: Zur letzten Instanz
-    type: Sit-down
-    cuisine: German
-    price_level: $$
-    tags: [traditional, historic, cosy, food]
-    indoor_outdoor: indoor
-    summary: Historic German restaurant suitable for travelers seeking traditional dishes.
-    source_note: Seed curated dataset v1
-  - id: restaurant.mitte.curry_61
-    name: Curry 61
-    type: Street food
-    cuisine: German / currywurst
-    price_level: $
-    tags: [quick, casual, local, budget]
-    indoor_outdoor: mixed
-    summary: Fast and affordable currywurst option near central areas.
-    source_note: Seed curated dataset v1
+- id: restaurant.mitte.monsieur_vuong
+  name: Monsieur Vuong
+  type: Sit-down
+  cuisine: Vietnamese
+  price_level: $$
+  tags:
+  - casual
+  - popular
+  - quick
+  - food
+  indoor_outdoor: indoor
+  summary: Well-known Vietnamese restaurant with fresh dishes and fast table turnover.
+  source_note: Seed curated dataset v1
+- id: restaurant.mitte.zur_letzten_instanz
+  name: Zur letzten Instanz
+  type: Sit-down
+  cuisine: German
+  price_level: $$
+  tags:
+  - traditional
+  - historic
+  - cosy
+  - food
+  indoor_outdoor: indoor
+  summary: Historic German restaurant suitable for travelers seeking traditional dishes.
+  source_note: Seed curated dataset v1
+- id: restaurant.mitte.curry_61
+  name: Curry 61
+  type: Street food
+  cuisine: German / currywurst
+  price_level: $
+  tags:
+  - quick
+  - casual
+  - local
+  - budget
+  indoor_outdoor: mixed
+  summary: Fast and affordable currywurst option near central areas.
+  source_note: Seed curated dataset v1
+- id: restaurant.mitte.bless_restaurant
+  name: BLESS Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - vietnamese_restaurant
+  - french_restaurant
+  - indonesian_restaurant
+  - fusion_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Hausvogteipl. 10, 10117 Berlin, Germany
+  address: Hausvogteipl. 10, 10117 Berlin, Germany
+  rating: 4.8
+  reviews: 2032
+  latitude: 52.5124086
+  longitude: 13.396790399999999
+  place_id: ChIJKe1GVI5RqEcRNkufK3YES0E
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.schnitzelei_mitte
+  name: Schnitzelei Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - tapas_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: 'Chausseestr. 8 Hinterhof erreichbar über: Chausseestr. 8 oder, Novalisstraße
+    11, 10115 Berlin, Germany'
+  address: 'Chausseestr. 8 Hinterhof erreichbar über: Chausseestr. 8 oder, Novalisstraße
+    11, 10115 Berlin, Germany'
+  rating: 4.5
+  reviews: 7274
+  latitude: 52.5285831
+  longitude: 13.387885299999999
+  place_id: ChIJywdI5etRqEcRUVD-ycuGL6M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.umami_mitte
+  name: Umami Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Friedrichstraße 30, 10969 Berlin, Germany
+  address: Friedrichstraße 30, 10969 Berlin, Germany
+  rating: 4.9
+  reviews: 3078
+  latitude: 52.504312999999996
+  longitude: 13.391273499999999
+  place_id: ChIJG0L10NNRqEcRi6Ll2vZUZPY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.pantry
+  name: Pantry
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cocktail_bar
+  - barbecue_restaurant
+  - german_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Friedrichstraße 120, 10117 Berlin, Germany
+  address: Friedrichstraße 120, 10117 Berlin, Germany
+  rating: 4.8
+  reviews: 1081
+  latitude: 52.526615
+  longitude: 13.3868762
+  place_id: ChIJB0YLe-lRqEcRIi1O4MkOwOo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.restaurant_dae_mon
+  name: Restaurant Dae Mon
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fusion_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Monbijoupl. 11, 10178 Berlin, Germany
+  address: Monbijoupl. 11, 10178 Berlin, Germany
+  rating: 4.8
+  reviews: 781
+  latitude: 52.52276990000001
+  longitude: 13.399358
+  place_id: ChIJMSwDTudRqEcRz6qTF1A-3CU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.noumi_mitte
+  name: NOUMI Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - vietnamese_restaurant
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Jägerstraße 35, 10117 Berlin, Germany
+  address: Jägerstraße 35, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 1587
+  latitude: 52.5143717
+  longitude: 13.3976565
+  place_id: ChIJs4EoVAJRqEcRtTINX5KZ_Ws
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.ristorante_bocca_felice_berlin_mitte
+  name: Ristorante Bocca Felice Berlin-Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - barbecue_restaurant
+  - mediterranean_restaurant
+  - noodle_shop
+  - event_venue
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Seydelstraße 16, 10117 Berlin, Germany
+  address: Seydelstraße 16, 10117 Berlin, Germany
+  rating: 4.9
+  reviews: 2218
+  latitude: 52.508673099999996
+  longitude: 13.4046246
+  place_id: ChIJR_RsRqBPqEcRIxGB4vZJNyQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.nante_eck_restaurant_berlin_mitte
+  name: Nante-Eck | Restaurant Berlin Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Unter den Linden 35, 10117 Berlin, Germany
+  address: Unter den Linden 35, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 5832
+  latitude: 52.516672199999995
+  longitude: 13.388301
+  place_id: ChIJ5xaQvsRRqEcRN8-Wy6L3dEE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.jamie_oliver_kitchen_berlin
+  name: Jamie Oliver Kitchen Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Friedrichstraße 136, 10117 Berlin, Germany
+  address: Friedrichstraße 136, 10117 Berlin, Germany
+  rating: 4.7
+  reviews: 715
+  latitude: 52.5225336
+  longitude: 13.3876374
+  place_id: ChIJMbyaYgBRqEcRwMwJntPf1OY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.amon_restaurant_cucina_italiana
+  name: AMON Restaurant - Cucina italiana
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - food_store
+  - store
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Charlottenstraße 35 - 36, 10117 Berlin, Germany
+  address: Charlottenstraße 35 - 36, 10117 Berlin, Germany
+  rating: 4.8
+  reviews: 518
+  latitude: 52.516309899999996
+  longitude: 13.390971599999999
+  place_id: ChIJlYMy-rdRqEcRo5LyhMtrFRw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.salamat
+  name: Salamat
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - middle_eastern_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Gartenstraße 1, 10115 Berlin, Germany
+  address: Gartenstraße 1, 10115 Berlin, Germany
+  rating: 4.6
+  reviews: 1244
+  latitude: 52.528736599999995
+  longitude: 13.393801
+  place_id: ChIJy6OLRe9RqEcRskm9VcCqs7g
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.zur_gerichtslaube
+  name: Zur Gerichtslaube
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - beer_garden
+  - european_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Poststraße 28, 10178 Berlin, Germany
+  address: Poststraße 28, 10178 Berlin, Germany
+  rating: 4.5
+  reviews: 4918
+  latitude: 52.5170542
+  longitude: 13.4063319
+  place_id: ChIJnVexvSBOqEcRfvA9xcM-z7c
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.night_kitchen
+  name: Night Kitchen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mediterranean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Heckmann Höfe, Oranienburger Str. 32, 10117 Berlin, Germany
+  address: Heckmann Höfe, Oranienburger Str. 32, 10117 Berlin, Germany
+  rating: 4.7
+  reviews: 2742
+  latitude: 52.5255777
+  longitude: 13.3939795
+  place_id: ChIJf0sWKuZRqEcR2B4cnN_H_eI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.lawrence_berlin_mitte
+  name: LAWRENCE berlin mitte
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - middle_eastern_restaurant
+  - lebanese_restaurant
+  - cafe
+  - mediterranean_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Oranienburger Str. 69, 10117 Berlin, Germany
+  address: Oranienburger Str. 69, 10117 Berlin, Germany
+  rating: 4.7
+  reviews: 1167
+  latitude: 52.524815999999994
+  longitude: 13.392472
+  place_id: ChIJ41OAeuhRqEcRTnSdFM6PXpI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.flamingo_fresh_food_bar
+  name: Flamingo Fresh Food Bar
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bistro
+  - brunch_restaurant
+  - soup_restaurant
+  - breakfast_restaurant
+  - salad_shop
+  - sandwich_shop
+  indoor_outdoor: mixed
+  summary: Neustädtische Kirchstraße 8, 10117 Berlin, Germany
+  address: Neustädtische Kirchstraße 8, 10117 Berlin, Germany
+  rating: 4.7
+  reviews: 1386
+  latitude: 52.519566399999995
+  longitude: 13.3855463
+  place_id: ChIJiY4zlsNRqEcRPXPbVZYbqFE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.beast_berlin
+  name: Beast Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - barbecue_restaurant
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 29, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 29, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 1710
+  latitude: 52.524768699999996
+  longitude: 13.4121757
+  place_id: ChIJV5veJQBPqEcRbBXEeGnCPoE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.peterpaul
+  name: PeterPaul
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Torstraße 99, 10119 Berlin, Germany
+  address: Torstraße 99, 10119 Berlin, Germany
+  rating: 4.7
+  reviews: 1296
+  latitude: 52.529979399999995
+  longitude: 13.404265899999999
+  place_id: ChIJbTLweuNRqEcRiaNAPjuqhB4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.bandol_sur_mer
+  name: Bandol sur mer
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Torstraße 167, 10115 Berlin, Germany
+  address: Torstraße 167, 10115 Berlin, Germany
+  rating: 4.9
+  reviews: 339
+  latitude: 52.529050299999994
+  longitude: 13.395343700000002
+  place_id: ChIJzxxz9eVRqEcRX2oG338jQnY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.golden_rice_mitte
+  name: Golden Rice Mitte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - sushi_restaurant
+  - vietnamese_restaurant
+  - meal_takeaway
+  - japanese_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Chausseestraße 29, 10115 Berlin, Germany
+  address: Chausseestraße 29, 10115 Berlin, Germany
+  rating: 4.7
+  reviews: 1441
+  latitude: 52.5320136
+  longitude: 13.381531599999999
+  place_id: ChIJFTj7Ke1RqEcRsnwlNgOa7Ek
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.sphere_tim_raue
+  name: Sphere Tim Raue
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alexanderplatz, Panoramastraße 1A, 10178 Berlin, Germany
+  address: Alexanderplatz, Panoramastraße 1A, 10178 Berlin, Germany
+  rating: 4.3
+  reviews: 8898
+  latitude: 52.5208204
+  longitude: 13.409367699999999
+  place_id: ChIJZ4w__M8jZUERE7WaomeuxqU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.the_barn_caf_mitte
+  name: THE BARN Café Mitte
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - coffee_shop
+  - food_store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Auguststraße 58, 10119 Berlin, Germany
+  address: Auguststraße 58, 10119 Berlin, Germany
+  rating: 4.2
+  reviews: 2238
+  latitude: 52.5274383
+  longitude: 13.39818
+  place_id: ChIJC-EDf-ZRqEcRiVrnNG31igA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.the_rabbit_caf
+  name: The Rabbit Café
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Strelitzer Str. 62, 10115 Berlin, Germany
+  address: Strelitzer Str. 62, 10115 Berlin, Germany
+  rating: 4.8
+  reviews: 1183
+  latitude: 52.5354019
+  longitude: 13.3948757
+  place_id: ChIJZ-mfs_FRqEcRcsGXh23NGnI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.cappuccino_grand_caf_mitte
+  name: Cappuccino Grand Café - Mitte
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - coffee_roastery
+  - sandwich_shop
+  - coffee_shop
+  indoor_outdoor: mixed
+  summary: Tucholskystraße 36, 10117 Berlin, Germany
+  address: Tucholskystraße 36, 10117 Berlin, Germany
+  rating: 4.7
+  reviews: 3275
+  latitude: 52.5266063
+  longitude: 13.3936742
+  place_id: ChIJGcIfn-hRqEcR8gKjBD3xKuU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.house_of_small_wonder
+  name: House of Small Wonder
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - brunch_restaurant
+  - breakfast_restaurant
+  - cafe
+  - japanese_restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Auguststraße 11-13, 10117 Berlin, Germany
+  address: Auguststraße 11-13, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 5419
+  latitude: 52.526407199999994
+  longitude: 13.394418799999999
+  place_id: ChIJfSfTtelRqEcRC52WM-fWJi8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.caf_oliv
+  name: Café Oliv
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Münzstraße 8, 10178 Berlin, Germany
+  address: Münzstraße 8, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 1106
+  latitude: 52.5243824
+  longitude: 13.408680299999999
+  place_id: ChIJCxevJx5OqEcRwbqpyRUJmKg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.five_elephant_mitte
+  name: Five Elephant Mitte
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - cake_shop
+  - coffee_shop
+  - bakery
+  - food_store
+  indoor_outdoor: mixed
+  summary: Alte Schönhauser Str. 14, 10119 Berlin, Germany
+  address: Alte Schönhauser Str. 14, 10119 Berlin, Germany
+  rating: 4.3
+  reviews: 1777
+  latitude: 52.5267524
+  longitude: 13.407582600000001
+  place_id: ChIJQSnqIeJRqEcRsZrGsz4BE7E
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.whynot_kaffee
+  name: WhyNot Kaffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - brunch_restaurant
+  - coffee_stand
+  - breakfast_restaurant
+  - cafe
+  - food_store
+  indoor_outdoor: mixed
+  summary: Pohlstraße 74, 10785 Berlin, Germany
+  address: Pohlstraße 74, 10785 Berlin, Germany
+  rating: 4.7
+  reviews: 1443
+  latitude: 52.501709899999994
+  longitude: 13.3611689
+  place_id: ChIJ4Qgv39FRqEcR-mblXvleONE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.koro_caf_berlin
+  name: KoRo Café Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 7, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 7, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 1669
+  latitude: 52.523942
+  longitude: 13.4093456
+  place_id: ChIJLSMbiLdPqEcR2VUSBbA0PAw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.milch_halle_berlin_coffee
+  name: Milch Halle Berlin Coffee
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - wine_bar
+  - cafe
+  - bar
+  - food_store
+  - food
+  indoor_outdoor: mixed
+  summary: Auguststraße 50, 10119 Berlin, Germany
+  address: Auguststraße 50, 10119 Berlin, Germany
+  rating: 4.5
+  reviews: 639
+  latitude: 52.527815999999994
+  longitude: 13.4005262
+  place_id: ChIJXZ9LIuRRqEcR4MGb8ykDdlM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.ben_rahim_berlin
+  name: BEN RAHIM Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Sophienstraße 7A, 10178 Berlin, Germany
+  address: Sophienstraße 7A, 10178 Berlin, Germany
+  rating: 4.2
+  reviews: 2212
+  latitude: 52.525040499999996
+  longitude: 13.4018739
+  place_id: ChIJ9wBfMOFRqEcRLuSC8Tu_yBM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.caf_minouche
+  name: Café Minouche
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - cake_shop
+  - coffee_shop
+  - bakery
+  indoor_outdoor: mixed
+  summary: Budapester Str. 6, 10787 Berlin, Germany
+  address: Budapester Str. 6, 10787 Berlin, Germany
+  rating: 4.9
+  reviews: 572
+  latitude: 52.506411899999996
+  longitude: 13.343678599999999
+  place_id: ChIJy9w5tFRQqEcRBDU9V9ZDOug
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.19grams_alex_coffee_roastery
+  name: 19grams Alex – Coffee Roastery
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - coffee_shop
+  - food_store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Karl-Liebknecht-Str. 13, 10178 Berlin, Germany
+  address: Karl-Liebknecht-Str. 13, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 1280
+  latitude: 52.5227717
+  longitude: 13.4075961
+  place_id: ChIJ_xJY4R9OqEcRBGbhAaDjCuU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.cafe_neundrei
+  name: cafe neundrei
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  - establishment
+  indoor_outdoor: mixed
+  summary: Monbijoupl. 2, 10178 Berlin, Germany
+  address: Monbijoupl. 2, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 1837
+  latitude: 52.5231054
+  longitude: 13.399805599999999
+  place_id: ChIJU4GyS-dRqEcRylq7yFsWHk4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.the_greens_coffee_plants
+  name: The Greens - Coffee & Plants
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Am Krögel 2, 10179 Berlin, Germany
+  address: Am Krögel 2, 10179 Berlin, Germany
+  rating: 4.4
+  reviews: 1526
+  latitude: 52.5152674
+  longitude: 13.4091223
+  place_id: ChIJIWT3zCZOqEcRWwzAR1rA1a8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.caf_n_nom
+  name: Café Nénom
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Charlottenstraße 34, 10117 Berlin, Germany
+  address: Charlottenstraße 34, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 429
+  latitude: 52.5154366
+  longitude: 13.391216900000002
+  place_id: ChIJDWiJqzdRqEcRwwtvhtmxS7U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.amy_s_coffee_restaurant
+  name: Amy’s Coffee & Restaurant
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - vietnamese_restaurant
+  - breakfast_restaurant
+  - asian_restaurant
+  - sushi_restaurant
+  indoor_outdoor: mixed
+  summary: Platz vor dem Neuen Tor 2, 10115 Berlin, Germany
+  address: Platz vor dem Neuen Tor 2, 10115 Berlin, Germany
+  rating: 4.5
+  reviews: 615
+  latitude: 52.5289387
+  longitude: 13.3793501
+  place_id: ChIJLyccocVRqEcRi76Sn5TqODA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.coffee_circle_rosa_luxemburg
+  name: Coffee Circle Rosa-Luxemburg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rosa-Luxemburg-Straße 19, 10178 Berlin, Germany
+  address: Rosa-Luxemburg-Straße 19, 10178 Berlin, Germany
+  rating: 4.6
+  reviews: 524
+  latitude: 52.5253399
+  longitude: 13.4103461
+  place_id: ChIJHdyZOjZPqEcR1WH4p1G0Y0Q
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.oslo_kaffebar
+  name: Oslo Kaffebar
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Eichendorffstraße 13, 10115 Berlin, Germany
+  address: Eichendorffstraße 13, 10115 Berlin, Germany
+  rating: 4.5
+  reviews: 1510
+  latitude: 52.530989399999996
+  longitude: 13.3867522
+  place_id: ChIJb4gZN-xRqEcRBgNOzFMM55A
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.cafe_latrio_berlin_monbijouplatz_4
+  name: Cafe Latrio-Berlin monbijouplatz 4
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - food
+  - point_of_interest
+  - store
+  indoor_outdoor: mixed
+  summary: Monbijoupl. 4, 10178 Berlin, Germany
+  address: Monbijoupl. 4, 10178 Berlin, Germany
+  rating: 4.7
+  reviews: 2677
+  latitude: 52.5233415
+  longitude: 13.3990792
+  place_id: ChIJVWePR-dRqEcRra5k78bQudk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.distrikt_coffee
+  name: Distrikt coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Bergstraße 68, 10115 Berlin, Germany
+  address: Bergstraße 68, 10115 Berlin, Germany
+  rating: 4.4
+  reviews: 2629
+  latitude: 52.531603
+  longitude: 13.3941146
+  place_id: ChIJ--YdvO9RqEcRWbP6iaXaoew
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.the_alchemist
+  name: The Alchemist
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Linkstraße 4, 10785 Berlin, Germany
+  address: Linkstraße 4, 10785 Berlin, Germany
+  rating: 4.4
+  reviews: 1553
+  latitude: 52.507389599999996
+  longitude: 13.374795899999999
+  place_id: ChIJd4VL-s5RqEcRSqgyWJgRAms
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.bonbon_bar_berlin
+  name: BonBon Bar Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - cocktail_bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Torstraße 133, 10119 Berlin, Germany
+  address: Torstraße 133, 10119 Berlin, Germany
+  rating: 4.7
+  reviews: 396
+  latitude: 52.529705199999995
+  longitude: 13.3998392
+  place_id: ChIJt4cTU-RRqEcRw3f8ubaEYrM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.mein_haus_am_see
+  name: Mein Haus am See
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - gastropub
+  - night_club
+  - live_music_venue
+  - event_venue
+  - cafe
+  indoor_outdoor: mixed
+  summary: Brunnenstraße 197-198, 10119 Berlin, Germany
+  address: Brunnenstraße 197-198, 10119 Berlin, Germany
+  rating: 4.6
+  reviews: 2513
+  latitude: 52.5299428
+  longitude: 13.4007965
+  place_id: ChIJo8Da9-RRqEcRp1K4g7WXtZQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.berlin_icebar
+  name: Berlin Icebar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - tourist_attraction
+  - cocktail_bar
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Spandauer Str. 2, 10178 Berlin, Germany
+  address: Spandauer Str. 2, 10178 Berlin, Germany
+  rating: 4.4
+  reviews: 3175
+  latitude: 52.521417199999995
+  longitude: 13.4036875
+  place_id: ChIJC6j4EPtRqEcR2dg2YzQ8AOA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.bellboy_bar
+  name: Bellboy Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cocktail_bar
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Anton-Wilhelm-Amo-Straße 30, 10117 Berlin, Germany
+  address: Anton-Wilhelm-Amo-Straße 30, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 1757
+  latitude: 52.512158899999996
+  longitude: 13.392056199999999
+  place_id: ChIJ0b0eHkBRqEcRHMXQiCDjKnE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.grand_bar_restaurant_bar_lounge_event_lokation_in_berlin_mitte
+  name: GRAND BAR - Restaurant | Bar | Lounge | Event-Lokation in Berlin-Mitte
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cocktail_bar
+  - breakfast_restaurant
+  - sports_bar
+  - meal_takeaway
+  - event_venue
+  indoor_outdoor: mixed
+  summary: Oranienburger Str. 33, 10117 Berlin, Germany
+  address: Oranienburger Str. 33, 10117 Berlin, Germany
+  rating: 4.7
+  reviews: 4271
+  latitude: 52.5250481
+  longitude: 13.393183599999999
+  place_id: ChIJy7TOeOhRqEcRO9bBWx8cg-0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.mitte.brewdog_berlin_mitte
+  name: BrewDog Berlin Mitte
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - liquor_store
+  - pizza_restaurant
+  - pub
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Ackerstraße 29, 10115 Berlin, Germany
+  address: Ackerstraße 29, 10115 Berlin, Germany
+  rating: 4.4
+  reviews: 4892
+  latitude: 52.5328642
+  longitude: 13.395793999999999
+  place_id: ChIJ6Qv93u9RqEcRh5Idxw-WJa8
+  source_note: Google Places seed build (2026-04-22)

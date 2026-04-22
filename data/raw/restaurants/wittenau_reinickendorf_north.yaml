@@ -1,0 +1,107 @@
+district: Wittenau & Reinickendorf north
+category: restaurants
+items:
+- id: restaurant.wittenau_reinickendorf_north.beyoglu_restaurant
+  name: Beyoglu Restaurant
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - turkish_restaurant
+  - mediterranean_restaurant
+  - bar_and_grill
+  - breakfast_restaurant
+  - bar
+  - meal_takeaway
+  indoor_outdoor: mixed
+  summary: Oranienburger Str. 89, 13437 Berlin, Germany
+  address: Oranienburger Str. 89, 13437 Berlin, Germany
+  rating: 4.8
+  reviews: 678
+  latitude: 52.5959782
+  longitude: 13.333176499999999
+  place_id: ChIJ5QD8nG5TqEcRzUrlMELrbUs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wittenau_reinickendorf_north.landhaus_schupke
+  name: Landhaus Schupke
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mediterranean_restaurant
+  - family_restaurant
+  - wedding_venue
+  - beer_garden
+  - bar
+  - educational_institution
+  indoor_outdoor: mixed
+  summary: Alt-Wittenau 66, 13437 Berlin, Germany
+  address: Alt-Wittenau 66, 13437 Berlin, Germany
+  rating: 4.6
+  reviews: 895
+  latitude: 52.591470099999995
+  longitude: 13.3266431
+  place_id: ChIJE8qGwoNTqEcREDaLKYQ70vQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wittenau_reinickendorf_north.dorfaue
+  name: Dorfaue
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - croatian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Wittenau 56, 13437 Berlin, Germany
+  address: Alt-Wittenau 56, 13437 Berlin, Germany
+  rating: 4.5
+  reviews: 1449
+  latitude: 52.592795599999995
+  longitude: 13.322711100000001
+  place_id: ChIJuVdpBIFTqEcR7yi8sfj1gGI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wittenau_reinickendorf_north.chung_s_kitchen
+  name: Chung's Kitchen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - snack_bar
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Alt-Wittenau 65, 13437 Berlin, Germany
+  address: Alt-Wittenau 65, 13437 Berlin, Germany
+  rating: 4.8
+  reviews: 381
+  latitude: 52.5918335
+  longitude: 13.3267046
+  place_id: ChIJN6VLiYFTqEcRsnbhleJmcTw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.wittenau_reinickendorf_north.trattoria_chiaromonte
+  name: Trattoria Chiaromonte
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Oranienburger Str. 60, 13437 Berlin, Germany
+  address: Oranienburger Str. 60, 13437 Berlin, Germany
+  rating: 4.8
+  reviews: 570
+  latitude: 52.589335399999996
+  longitude: 13.3346548
+  place_id: ChIJQRNGnJxTqEcRDxrUB0oLs_Y
+  source_note: Google Places seed build (2026-04-22)

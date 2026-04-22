@@ -1,27 +1,268 @@
 district: Kreuzberg
 category: places
 items:
-  - id: place.kreuzberg.gorlitzer_park
-    name: Görlitzer Park
-    type: Park
-    tags: [outdoor, local, relaxed, nature]
-    indoor_outdoor: outdoor
-    typical_visit_minutes: 90
-    summary: Lively local park with open space and casual atmosphere, especially popular in warmer months.
-    source_note: Seed curated dataset v1
-  - id: place.kreuzberg.markthalle_neun
-    name: Markthalle Neun
-    type: Food market
-    tags: [food, indoor, local, market]
-    indoor_outdoor: indoor
-    typical_visit_minutes: 90
-    summary: Historic market hall with diverse vendors and strong local food scene.
-    source_note: Seed curated dataset v1
-  - id: place.kreuzberg.viktoriapark
-    name: Viktoriapark
-    type: Park / viewpoint
-    tags: [nature, viewpoint, outdoor, walking]
-    indoor_outdoor: outdoor
-    typical_visit_minutes: 75
-    summary: Hilltop park with city views and a waterfall; calmer than busier central parks.
-    source_note: Seed curated dataset v1
+- id: place.kreuzberg.gorlitzer_park
+  name: Görlitzer Park
+  type: Park
+  tags:
+  - outdoor
+  - local
+  - relaxed
+  - nature
+  indoor_outdoor: outdoor
+  typical_visit_minutes: 90
+  summary: Lively local park with open space and casual atmosphere, especially popular
+    in warmer months.
+  source_note: Seed curated dataset v1
+- id: place.kreuzberg.markthalle_neun
+  name: Markthalle Neun
+  type: Food market
+  tags:
+  - food
+  - indoor
+  - local
+  - market
+  indoor_outdoor: indoor
+  typical_visit_minutes: 90
+  summary: Historic market hall with diverse vendors and strong local food scene.
+  source_note: Seed curated dataset v1
+- id: place.kreuzberg.viktoriapark
+  name: Viktoriapark
+  type: Park / viewpoint
+  tags:
+  - nature
+  - viewpoint
+  - outdoor
+  - walking
+  indoor_outdoor: outdoor
+  typical_visit_minutes: 75
+  summary: Hilltop park with city views and a waterfall; calmer than busier central
+    parks.
+  source_note: Seed curated dataset v1
+- id: place.kreuzberg.fhxb_friedrichshain_kreuzberg_museum
+  name: FHXB Friedrichshain-Kreuzberg Museum
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Adalbertstraße 95A, 10999 Berlin, Germany
+  address: Adalbertstraße 95A, 10999 Berlin, Germany
+  rating: 4.3
+  reviews: 304
+  latitude: 52.5006146
+  longitude: 13.418253199999999
+  place_id: ChIJ0xpVdTNOqEcRW22FiVSWFX0
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.topography_of_terror
+  name: Topography of Terror
+  type: history_museum
+  tags:
+  - history_museum
+  - tourist_attraction
+  - museum
+  - association_or_organization
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Niederkirchnerstraße 8, 10963 Berlin, Germany
+  address: Niederkirchnerstraße 8, 10963 Berlin, Germany
+  rating: 4.6
+  reviews: 39954
+  latitude: 52.506747
+  longitude: 13.3837099
+  place_id: ChIJx3iXOMxRqEcRSGbJBczVSzc
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.german_museum_of_technology
+  name: German Museum of Technology
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Trebbiner Str. 9, 10963 Berlin, Germany
+  address: Trebbiner Str. 9, 10963 Berlin, Germany
+  rating: 4.7
+  reviews: 26559
+  latitude: 52.4986982
+  longitude: 13.3778846
+  place_id: ChIJuyVqNDJQqEcReGoSmZuRNUQ
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.synthesizer_museum_berlin
+  name: Synthesizer Museum Berlin
+  type: museum
+  tags:
+  - museum
+  - cafe
+  - event_venue
+  - food
+  - point_of_interest
+  - service
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Eingang REWE, Stahltür rechts, Klingel - REWE supermarket entrance, steel
+    door at the right, doorbell, Skalitzer Str. 135a, 10999 Berlin, Germany
+  address: Eingang REWE, Stahltür rechts, Klingel - REWE supermarket entrance, steel
+    door at the right, doorbell, Skalitzer Str. 135a, 10999 Berlin, Germany
+  rating: 5
+  reviews: 271
+  latitude: 52.4993428
+  longitude: 13.4187692
+  place_id: ChIJ9YKw7ANPqEcR_Gxab6T2N_s
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.berlin_story_bunker
+  name: Berlin Story Bunker
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - historical_landmark
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schöneberger Str. 23A, 10963 Berlin, Germany
+  address: Schöneberger Str. 23A, 10963 Berlin, Germany
+  rating: 4.7
+  reviews: 6851
+  latitude: 52.5029008
+  longitude: 13.3803901
+  place_id: ChIJi0F9Ns1RqEcRi_7TluGaXTM
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.dokumentationszentrum_flucht_vertreibung_vers_hnung
+  name: Dokumentationszentrum Flucht, Vertreibung, Versöhnung
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Stresemannstraße 90, 10963 Berlin, Germany
+  address: Stresemannstraße 90, 10963 Berlin, Germany
+  rating: 4.6
+  reviews: 422
+  latitude: 52.5049053
+  longitude: 13.3822952
+  place_id: ChIJIVRTpNFRqEcRHXdTqdBhh10
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.berlinische_galerie
+  name: Berlinische Galerie
+  type: art_museum
+  tags:
+  - tourist_attraction
+  - art_gallery
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alte Jakobstraße 124-128, 10969 Berlin, Germany
+  address: Alte Jakobstraße 124-128, 10969 Berlin, Germany
+  rating: 4.5
+  reviews: 5171
+  latitude: 52.5039563
+  longitude: 13.3981579
+  place_id: ChIJNRqweCpOqEcR9Wab9cvf6lc
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.gropius_bau
+  name: Gropius Bau
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Niederkirchnerstraße 7, 10963 Berlin, Germany
+  address: Niederkirchnerstraße 7, 10963 Berlin, Germany
+  rating: 4.6
+  reviews: 4589
+  latitude: 52.507024699999995
+  longitude: 13.3818647
+  place_id: ChIJ4TYb281RqEcRPHf9ZNl05uM
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.jewish_museum_berlin
+  name: Jewish Museum Berlin
+  type: history_museum
+  tags:
+  - history_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Lindenstraße 9-14, 10969 Berlin, Germany
+  address: Lindenstraße 9-14, 10969 Berlin, Germany
+  rating: 4.4
+  reviews: 17733
+  latitude: 52.5023115
+  longitude: 13.3954469
+  place_id: ChIJ-UrRPdVRqEcRTzDm7VTSLEw
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.kunstraum_kreuzberg_bethanien
+  name: Kunstraum Kreuzberg/Bethanien
+  type: art_gallery
+  tags:
+  - art_gallery
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Mariannenpl. 2, 10997 Berlin, Germany
+  address: Mariannenpl. 2, 10997 Berlin, Germany
+  rating: 4.5
+  reviews: 1008
+  latitude: 52.5044596
+  longitude: 13.423787299999999
+  place_id: ChIJQfGMiDZOqEcRnneyY2dd8sk
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.science_center_spectrum
+  name: Science Center Spectrum
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Möckernstraße 26, 10963 Berlin, Germany
+  address: Möckernstraße 26, 10963 Berlin, Germany
+  rating: 4.7
+  reviews: 3105
+  latitude: 52.4981015
+  longitude: 13.3793303
+  place_id: ChIJsa8CDDJQqEcRIJHE6BnHaag
+  source_note: Google Places seed build (2026-04-22)
+- id: place.kreuzberg.anoha_the_children_s_world_of_the_jewish_museum_berlin
+  name: ANOHA — The Children’s World of the Jewish Museum Berlin
+  type: museum
+  tags:
+  - indoor_playground
+  - playground
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Fromet-und-Moses-Mendelssohn-Platz, 10969 Berlin, Germany
+  address: Fromet-und-Moses-Mendelssohn-Platz, 10969 Berlin, Germany
+  rating: 4.8
+  reviews: 1523
+  latitude: 52.503115
+  longitude: 13.393241199999999
+  place_id: ChIJ8YeH-MNRqEcR5rvunFe_aRU
+  source_note: Google Places seed build (2026-04-22)

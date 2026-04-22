@@ -1,0 +1,185 @@
+district: Tiergarten
+category: places
+items:
+- id: place.tiergarten.global_stone_project
+  name: Global Stone Project
+  type: sculpture
+  tags:
+  - sculpture
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Tiergarten, 10785 Berlin, Germany
+  address: Tiergarten, 10785 Berlin, Germany
+  rating: 4.2
+  reviews: 151
+  latitude: 52.5130028
+  longitude: 13.373536699999999
+  place_id: ChIJDzFvFMhRqEcRl-QVxuYUNpI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.rosengarten
+  name: Rosengarten
+  type: garden
+  tags:
+  - garden
+  - park
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Tiergarten, 10785 Berlin, Germany
+  address: Tiergarten, 10785 Berlin, Germany
+  rating: 4.6
+  reviews: 284
+  latitude: 52.513852199999995
+  longitude: 13.356892600000002
+  place_id: ChIJaT3_dKtRqEcRU0k_u2tGcik
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.reitergarten
+  name: Reitergarten
+  type: garden
+  tags:
+  - garden
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Tiergarten, 10557 Berlin, Germany
+  address: Tiergarten, 10557 Berlin, Germany
+  rating: 4.9
+  reviews: 7
+  latitude: 52.5170579
+  longitude: 13.350588
+  place_id: ChIJH13k2ypRqEcRFRxhIT6vp90
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.rhododendronhain
+  name: Rhododendronhain
+  type: park
+  tags:
+  - park
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Tiergartengewässer, 10785 Berlin, Germany
+  address: Tiergartengewässer, 10785 Berlin, Germany
+  rating: 4.8
+  reviews: 156
+  latitude: 52.511937599999996
+  longitude: 13.3604652
+  place_id: ChIJo0MzLa5RqEcRvdR-EHL8mog
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.the_upside_down_berlin
+  name: The Upside Down Berlin
+  type: tourist_attraction
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: The Playce, Unite BZ, Alte Potsdamer Str. 7, 10785 Berlin, Germany
+  address: The Playce, Unite BZ, Alte Potsdamer Str. 7, 10785 Berlin, Germany
+  rating: 4.8
+  reviews: 1910
+  latitude: 52.5068649
+  longitude: 13.3735482
+  place_id: ChIJs9n-LklRqEcRvNwJIBlx5BA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.p61_gallery_exhibition
+  name: P61 Gallery & Exhibition
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - event_venue
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Potsdamer Str. 61, 10785 Berlin, Germany
+  address: Potsdamer Str. 61, 10785 Berlin, Germany
+  rating: 4.6
+  reviews: 524
+  latitude: 52.5040184
+  longitude: 13.366975
+  place_id: ChIJLzINUrpRqEcRswxeycV3rZo
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.gem_ldegalerie
+  name: Gemäldegalerie
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - art_gallery
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Johanna und Eduard Arnhold Platz, 10785 Berlin, Germany
+  address: Johanna und Eduard Arnhold Platz, 10785 Berlin, Germany
+  rating: 4.7
+  reviews: 5395
+  latitude: 52.5084982
+  longitude: 13.3651754
+  place_id: ChIJc3DkFbRRqEcRrUuZhztJVVg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.futurium
+  name: Futurium
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alexanderufer 2, 10117 Berlin, Germany
+  address: Alexanderufer 2, 10117 Berlin, Germany
+  rating: 4.4
+  reviews: 12740
+  latitude: 52.524087599999994
+  longitude: 13.374350699999999
+  place_id: ChIJExpfyL9RqEcROQaM3Ff0a7A
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.deutschlandmuseum
+  name: Deutschlandmuseum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - adventure_sports_center
+  - amusement_park
+  - history_museum
+  - sports_complex
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Leipziger Pl. 7, 10117 Berlin, Germany
+  address: Leipziger Pl. 7, 10117 Berlin, Germany
+  rating: 4.6
+  reviews: 4140
+  latitude: 52.5087602
+  longitude: 13.3783615
+  place_id: ChIJ6w8lPm5RqEcRqAOszOrK_dA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.tiergarten.c_o_berlin
+  name: C/O Berlin
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  address: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 3446
+  latitude: 52.506633699999995
+  longitude: 13.330547
+  place_id: ChIJ3_95c_5QqEcRbKo0_TzdGC8
+  source_note: Google Places seed build (2026-04-22)

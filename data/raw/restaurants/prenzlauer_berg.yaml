@@ -1,0 +1,828 @@
+district: Prenzlauer Berg
+category: restaurants
+items:
+- id: restaurant.prenzlauer_berg.restaurant_pasternak
+  name: Restaurant Pasternak
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - russian_restaurant
+  - brunch_restaurant
+  - ukrainian_restaurant
+  - eastern_european_restaurant
+  - breakfast_restaurant
+  - vegan_restaurant
+  indoor_outdoor: mixed
+  summary: Knaackstraße 22-24, 10405 Berlin, Germany
+  address: Knaackstraße 22-24, 10405 Berlin, Germany
+  rating: 4.8
+  reviews: 2915
+  latitude: 52.534818599999994
+  longitude: 13.4186651
+  place_id: ChIJ5e1AjFhPqEcRygPhofAdq3k
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.zur_haxe
+  name: Zur Haxe
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - bavarian_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Erich-Weinert-Straße 128, 10409 Berlin, Germany
+  address: Erich-Weinert-Straße 128, 10409 Berlin, Germany
+  rating: 4.6
+  reviews: 3089
+  latitude: 52.5448106
+  longitude: 13.4369116
+  place_id: ChIJybmBguRNqEcRZzHBB4br45U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.masel_topf
+  name: Masel Topf
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - israeli_restaurant
+  - fine_dining_restaurant
+  - fusion_restaurant
+  - middle_eastern_restaurant
+  - falafel_restaurant
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Rykestraße 2, 10405 Berlin, Germany
+  address: Rykestraße 2, 10405 Berlin, Germany
+  rating: 4.6
+  reviews: 1482
+  latitude: 52.5348068
+  longitude: 13.419555899999999
+  place_id: ChIJedQX7QNOqEcRO900Oc6mT6Y
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.sadhu_prenzlauer_berg
+  name: Sadhu Prenzlauer Berg
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pakistani_restaurant
+  - cocktail_bar
+  - bar
+  - indian_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Stargarder Str. 60, 10437 Berlin, Germany
+  address: Stargarder Str. 60, 10437 Berlin, Germany
+  rating: 4.9
+  reviews: 1189
+  latitude: 52.5453541
+  longitude: 13.4214104
+  place_id: ChIJyc-08BpNqEcRiOxp-r0_rvM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.vegang_prenzlauer_berg
+  name: Vegang Prenzlauer Berg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vegan_restaurant
+  - vietnamese_restaurant
+  - vegetarian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Oderberger Str. 51-52, 10435 Berlin, Germany
+  address: Oderberger Str. 51-52, 10435 Berlin, Germany
+  rating: 4.8
+  reviews: 531
+  latitude: 52.538650000000004
+  longitude: 13.40855
+  place_id: ChIJixNxB7VRqEcRwY6rMfC9mlQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.ristorante_mjalt
+  name: Ristorante Mjalt
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Sredzkistraße 23, 10435 Berlin, Germany
+  address: Sredzkistraße 23, 10435 Berlin, Germany
+  rating: 4.8
+  reviews: 268
+  latitude: 52.538540100000006
+  longitude: 13.4160326
+  place_id: ChIJweDgnidPqEcRDpxA9eb1HtM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.umami
+  name: Umami
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Knaackstraße 16-18, 10405 Berlin, Germany
+  address: Knaackstraße 16-18, 10405 Berlin, Germany
+  rating: 4.3
+  reviews: 5062
+  latitude: 52.534441799999996
+  longitude: 13.4194515
+  place_id: ChIJ0dhGlQNOqEcRWIA5f74Udu4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.mami_s_food_wine
+  name: MaMi's Food&Wine
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Oderberger Str. 13, 10435 Berlin, Germany
+  address: Oderberger Str. 13, 10435 Berlin, Germany
+  rating: 4.9
+  reviews: 359
+  latitude: 52.539162999999995
+  longitude: 13.4087825
+  place_id: ChIJHxuv2UlRqEcRP9CLzD5upAc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.zum_schusterjungen
+  name: Zum Schusterjungen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Danziger Str. 9, 10435 Berlin, Germany
+  address: Danziger Str. 9, 10435 Berlin, Germany
+  rating: 4.5
+  reviews: 2727
+  latitude: 52.5409194
+  longitude: 13.4141972
+  place_id: ChIJAQqSlv9RqEcRoZcWMcljt10
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.j_mo_restaurant
+  name: JÓMO Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - brunch_restaurant
+  - breakfast_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rykestraße 14, 10405 Berlin, Germany
+  address: Rykestraße 14, 10405 Berlin, Germany
+  rating: 4.8
+  reviews: 414
+  latitude: 52.536611699999995
+  longitude: 13.421101
+  place_id: ChIJ4dMOuO1PqEcRx5UrxoPxz3Q
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.asteria
+  name: Asteria
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schönhauser Allee 143, 10437 Berlin, Germany
+  address: Schönhauser Allee 143, 10437 Berlin, Germany
+  rating: 4.7
+  reviews: 3171
+  latitude: 52.5415419
+  longitude: 13.4117448
+  place_id: ChIJhWheb_9RqEcReDrBqesXFmk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.tapalier_taste_of_art
+  name: Tapalier - Taste of Art
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - tapas_restaurant
+  - asian_restaurant
+  - vietnamese_restaurant
+  - japanese_restaurant
+  indoor_outdoor: mixed
+  summary: Pappelallee 22, 10437 Berlin, Germany
+  address: Pappelallee 22, 10437 Berlin, Germany
+  rating: 4.8
+  reviews: 544
+  latitude: 52.5443632
+  longitude: 13.4163182
+  place_id: ChIJ9bzPFuZTqEcRpp0em7sOkgk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.itarei_restaurant_japanese_x_italian_fusion
+  name: Itarei Restaurant - Japanese x Italian Fusion
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - japanese_restaurant
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - asian_restaurant
+  - food_store
+  - barbecue_restaurant
+  indoor_outdoor: mixed
+  summary: Kollwitzstraße 89, 10435 Berlin, Germany
+  address: Kollwitzstraße 89, 10435 Berlin, Germany
+  rating: 4.7
+  reviews: 766
+  latitude: 52.538622499999995
+  longitude: 13.4200916
+  place_id: ChIJx4ZZfwBPqEcR7f3jjsc8dEE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.vietnamese_restaurant_anjoy
+  name: Vietnamese Restaurant Anjoy
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_restaurant
+  - buffet_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Rykestraße 11, 10405 Berlin, Germany
+  address: Rykestraße 11, 10405 Berlin, Germany
+  rating: 4.7
+  reviews: 1672
+  latitude: 52.536173899999994
+  longitude: 13.4205434
+  place_id: ChIJzTSPWwFOqEcR9JseYbF2DXE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.h_ppies
+  name: häppies
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Dunckerstraße 2, 10437 Berlin, Germany
+  address: Dunckerstraße 2, 10437 Berlin, Germany
+  rating: 4.8
+  reviews: 982
+  latitude: 52.540596199999996
+  longitude: 13.419345499999999
+  place_id: ChIJlxpe2P9NqEcR_hXnJHV-tAY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.babel_restaurant
+  name: Babel Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - lebanese_restaurant
+  - snack_bar
+  - mediterranean_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Kastanienallee 33, 10435 Berlin, Germany
+  address: Kastanienallee 33, 10435 Berlin, Germany
+  rating: 4.7
+  reviews: 2487
+  latitude: 52.536718199999996
+  longitude: 13.4074297
+  place_id: ChIJE0RxBvxRqEcREc3DBhw-Qkw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.vedis_indisches_restaurant
+  name: Vedis Indisches Restaurant
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - halal_restaurant
+  - cocktail_bar
+  - bar_and_grill
+  - vegan_restaurant
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Schönhauser Allee 142, 10437 Berlin, Germany
+  address: Schönhauser Allee 142, 10437 Berlin, Germany
+  rating: 4.6
+  reviews: 2396
+  latitude: 52.5417968
+  longitude: 13.4117033
+  place_id: ChIJX1xyZv9RqEcRbAgPx6C54WM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.meya_meya_gyptisches_essen
+  name: Meya Meya - ägyptisches Essen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Meya Meya, Greifswalder Str. 214, 10405 Berlin, Germany
+  address: Meya Meya, Greifswalder Str. 214, 10405 Berlin, Germany
+  rating: 4.9
+  reviews: 1782
+  latitude: 52.5317619
+  longitude: 13.427435299999999
+  place_id: ChIJH_jiNgxPqEcRWEaethbyiBo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.matthias_restaurant
+  name: Matthias Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kollwitzstraße 87, 10435 Berlin, Germany
+  address: Kollwitzstraße 87, 10435 Berlin, Germany
+  rating: 4.8
+  reviews: 119
+  latitude: 52.5383341
+  longitude: 13.419955499999999
+  place_id: ChIJte69WIFPqEcRK-m9QqI74xE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.ushido
+  name: Ushido
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - yakiniku_restaurant
+  - asian_restaurant
+  - barbecue_restaurant
+  - japanese_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Lychener Str. 18, 10437 Berlin, Germany
+  address: Lychener Str. 18, 10437 Berlin, Germany
+  rating: 4.8
+  reviews: 1857
+  latitude: 52.542226799999995
+  longitude: 13.4162567
+  place_id: ChIJTbAOBABSqEcRD-cP31BLmr8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.kaffee_momente_berlin_caf_berlin
+  name: Kaffee Momente Berlin - Café Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - breakfast_restaurant
+  - cafe
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Bötzowstraße 21, 10407 Berlin, Germany
+  address: Bötzowstraße 21, 10407 Berlin, Germany
+  rating: 4.9
+  reviews: 1044
+  latitude: 52.530988699999995
+  longitude: 13.432951
+  place_id: ChIJM1oDX6VPqEcR62STb2jLJDo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.ewig_freunde
+  name: Ewig Freunde
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - coffee_roastery
+  - diner
+  - breakfast_restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Raumerstraße 9, 10437 Berlin, Germany
+  address: Raumerstraße 9, 10437 Berlin, Germany
+  rating: 4.9
+  reviews: 1265
+  latitude: 52.5427945
+  longitude: 13.4180771
+  place_id: ChIJNU2eaKxNqEcRFIFM7gsHG_I
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.caf_krone
+  name: Café Krone
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - breakfast_restaurant
+  - coffee_shop
+  - bar
+  - food_store
+  indoor_outdoor: mixed
+  summary: Oderberger Str. 38, 10435 Berlin, Germany
+  address: Oderberger Str. 38, 10435 Berlin, Germany
+  rating: 4.7
+  reviews: 2304
+  latitude: 52.539744
+  longitude: 13.406048
+  place_id: ChIJ-ZwOGflRqEcRkAnldfn_14c
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.kaffee_marlene
+  name: Kaffee Marlene
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - cocktail_bar
+  - coffee_shop
+  - bar
+  - pastry_shop
+  - dessert_shop
+  indoor_outdoor: mixed
+  summary: Kastanienallee 103, 10435 Berlin, Germany
+  address: Kastanienallee 103, 10435 Berlin, Germany
+  rating: 4.4
+  reviews: 960
+  latitude: 52.53994600000001
+  longitude: 13.411412499999999
+  place_id: ChIJVVVFBP9RqEcRdIF-tfupkDM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.luuv_caf
+  name: luuv café
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Dunckerstraße 72, 10437 Berlin, Germany
+  address: Dunckerstraße 72, 10437 Berlin, Germany
+  rating: 4.7
+  reviews: 1137
+  latitude: 52.5443077
+  longitude: 13.4219837
+  place_id: ChIJfwl8AQBNqEcRKDbA_PT74a4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.kaffee_bar
+  name: KAFFEE.BAR
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Stargarder Str. 55a, 10437 Berlin, Germany
+  address: Stargarder Str. 55a, 10437 Berlin, Germany
+  rating: 4.7
+  reviews: 820
+  latitude: 52.544654799999996
+  longitude: 13.4230246
+  place_id: ChIJbQuiqRdNqEcR0FgQumf7_G4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.liebling_caf_bar
+  name: Liebling - Café & Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - cocktail_bar
+  - breakfast_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Raumerstraße 36A, 10437 Berlin, Germany
+  address: Raumerstraße 36A, 10437 Berlin, Germany
+  rating: 4.7
+  reviews: 759
+  latitude: 52.542111899999995
+  longitude: 13.420669499999999
+  place_id: ChIJZ69azP9NqEcRMwjNItE1MF4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.bonanza_coffee_heroes
+  name: Bonanza Coffee Heroes
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Oderberger Str. 35, 10435 Berlin, Germany
+  address: Oderberger Str. 35, 10435 Berlin, Germany
+  rating: 4.2
+  reviews: 1725
+  latitude: 52.539975
+  longitude: 13.405344399999999
+  place_id: ChIJyWdFA_lRqEcRPDXaiTYiPmk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.pursuit_of_coffee
+  name: Pursuit of Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Pappelallee 36, 10437 Berlin, Germany
+  address: Pappelallee 36, 10437 Berlin, Germany
+  rating: 4.8
+  reviews: 314
+  latitude: 52.5466749
+  longitude: 13.418647499999999
+  place_id: ChIJvQhbiTVTqEcRfrtftQefsMQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.godshot
+  name: Godshot
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Immanuelkirchstraße 32, 10405 Berlin, Germany
+  address: Immanuelkirchstraße 32, 10405 Berlin, Germany
+  rating: 4.5
+  reviews: 554
+  latitude: 52.533070699999996
+  longitude: 13.4228907
+  place_id: ChIJQQI6WwROqEcRn7-6RmdQ-2I
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.cafe_melon
+  name: Cafe Melon
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Greifswalder Str. 217, 10405 Berlin, Germany
+  address: Greifswalder Str. 217, 10405 Berlin, Germany
+  rating: 4.8
+  reviews: 955
+  latitude: 52.531173900000006
+  longitude: 13.4267621
+  place_id: ChIJg5dwzBpOqEcRSm3_6gS1sDU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.town_mouse_coffee
+  name: Town Mouse Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Marienburger Str. 5, 10405 Berlin, Germany
+  address: Marienburger Str. 5, 10405 Berlin, Germany
+  rating: 4.8
+  reviews: 535
+  latitude: 52.5349971
+  longitude: 13.423450400000002
+  place_id: ChIJyXISxh5PqEcRCj1H8Ksseng
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.caf_anna_blume
+  name: Café Anna Blume
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - western_restaurant
+  - breakfast_restaurant
+  - pastry_shop
+  - dessert_shop
+  - confectionery
+  indoor_outdoor: mixed
+  summary: Kollwitzstraße 83, 10435 Berlin, Germany
+  address: Kollwitzstraße 83, 10435 Berlin, Germany
+  rating: 4.2
+  reviews: 4050
+  latitude: 52.5380566
+  longitude: 13.419539799999999
+  place_id: ChIJld4fBgFOqEcR1gR_4gT6sfY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.kajumi
+  name: Kajumi
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - coffee_roastery
+  - cafe
+  - food_store
+  - store
+  - food
+  indoor_outdoor: mixed
+  summary: Dunckerstraße 73, 10437 Berlin, Germany
+  address: Dunckerstraße 73, 10437 Berlin, Germany
+  rating: 4.8
+  reviews: 541
+  latitude: 52.544187199999996
+  longitude: 13.4219242
+  place_id: ChIJjQVBau1NqEcRigtYl9mvrz4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.an_einem_sonntag_im_august
+  name: An einem Sonntag im August
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - gastropub
+  - pub
+  - live_music_venue
+  - cafe
+  - event_venue
+  indoor_outdoor: mixed
+  summary: Kastanienallee 103, 10435 Berlin, Germany
+  address: Kastanienallee 103, 10435 Berlin, Germany
+  rating: 4.4
+  reviews: 1789
+  latitude: 52.539963099999994
+  longitude: 13.4115024
+  place_id: ChIJt5AxG_9RqEcR4P2Ricm8tv8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.caf_morgenrot
+  name: Café Morgenrot
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kastanienallee 85, 10435 Berlin, Germany
+  address: Kastanienallee 85, 10435 Berlin, Germany
+  rating: 4.4
+  reviews: 1267
+  latitude: 52.5375162
+  longitude: 13.4089072
+  place_id: ChIJkxeZpf5RqEcR5TkFkROUSjY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.spro_scones_bakery_coffee
+  name: SPRO Scones Bakery & Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Schönhauser Allee 50A, 10437 Berlin, Germany
+  address: Schönhauser Allee 50A, 10437 Berlin, Germany
+  rating: 4.7
+  reviews: 362
+  latitude: 52.542637299999996
+  longitude: 13.4127143
+  place_id: ChIJ7bFaGxJTqEcRZkR3dDtbF9Y
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.butter
+  name: BUTTER
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - gastropub
+  - brunch_restaurant
+  - bistro
+  - breakfast_restaurant
+  - german_restaurant
+  indoor_outdoor: mixed
+  summary: Pappelallee 73, 10437 Berlin, Germany
+  address: Pappelallee 73, 10437 Berlin, Germany
+  rating: 4.4
+  reviews: 1563
+  latitude: 52.54396
+  longitude: 13.415059999999999
+  place_id: ChIJuVMvUABSqEcRqTEtBlwVETc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.coffee_ai_le
+  name: Coffee ai-le
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Marienburger Str. 39, 10405 Berlin, Germany
+  address: Marienburger Str. 39, 10405 Berlin, Germany
+  rating: 4.9
+  reviews: 224
+  latitude: 52.5347867
+  longitude: 13.4248329
+  place_id: ChIJJbBcRgBPqEcROgm6VC7xXVE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.prenzlauer_berg.nothaft_cafe
+  name: NOTHAFT CAFE
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - bagel_shop
+  - sandwich_shop
+  - cafe
+  - bakery
+  - food_store
+  indoor_outdoor: mixed
+  summary: Schönhauser Allee 43A, 10435 Berlin, Germany
+  address: Schönhauser Allee 43A, 10435 Berlin, Germany
+  rating: 4.4
+  reviews: 541
+  latitude: 52.540310999999996
+  longitude: 13.4126148
+  place_id: ChIJN4mFp_9RqEcR_llzgg8Tw28
+  source_note: Google Places seed build (2026-04-22)

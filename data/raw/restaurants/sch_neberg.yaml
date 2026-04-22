@@ -1,0 +1,615 @@
+district: Schöneberg
+category: restaurants
+items:
+- id: restaurant.sch_neberg.masaya_restaurant
+  name: Masaya Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Zietenstraße 19, 10783 Berlin, Germany
+  address: Zietenstraße 19, 10783 Berlin, Germany
+  rating: 4.9
+  reviews: 535
+  latitude: 52.497968099999994
+  longitude: 13.3568438
+  place_id: ChIJzXLxUlRRqEcRXBkD8Spec7w
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.amrit_restaurant_schoneberg
+  name: AMRIT Restaurant Schoneberg
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - halal_restaurant
+  - catering_service
+  - cocktail_bar
+  - meal_takeaway
+  - bar
+  indoor_outdoor: mixed
+  summary: Winterfeldtstraße 40, 10781 Berlin, Germany
+  address: Winterfeldtstraße 40, 10781 Berlin, Germany
+  rating: 4.7
+  reviews: 4187
+  latitude: 52.4973106
+  longitude: 13.3547693
+  place_id: ChIJEzVVJ09QqEcRGaayeeRiLYA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.fatoush_sch_neberg
+  name: Fatoush Schöneberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - middle_eastern_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Welserstraße 27, 10777 Berlin, Germany
+  address: Welserstraße 27, 10777 Berlin, Germany
+  rating: 4.8
+  reviews: 189
+  latitude: 52.499392099999994
+  longitude: 13.3422076
+  place_id: ChIJ1ZVJlilRqEcR-a9Zj3i5Hms
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.malakeh_cuisine_berlin
+  name: Malakeh Cuisine Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Potsdamer Str. 153, 10783 Berlin, Germany
+  address: Potsdamer Str. 153, 10783 Berlin, Germany
+  rating: 4.8
+  reviews: 1725
+  latitude: 52.49538
+  longitude: 13.36146
+  place_id: ChIJB51hayBRqEcRy9hHDRjFHXQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.ong_cat
+  name: Ong Cat
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Meininger Str. 7, 10823 Berlin, Germany
+  address: Meininger Str. 7, 10823 Berlin, Germany
+  rating: 4.7
+  reviews: 1084
+  latitude: 52.485794899999995
+  longitude: 13.345366199999999
+  place_id: ChIJ_botl9dRqEcRDqTZXOopcWY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.elefant
+  name: Elefant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Fuggerstraße 18, 10777 Berlin, Germany
+  address: Fuggerstraße 18, 10777 Berlin, Germany
+  rating: 4.5
+  reviews: 4205
+  latitude: 52.499055399999996
+  longitude: 13.3453729
+  place_id: ChIJf9UjBlFQqEcRKejL4YhXNl0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.pequena_habana_restaurant_berlin
+  name: Pequena Habana Restaurant Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cuban_restaurant
+  - caribbean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Eisenacher Str. 48, 10823 Berlin, Germany
+  address: Eisenacher Str. 48, 10823 Berlin, Germany
+  rating: 4.8
+  reviews: 920
+  latitude: 52.4877694
+  longitude: 13.349167699999999
+  place_id: ChIJ0y-QukNQqEcRfMzBScTZHqY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.restaurant_boccacelli_am_winterfeldtplatz_berlin
+  name: Restaurant Boccacelli am Winterfeldtplatz Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - bar
+  - italian_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Winterfeldtstraße 34, 10781 Berlin, Germany
+  address: Winterfeldtstraße 34, 10781 Berlin, Germany
+  rating: 4.8
+  reviews: 2226
+  latitude: 52.4971071
+  longitude: 13.355708499999999
+  place_id: ChIJrcPw105QqEcR_0-GmjViOMk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.landhaus_sch_neberg
+  name: Landhaus Schöneberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Salzburger Str. 19, 10825 Berlin, Germany
+  address: Salzburger Str. 19, 10825 Berlin, Germany
+  rating: 4.4
+  reviews: 567
+  latitude: 52.4867724
+  longitude: 13.342050299999999
+  place_id: ChIJTSxmaVFRqEcRq1_ntQggtQA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.r_yam_gem_se_kebab
+  name: Rüyam Gemüse Kebab
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - kebab_shop
+  - turkish_restaurant
+  - fast_food_restaurant
+  - vegetarian_restaurant
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Hauptstraße 36, 10827 Berlin, Germany
+  address: Hauptstraße 36, 10827 Berlin, Germany
+  rating: 4.9
+  reviews: 38875
+  latitude: 52.484503
+  longitude: 13.3523488
+  place_id: ChIJ_UftzEFQqEcRaR1V3JDyRrQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.meyan_mediterranean_restaurant
+  name: Meyan Mediterranean Restaurant
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - mediterranean_restaurant
+  - catering_service
+  - brunch_restaurant
+  - turkish_restaurant
+  - deli
+  indoor_outdoor: mixed
+  summary: Goltzstraße 36, 10781 Berlin, Germany
+  address: Goltzstraße 36, 10781 Berlin, Germany
+  rating: 4.7
+  reviews: 883
+  latitude: 52.4937743
+  longitude: 13.3535758
+  place_id: ChIJRzyo7kVQqEcRUSJNII0DTi0
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.gasthaus_gottlob
+  name: Gasthaus Gottlob
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Akazienstraße 17, 10823 Berlin, Germany
+  address: Akazienstraße 17, 10823 Berlin, Germany
+  rating: 4.6
+  reviews: 1057
+  latitude: 52.4893715
+  longitude: 13.353542299999999
+  place_id: ChIJsxy_rUZQqEcRfQnlHPRM0ys
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.planet_cuisine
+  name: Planet Cuisine
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hauptstraße 3, 10827 Berlin, Germany
+  address: Hauptstraße 3, 10827 Berlin, Germany
+  rating: 4.9
+  reviews: 204
+  latitude: 52.490119
+  longitude: 13.359532999999999
+  place_id: ChIJe6wmOaxRqEcRF8ISgZHVZQY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.restaurant_winterfeld
+  name: Restaurant Winterfeld
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Winterfeldtstraße 58, 10781 Berlin, Germany
+  address: Winterfeldtstraße 58, 10781 Berlin, Germany
+  rating: 4.5
+  reviews: 1341
+  latitude: 52.4968551
+  longitude: 13.3513253
+  place_id: ChIJe7Tsuk9QqEcRel93jOGpN_c
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.karabach_restaurant
+  name: Karabach Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - middle_eastern_restaurant
+  - eastern_european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Maaßenstraße 9, 10777 Berlin, Germany
+  address: Maaßenstraße 9, 10777 Berlin, Germany
+  rating: 4.8
+  reviews: 887
+  latitude: 52.4978327
+  longitude: 13.3545816
+  place_id: ChIJ5SEH505QqEcRBtrALtEhxpI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.bob_thoms
+  name: Bob & Thoms
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Welserstraße 10-12, 10777 Berlin, Germany
+  address: Welserstraße 10-12, 10777 Berlin, Germany
+  rating: 4.9
+  reviews: 180
+  latitude: 52.496955
+  longitude: 13.3420431
+  place_id: ChIJnZ42Mo5RqEcRavC2G5LxcTI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.taverna_ousia
+  name: Taverna Ousia
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Grunewaldstraße 54, 10825 Berlin, Germany
+  address: Grunewaldstraße 54, 10825 Berlin, Germany
+  rating: 4.6
+  reviews: 2017
+  latitude: 52.4881721
+  longitude: 13.33794
+  place_id: ChIJOXPlpUZQqEcRgL0WX0_P_4U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.april
+  name: April
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Eisenacher Str. 75, 10823 Berlin, Germany
+  address: Eisenacher Str. 75, 10823 Berlin, Germany
+  rating: 4.4
+  reviews: 2041
+  latitude: 52.487620299999996
+  longitude: 13.349748199999999
+  place_id: ChIJaZtxr09QqEcROU8qtAgE12k
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.rocoto_peruvian_cuisine_pisco_bar
+  name: Rocoto - Peruvian Cuisine & Pisco Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - peruvian_restaurant
+  - brewpub
+  - fusion_restaurant
+  - seafood_restaurant
+  - wine_bar
+  - cocktail_bar
+  indoor_outdoor: mixed
+  summary: Winterfeldtstraße 17, 10781 Berlin, Germany
+  address: Winterfeldtstraße 17, 10781 Berlin, Germany
+  rating: 4.8
+  reviews: 1040
+  latitude: 52.4962354
+  longitude: 13.3586761
+  place_id: ChIJUSVlHHNRqEcRCYhG-Ta8bT4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.osteria_ribaltone
+  name: Osteria Ribaltone
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Motzstraße 54, 10777 Berlin, Germany
+  address: Motzstraße 54, 10777 Berlin, Germany
+  rating: 4.5
+  reviews: 1203
+  latitude: 52.496204399999996
+  longitude: 13.3426742
+  place_id: ChIJs7V_m1BQqEcRcGvKiJsmdZU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.caf_modo
+  name: Café Modo
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - brunch_restaurant
+  - bagel_shop
+  - breakfast_restaurant
+  - bakery
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Fuggerstraße 37, 10777 Berlin, Germany
+  address: Fuggerstraße 37, 10777 Berlin, Germany
+  rating: 4.8
+  reviews: 539
+  latitude: 52.4990957
+  longitude: 13.3416374
+  place_id: ChIJ_bfuSnRRqEcRuuqATfAlv7I
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.caf_sch_ngrau
+  name: Café Schöngrau
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Eisenacher Str. 79, 10823 Berlin, Germany
+  address: Eisenacher Str. 79, 10823 Berlin, Germany
+  rating: 4.6
+  reviews: 381
+  latitude: 52.4887271
+  longitude: 13.3495685
+  place_id: ChIJsUs7ua1RqEcR6QeaShZfY14
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.coffee_pony
+  name: Coffee Pony
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Richard-von-Weizsäcker-Platz 4, 10827 Berlin, Germany
+  address: Richard-von-Weizsäcker-Platz 4, 10827 Berlin, Germany
+  rating: 4.9
+  reviews: 1189
+  latitude: 52.486462599999996
+  longitude: 13.357641000000001
+  place_id: ChIJ19-3HGJRqEcR87QYGo_Ki_M
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.doubleeye
+  name: DoubleEye
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Akazienstraße 22, 10823 Berlin, Germany
+  address: Akazienstraße 22, 10823 Berlin, Germany
+  rating: 4.6
+  reviews: 1208
+  latitude: 52.487989299999995
+  longitude: 13.354066
+  place_id: ChIJ5Y6iakFQqEcRYAQYU3VR4ls
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.coffee_bagel_house
+  name: Coffee & Bagel House
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - vegan_restaurant
+  - brunch_restaurant
+  - bagel_shop
+  - vegetarian_restaurant
+  - bakery
+  indoor_outdoor: mixed
+  summary: Belziger Str. 21, 10823 Berlin, Germany
+  address: Belziger Str. 21, 10823 Berlin, Germany
+  rating: 4.9
+  reviews: 820
+  latitude: 52.4871413
+  longitude: 13.354233599999999
+  place_id: ChIJb7HZP5xRqEcRKUww6RNqjTw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.someone_loves_you
+  name: Someone loves you
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - brunch_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Goltzstraße 1, 10781 Berlin, Germany
+  address: Goltzstraße 1, 10781 Berlin, Germany
+  rating: 4.6
+  reviews: 397
+  latitude: 52.4902088
+  longitude: 13.3534261
+  place_id: ChIJQceWKrZRqEcRGEl6phEVwAM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.caf_60_grad_sch_neberg
+  name: Café 60 Grad (Schöneberg)
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Stübbenstraße 8, 10779 Berlin, Germany
+  address: Stübbenstraße 8, 10779 Berlin, Germany
+  rating: 4.5
+  reviews: 168
+  latitude: 52.489647999999995
+  longitude: 13.336974900000001
+  place_id: ChIJbZhZL9JRqEcR39CaKx4xaxU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.caf_de_enrico
+  name: Café de Enrico
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - coffee_shop
+  - food_store
+  - store
+  - food
+  indoor_outdoor: mixed
+  summary: Fritz-Reuter-Straße 13, 10827 Berlin, Germany
+  address: Fritz-Reuter-Straße 13, 10827 Berlin, Germany
+  rating: 4.8
+  reviews: 819
+  latitude: 52.4808218
+  longitude: 13.3499152
+  place_id: ChIJR88fxmtQqEcRQCHSAtkyJCE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.mattea
+  name: Mattea
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - wine_bar
+  - bar
+  - cafe
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Frankenstraße 13, 10781 Berlin, Germany
+  address: Frankenstraße 13, 10781 Berlin, Germany
+  rating: 4.5
+  reviews: 1544
+  latitude: 52.493271099999994
+  longitude: 13.351966000000001
+  place_id: ChIJKfasvUVQqEcR5Ke7IhOTOnQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.sch_neberg.caf_kalwil_berlin
+  name: Café Kalwil Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - coffee_shop
+  - restaurant
+  - food_store
+  - store
+  indoor_outdoor: mixed
+  summary: Motzstraße 30, 10777 Berlin, Germany
+  address: Motzstraße 30, 10777 Berlin, Germany
+  rating: 4.4
+  reviews: 1457
+  latitude: 52.497802799999995
+  longitude: 13.347697199999999
+  place_id: ChIJIbrAM1BQqEcRbv8ly8HwIGA
+  source_note: Google Places seed build (2026-04-22)

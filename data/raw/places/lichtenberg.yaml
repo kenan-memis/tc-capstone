@@ -1,0 +1,57 @@
+district: Lichtenberg
+category: places
+items:
+- id: place.lichtenberg.stasi_museum
+  name: Stasi Museum
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  address: Normannenstraße 20/Haus 1, 10365 Berlin, Germany
+  rating: 4.5
+  reviews: 9183
+  latitude: 52.514527
+  longitude: 13.4872818
+  place_id: ChIJKeccmpNOqEcRHQ7hqU7JhnY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.lichtenberg.dark_matter
+  name: DARK MATTER
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Köpenicker Ch 46, 10317 Berlin, Germany
+  address: Köpenicker Ch 46, 10317 Berlin, Germany
+  rating: 4.6
+  reviews: 6097
+  latitude: 52.4927414
+  longitude: 13.492695399999999
+  place_id: ChIJqc2JIkRPqEcRLdpX7ohXL0U
+  source_note: Google Places seed build (2026-04-22)
+- id: place.lichtenberg.museum_lichtenberg_in_the_stadthaus
+  name: Museum Lichtenberg in the Stadthaus
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Türrschmidtstraße 24, 10317 Berlin, Germany
+  address: Türrschmidtstraße 24, 10317 Berlin, Germany
+  rating: 4.4
+  reviews: 122
+  latitude: 52.502940599999995
+  longitude: 13.4808481
+  place_id: ChIJ81cRa-9OqEcRs409kriHSBY
+  source_note: Google Places seed build (2026-04-22)

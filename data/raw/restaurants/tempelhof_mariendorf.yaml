@@ -1,0 +1,107 @@
+district: Tempelhof & Mariendorf
+category: restaurants
+items:
+- id: restaurant.tempelhof_mariendorf.mundo_tapas_alt_mariendorf
+  name: Mundo Tapas - Alt Mariendorf
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - spanish_restaurant
+  - wine_bar
+  - cocktail_bar
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Alt-Mariendorf 32, 12107 Berlin, Germany
+  address: Alt-Mariendorf 32, 12107 Berlin, Germany
+  rating: 4.6
+  reviews: 1503
+  latitude: 52.4404895
+  longitude: 13.3875476
+  place_id: ChIJywNLxthFqEcRr6upXkyTttg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_mariendorf.restaurant_adlerm_hle_berlin
+  name: Restaurant Adlermühle Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - croatian_restaurant
+  - beer_garden
+  - german_restaurant
+  - food_delivery
+  - meal_takeaway
+  - barbecue_restaurant
+  indoor_outdoor: mixed
+  summary: Mariendorfer Damm 320, 12107 Berlin, Germany
+  address: Mariendorfer Damm 320, 12107 Berlin, Germany
+  rating: 4.7
+  reviews: 2025
+  latitude: 52.424686799999996
+  longitude: 13.3947603
+  place_id: ChIJh6sq1BlFqEcROQM3JfVwU0A
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_mariendorf.mustang_restaurant_cafe_cocktailbar_italienische_spezialit_ten_steakhaus
+  name: Mustang Restaurant, Cafe & Cocktailbar | Italienische Spezialitäten & Steakhaus
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar_and_grill
+  - steak_house
+  - cocktail_bar
+  - live_music_venue
+  - event_venue
+  - bar
+  indoor_outdoor: mixed
+  summary: Mariendorfer Damm 296, 12107 Berlin, Germany
+  address: Mariendorfer Damm 296, 12107 Berlin, Germany
+  rating: 4.8
+  reviews: 1672
+  latitude: 52.4259567
+  longitude: 13.392704
+  place_id: ChIJR1gg7RdFqEcR1fFjhpCCPvM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_mariendorf.ristorante_la_piccola_cantina
+  name: Ristorante La Piccola Cantina
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - pizza_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Eisenacher Str. 8, 12109 Berlin, Germany
+  address: Eisenacher Str. 8, 12109 Berlin, Germany
+  rating: 4.8
+  reviews: 713
+  latitude: 52.44768
+  longitude: 13.38905
+  place_id: ChIJUYUs0FpFqEcRMPsKxcZfZrs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.tempelhof_mariendorf.bei_radi
+  name: Bei Radi
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - croatian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Westphalweg 28, 12109 Berlin, Germany
+  address: Westphalweg 28, 12109 Berlin, Germany
+  rating: 4.7
+  reviews: 2232
+  latitude: 52.4458355
+  longitude: 13.389991499999999
+  place_id: ChIJdewa6ERFqEcR3gEUleTgbgI
+  source_note: Google Places seed build (2026-04-22)

@@ -1,0 +1,103 @@
+district: Karlshorst
+category: restaurants
+items:
+- id: restaurant.karlshorst.quattro_fratelli
+  name: Quattro Fratelli
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Rheinsteinstraße 1, 10318 Berlin, Germany
+  address: Rheinsteinstraße 1, 10318 Berlin, Germany
+  rating: 4.6
+  reviews: 758
+  latitude: 52.4828342
+  longitude: 13.5261544
+  place_id: ChIJh4dfnddIqEcR-yHNYknc4tE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.karlshorst.anna_kim_restaurant
+  name: Anna Kim Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Treskowallee 65, 10318 Berlin, Germany
+  address: Treskowallee 65, 10318 Berlin, Germany
+  rating: 4.7
+  reviews: 103
+  latitude: 52.4866957
+  longitude: 13.5272939
+  place_id: ChIJwc8Vxn5JqEcR5H_CCh_sK6Q
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.karlshorst.wernesgr_ner_b
+  name: Wernesgrüner B
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - german_restaurant
+  - european_restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Treskowallee 68, 10318 Berlin, Germany
+  address: Treskowallee 68, 10318 Berlin, Germany
+  rating: 4.6
+  reviews: 1985
+  latitude: 52.486446099999995
+  longitude: 13.5264809
+  place_id: ChIJQWWZOyhJqEcRGmZOwtNLi_4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.karlshorst.fratelli_da_giovanni_quattro
+  name: Fratelli da Giovanni Quattro
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Ehrlichstraße 47, 10318 Berlin, Germany
+  address: Ehrlichstraße 47, 10318 Berlin, Germany
+  rating: 4.8
+  reviews: 370
+  latitude: 52.4815535
+  longitude: 13.5170573
+  place_id: ChIJ2XXgehFNqEcRg3p4XuBQ4Jk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.karlshorst.syrtaki
+  name: Syrtaki
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Wandlitzstraße 10, 10318 Berlin, Germany
+  address: Wandlitzstraße 10, 10318 Berlin, Germany
+  rating: 4.6
+  reviews: 1307
+  latitude: 52.4810811
+  longitude: 13.5237692
+  place_id: ChIJhQc2MNdIqEcRULtghLT_oEo
+  source_note: Google Places seed build (2026-04-22)

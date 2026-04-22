@@ -1,0 +1,103 @@
+district: Grunewald
+category: restaurants
+items:
+- id: restaurant.grunewald.restaurant_villa_grunewald
+  name: Restaurant Villa Grunewald
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Flinsberger Pl. 8, 14193 Berlin, Germany
+  address: Flinsberger Pl. 8, 14193 Berlin, Germany
+  rating: 4.8
+  reviews: 41
+  latitude: 52.4835626
+  longitude: 13.2900621
+  place_id: ChIJFS_pNgBRqEcRGG9lXOYrYMg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.grunewald.landhaus_grunewald
+  name: Landhaus Grunewald
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Delbrückstraße 37, 14193 Berlin, Germany
+  address: Delbrückstraße 37, 14193 Berlin, Germany
+  rating: 4.4
+  reviews: 1407
+  latitude: 52.483582000000006
+  longitude: 13.2823812
+  place_id: ChIJd2pY9LpQqEcRO7sfvs2DlPU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.grunewald.trattoria_toscana_berlin_im_grunewald
+  name: Trattoria Toscana Berlin im Grunewald
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - meal_takeaway
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hubertusallee 48, 14193 Berlin, Germany
+  address: Hubertusallee 48, 14193 Berlin, Germany
+  rating: 4.8
+  reviews: 565
+  latitude: 52.4868727
+  longitude: 13.2845932
+  place_id: ChIJ0_SukblQqEcRKkJOjlMraUY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.grunewald.nuovo_mario_grunewald
+  name: Nuovo Mario Grunewald
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Reichenhaller Str. 4, 14199 Berlin, Germany
+  address: Reichenhaller Str. 4, 14199 Berlin, Germany
+  rating: 4.8
+  reviews: 741
+  latitude: 52.4771887
+  longitude: 13.2897716
+  place_id: ChIJtX-KWaJQqEcRd4gcVfosMwA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.grunewald.restaurant_scheune
+  name: Restaurant Scheune
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - beer_garden
+  - european_restaurant
+  - bar
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Eichkampstraße 155, 14055 Berlin, Germany
+  address: Eichkampstraße 155, 14055 Berlin, Germany
+  rating: 4.4
+  reviews: 2398
+  latitude: 52.488975700000005
+  longitude: 13.261215499999999
+  place_id: ChIJJQEn_0tXqEcRyoIfRkByA9s
+  source_note: Google Places seed build (2026-04-22)

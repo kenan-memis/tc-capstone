@@ -1,0 +1,105 @@
+district: Hohenschönhausen
+category: restaurants
+items:
+- id: restaurant.hohensch_nhausen.korry_restaurant
+  name: Korry Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Konrad-Wolf-Straße 68A, 13055 Berlin, Germany
+  address: Konrad-Wolf-Straße 68A, 13055 Berlin, Germany
+  rating: 4.7
+  reviews: 833
+  latitude: 52.5376676
+  longitude: 13.478926399999999
+  place_id: ChIJ3bKaPaZNqEcR0rn-NnFd0Kc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hohensch_nhausen.vin_garden
+  name: Vin Garden
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Malchower Weg 69, 13053 Berlin, Germany
+  address: Malchower Weg 69, 13053 Berlin, Germany
+  rating: 4.6
+  reviews: 398
+  latitude: 52.5557447
+  longitude: 13.502289399999999
+  place_id: ChIJaRvfPNpNqEcRND6lS3RGFK8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hohensch_nhausen.restaurant_greek_olympia_berlin
+  name: Restaurant Greek Olympia Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - mediterranean_restaurant
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Malchower Weg 45, 13053 Berlin, Germany
+  address: Malchower Weg 45, 13053 Berlin, Germany
+  rating: 4.5
+  reviews: 4453
+  latitude: 52.553777399999994
+  longitude: 13.5027929
+  place_id: ChIJewOHh0dMqEcR-lxmXVQbvZY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hohensch_nhausen.restaurant_wiesenblick
+  name: Restaurant Wiesenblick
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Waldowstraße 1, 13053 Berlin, Germany
+  address: Waldowstraße 1, 13053 Berlin, Germany
+  rating: 4.7
+  reviews: 266
+  latitude: 52.5459988
+  longitude: 13.4942724
+  place_id: ChIJE0xld-RNqEcRs2Qtq2VLQvY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.hohensch_nhausen.orankesee_terrassen
+  name: Orankesee-Terrassen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - greek_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Orankestraße 41, 13053 Berlin, Germany
+  address: Orankestraße 41, 13053 Berlin, Germany
+  rating: 4.3
+  reviews: 3468
+  latitude: 52.547556699999994
+  longitude: 13.4827228
+  place_id: ChIJK8Z21jJMqEcRz8D_aGYoeF8
+  source_note: Google Places seed build (2026-04-22)

@@ -1,0 +1,54 @@
+district: Treptow-Köpenick (overall)
+category: places
+items:
+- id: place.treptow_k_penick_overall.museen_treptow_k_penick
+  name: Museen Treptow-Köpenick
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alter Markt 1, 12555 Berlin, Germany
+  address: Alter Markt 1, 12555 Berlin, Germany
+  rating: 4.2
+  reviews: 98
+  latitude: 52.4452917
+  longitude: 13.5790001
+  place_id: ChIJfwpMQgJGqEcR0UfLHjdgvO8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.treptow_k_penick_overall.ausstellung_zur_ckgeschaut_looking_back_im_museum_treptow
+  name: Ausstellung "zurückgeschaut | looking back" im Museum Treptow
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Sterndamm 102, 12487 Berlin, Germany
+  address: Sterndamm 102, 12487 Berlin, Germany
+  rating: 4.7
+  reviews: 6
+  latitude: 52.4435569
+  longitude: 13.502238
+  place_id: ChIJq6raQQJGqEcRhhPWbudXX7s
+  source_note: Google Places seed build (2026-04-22)
+- id: place.treptow_k_penick_overall.museum_treptow
+  name: Museum Treptow
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Sterndamm 102, 12487 Berlin, Germany
+  address: Sterndamm 102, 12487 Berlin, Germany
+  rating: 4.2
+  reviews: 15
+  latitude: 52.4435411
+  longitude: 13.5022377
+  place_id: ChIJHxQKHttHqEcRGAhezajgEWU
+  source_note: Google Places seed build (2026-04-22)

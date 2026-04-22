@@ -27,6 +27,7 @@ dev = [
 [project.scripts]
 planmyberlin-export-graphs = "planmyberlin.cli.export_graphs:main"
 planmyberlin-build-index = "planmyberlin.cli.build_index:main"
+planmyberlin-build-seed-kb = "planmyberlin.cli.build_seed_kb:main"
 
 [build-system]
 requires = ["hatchling"]

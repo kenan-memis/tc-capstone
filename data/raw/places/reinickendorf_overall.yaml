@@ -1,0 +1,57 @@
+district: Reinickendorf (overall)
+category: places
+items:
+- id: place.reinickendorf_overall.museum_reinickendorf
+  name: Museum Reinickendorf
+  type: museum
+  tags:
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Alt-Hermsdorf 35, 13467 Berlin, Germany
+  address: Alt-Hermsdorf 35, 13467 Berlin, Germany
+  rating: 4.5
+  reviews: 201
+  latitude: 52.6155445
+  longitude: 13.318699599999999
+  place_id: ChIJD987HJlUqEcRXVfK0WA1ulg
+  source_note: Google Places seed build (2026-04-22)
+- id: place.reinickendorf_overall.museum_der_berliner_feuerwehr
+  name: Museum der Berliner Feuerwehr
+  type: museum
+  tags:
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Veitstraße 5, 13507 Berlin, Germany
+  address: Veitstraße 5, 13507 Berlin, Germany
+  rating: 4.7
+  reviews: 446
+  latitude: 52.5865214
+  longitude: 13.286103599999999
+  place_id: ChIJ84EAtWlUqEcRVuJJK7PLU9Y
+  source_note: Google Places seed build (2026-04-22)
+- id: place.reinickendorf_overall.museum_f_r_naturkunde_berlin
+  name: Museum für Naturkunde Berlin
+  type: museum
+  tags:
+  - research_institute
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Invalidenstraße 43, 10115 Berlin, Germany
+  address: Invalidenstraße 43, 10115 Berlin, Germany
+  rating: 4.5
+  reviews: 6903
+  latitude: 52.5305726
+  longitude: 13.379175499999999
+  place_id: ChIJ3eWqqpRRqEcRjILZ3j4y0Hs
+  source_note: Google Places seed build (2026-04-22)

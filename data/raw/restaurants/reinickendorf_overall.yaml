@@ -1,0 +1,103 @@
+district: Reinickendorf (overall)
+category: restaurants
+items:
+- id: restaurant.reinickendorf_overall.tre_amici
+  name: Tre Amici
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Neptunstraße 30, 13409 Berlin, Germany
+  address: Neptunstraße 30, 13409 Berlin, Germany
+  rating: 4.7
+  reviews: 861
+  latitude: 52.562360399999996
+  longitude: 13.3736692
+  place_id: ChIJSaLyUDFSqEcRLNhQcASSymk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.reinickendorf_overall.schollenkrug
+  name: Schollenkrug
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mediterranean_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Waidmannsluster Damm 77, 13509 Berlin, Germany
+  address: Waidmannsluster Damm 77, 13509 Berlin, Germany
+  rating: 4.5
+  reviews: 592
+  latitude: 52.600689
+  longitude: 13.3028485
+  place_id: ChIJ2duAU4hUqEcRJoOsofETv_k
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.reinickendorf_overall.trattoria_da_ciro
+  name: Trattoria da Ciro
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schubartstraße 47, 13509 Berlin, Germany
+  address: Schubartstraße 47, 13509 Berlin, Germany
+  rating: 4.8
+  reviews: 333
+  latitude: 52.5839498
+  longitude: 13.3026945
+  place_id: ChIJy7_hBnFUqEcR9l2jJ9U1aN4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.reinickendorf_overall.restaurant_dalmacija
+  name: Restaurant Dalmacija
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - croatian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Quäkerstraße 2, 13403 Berlin, Germany
+  address: Quäkerstraße 2, 13403 Berlin, Germany
+  rating: 4.7
+  reviews: 781
+  latitude: 52.572572
+  longitude: 13.308221999999999
+  place_id: ChIJu0NClPVTqEcR4LHbTQF9DAs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.reinickendorf_overall.trattoria_nardini
+  name: Trattoria Nardini
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Ollenhauerstraße 23, 13403 Berlin, Germany
+  address: Ollenhauerstraße 23, 13403 Berlin, Germany
+  rating: 4.7
+  reviews: 862
+  latitude: 52.56804030000001
+  longitude: 13.3296662
+  place_id: ChIJGz1x_utTqEcRkuSFY_fWKhY
+  source_note: Google Places seed build (2026-04-22)

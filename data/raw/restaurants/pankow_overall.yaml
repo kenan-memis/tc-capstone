@@ -1,0 +1,105 @@
+district: Pankow (overall)
+category: restaurants
+items:
+- id: restaurant.pankow_overall.baba_u_restaurant
+  name: Baba đu Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Breite Str. 50, 13187 Berlin, Germany
+  address: Breite Str. 50, 13187 Berlin, Germany
+  rating: 4.8
+  reviews: 1126
+  latitude: 52.572022999999994
+  longitude: 13.41488
+  place_id: ChIJN1PxiuBTqEcRFCOAciXXaCc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.pankow_overall.roji_taste_of_japan_pankow
+  name: Roji - Taste of Japan Pankow
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - japanese_restaurant
+  - asian_fusion_restaurant
+  - sushi_restaurant
+  - asian_restaurant
+  - vietnamese_restaurant
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Mühlenstraße 1, 13187 Berlin, Germany
+  address: Mühlenstraße 1, 13187 Berlin, Germany
+  rating: 4.7
+  reviews: 2088
+  latitude: 52.5691529
+  longitude: 13.4034658
+  place_id: ChIJnW0lNWpSqEcR5n4y0SgGDEk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.pankow_overall.trattoria_rossini
+  name: Trattoria Rossini
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Florastraße 96A, 13187 Berlin, Germany
+  address: Florastraße 96A, 13187 Berlin, Germany
+  rating: 4.8
+  reviews: 1205
+  latitude: 52.5660743
+  longitude: 13.3963989
+  place_id: ChIJu8z6C0BSqEcRamvD0Tl36Q8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.pankow_overall.nam_y_restaurant
+  name: Nam Y Restaurant
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Wollankstraße 105, 13187 Berlin, Germany
+  address: Wollankstraße 105, 13187 Berlin, Germany
+  rating: 4.8
+  reviews: 1724
+  latitude: 52.5651765
+  longitude: 13.395009
+  place_id: ChIJpRwt85dTqEcREUCNunCLupM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.pankow_overall.restaurant_pankoff
+  name: Restaurant Pankoff
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - german_restaurant
+  - european_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Breite Str. 22, 13187 Berlin, Germany
+  address: Breite Str. 22, 13187 Berlin, Germany
+  rating: 4.8
+  reviews: 349
+  latitude: 52.5698234
+  longitude: 13.4024778
+  place_id: ChIJV28u1m5SqEcR8UVVB2RHRt4
+  source_note: Google Places seed build (2026-04-22)

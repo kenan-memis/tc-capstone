@@ -1,0 +1,227 @@
+district: Charlottenburg
+category: places
+items:
+- id: place.charlottenburg.br_han_museum
+  name: Bröhan Museum
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßstraße 1a, 14059 Berlin, Germany
+  address: Schloßstraße 1a, 14059 Berlin, Germany
+  rating: 4.4
+  reviews: 1277
+  latitude: 52.518865
+  longitude: 13.2953426
+  place_id: ChIJ7z0TPi9RqEcRWPHOnt67DG8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.c_o_berlin
+  name: C/O Berlin
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  address: Amerika Haus, Hardenbergstraße 22-24, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 3446
+  latitude: 52.506633699999995
+  longitude: 13.330547
+  place_id: ChIJ3_95c_5QqEcRbKo0_TzdGC8
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.villa_oppenheim_museum_charlottenburg_wilmersdorf
+  name: Villa Oppenheim - Museum Charlottenburg-Wilmersdorf
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßstraße 55, 14059 Berlin, Germany
+  address: Schloßstraße 55, 14059 Berlin, Germany
+  rating: 4.4
+  reviews: 472
+  latitude: 52.5160114
+  longitude: 13.2980222
+  place_id: ChIJSRooayZRqEcRU7NRQ2TKyqA
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.k_the_kollwitz_museum
+  name: Käthe Kollwitz Museum
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Theaterbau am Schloss, Spandauer Damm 10, 14059 Berlin, Germany
+  address: Theaterbau am Schloss, Spandauer Damm 10, 14059 Berlin, Germany
+  rating: 4.5
+  reviews: 472
+  latitude: 52.5205765
+  longitude: 13.2921487
+  place_id: ChIJE_dF5PtQqEcRdRM8kTXCsTM
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.museum_of_photography
+  name: Museum of Photography
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Jebensstraße 2, 10623 Berlin, Germany
+  address: Jebensstraße 2, 10623 Berlin, Germany
+  rating: 4.4
+  reviews: 2784
+  latitude: 52.5082265
+  longitude: 13.331928300000001
+  place_id: ChIJ5ypZHf5QqEcRNiyGj0WoMsY
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.charlottenburg_palace
+  name: Charlottenburg Palace
+  type: castle
+  tags:
+  - castle
+  - historical_landmark
+  - tourist_attraction
+  - historical_place
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Spandauer Damm 10-22, 14059 Berlin, Germany
+  address: Spandauer Damm 10-22, 14059 Berlin, Germany
+  rating: 4.6
+  reviews: 30907
+  latitude: 52.5209319
+  longitude: 13.2956165
+  place_id: ChIJ85FCdSVRqEcRGv55KkmuuIs
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.scharf_gerstenberg_collection
+  name: Scharf-Gerstenberg Collection
+  type: art_museum
+  tags:
+  - art_museum
+  - tourist_attraction
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßstraße 70, 14059 Berlin, Germany
+  address: Schloßstraße 70, 14059 Berlin, Germany
+  rating: 4.4
+  reviews: 686
+  latitude: 52.519202199999995
+  longitude: 13.296672700000002
+  place_id: ChIJwQHaZS9RqEcRE9gzOMgXyeU
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.helmut_newton_foundation
+  name: Helmut Newton Foundation
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Im Museum für Fotografie, Jebensstraße 2, 10623 Berlin, Germany
+  address: Im Museum für Fotografie, Jebensstraße 2, 10623 Berlin, Germany
+  rating: 4.6
+  reviews: 1168
+  latitude: 52.508154999999995
+  longitude: 13.3321309
+  place_id: ChIJ5ypZHf5QqEcRkB1wDyXKAyI
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.polyrama_museum_f_r_lebensgeschichten
+  name: Polyrama - Museum für Lebensgeschichten
+  type: museum
+  tags:
+  - museum
+  - cafe
+  - store
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Stuttgarter Pl. 2, 10627 Berlin, Germany
+  address: Stuttgarter Pl. 2, 10627 Berlin, Germany
+  rating: 4.8
+  reviews: 27
+  latitude: 52.505835399999995
+  longitude: 13.3057562
+  place_id: ChIJb42ELdhRqEcRyOS8DvIsmAs
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.abguss_sammlung_antiker_plastik
+  name: Abguss-Sammlung Antiker Plastik
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Schloßstraße 69 b, 10585 Berlin, Germany
+  address: Schloßstraße 69 b, 10585 Berlin, Germany
+  rating: 4.7
+  reviews: 56
+  latitude: 52.5188613
+  longitude: 13.296954300000001
+  place_id: ChIJc4smaC9RqEcRtJs6-1Sfl8Q
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.stiftung_kunstforum_berliner_volksbank
+  name: Stiftung Kunstforum Berliner Volksbank
+  type: art_museum
+  tags:
+  - art_museum
+  - museum
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Kaiserdamm 105, 14057 Berlin, Germany
+  address: Kaiserdamm 105, 14057 Berlin, Germany
+  rating: 4.5
+  reviews: 54
+  latitude: 52.510168
+  longitude: 13.288875599999999
+  place_id: ChIJac1OEG1UqEcRCFwQ22ln4Jc
+  source_note: Google Places seed build (2026-04-22)
+- id: place.charlottenburg.gipsformerei
+  name: Gipsformerei
+  type: museum
+  tags:
+  - museum
+  - tourist_attraction
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  typical_visit_minutes: 90
+  summary: Sophie-Charlotten-Straße 17/18, 14059 Berlin, Germany
+  address: Sophie-Charlotten-Straße 17/18, 14059 Berlin, Germany
+  rating: 4.7
+  reviews: 58
+  latitude: 52.5194608
+  longitude: 13.2860786
+  place_id: ChIJE124fCxRqEcRIUoNio3z-9o
+  source_note: Google Places seed build (2026-04-22)

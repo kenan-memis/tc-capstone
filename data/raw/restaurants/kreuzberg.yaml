@@ -1,30 +1,1007 @@
 district: Kreuzberg
 category: restaurants
 items:
-  - id: restaurant.kreuzberg.mustafas_gemuse_kebap
-    name: Mustafa's Gemüse Kebap
-    type: Street food
-    cuisine: Turkish / döner
-    price_level: $
-    tags: [quick, popular, casual, food]
-    indoor_outdoor: outdoor
-    summary: Famous döner stop, usually with long queues but highly rated by visitors and locals.
-    source_note: Seed curated dataset v1
-  - id: restaurant.kreuzberg.burgermeister
-    name: Burgermeister
-    type: Street food
-    cuisine: Burgers
-    price_level: $
-    tags: [quick, casual, popular, food]
-    indoor_outdoor: mixed
-    summary: Strong quick-meal option in Kreuzberg, good for packed itineraries.
-    source_note: Seed curated dataset v1
-  - id: restaurant.kreuzberg.cafe_am_engelbecken
-    name: Café am Engelbecken
-    type: Café / brunch
-    cuisine: Café
-    price_level: $$
-    tags: [relaxed, scenic, brunch, coffee]
-    indoor_outdoor: mixed
-    summary: Waterside cafe suitable for slower pace mornings or afternoon breaks.
-    source_note: Seed curated dataset v1
+- id: restaurant.kreuzberg.mustafas_gemuse_kebap
+  name: Mustafa's Gemüse Kebap
+  type: Street food
+  cuisine: Turkish / döner
+  price_level: $
+  tags:
+  - quick
+  - popular
+  - casual
+  - food
+  indoor_outdoor: outdoor
+  summary: Famous döner stop, usually with long queues but highly rated by visitors
+    and locals.
+  source_note: Seed curated dataset v1
+- id: restaurant.kreuzberg.burgermeister
+  name: Burgermeister
+  type: Street food
+  cuisine: Burgers
+  price_level: $
+  tags:
+  - quick
+  - casual
+  - popular
+  - food
+  indoor_outdoor: mixed
+  summary: Strong quick-meal option in Kreuzberg, good for packed itineraries.
+  source_note: Seed curated dataset v1
+- id: restaurant.kreuzberg.cafe_am_engelbecken
+  name: Café am Engelbecken
+  type: Café / brunch
+  cuisine: Café
+  price_level: $$
+  tags:
+  - relaxed
+  - scenic
+  - brunch
+  - coffee
+  indoor_outdoor: mixed
+  summary: Waterside cafe suitable for slower pace mornings or afternoon breaks.
+  source_note: Seed curated dataset v1
+- id: restaurant.kreuzberg.umami
+  name: Umami
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schlesische Str. 5, 10997 Berlin, Germany
+  address: Schlesische Str. 5, 10997 Berlin, Germany
+  rating: 4.6
+  reviews: 3461
+  latitude: 52.5002766
+  longitude: 13.442929
+  place_id: ChIJafBhcoVPqEcRb7rHEy3G0L8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.mido_restaurant_kreuzberg
+  name: Mido Restaurant Kreuzberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - sushi_restaurant
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - vegetarian_restaurant
+  - asian_restaurant
+  - vietnamese_restaurant
+  indoor_outdoor: mixed
+  summary: Marheinekepl. 3-4, 10961 Berlin, Germany
+  address: Marheinekepl. 3-4, 10961 Berlin, Germany
+  rating: 4.9
+  reviews: 1500
+  latitude: 52.489554899999995
+  longitude: 13.3967616
+  place_id: ChIJSys7uQJPqEcRgAXyd5G8Kas
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.fourty_years_kitchen
+  name: Fourty Years Kitchen
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Dieffenbachstraße 52, 10967 Berlin, Germany
+  address: Dieffenbachstraße 52, 10967 Berlin, Germany
+  rating: 4.8
+  reviews: 1080
+  latitude: 52.492335499999996
+  longitude: 13.418363399999999
+  place_id: ChIJ59m7wBFPqEcRtu_vSPsf5Lw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.umami
+  name: Umami
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - asian_fusion_restaurant
+  - fusion_restaurant
+  - vegetarian_restaurant
+  - asian_restaurant
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Bergmannstraße 97, 10961 Berlin, Germany
+  address: Bergmannstraße 97, 10961 Berlin, Germany
+  rating: 4.5
+  reviews: 5327
+  latitude: 52.4896536
+  longitude: 13.391072099999999
+  place_id: ChIJb_A0-SdQqEcRa-ST7onQPGQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.ristorante_leo_e_pepe_kreuzberg
+  name: Ristorante Leo e Pepe Kreuzberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - italian_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Görlitzer Str. 63, 10997 Berlin, Germany
+  address: Görlitzer Str. 63, 10997 Berlin, Germany
+  rating: 4.9
+  reviews: 896
+  latitude: 52.498253
+  longitude: 13.435953699999999
+  place_id: ChIJa-T4zuNPqEcR-8trMvqPOvc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.mama_cook
+  name: Mama Cook
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - vietnamese_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hedemannstraße 10, 10969 Berlin, Germany
+  address: Hedemannstraße 10, 10969 Berlin, Germany
+  rating: 4.6
+  reviews: 3429
+  latitude: 52.5029392
+  longitude: 13.3886048
+  place_id: ChIJWS9JatNRqEcRABpjSZmGpXo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.hatay_ocakbasi
+  name: Hatay Ocakbasi
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - turkish_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kochstraße 16, 10969 Berlin, Germany
+  address: Kochstraße 16, 10969 Berlin, Germany
+  rating: 4.8
+  reviews: 1361
+  latitude: 52.506859999999996
+  longitude: 13.38971
+  place_id: ChIJI-CVYdpRqEcRa2Pn0HU_0Nc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.loumi
+  name: LOUMI
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Ritterstraße 2, 10969 Berlin, Germany
+  address: Ritterstraße 2, 10969 Berlin, Germany
+  rating: 4.9
+  reviews: 190
+  latitude: 52.5007247
+  longitude: 13.4135175
+  place_id: ChIJ5WgX8MtPqEcR0R9_l12Zl6U
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.mihmandar_restaurant_berlin_kreuzberg
+  name: Mihmandar Restaurant Berlin Kreuzberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - turkish_restaurant
+  - halal_restaurant
+  - wedding_venue
+  - event_venue
+  - meal_takeaway
+  - barbecue_restaurant
+  indoor_outdoor: mixed
+  summary: Kottbusser Damm 31, 10967 Berlin, Germany
+  address: Kottbusser Damm 31, 10967 Berlin, Germany
+  rating: 4.8
+  reviews: 1101
+  latitude: 52.489128099999995
+  longitude: 13.4241914
+  place_id: ChIJD1cftbdPqEcRM-c84bnthxk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.burgermeister_schlesisches_tor
+  name: Burgermeister Schlesisches Tor
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - hamburger_restaurant
+  - fast_food_restaurant
+  - american_restaurant
+  - snack_bar
+  - meal_takeaway
+  - restaurant
+  indoor_outdoor: mixed
+  summary: U1 Schlesisches Tor, Oberbaumstraße 8, 10997 Berlin, Germany
+  address: U1 Schlesisches Tor, Oberbaumstraße 8, 10997 Berlin, Germany
+  rating: 4.7
+  reviews: 16931
+  latitude: 52.501092
+  longitude: 13.442424899999999
+  place_id: ChIJ2Uh9Bk5OqEcREoy9N1LxImw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.die_horn
+  name: DIE HORN
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Hornstraße 4, 10963 Berlin, Germany
+  address: Hornstraße 4, 10963 Berlin, Germany
+  rating: 4.8
+  reviews: 426
+  latitude: 52.4942843
+  longitude: 13.382318999999999
+  place_id: ChIJh_eqjW9RqEcRdrBvWzVWxRM
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.schnitzery_kreuzberg
+  name: Schnitzery Kreuzberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Reichenberger Str. 176 Laden Nr. 14, 10999 Berlin, Germany
+  address: Reichenberger Str. 176 Laden Nr. 14, 10999 Berlin, Germany
+  rating: 4.8
+  reviews: 1179
+  latitude: 52.499753299999995
+  longitude: 13.417234899999999
+  place_id: ChIJ9wz0QClPqEcRiGCLP4tTVkY
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.golda_delux
+  name: Golda delux
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - snack_bar
+  - meal_takeaway
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Erkelenzdamm 45, 10999 Berlin, Germany
+  address: Erkelenzdamm 45, 10999 Berlin, Germany
+  rating: 4.8
+  reviews: 996
+  latitude: 52.4977972
+  longitude: 13.413529100000002
+  place_id: ChIJ4fQD_X5PqEcRK3hzuCPCIjg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.tulus_lotrek
+  name: tulus lotrek
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - fine_dining_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Fichtestraße 24, 10967 Berlin, Germany
+  address: Fichtestraße 24, 10967 Berlin, Germany
+  rating: 4.8
+  reviews: 590
+  latitude: 52.489677
+  longitude: 13.413604
+  place_id: ChIJ95zYL89PqEcRlyKANk7ORQQ
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.delhi_6_restaurant_berlin
+  name: Delhi 6 Restaurant - Berlin
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - vegan_restaurant
+  - vegetarian_restaurant
+  - tea_store
+  - north_indian_restaurant
+  - family_restaurant
+  indoor_outdoor: mixed
+  summary: Friedrichstraße 237, 10969 Berlin, Germany
+  address: Friedrichstraße 237, 10969 Berlin, Germany
+  rating: 4.7
+  reviews: 3146
+  latitude: 52.5019381
+  longitude: 13.391094599999999
+  place_id: ChIJvQpWutRRqEcRdpvv8e0S4ng
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.amrit_indisches_restaurant_berlin_kreuzberg
+  name: AMRIT - Indisches Restaurant Berlin Kreuzberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - indian_restaurant
+  - vegan_restaurant
+  - halal_restaurant
+  - vegetarian_restaurant
+  - catering_service
+  - food_delivery
+  indoor_outdoor: mixed
+  summary: Oranienstraße 204, 10999 Berlin, Germany
+  address: Oranienstraße 204, 10999 Berlin, Germany
+  rating: 4.7
+  reviews: 3877
+  latitude: 52.499641
+  longitude: 13.4249485
+  place_id: ChIJeVq3CDVOqEcRba5RL1mUXDE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.tomasa
+  name: Tomasa
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Kreuzbergstraße 62, 10965 Berlin, Germany
+  address: Kreuzbergstraße 62, 10965 Berlin, Germany
+  rating: 4.5
+  reviews: 2429
+  latitude: 52.4894688
+  longitude: 13.3802681
+  place_id: ChIJVbeTaTFaqEcRkmJxOHe4rrA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.canc_n_kreuzberg
+  name: Cancún Kreuzberg
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - mexican_restaurant
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Mehringdamm 45, 10961 Berlin, Germany
+  address: Mehringdamm 45, 10961 Berlin, Germany
+  rating: 4.8
+  reviews: 1305
+  latitude: 52.491991899999995
+  longitude: 13.387684
+  place_id: ChIJCdglrJtTqEcRHWd40FbjwBc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.lala
+  name: LALA
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Dieffenbachstraße 11, 10967 Berlin, Germany
+  address: Dieffenbachstraße 11, 10967 Berlin, Germany
+  rating: 4.8
+  reviews: 575
+  latitude: 52.49300230000001
+  longitude: 13.414420499999999
+  place_id: ChIJsaNFBA1PqEcRSr7HecM1oeI
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.heimweh
+  name: Heimweh
+  type: Restaurant
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bistro
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Skalitzer Str. 100, 10997 Berlin, Germany
+  address: Skalitzer Str. 100, 10997 Berlin, Germany
+  rating: 4.8
+  reviews: 1613
+  latitude: 52.4995628
+  longitude: 13.428483799999999
+  place_id: ChIJ-4uLYkpOqEcRaTcOmt25Q34
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.la_maison_berlin
+  name: La Maison Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - bar
+  - pastry_shop
+  - dessert_shop
+  - confectionery
+  indoor_outdoor: mixed
+  summary: Paul-Lincke-Ufer 17, 10999 Berlin, Germany
+  address: Paul-Lincke-Ufer 17, 10999 Berlin, Germany
+  rating: 4.5
+  reviews: 2708
+  latitude: 52.4933315
+  longitude: 13.431093899999999
+  place_id: ChIJwz72qINPqEcRkZLhzk2nNoU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.five_elephant_kreuzberg
+  name: Five Elephant Kreuzberg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - cake_shop
+  - coffee_roastery
+  - coffee_shop
+  - bakery
+  - food_store
+  indoor_outdoor: mixed
+  summary: Reichenberger Str. 101, 10999 Berlin, Germany
+  address: Reichenberger Str. 101, 10999 Berlin, Germany
+  rating: 4.4
+  reviews: 1227
+  latitude: 52.4934326
+  longitude: 13.438334999999999
+  place_id: ChIJqx7ojrJPqEcRXeGCeoYq5fE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.chapter_one_coffee
+  name: Chapter One Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Mittenwalder Str. 30, 10961 Berlin, Germany
+  address: Mittenwalder Str. 30, 10961 Berlin, Germany
+  rating: 4.6
+  reviews: 992
+  latitude: 52.489784799999995
+  longitude: 13.395690199999999
+  place_id: ChIJZav11dlPqEcRjMLT3Jov_wA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.jederzeit_caf_berlin_kreuzberg
+  name: Jederzeit Café - Berlin Kreuzberg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - brunch_restaurant
+  - juice_shop
+  - sandwich_shop
+  - vegan_restaurant
+  - vegetarian_restaurant
+  indoor_outdoor: mixed
+  summary: Bergmannstraße 92, 10961 Berlin, Germany
+  address: Bergmannstraße 92, 10961 Berlin, Germany
+  rating: 4.6
+  reviews: 1142
+  latitude: 52.4895929
+  longitude: 13.3926652
+  place_id: ChIJqaBn8fdPqEcRxMdT3BJrfSs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.cuccuma
+  name: cuccuma
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Zossener Str. 34, 10961 Berlin, Germany
+  address: Zossener Str. 34, 10961 Berlin, Germany
+  rating: 4.4
+  reviews: 748
+  latitude: 52.490584399999996
+  longitude: 13.394355
+  place_id: ChIJa5oijtdPqEcRR0P_3lSsTas
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.caf_jenseits
+  name: Café Jenseits
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - bar
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Oranienstraße 16, 10999 Berlin, Germany
+  address: Oranienstraße 16, 10999 Berlin, Germany
+  rating: 4.6
+  reviews: 440
+  latitude: 52.5006202
+  longitude: 13.423067999999999
+  place_id: ChIJ71hzWjROqEcR4ddHKx8tfWg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.fourty_years
+  name: Fourty Years
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - cafe
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Lausitzer Str. 34, 10999 Berlin, Germany
+  address: Lausitzer Str. 34, 10999 Berlin, Germany
+  rating: 4.7
+  reviews: 477
+  latitude: 52.495790799999995
+  longitude: 13.427397299999999
+  place_id: ChIJaTZfp6NPqEcRHFinzKFzr-Y
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.die_zimtschnecke_kreuzberg
+  name: Die Zimtschnecke Kreuzberg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - pastry_shop
+  - dessert_shop
+  - confectionery
+  - bakery
+  indoor_outdoor: mixed
+  summary: Reichenberger Str. 107, 10999 Berlin, Germany
+  address: Reichenberger Str. 107, 10999 Berlin, Germany
+  rating: 4.6
+  reviews: 611
+  latitude: 52.493998999999995
+  longitude: 13.4362056
+  place_id: ChIJgXon0UVPqEcRcAD79OCbPYE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.zazza_kaffeehaus
+  name: ZAZZA Kaffeehaus
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schönleinstraße 7B, 10967 Berlin, Germany
+  address: Schönleinstraße 7B, 10967 Berlin, Germany
+  rating: 4.6
+  reviews: 855
+  latitude: 52.492094599999994
+  longitude: 13.4206836
+  place_id: ChIJ-TsTj8lPqEcRhyiifQDItwk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.caf_mugrabi
+  name: Café Mugrabi
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - middle_eastern_restaurant
+  - breakfast_restaurant
+  - vegetarian_restaurant
+  - coffee_shop
+  - bar
+  indoor_outdoor: mixed
+  summary: Planufer 92D, 10967 Berlin, Germany
+  address: Planufer 92D, 10967 Berlin, Germany
+  rating: 4.7
+  reviews: 1480
+  latitude: 52.495443699999996
+  longitude: 13.417844899999999
+  place_id: ChIJK33h4kxOqEcRnkzpfZntMIs
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.coffee_and_cookies_berlin
+  name: Coffee and Cookies - Berlin
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - breakfast_restaurant
+  - coffee_shop
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Stresemannstraße 107, 10963 Berlin, Germany
+  address: Stresemannstraße 107, 10963 Berlin, Germany
+  rating: 4.5
+  reviews: 793
+  latitude: 52.506106599999995
+  longitude: 13.37995
+  place_id: ChIJ-3ddTMxRqEcRQ5-A43-hEdw
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.kaffeekirsche
+  name: Kaffeekirsche
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_roastery
+  - coffee_shop
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Adalbertstraße 23, 10997 Berlin, Germany
+  address: Adalbertstraße 23, 10997 Berlin, Germany
+  rating: 4.6
+  reviews: 643
+  latitude: 52.50303220000001
+  longitude: 13.4206823
+  place_id: ChIJvUaC_jNOqEcRJHqrk9ri5r4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.caf_saz
+  name: Café SAZ
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - store
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Kreuzbergstraße 10, 10965 Berlin, Germany
+  address: Kreuzbergstraße 10, 10965 Berlin, Germany
+  rating: 4.8
+  reviews: 371
+  latitude: 52.490115499999995
+  longitude: 13.3838426
+  place_id: ChIJqUR34iVQqEcRVVpZsDlOCTc
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.what_a_treat_breakfast_kreuzberg
+  name: What a Treat Breakfast Kreuzberg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - breakfast_restaurant
+  - bagel_shop
+  - hamburger_restaurant
+  - coffee_shop
+  - cafe
+  - bakery
+  indoor_outdoor: mixed
+  summary: Gneisenaustraße 94, 10961 Berlin, Germany
+  address: Gneisenaustraße 94, 10961 Berlin, Germany
+  rating: 4.8
+  reviews: 859
+  latitude: 52.4920213
+  longitude: 13.393558299999999
+  place_id: ChIJGRR6GV1PqEcRqwlhbD5Qkyo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.maracay_coffee
+  name: Maracay Coffee
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - breakfast_restaurant
+  - cafe
+  - food_store
+  - store
+  - restaurant
+  indoor_outdoor: mixed
+  summary: Stresemannstraße 72, 10963 Berlin, Germany
+  address: Stresemannstraße 72, 10963 Berlin, Germany
+  rating: 4.6
+  reviews: 1014
+  latitude: 52.503647799999996
+  longitude: 13.3841389
+  place_id: ChIJTegsmNJRqEcR-H02Fbk50jo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.barcomi_s_caf_kaffeer_sterei
+  name: Barcomi’s Café & Kaffeerösterei
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - cake_shop
+  - coffee_roastery
+  - coffee_shop
+  - bakery
+  - food_store
+  indoor_outdoor: mixed
+  summary: Bergmannstraße 21, 10961 Berlin, Germany
+  address: Bergmannstraße 21, 10961 Berlin, Germany
+  rating: 4.3
+  reviews: 1296
+  latitude: 52.489033799999994
+  longitude: 13.393418299999999
+  place_id: ChIJm-HoPthPqEcRM3lfzmNhoh8
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.caf_quitte_espresso_bar_kreuzberg
+  name: Café Quitte Espresso Bar Kreuzberg
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - coffee_shop
+  - ice_cream_shop
+  - breakfast_restaurant
+  - tea_house
+  - cafe
+  - dessert_shop
+  indoor_outdoor: mixed
+  summary: Wiener Str. 62, 10999 Berlin, Germany
+  address: Wiener Str. 62, 10999 Berlin, Germany
+  rating: 4.7
+  reviews: 433
+  latitude: 52.498244199999995
+  longitude: 13.4303408
+  place_id: ChIJD_cm4kpOqEcRbYcaIez9Xsg
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.milch_zucker
+  name: Milch & Zucker
+  type: Cafe
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cafe
+  - coffee_shop
+  - food_store
+  - store
+  - restaurant
+  - food
+  indoor_outdoor: mixed
+  summary: Oranienstraße 37, 10999 Berlin, Germany
+  address: Oranienstraße 37, 10999 Berlin, Germany
+  rating: 4.1
+  reviews: 827
+  latitude: 52.5018726
+  longitude: 13.417621299999999
+  place_id: ChIJd3m6sDNOqEcR4isDXv7EV3Q
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.caf_restaurant_morgenland
+  name: Café Restaurant Morgenland
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - restaurant
+  - cocktail_bar
+  - breakfast_restaurant
+  - cafe
+  - bar
+  - food
+  indoor_outdoor: mixed
+  summary: Skalitzer Str. 35, 10999 Berlin, Germany
+  address: Skalitzer Str. 35, 10999 Berlin, Germany
+  rating: 4.8
+  reviews: 1713
+  latitude: 52.4988773
+  longitude: 13.425704
+  place_id: ChIJeaQbNUpOqEcRF75kBlRUOEk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.caf_luzia
+  name: Café Luzia
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - cafe
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Oranienstraße 34, 10999 Berlin, Germany
+  address: Oranienstraße 34, 10999 Berlin, Germany
+  rating: 4.2
+  reviews: 2240
+  latitude: 52.501675899999995
+  longitude: 13.4182843
+  place_id: ChIJe-IgvDNOqEcR65aU1jfYOEk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.clash
+  name: Clash
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pub
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Im Mehringhof, Gneisenaustraße 2A, 10961 Berlin, Germany
+  address: Im Mehringhof, Gneisenaustraße 2A, 10961 Berlin, Germany
+  rating: 4.5
+  reviews: 3711
+  latitude: 52.4920396
+  longitude: 13.3885594
+  place_id: ChIJX82QiihQqEcRpFEVHqNvAbk
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.limonadier_cocktailbar
+  name: LIMONADIER Cocktailbar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Nostitzstraße 12, 10961 Berlin, Germany
+  address: Nostitzstraße 12, 10961 Berlin, Germany
+  rating: 4.7
+  reviews: 1410
+  latitude: 52.4918236
+  longitude: 13.390496899999999
+  place_id: ChIJoa2VQShQqEcRA7c9NHuooAA
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.lerchen_eulen
+  name: Lerchen&Eulen
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - bar
+  - cocktail_bar
+  - pub
+  - cafe
+  - food
+  - point_of_interest
+  indoor_outdoor: mixed
+  summary: Pücklerstraße 33, 10997 Berlin, Germany
+  address: Pücklerstraße 33, 10997 Berlin, Germany
+  rating: 4.6
+  reviews: 1328
+  latitude: 52.5020624
+  longitude: 13.430792199999999
+  place_id: ChIJC4pziklOqEcRLfDUXvZggQU
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.bei_schlawinchen_berlin
+  name: Bei Schlawinchen - Berlin
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pub
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Schönleinstraße 34, 10967 Berlin, Germany
+  address: Schönleinstraße 34, 10967 Berlin, Germany
+  rating: 4.2
+  reviews: 1038
+  latitude: 52.4926832
+  longitude: 13.4217161
+  place_id: ChIJuUymI8pPqEcRn8-4dJ-hswE
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.destille_kreuzberg
+  name: Destille Kreuzberg
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - pub
+  - bar
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Mehringdamm 67, 10961 Berlin, Germany
+  address: Mehringdamm 67, 10961 Berlin, Germany
+  rating: 4.6
+  reviews: 1309
+  latitude: 52.4904258
+  longitude: 13.387054099999999
+  place_id: ChIJ-y-CyrNRqEcR0gK7_VWice4
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.eingang_zwei_bar
+  name: Eingang Zwei Bar
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - cafe
+  - bar
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Mehringdamm 57, 10961 Berlin, Germany
+  address: Mehringdamm 57, 10961 Berlin, Germany
+  rating: 4.9
+  reviews: 350
+  latitude: 52.491174199999996
+  longitude: 13.3873149
+  place_id: ChIJQ5omO1xRqEcRk3wEoMAocRo
+  source_note: Google Places seed build (2026-04-22)
+- id: restaurant.kreuzberg.the_alchemist
+  name: The Alchemist
+  type: Bar
+  cuisine: mixed
+  price_level: $$
+  tags:
+  - cocktail_bar
+  - bar
+  - restaurant
+  - food
+  - point_of_interest
+  - establishment
+  indoor_outdoor: mixed
+  summary: Linkstraße 4, 10785 Berlin, Germany
+  address: Linkstraße 4, 10785 Berlin, Germany
+  rating: 4.4
+  reviews: 1553
+  latitude: 52.507389599999996
+  longitude: 13.374795899999999
+  place_id: ChIJd4VL-s5RqEcRSqgyWJgRAms
+  source_note: Google Places seed build (2026-04-22)
