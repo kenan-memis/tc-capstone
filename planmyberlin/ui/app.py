@@ -117,6 +117,17 @@ def _activity_emoji(title: str, place_name: str, time_of_day: str) -> str:
     return "📍"
 
 
+def _time_of_day_emoji(time_of_day: str) -> str:
+    tod = (time_of_day or "").strip().lower()
+    if tod == "morning":
+        return "🌅"
+    if tod == "afternoon":
+        return "🌇"
+    if tod == "evening":
+        return "🌙"
+    return "🕒"
+
+
 def _format_itinerary_markdown(itinerary: dict) -> str:
     title = str(itinerary.get("title", "Your plan")).strip()
     lines: list[str] = [f"## {title}", ""]
@@ -134,9 +145,10 @@ def _format_itinerary_markdown(itinerary: dict) -> str:
             t = str(act.get("title", "")).strip()
             desc = str(act.get("description", "")).strip()
             pn = str(act.get("place_name", "")).strip()
-            icon = _activity_emoji(t, pn, tod)
+            time_icon = _time_of_day_emoji(tod)
+            event_icon = _activity_emoji(t, pn, tod)
             head = f"**{tod.title()} — {t}**" if tod else f"**{t}**"
-            lines.append(f"- {icon} {head}")
+            lines.append(f"- {time_icon} {head} {event_icon}")
             if pn:
                 lines.append(f"  - Place: {pn}")
             if desc:
@@ -546,7 +558,7 @@ def main() -> None:
                 st.caption(itinerary_message)
 
     with bottom_right:
-        st.subheader("Map with tabs")
+        st.subheader("Map & Trip Details")
         if map_display_points:
             st.caption(
                 "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
