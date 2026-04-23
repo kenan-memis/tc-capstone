@@ -268,16 +268,6 @@ def _walk_hint(distance_m: int | float | None) -> str:
     return f"{d}m walk"
 
 
-def _transport_type_label(raw: str) -> str:
-    t = (raw or "").strip().lower()
-    mapping = {
-        "stop": "Transit stop",
-        "station": "Station",
-        "platform": "Platform",
-    }
-    return mapping.get(t, t.title() if t else "Transit stop")
-
-
 def _build_steps_markdown(completed_nodes: set[str]) -> str:
     derived = set(completed_nodes)
     if "multi_day_track" in completed_nodes or "single_day_track" in completed_nodes:
@@ -655,13 +645,6 @@ def main() -> None:
                                     continue
                                 st.markdown(
                                     f"- {opt.get('name','Unknown stop')} — {_walk_hint(opt.get('distance_m'))}"
-                                )
-                        with st.expander("Technical stop details", expanded=False):
-                            for opt in options:
-                                if not isinstance(opt, dict):
-                                    continue
-                                st.markdown(
-                                    f"- {opt.get('name','Unknown stop')} · {_transport_type_label(str(opt.get('type','')))}"
                                 )
                     else:
                         st.caption("No nearby stop details available for this place.")
