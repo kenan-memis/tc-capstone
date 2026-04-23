@@ -32,18 +32,38 @@ from planmyberlin.observability import bind_run_context, get_logger
 _ui_log = get_logger(__name__)
 
 
-_BUILD_STEP_ORDER = [
-    "normalize_profile",
-    "retrieve_context",
-    "enrich_places",
-    "fetch_weather",
-    "build_map_points",
-    "fetch_transport",
-    "route_track",
-    "merge",
-    "accommodation_route",
-    "generate_itinerary",
+_BUILD_PHASE_ORDER = [
+    "phase_preferences",
+    "phase_places",
+    "phase_weather_transport",
+    "phase_itinerary",
+    "phase_stays",
+    "phase_finalize",
 ]
+
+_BUILD_PHASE_LABELS = {
+    "phase_preferences": "Processing your preferences",
+    "phase_places": "Finding places that match your trip",
+    "phase_weather_transport": "Checking weather and local transport",
+    "phase_itinerary": "Building your day-by-day itinerary",
+    "phase_stays": "Adding stay suggestions",
+    "phase_finalize": "Preparing map and trip details",
+}
+
+_NODE_TO_PHASE = {
+    "normalize_profile": "phase_preferences",
+    "retrieve_context": "phase_places",
+    "enrich_places": "phase_places",
+    "fetch_weather": "phase_weather_transport",
+    "fetch_transport": "phase_weather_transport",
+    "multi_day_track": "phase_itinerary",
+    "single_day_track": "phase_itinerary",
+    "merge": "phase_itinerary",
+    "generate_itinerary": "phase_itinerary",
+    "accommodation": "phase_stays",
+    "skip_accommodation": "phase_stays",
+    "build_map_points": "phase_finalize",
+}
 
 
 def _default_index(options: tuple[str, ...], prefer: str) -> int:
@@ -51,26 +71,6 @@ def _default_index(options: tuple[str, ...], prefer: str) -> int:
         return options.index(prefer)
     except ValueError:
         return 0
-
-
-def _step_label(node_name: str) -> str:
-    labels = {
-        "normalize_profile": "Normalizing your trip preferences",
-        "retrieve_context": "Retrieving matching context",
-        "enrich_places": "Enriching places with live details",
-        "fetch_weather": "Checking current weather",
-        "build_map_points": "Preparing map markers",
-        "fetch_transport": "Checking transport options",
-        "multi_day_track": "Applying multi-day planning route",
-        "single_day_track": "Applying single-day planning route",
-        "route_track": "Applying planning route",
-        "merge": "Merging planning state",
-        "accommodation": "Adding accommodation suggestions",
-        "skip_accommodation": "Skipping accommodation suggestions",
-        "accommodation_route": "Handling accommodation preferences",
-        "generate_itinerary": "Drafting your day-by-day plan",
-    }
-    return labels.get(node_name, f"Running {node_name}")
 
 
 def _weather_recommendation_text(bias: str) -> str:
@@ -277,20 +277,17 @@ def _walk_hint(distance_m: int | float | None) -> str:
     return f"{d}m walk"
 
 
-def _build_steps_markdown(completed_nodes: set[str]) -> str:
-    derived = set(completed_nodes)
-    if "multi_day_track" in completed_nodes or "single_day_track" in completed_nodes:
-        derived.add("route_track")
-    if "accommodation" in completed_nodes or "skip_accommodation" in completed_nodes:
-        derived.add("accommodation_route")
-
+def _build_steps_markdown(completed_nodes: set[str], *, phase: str) -> str:
+    completed_phases = {_NODE_TO_PHASE[n] for n in completed_nodes if n in _NODE_TO_PHASE}
+    if phase in {"rendering", "ready"}:
+        completed_phases.add("phase_finalize")
     lines: list[str] = []
-    for node in _BUILD_STEP_ORDER:
-        label = _step_label(node)
-        if node in derived:
-            lines.append(f"- ✅ {label}")
+    for p in _BUILD_PHASE_ORDER:
+        label = _BUILD_PHASE_LABELS[p]
+        if p in completed_phases:
+            lines.append(f"✅ {label}")
         else:
-            lines.append(f"- ⬜ {label}")
+            lines.append(f"⬜ {label}")
     return "\n".join(lines)
 
 
@@ -315,7 +312,6 @@ def main() -> None:
         return
 
     st.session_state.setdefault("plan_build_phase", "idle")
-    st.session_state.setdefault("plan_build_steps", [])
     st.session_state.setdefault("plan_build_nodes", [])
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
@@ -431,13 +427,12 @@ def main() -> None:
             status_panel.caption("Run the planner to see build progress and step logs.")
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
         if phase in {"building", "rendering", "ready", "error"}:
-            steps_panel.markdown(_build_steps_markdown(completed_nodes))
+            steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
         else:
             steps_panel.empty()
 
     if run_clicked:
         st.session_state["plan_build_phase"] = "building"
-        st.session_state["plan_build_steps"] = []
         st.session_state["plan_build_nodes"] = []
         profile = TripProfile(
             days=days,
@@ -466,11 +461,11 @@ def main() -> None:
                     if not isinstance(event, dict):
                         continue
                     for node_name, delta in event.items():
-                        label = _step_label(str(node_name))
-                        st.session_state["plan_build_steps"].append(label)
                         if str(node_name) not in st.session_state["plan_build_nodes"]:
                             st.session_state["plan_build_nodes"].append(str(node_name))
-                        steps_panel.markdown(_build_steps_markdown(set(st.session_state["plan_build_nodes"])))
+                        steps_panel.markdown(
+                            _build_steps_markdown(set(st.session_state["plan_build_nodes"]), phase="building")
+                        )
                         if isinstance(delta, dict):
                             result.update(delta)
                 _ui_log.info(
