@@ -82,6 +82,41 @@ def _weather_recommendation_text(bias: str) -> str:
     return "Weather is uncertain, so keeping a flexible indoor/outdoor mix is recommended."
 
 
+def _weather_emoji(condition_main: str, bias: str) -> str:
+    c = (condition_main or "").strip().lower()
+    if "rain" in c or "drizzle" in c or "storm" in c:
+        return "🌧️"
+    if "snow" in c:
+        return "❄️"
+    if "cloud" in c:
+        return "☁️"
+    if "clear" in c or "sun" in c:
+        return "☀️"
+    if (bias or "").strip().lower() == "indoor":
+        return "🏛️"
+    return "🌤️"
+
+
+def _activity_emoji(title: str, place_name: str, time_of_day: str) -> str:
+    text = f"{title} {place_name}".lower()
+    if "museum" in text or "gallery" in text:
+        return "🏛️"
+    if "cafe" in text or "coffee" in text:
+        return "☕"
+    if "park" in text or "garden" in text or "nature" in text:
+        return "🌳"
+    if "bar" in text or "beer" in text or "club" in text:
+        return "🍸"
+    tod = (time_of_day or "").strip().lower()
+    if tod == "morning":
+        return "🌅"
+    if tod == "afternoon":
+        return "🌇"
+    if tod == "evening":
+        return "🌙"
+    return "📍"
+
+
 def _format_itinerary_markdown(itinerary: dict) -> str:
     title = str(itinerary.get("title", "Your plan")).strip()
     lines: list[str] = [f"## {title}", ""]
@@ -99,8 +134,9 @@ def _format_itinerary_markdown(itinerary: dict) -> str:
             t = str(act.get("title", "")).strip()
             desc = str(act.get("description", "")).strip()
             pn = str(act.get("place_name", "")).strip()
+            icon = _activity_emoji(t, pn, tod)
             head = f"**{tod.title()} — {t}**" if tod else f"**{t}**"
-            lines.append(f"- {head}")
+            lines.append(f"- {icon} {head}")
             if pn:
                 lines.append(f"  - Place: {pn}")
             if desc:
@@ -483,8 +519,10 @@ def main() -> None:
         st.subheader(str(constants.get("section_result", "Plan preview")))
         weather_summary = str(result.get("weather_summary", "")).strip()
         weather_bias = str(result.get("weather_bias", "unknown"))
+        weather_condition_main = str(result.get("weather_condition_main", ""))
         if weather_summary:
-            st.markdown(f"**Expected weather on trip days:** {weather_summary}")
+            weather_icon = _weather_emoji(weather_condition_main, weather_bias)
+            st.markdown(f"**{weather_icon} Expected weather on trip days:** {weather_summary}")
             st.caption(_weather_recommendation_text(weather_bias))
         if retrieval_notice:
             st.caption(retrieval_notice)
@@ -550,13 +588,13 @@ def main() -> None:
 
         tabs = st.tabs(
             [
-                "Places to Explore",
-                "Food & Drink",
-                "How to Get Around",
-                "Stay Options",
-                "Developer Diagnostics",
-                "Raw Data",
-                "Structured itinerary (JSON)",
+                "🧭 Places to Explore",
+                "☕ Food & Drink",
+                "🚇 How to Get Around",
+                "🏨 Stay Options",
+                "🛠️ Developer Diagnostics",
+                "🗂️ Raw Data",
+                "📦 Structured itinerary (JSON)",
             ]
         )
 

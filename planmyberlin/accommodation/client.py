@@ -122,7 +122,7 @@ def fetch_accommodation_suggestions(
                                 "name": name,
                                 "district": district,
                                 "type": "hotel",
-                                "reason": f"Well-reviewed stay option near your planned areas. {address}".strip(),
+                                "reason": "Well-reviewed stay option near your planned areas.",
                                 "url": url,
                                 "rating": p.get("rating"),
                                 "reviews": p.get("userRatingCount"),
