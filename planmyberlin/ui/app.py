@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import base64
 import html
 import json
 import os
 import uuid
+from functools import lru_cache
 from pathlib import Path
 
 import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv + logging
@@ -67,6 +69,18 @@ _NODE_TO_PHASE = {
     "build_map_points": "phase_prepare",
 }
 
+_TIME_ICON_PATHS: dict[str, Path] = {
+    "morning": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/morning-6bb8cac5-de7c-4030-b367-be3ec132a85b.png"
+    ),
+    "afternoon": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/afternoon-fc911002-3c3d-410b-94ff-26e65fa5292e.png"
+    ),
+    "evening": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/evening-3a9f9fd8-6d10-4eeb-86de-4c8678a91b3c.png"
+    ),
+}
+
 
 def _default_index(options: tuple[str, ...], prefer: str) -> int:
     try:
@@ -82,6 +96,15 @@ def _weather_recommendation_text(bias: str) -> str:
     if b == "outdoor_or_mixed":
         return "Expected conditions support a balanced mix of outdoor and indoor activities."
     return "Weather is uncertain, so keeping a flexible indoor/outdoor mix is recommended."
+
+
+def _weather_support_text(bias: str) -> str:
+    b = (bias or "").strip().lower()
+    if b == "indoor":
+        return "indoor-focused activities."
+    if b == "outdoor_or_mixed":
+        return "a balanced mix of outdoor and indoor activities."
+    return "a flexible indoor/outdoor mix."
 
 
 def _weather_emoji(condition_main: str, bias: str) -> str:
@@ -119,47 +142,80 @@ def _activity_emoji(title: str, place_name: str, time_of_day: str) -> str:
 def _time_of_day_emoji(time_of_day: str) -> str:
     tod = (time_of_day or "").strip().lower()
     if tod == "morning":
-        return "🌅"
+        return "🌄"
     if tod == "afternoon":
-        return "🌇"
+        return "🌞"
     if tod == "evening":
-        return "🌙"
+        return "🌆"
     return "🕒"
 
 
+@lru_cache(maxsize=16)
+def _icon_data_uri(path: str) -> str | None:
+    p = Path(path)
+    if not p.exists():
+        return None
+    payload = p.read_bytes()
+    encoded = base64.b64encode(payload).decode("ascii")
+    return f"data:image/png;base64,{encoded}"
+
+
+def _time_of_day_icon_html(time_of_day: str) -> str:
+    tod = (time_of_day or "").strip().lower()
+    icon_path = _TIME_ICON_PATHS.get(tod)
+    if icon_path is None:
+        return _time_of_day_emoji(time_of_day)
+    uri = _icon_data_uri(str(icon_path))
+    if not uri:
+        return _time_of_day_emoji(time_of_day)
+    return (
+        f'<img src="{uri}" alt="{html.escape(tod)}" '
+        'style="width:18px;height:18px;vertical-align:-3px;margin-right:6px;border-radius:3px;" />'
+    )
+
+
 def _format_itinerary_markdown(itinerary: dict) -> str:
-    title = str(itinerary.get("title", "Your plan")).strip()
-    lines: list[str] = [f"## {title}", ""]
-    for day in itinerary.get("days", []) if isinstance(itinerary.get("days"), list) else []:
+    days = itinerary.get("days", [])
+    day_list = days if isinstance(days, list) else []
+    single_day = len(day_list) == 1
+    lines: list[str] = []
+    for day in day_list:
         if not isinstance(day, dict):
             continue
         dn = day.get("day_number", "")
-        theme = str(day.get("theme", "")).strip()
-        lines.append(f"### Day {dn}: {theme}".strip())
+        theme = html.escape(str(day.get("theme", "")).strip())
+        if single_day:
+            if theme:
+                lines.append(f"### {theme}")
+        else:
+            lines.append(f"### Day {dn}: {theme}".strip())
         lines.append("")
         for act in day.get("activities", []) if isinstance(day.get("activities"), list) else []:
             if not isinstance(act, dict):
                 continue
             tod = str(act.get("time_of_day", "")).strip()
-            t = str(act.get("title", "")).strip()
-            desc = str(act.get("description", "")).strip()
-            pn = str(act.get("place_name", "")).strip()
-            time_icon = _time_of_day_emoji(tod)
+            t = html.escape(str(act.get("title", "")).strip())
+            desc = html.escape(str(act.get("description", "")).strip())
+            pn = html.escape(str(act.get("place_name", "")).strip())
+            time_icon = _time_of_day_icon_html(tod)
             event_icon = _activity_emoji(t, pn, tod)
-            head = f"**{tod.title()} — {t}**" if tod else f"**{t}**"
+            tod_label = html.escape(tod.title())
+            head = f"**{tod_label} — {t}**" if tod else f"**{t}**"
             lines.append(f"- {time_icon} {head} {event_icon}")
             if pn:
                 lines.append(f"  - Place: {pn}")
             if desc:
                 lines.append(f"  - {desc}")
         lines.append("")
-    notes = itinerary.get("practical_notes", [])
-    if isinstance(notes, list) and notes:
-        lines.append("**Practical notes**")
-        for n in notes:
-            if str(n).strip():
-                lines.append(f"- {str(n).strip()}")
     return "\n".join(lines).strip()
+
+
+def _clean_weather_summary(summary: str) -> str:
+    s = (summary or "").strip()
+    prefix = "Current weather in Berlin:"
+    if s.lower().startswith(prefix.lower()):
+        return s[len(prefix) :].strip()
+    return s
 
 
 def _stream_itinerary_markdown(itinerary: dict, *, model: str, temperature: float, placeholder) -> str:
@@ -406,17 +462,6 @@ def main() -> None:
 
     with top_right:
         st.subheader("Plan builder list")
-        latest_result = st.session_state.get("plan_result", {})
-        latest_items = list(latest_result.get("enriched_items", [])) or list(latest_result.get("retrieved_items", []))
-        latest_place_count = sum(1 for x in latest_items if not _is_food_item(x))
-        latest_food_count = sum(1 for x in latest_items if _is_food_item(x))
-        stat_1, stat_2, stat_3 = st.columns(3)
-        with stat_1:
-            st.metric("Places", latest_place_count)
-        with stat_2:
-            st.metric("Food", latest_food_count)
-        with stat_3:
-            st.metric("Stay", int(latest_result.get("accommodation_count", 0) or 0))
         status_panel = st.empty()
         steps_panel = st.empty()
         phase = str(st.session_state.get("plan_build_phase", "idle"))
@@ -520,11 +565,10 @@ def main() -> None:
         weather_bias = str(result.get("weather_bias", "unknown"))
         weather_condition_main = str(result.get("weather_condition_main", ""))
         practical_notes = itinerary.get("practical_notes", []) if isinstance(itinerary, dict) else []
-        preview_tabs = st.tabs(["🗓️ Trip Plan", "🌤️ Weather", "📝 Practical Notes"])
+        preview_tabs = st.tabs(["🗓️ Berlin Itinerary", "🌤️ Weather", "📝 Practical Notes"])
 
         with preview_tabs[0]:
             if isinstance(itinerary, dict) and itinerary:
-                st.markdown("### Berlin Itinerary")
                 llm_cfg = settings.get("itinerary", {})
                 narrative_stream = bool(llm_cfg.get("narrative_stream", False))
                 if narrative_stream and os.getenv("OPENAI_API_KEY"):
@@ -532,7 +576,7 @@ def main() -> None:
                     temperature = float(llm_cfg.get("temperature", 0.4))
                     cached_narrative = st.session_state.get("plan_narrative_md")
                     if cached_narrative:
-                        st.markdown(cached_narrative)
+                        st.markdown(cached_narrative, unsafe_allow_html="<img" in str(cached_narrative))
                     else:
                         narrative_box = st.empty()
                         try:
@@ -541,33 +585,35 @@ def main() -> None:
                             )
                             if not text:
                                 text = _format_itinerary_markdown(itinerary)
+                                narrative_box.markdown(text, unsafe_allow_html=True)
+                            else:
+                                narrative_box.markdown(text)
                             st.session_state.plan_narrative_md = text
-                            narrative_box.markdown(text)
                         except Exception:
                             fallback_md = _format_itinerary_markdown(itinerary)
                             st.session_state.plan_narrative_md = fallback_md
-                            narrative_box.markdown(fallback_md)
+                            narrative_box.markdown(fallback_md, unsafe_allow_html=True)
                 else:
-                    st.markdown(_format_itinerary_markdown(itinerary))
-                if itinerary_status != "ok" and itinerary_message:
+                    st.markdown(_format_itinerary_markdown(itinerary), unsafe_allow_html=True)
+                if itinerary_status != "ok" and itinerary_message and (
+                    itinerary_message.strip().lower()
+                    != "venue names were aligned with retrieved candidates."
+                ):
                     st.caption(itinerary_message)
             else:
                 st.caption("No itinerary was generated for this run.")
 
         with preview_tabs[1]:
-            st.markdown("### Weather")
-            st.markdown("- **Expected weather on trip days**")
+            clean_weather = _clean_weather_summary(weather_summary)
             if weather_summary:
                 weather_icon = _weather_emoji(weather_condition_main, weather_bias)
-                st.markdown(f"  - {weather_icon} {weather_summary}")
-                st.markdown(f"  - {_weather_recommendation_text(weather_bias)}")
+                st.markdown(f"- **Expected weather on trip days:** {weather_icon} {clean_weather}")
+                st.markdown(f"- **Expected conditions support:** {_weather_support_text(weather_bias)}")
             else:
-                st.markdown("  - Weather data unavailable for this run.")
-            if retrieval_notice:
-                st.caption(retrieval_notice)
+                st.markdown("- **Expected weather on trip days:** unavailable for this run.")
+                st.markdown("- **Expected conditions support:** a flexible indoor/outdoor mix.")
 
         with preview_tabs[2]:
-            st.markdown("### Practical Notes")
             if isinstance(practical_notes, list) and practical_notes:
                 for note in practical_notes:
                     text = str(note).strip()
