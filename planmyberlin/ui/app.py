@@ -103,17 +103,14 @@ def _activity_emoji(title: str, place_name: str, time_of_day: str) -> str:
         return "🏛️"
     if "cafe" in text or "coffee" in text:
         return "☕"
+    if "dinner" in text or "lunch" in text or "breakfast" in text:
+        return "🍽️"
+    if "restaurant" in text or "food" in text or "eat" in text:
+        return "🍴"
     if "park" in text or "garden" in text or "nature" in text:
         return "🌳"
     if "bar" in text or "beer" in text or "club" in text:
         return "🍸"
-    tod = (time_of_day or "").strip().lower()
-    if tod == "morning":
-        return "🌅"
-    if tod == "afternoon":
-        return "🌇"
-    if tod == "evening":
-        return "🌙"
     return "📍"
 
 
