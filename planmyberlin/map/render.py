@@ -14,7 +14,8 @@ def _category_color(category: str) -> str:
     if "hotel" in c or "accommodation" in c or "stay" in c:
         return "green"
     if "restaurant" in c:
-        return "red"
+        # Folium doesn't support pure yellow marker; orange is the closest.
+        return "orange"
     if "place" in c:
         return "blue"
     return "blue"

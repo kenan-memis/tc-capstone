@@ -562,7 +562,7 @@ def main() -> None:
                 "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
                 "Itinerary-linked stops are listed first."
             )
-            st.caption("Marker colors: blue = places, red = food & drink, green = stays/hotels (when available).")
+            st.caption("Marker colors: blue = places, yellow = food & drink, green = stays/hotels, red = selected marker.")
             pending_tip = st.session_state.pop("pending_map_highlight_pick", None)
             if pending_tip in highlight_opts:
                 st.session_state["map_highlight_pick"] = pending_tip
@@ -692,6 +692,7 @@ def main() -> None:
                         else "No verified review score available"
                     )
                     url = str(item.get("url", "")).strip()
+                    photo_url = str(item.get("photo_url", "")).strip()
                     icon = (
                         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" '
                         'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -704,12 +705,17 @@ def main() -> None:
                         f'<a href="{html.escape(url, quote=True)}" target="_blank" rel="noopener noreferrer" '
                         f'title="Open in new tab" style="text-decoration:none;margin-left:6px;">{icon}</a>'
                     )
-                    st.markdown(
-                        f"- **{name}** ({typ}, {district}) — {reason}  \n"
-                        f"  - {rating_text}  \n"
-                        f"  - {address} {link}",
-                        unsafe_allow_html=True,
-                    )
+                    c_img, c_txt = st.columns([0.24, 0.76], gap="small")
+                    with c_img:
+                        if photo_url:
+                            st.image(photo_url, use_container_width=True)
+                    with c_txt:
+                        st.markdown(
+                            f"- **{name}** ({typ}, {district}) — {reason}  \n"
+                            f"  - {rating_text}  \n"
+                            f"  - {address} {link}",
+                            unsafe_allow_html=True,
+                        )
             else:
                 st.caption("Accommodation suggestions are not enabled for this run.")
 

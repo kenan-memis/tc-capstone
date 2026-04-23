@@ -86,7 +86,8 @@ def fetch_accommodation_suggestions(
             "X-Goog-Api-Key": api_key,
             "X-Goog-FieldMask": (
                 "places.id,places.displayName,places.formattedAddress,places.location,"
-                "places.rating,places.userRatingCount,places.websiteUri,places.googleMapsUri"
+                "places.rating,places.userRatingCount,places.websiteUri,places.googleMapsUri,"
+                "places.photos"
             ),
         }
         out: list[dict[str, Any]] = []
@@ -117,6 +118,15 @@ def fetch_accommodation_suggestions(
                         loc = p.get("location") if isinstance(p.get("location"), dict) else {}
                         district = wanted[0] if wanted else city
                         url = str(p.get("websiteUri") or p.get("googleMapsUri") or "").strip()
+                        photos = p.get("photos") if isinstance(p.get("photos"), list) else []
+                        photo_name = ""
+                        if photos and isinstance(photos[0], dict):
+                            photo_name = str(photos[0].get("name", "")).strip()
+                        photo_url = (
+                            f"https://places.googleapis.com/v1/{photo_name}/media?maxHeightPx=220&key={api_key}"
+                            if photo_name
+                            else ""
+                        )
                         out.append(
                             {
                                 "name": name,
@@ -127,6 +137,7 @@ def fetch_accommodation_suggestions(
                                 "rating": p.get("rating"),
                                 "reviews": p.get("userRatingCount"),
                                 "address": address,
+                                "photo_url": photo_url,
                                 "latitude": loc.get("latitude") if isinstance(loc.get("latitude"), (int, float)) else None,
                                 "longitude": loc.get("longitude") if isinstance(loc.get("longitude"), (int, float)) else None,
                                 "place_id": pid,
