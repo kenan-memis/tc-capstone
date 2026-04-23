@@ -515,44 +515,66 @@ def main() -> None:
 
     bottom_left, bottom_right = st.columns([0.52, 0.48], gap="large")
     with bottom_left:
-        st.subheader(str(constants.get("section_result", "Plan preview")))
+        st.markdown("## Plan Preview")
         weather_summary = str(result.get("weather_summary", "")).strip()
         weather_bias = str(result.get("weather_bias", "unknown"))
         weather_condition_main = str(result.get("weather_condition_main", ""))
-        if weather_summary:
-            weather_icon = _weather_emoji(weather_condition_main, weather_bias)
-            st.markdown(f"**{weather_icon} Expected weather on trip days:** {weather_summary}")
-            st.caption(_weather_recommendation_text(weather_bias))
-        if retrieval_notice:
-            st.caption(retrieval_notice)
-        if isinstance(itinerary, dict) and itinerary:
-            st.markdown("**Your trip plan**")
-            llm_cfg = settings.get("itinerary", {})
-            narrative_stream = bool(llm_cfg.get("narrative_stream", False))
-            if narrative_stream and os.getenv("OPENAI_API_KEY"):
-                model = str(llm_cfg.get("model", "gpt-4o-mini"))
-                temperature = float(llm_cfg.get("temperature", 0.4))
-                cached_narrative = st.session_state.get("plan_narrative_md")
-                if cached_narrative:
-                    st.markdown(cached_narrative)
+        practical_notes = itinerary.get("practical_notes", []) if isinstance(itinerary, dict) else []
+        preview_tabs = st.tabs(["🗓️ Trip Plan", "🌤️ Weather", "📝 Practical Notes"])
+
+        with preview_tabs[0]:
+            if isinstance(itinerary, dict) and itinerary:
+                st.markdown("### Berlin Itinerary")
+                llm_cfg = settings.get("itinerary", {})
+                narrative_stream = bool(llm_cfg.get("narrative_stream", False))
+                if narrative_stream and os.getenv("OPENAI_API_KEY"):
+                    model = str(llm_cfg.get("model", "gpt-4o-mini"))
+                    temperature = float(llm_cfg.get("temperature", 0.4))
+                    cached_narrative = st.session_state.get("plan_narrative_md")
+                    if cached_narrative:
+                        st.markdown(cached_narrative)
+                    else:
+                        narrative_box = st.empty()
+                        try:
+                            text = _stream_itinerary_markdown(
+                                itinerary, model=model, temperature=temperature, placeholder=narrative_box
+                            )
+                            if not text:
+                                text = _format_itinerary_markdown(itinerary)
+                            st.session_state.plan_narrative_md = text
+                            narrative_box.markdown(text)
+                        except Exception:
+                            fallback_md = _format_itinerary_markdown(itinerary)
+                            st.session_state.plan_narrative_md = fallback_md
+                            narrative_box.markdown(fallback_md)
                 else:
-                    narrative_box = st.empty()
-                    try:
-                        text = _stream_itinerary_markdown(
-                            itinerary, model=model, temperature=temperature, placeholder=narrative_box
-                        )
-                        if not text:
-                            text = _format_itinerary_markdown(itinerary)
-                        st.session_state.plan_narrative_md = text
-                        narrative_box.markdown(text)
-                    except Exception:
-                        fallback_md = _format_itinerary_markdown(itinerary)
-                        st.session_state.plan_narrative_md = fallback_md
-                        narrative_box.markdown(fallback_md)
+                    st.markdown(_format_itinerary_markdown(itinerary))
+                if itinerary_status != "ok" and itinerary_message:
+                    st.caption(itinerary_message)
             else:
-                st.markdown(_format_itinerary_markdown(itinerary))
-            if itinerary_status != "ok" and itinerary_message:
-                st.caption(itinerary_message)
+                st.caption("No itinerary was generated for this run.")
+
+        with preview_tabs[1]:
+            st.markdown("### Weather")
+            st.markdown("- **Expected weather on trip days**")
+            if weather_summary:
+                weather_icon = _weather_emoji(weather_condition_main, weather_bias)
+                st.markdown(f"  - {weather_icon} {weather_summary}")
+                st.markdown(f"  - {_weather_recommendation_text(weather_bias)}")
+            else:
+                st.markdown("  - Weather data unavailable for this run.")
+            if retrieval_notice:
+                st.caption(retrieval_notice)
+
+        with preview_tabs[2]:
+            st.markdown("### Practical Notes")
+            if isinstance(practical_notes, list) and practical_notes:
+                for note in practical_notes:
+                    text = str(note).strip()
+                    if text:
+                        st.markdown(f"- {text}")
+            else:
+                st.caption("No practical notes were generated for this run.")
 
     with bottom_right:
         st.subheader("Map & Trip Details")
