@@ -195,6 +195,27 @@ def _merge_display_items(retrieved_items: list[dict], enriched_items: list[dict]
     return out
 
 
+def _walk_hint(distance_m: int | float | None) -> str:
+    if not isinstance(distance_m, (int, float)):
+        return "walking distance unavailable"
+    d = int(distance_m)
+    if d <= 250:
+        return f"{d}m walk (very close)"
+    if d <= 600:
+        return f"{d}m walk (short walk)"
+    return f"{d}m walk"
+
+
+def _transport_type_label(raw: str) -> str:
+    t = (raw or "").strip().lower()
+    mapping = {
+        "stop": "Transit stop",
+        "station": "Station",
+        "platform": "Platform",
+    }
+    return mapping.get(t, t.title() if t else "Transit stop")
+
+
 def _build_steps_markdown(completed_nodes: set[str]) -> str:
     derived = set(completed_nodes)
     if "multi_day_track" in completed_nodes or "single_day_track" in completed_nodes:
@@ -556,23 +577,36 @@ def main() -> None:
                     options = row.get("options", [])
                     st.markdown(f"**For `{place_name}`**")
                     if isinstance(options, list) and options:
-                        for opt in options:
-                            if not isinstance(opt, dict):
-                                continue
-                            distance = opt.get("distance_m")
-                            distance_text = f" (~{int(distance)}m walk)" if isinstance(distance, (int, float)) else ""
+                        best = options[0] if isinstance(options[0], dict) else {}
+                        if best:
                             st.markdown(
-                                f"- {opt.get('name','Unknown stop')} ({opt.get('type','stop')}){distance_text}"
+                                f"**Best option:** {best.get('name','Nearest stop')} — {_walk_hint(best.get('distance_m'))}"
                             )
+                        with st.expander("See additional nearby options", expanded=False):
+                            for idx, opt in enumerate(options):
+                                if not isinstance(opt, dict):
+                                    continue
+                                if idx == 0:
+                                    continue
+                                st.markdown(
+                                    f"- {opt.get('name','Unknown stop')} — {_walk_hint(opt.get('distance_m'))}"
+                                )
+                        with st.expander("Technical stop details", expanded=False):
+                            for opt in options:
+                                if not isinstance(opt, dict):
+                                    continue
+                                st.markdown(
+                                    f"- {opt.get('name','Unknown stop')} · {_transport_type_label(str(opt.get('type','')))}"
+                                )
                     else:
                         st.caption("No nearby stop details available for this place.")
+                    st.divider()
             elif transport_items:
                 for item in transport_items[:10]:
                     distance = item.get("distance_m")
-                    distance_text = f", ~{int(distance)}m away" if isinstance(distance, (int, float)) else ""
+                    distance_text = _walk_hint(distance if isinstance(distance, (int, float)) else None)
                     st.markdown(
-                        f"- **{item.get('name','')}** ({item.get('type','')})"
-                        f" — near: {item.get('query','')}{distance_text}"
+                        f"- **{item.get('name','')}** — near {item.get('query','')} ({distance_text})"
                     )
             else:
                 st.caption("No transport suggestions available for this run.")
