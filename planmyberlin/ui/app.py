@@ -557,15 +557,11 @@ def main() -> None:
     with bottom_right:
         st.subheader("Map & Trip Details")
         if map_display_points:
-            st.caption(
-                "Pick a place to emphasize on the map, or click a marker (tooltip = place name). "
-                "Itinerary-linked stops are listed first."
-            )
-            st.caption("Marker colors: blue = places, yellow = food & drink, green = stays/hotels, red = selected marker.")
             pending_tip = st.session_state.pop("pending_map_highlight_pick", None)
+            sel = st.session_state.get("map_highlight_pick", "(All places)")
             if pending_tip in highlight_opts:
-                st.session_state["map_highlight_pick"] = pending_tip
-            sel = st.selectbox("Focus marker", options=highlight_opts, key="map_highlight_pick")
+                sel = pending_tip
+                st.session_state["map_highlight_pick"] = sel
             hl = None if sel == "(All places)" else sel
             pv = st.session_state.get("plan_map_version", "1")
             map_obj = build_preview_map(map_display_points, highlight_name=hl)
@@ -580,6 +576,7 @@ def main() -> None:
             if tip and tip in highlight_opts and tip != sel:
                 st.session_state["pending_map_highlight_pick"] = tip
                 st.rerun()
+            st.caption("Marker colors: blue = places, yellow = food & drink, green = stays/hotels, red = selected marker.")
         elif map_status != "ok":
             st.info("Map preview is unavailable because no coordinates were found for the current results.")
         else:
