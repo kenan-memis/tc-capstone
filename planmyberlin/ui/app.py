@@ -38,7 +38,8 @@ _BUILD_PHASE_ORDER = [
     "phase_weather_transport",
     "phase_itinerary",
     "phase_stays",
-    "phase_finalize",
+    "phase_prepare",
+    "phase_finish",
 ]
 
 _BUILD_PHASE_LABELS = {
@@ -47,7 +48,8 @@ _BUILD_PHASE_LABELS = {
     "phase_weather_transport": "Checking weather and local transport",
     "phase_itinerary": "Building your day-by-day itinerary",
     "phase_stays": "Adding stay suggestions",
-    "phase_finalize": "Preparing map and trip details",
+    "phase_prepare": "Preparing map and trip details",
+    "phase_finish": "Finalizing and displaying your plan",
 }
 
 _NODE_TO_PHASE = {
@@ -62,7 +64,7 @@ _NODE_TO_PHASE = {
     "generate_itinerary": "phase_itinerary",
     "accommodation": "phase_stays",
     "skip_accommodation": "phase_stays",
-    "build_map_points": "phase_finalize",
+    "build_map_points": "phase_prepare",
 }
 
 
@@ -280,7 +282,9 @@ def _walk_hint(distance_m: int | float | None) -> str:
 def _build_steps_markdown(completed_nodes: set[str], *, phase: str) -> str:
     completed_phases = {_NODE_TO_PHASE[n] for n in completed_nodes if n in _NODE_TO_PHASE}
     if phase in {"rendering", "ready"}:
-        completed_phases.add("phase_finalize")
+        completed_phases.add("phase_prepare")
+    if phase == "ready":
+        completed_phases.add("phase_finish")
     lines: list[str] = []
     for p in _BUILD_PHASE_ORDER:
         label = _BUILD_PHASE_LABELS[p]
@@ -419,7 +423,7 @@ def main() -> None:
         if phase == "building":
             status_panel.info("Building plan...")
         elif phase == "rendering":
-            status_panel.info("Preparing map and detail panels...")
+            status_panel.info("Finalizing and displaying your plan...")
         elif phase == "ready":
             status_panel.success("Plan ready.")
         elif phase == "error":
