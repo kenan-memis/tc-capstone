@@ -6,6 +6,7 @@ import html
 import json
 import os
 import uuid
+from pathlib import Path
 
 import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv + logging
 import streamlit as st
@@ -678,6 +679,20 @@ def main() -> None:
                 st.caption(f"Accommodation message: {accommodation_message}")
             if itinerary_message:
                 st.caption(f"Itinerary message: {itinerary_message}")
+
+            repo_root = Path(__file__).resolve().parents[2]
+            graph_png = repo_root / "docs" / "graphs" / "planner_workflow.png"
+            graph_mmd = repo_root / "docs" / "graphs" / "planner_workflow.mmd"
+            st.markdown("**LangGraph workflow**")
+            if graph_png.exists():
+                st.image(str(graph_png), caption="Planner workflow graph")
+            elif graph_mmd.exists():
+                st.caption("PNG graph not found; showing Mermaid source.")
+                with st.expander("Planner workflow Mermaid", expanded=False):
+                    st.code(graph_mmd.read_text(encoding="utf-8"), language="mermaid")
+                st.caption("Generate PNG with: `uv run planmyberlin-export-graphs`")
+            else:
+                st.caption("Graph export not found. Run: `uv run planmyberlin-export-graphs`")
 
         with tabs[5]:
             with st.expander("Raw result payload", expanded=False):
