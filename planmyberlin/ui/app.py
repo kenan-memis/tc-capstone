@@ -364,7 +364,6 @@ def main() -> None:
 
     st.title(str(constants.get("hero_title", "PlanMyBerlin")))
     st.caption(str(constants.get("hero_subtitle", "")))
-    st.info(str(constants.get("info_banner", "")))
 
     dietary_opts = tuple(get_dietary_options())
     mobility_opts = tuple(get_mobility_options())
@@ -375,11 +374,15 @@ def main() -> None:
     st.session_state.setdefault("plan_build_phase", "idle")
     st.session_state.setdefault("plan_build_nodes", [])
 
+    banner_left, _banner_right = st.columns([0.55, 0.45], gap="large")
+    with banner_left:
+        st.info(str(constants.get("info_banner", "")))
+
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
         st.subheader(str(constants.get("section_plan", "Your trip")))
-        c1, c2 = st.columns(2)
-        with c1:
+        r1c1, r1c2, r1c3 = st.columns(3)
+        with r1c1:
             days = int(
                 st.number_input(
                     str(constants.get("label_days", "Days")),
@@ -389,6 +392,7 @@ def main() -> None:
                     step=1,
                 )
             )
+        with r1c2:
             party_size = int(
                 st.number_input(
                     str(constants.get("label_party", "Party size")),
@@ -398,57 +402,53 @@ def main() -> None:
                     step=1,
                 )
             )
-            default_include_acc = days >= 2
-            include_accommodation = st.checkbox(
-                str(constants.get("label_accommodation", "Include accommodation")),
-                value=default_include_acc,
-                help=str(constants.get("help_accommodation", "")),
-            )
-
-        with c2:
+        with r1c3:
             budget_options = ("low", "moderate", "high")
             budget_tier = st.selectbox(
                 str(constants.get("label_budget", "Budget")),
                 options=budget_options,
                 index=1,
             )
-            pace_options = ("relaxed", "balanced", "packed")
-            pace = st.selectbox(
-                str(constants.get("label_pace", "Pace")),
-                options=pace_options,
-                index=1,
-            )
 
         interest_options = list(get_interest_options())
-        interest_tags = st.multiselect(
-            str(constants.get("label_interests", "Interests")),
-            options=interest_options,
-            default=[],
-            help=str(constants.get("help_interests", "")),
-        )
-
-        neighbourhood_options = list(get_neighbourhood_options())
-        neighbourhoods = st.multiselect(
-            str(constants.get("label_neighbourhoods", "Neighbourhoods")),
-            options=neighbourhood_options,
-            default=[],
-            help=str(constants.get("help_neighbourhoods", "")),
-        )
-
-        d1, d2 = st.columns(2)
-        with d1:
+        pace_options = ("relaxed", "balanced", "packed")
+        r2c1, r2c2, r2c3 = st.columns(3)
+        with r2c1:
             dietary_choice = st.selectbox(
                 str(constants.get("label_dietary", "Food & diet")),
                 options=list(dietary_opts),
                 index=_default_index(dietary_opts, "Doesn't matter / no preference"),
                 help=str(constants.get("help_dietary", "")),
             )
-        with d2:
+        with r2c2:
             mobility_choice = st.selectbox(
                 str(constants.get("label_mobility", "Walking & getting around")),
                 options=list(mobility_opts),
                 index=_default_index(mobility_opts, "No specific needs"),
                 help=str(constants.get("help_mobility", "")),
+            )
+        with r2c3:
+            pace = st.selectbox(
+                str(constants.get("label_pace", "Pace")),
+                options=pace_options,
+                index=1,
+            )
+
+        neighbourhood_options = list(get_neighbourhood_options())
+        r3c1, r3c2 = st.columns(2)
+        with r3c1:
+            interest_tags = st.multiselect(
+                str(constants.get("label_interests", "Interests")),
+                options=interest_options,
+                default=[],
+                help=str(constants.get("help_interests", "")),
+            )
+        with r3c2:
+            neighbourhoods = st.multiselect(
+                str(constants.get("label_neighbourhoods", "Neighbourhoods")),
+                options=neighbourhood_options,
+                default=[],
+                help=str(constants.get("help_neighbourhoods", "")),
             )
 
         extra_details = st.text_area(
@@ -456,6 +456,13 @@ def main() -> None:
             value="",
             height=120,
             help=str(constants.get("help_notes", "")),
+        )
+
+        default_include_acc = days >= 2
+        include_accommodation = st.checkbox(
+            str(constants.get("label_accommodation", "Include accommodation")),
+            value=default_include_acc,
+            help=str(constants.get("help_accommodation", "")),
         )
 
         run_clicked = st.button(str(constants.get("button_run", "Run")), type="primary")

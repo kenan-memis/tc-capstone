@@ -31,7 +31,7 @@ label_notes: Other details
 help_notes: >-
   Allergies, specific must-sees, dates, mobility details not listed above, or anything else we should know.
 
-button_run: Build my plan (preview)
+button_run: Build my plan
 
 section_result: Plan preview
 section_places: Place enrichment
