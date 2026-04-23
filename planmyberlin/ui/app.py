@@ -288,7 +288,8 @@ def _build_steps_markdown(completed_nodes: set[str], *, phase: str) -> str:
             lines.append(f"✅ {label}")
         else:
             lines.append(f"⬜ {label}")
-    return "\n".join(lines)
+    # Force line-by-line rendering without markdown bullet semantics.
+    return "  \n".join(lines)
 
 
 def main() -> None:
