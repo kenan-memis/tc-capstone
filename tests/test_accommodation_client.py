@@ -24,3 +24,16 @@ def test_accommodation_backend_not_implemented() -> None:
     assert out["status"] == "unavailable"
     assert out["backend"] == "future_api"
     assert out["accommodation_items"] == []
+
+
+def test_google_places_backend_requires_key(monkeypatch) -> None:
+    monkeypatch.delenv("GOOGLE_PLACES_API_KEY", raising=False)
+    out = fetch_accommodation_suggestions(
+        neighbourhoods=["Mitte"],
+        map_points=[],
+        budget_tier="moderate",
+        party_size=2,
+        backend="google_places",
+    )
+    assert out["status"] == "unavailable"
+    assert out["backend"] == "google_places"

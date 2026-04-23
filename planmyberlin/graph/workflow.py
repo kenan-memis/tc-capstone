@@ -304,6 +304,8 @@ def _with_accommodation(state: PlannerState) -> PlannerState:
     cfg = get_settings().get("accommodation", {})
     backend = str(cfg.get("backend", "curated"))
     max_items = int(cfg.get("max_items", 4))
+    city = str(get_settings().get("transport", {}).get("city", "Berlin"))
+    timeout_seconds = float(get_settings().get("transport", {}).get("timeout_seconds", 8.0))
     profile = out.get("profile", {})
     neighbourhoods = profile.get("neighbourhoods", []) if isinstance(profile, dict) else []
     budget_tier = str(profile.get("budget_tier", "moderate")) if isinstance(profile, dict) else "moderate"
@@ -311,10 +313,13 @@ def _with_accommodation(state: PlannerState) -> PlannerState:
 
     payload = fetch_accommodation_suggestions(
         neighbourhoods=list(neighbourhoods) if isinstance(neighbourhoods, list) else [],
+        map_points=list(out.get("map_points", [])),
         budget_tier=budget_tier,
         party_size=party_size,
         backend=backend,
         max_items=max_items,
+        city=city,
+        timeout_seconds=timeout_seconds,
     )
 
     out["accommodation_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]

@@ -44,7 +44,7 @@ transport:
   nearby_results: 2
 
 accommodation:
-  backend: curated
+  backend: google_places
   max_items: 4
 
 itinerary:

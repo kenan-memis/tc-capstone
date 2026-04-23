@@ -155,6 +155,31 @@ def _is_food_item(item: dict) -> bool:
     return any(k in category for k in ("restaurant", "cafe", "bar", "food"))
 
 
+def _merge_map_with_stays(
+    map_points: list[dict],
+    accommodation_items: list[dict],
+) -> list[dict]:
+    out = [dict(x) for x in map_points if isinstance(x, dict)]
+    for stay in accommodation_items:
+        if not isinstance(stay, dict):
+            continue
+        lat = stay.get("latitude")
+        lng = stay.get("longitude")
+        if not isinstance(lat, (int, float)) or not isinstance(lng, (int, float)):
+            continue
+        out.append(
+            {
+                "name": stay.get("name", ""),
+                "category": "accommodation",
+                "district": stay.get("district", ""),
+                "summary": stay.get("reason", "") or stay.get("address", ""),
+                "latitude": float(lat),
+                "longitude": float(lng),
+            }
+        )
+    return out
+
+
 def _merge_display_items(retrieved_items: list[dict], enriched_items: list[dict]) -> list[dict]:
     """Merge retrieval + enrichment rows so partial enrichment does not hide categories."""
     out: list[dict] = []
@@ -448,7 +473,8 @@ def main() -> None:
     map_points = list(result.get("map_points", []))
     map_status = str(result.get("map_status", "no_coordinates"))
     linked = itinerary_places_linked_to_map(itinerary, map_points) if isinstance(itinerary, dict) else []
-    map_display_points = linked if linked else []
+    itinerary_only_points = linked if linked else []
+    map_display_points = _merge_map_with_stays(itinerary_only_points, accommodation_items)
     linked_days = {row["name"]: row["days"] for row in linked}
     highlight_opts = _map_highlight_option_list(linked, map_display_points)
 
@@ -619,6 +645,14 @@ def main() -> None:
                     typ = html.escape(str(item.get("type", "")))
                     district = html.escape(str(item.get("district", "")))
                     reason = html.escape(str(item.get("reason", "")))
+                    address = html.escape(str(item.get("address", "")))
+                    rating = item.get("rating")
+                    reviews = item.get("reviews")
+                    rating_text = (
+                        f"⭐ {rating:.1f} ({int(reviews)} reviews)"
+                        if isinstance(rating, (int, float)) and isinstance(reviews, (int, float))
+                        else "No verified review score available"
+                    )
                     url = str(item.get("url", "")).strip()
                     icon = (
                         '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" '
@@ -633,7 +667,9 @@ def main() -> None:
                         f'title="Open in new tab" style="text-decoration:none;margin-left:6px;">{icon}</a>'
                     )
                     st.markdown(
-                        f"- **{name}** ({typ}, {district}) — {reason} {link}",
+                        f"- **{name}** ({typ}, {district}) — {reason}  \n"
+                        f"  - {rating_text}  \n"
+                        f"  - {address} {link}",
                         unsafe_allow_html=True,
                     )
             else:
