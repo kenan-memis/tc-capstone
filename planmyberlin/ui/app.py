@@ -377,6 +377,7 @@ def main() -> None:
 
     st.session_state.setdefault("plan_build_phase", "idle")
     st.session_state.setdefault("plan_build_nodes", [])
+    st.session_state.setdefault("plan_build_summary", None)
 
     banner_left, _banner_right = st.columns([0.55, 0.45], gap="large")
     with banner_left:
@@ -384,12 +385,19 @@ def main() -> None:
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
-        st.subheader(str(constants.get("section_plan", "Your trip")))
+        default_start = st.session_state.get("plan_start_date", date.today())
+        if not isinstance(default_start, date):
+            default_start = date.today()
+        default_end = st.session_state.get("plan_end_date")
+        if not isinstance(default_end, date):
+            default_end = default_start + timedelta(days=1)
+        if default_end < default_start:
+            default_end = default_start
+        preview_days = (default_end - default_start).days + 1
+        st.subheader(f"{str(constants.get('section_plan', 'Your trip'))} - {preview_days} day(s)")
+
         r1c1, r1c2, r1c3 = st.columns(3)
         with r1c1:
-            default_start = st.session_state.get("plan_start_date", date.today())
-            if not isinstance(default_start, date):
-                default_start = date.today()
             start_date = st.date_input(
                 str(constants.get("label_start_date", "Trip start date")),
                 value=default_start,
@@ -398,14 +406,10 @@ def main() -> None:
             )
             st.session_state["plan_start_date"] = start_date
         with r1c2:
-            default_end = st.session_state.get("plan_end_date")
-            if not isinstance(default_end, date):
-                default_end = start_date + timedelta(days=1)
-            if default_end < start_date:
-                default_end = start_date
+            end_value = default_end if default_end >= start_date else start_date
             end_date = st.date_input(
                 str(constants.get("label_end_date", "Trip end date")),
-                value=default_end,
+                value=end_value,
                 min_value=start_date,
                 max_value=start_date + timedelta(days=13),
                 help=str(constants.get("help_end_date", "")),
@@ -422,53 +426,48 @@ def main() -> None:
                 )
             )
         days = (end_date - start_date).days + 1
-        st.caption(f"Trip length: {days} day(s)")
 
-        r2c1, r2c2 = st.columns(2)
-        with r2c2:
-            budget_options = ("low", "moderate", "high")
-            budget_tier = st.selectbox(
-                str(constants.get("label_budget", "Budget")),
-                options=budget_options,
-                index=1,
-            )
+        budget_options = ("low", "moderate", "high")
+        pace_options = ("relaxed", "balanced", "packed")
+        r2c1, r2c2, r2c3 = st.columns(3)
         with r2c1:
-            pace_options = ("relaxed", "balanced", "packed")
             pace = st.selectbox(
                 str(constants.get("label_pace", "Pace")),
                 options=pace_options,
                 index=1,
             )
-
-        interest_options = list(get_interest_options())
-        r3c1, r3c2, r3c3 = st.columns(3)
-        with r3c1:
+        with r2c2:
+            budget_tier = st.selectbox(
+                str(constants.get("label_budget", "Budget")),
+                options=budget_options,
+                index=1,
+            )
+        with r2c3:
             dietary_choice = st.selectbox(
                 str(constants.get("label_dietary", "Food & diet")),
                 options=list(dietary_opts),
                 index=_default_index(dietary_opts, "Doesn't matter / no preference"),
                 help=str(constants.get("help_dietary", "")),
             )
-        with r3c2:
+
+        interest_options = list(get_interest_options())
+        neighbourhood_options = list(get_neighbourhood_options())
+        r3c1, r3c2, r3c3 = st.columns(3)
+        with r3c1:
             mobility_choice = st.selectbox(
                 str(constants.get("label_mobility", "Walking & getting around")),
                 options=list(mobility_opts),
                 index=_default_index(mobility_opts, "No specific needs"),
                 help=str(constants.get("help_mobility", "")),
             )
-        with r3c3:
-            st.write("")
-
-        neighbourhood_options = list(get_neighbourhood_options())
-        r4c1, r4c2 = st.columns(2)
-        with r4c1:
+        with r3c2:
             interest_tags = st.multiselect(
                 str(constants.get("label_interests", "Interests")),
                 options=interest_options,
                 default=[],
                 help=str(constants.get("help_interests", "")),
             )
-        with r4c2:
+        with r3c3:
             neighbourhoods = st.multiselect(
                 str(constants.get("label_neighbourhoods", "Neighbourhoods")),
                 options=neighbourhood_options,
@@ -496,6 +495,7 @@ def main() -> None:
         st.subheader("Plan builder list")
         status_panel = st.empty()
         steps_panel = st.empty()
+        summary_panel = st.empty()
         phase = str(st.session_state.get("plan_build_phase", "idle"))
         if phase == "building":
             status_panel.info("Building plan...")
@@ -510,12 +510,30 @@ def main() -> None:
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
         if phase in {"building", "rendering", "ready", "error"}:
             steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
+            summary_text = st.session_state.get("plan_build_summary")
+            if isinstance(summary_text, str) and summary_text.strip():
+                summary_panel.caption(summary_text)
+            else:
+                summary_panel.empty()
         else:
             steps_panel.empty()
+            summary_panel.empty()
 
     if run_clicked:
         st.session_state["plan_build_phase"] = "building"
         st.session_state["plan_build_nodes"] = []
+        interests_short = ", ".join(interest_tags[:2]) + (f" +{len(interest_tags) - 2} more" if len(interest_tags) > 2 else "")
+        areas_short = ", ".join(neighbourhoods[:2]) + (f" +{len(neighbourhoods) - 2} more" if len(neighbourhoods) > 2 else "")
+        summary_lines = [
+            f"**Trip summary:** {days} day(s), {party_size} traveler(s), {pace} pace, {budget_tier} budget.",
+            f"**Food/mobility:** {dietary_choice}; {mobility_choice}.",
+            f"**Stay ideas:** {'on' if include_accommodation else 'off'}.",
+        ]
+        if interests_short:
+            summary_lines.append(f"**Interests:** {interests_short}.")
+        if areas_short:
+            summary_lines.append(f"**Areas:** {areas_short}.")
+        st.session_state["plan_build_summary"] = "  \n".join(summary_lines)
         profile = TripProfile(
             days=days,
             start_date=start_date,
