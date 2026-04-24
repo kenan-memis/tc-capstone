@@ -394,7 +394,11 @@ def main() -> None:
         if default_end < default_start:
             default_end = default_start
         preview_days = (default_end - default_start).days + 1
-        st.subheader(f"{str(constants.get('section_plan', 'Your trip'))} - {preview_days} day(s)")
+        show_days_in_title = isinstance(st.session_state.get("plan_build_summary"), str)
+        if show_days_in_title:
+            st.subheader(f"{str(constants.get('section_plan', 'Your trip'))} - {preview_days} day(s)")
+        else:
+            st.subheader(str(constants.get("section_plan", "Your trip")))
 
         r1c1, r1c2, r1c3 = st.columns(3)
         with r1c1:
