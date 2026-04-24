@@ -165,6 +165,12 @@ def _fetch_weather(state: PlannerState) -> PlannerState:
     city = str(cfg.get("city", "Berlin"))
     units = str(cfg.get("units", "metric"))
     timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
+    profile_raw = out.get("profile", {})
+    start_date = ""
+    end_date = ""
+    if isinstance(profile_raw, dict):
+        start_date = str(profile_raw.get("start_date", "") or "")
+        end_date = str(profile_raw.get("end_date", "") or "")
 
     payload = fetch_weather_context(
         city=city,

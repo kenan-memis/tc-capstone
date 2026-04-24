@@ -496,7 +496,7 @@ def main() -> None:
         run_clicked = st.button(str(constants.get("button_run", "Run")), type="primary")
 
     with top_right:
-        st.subheader("Plan builder list")
+        st.subheader("Plan builder")
         status_panel = st.empty()
         steps_panel = st.empty()
         summary_panel = st.empty()
@@ -514,13 +514,12 @@ def main() -> None:
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
         if phase in {"building", "rendering", "ready", "error"}:
             steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
-            summary_text = st.session_state.get("plan_build_summary")
-            if isinstance(summary_text, str) and summary_text.strip():
-                summary_panel.caption(summary_text)
-            else:
-                summary_panel.empty()
         else:
             steps_panel.empty()
+        summary_text = st.session_state.get("plan_build_summary")
+        if isinstance(summary_text, str) and summary_text.strip():
+            summary_panel.markdown(summary_text)
+        else:
             summary_panel.empty()
 
     if run_clicked:
