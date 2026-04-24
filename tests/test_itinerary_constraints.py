@@ -25,6 +25,8 @@ def test_enforce_day_count_pads() -> None:
     assert changed is True
     assert len(fixed.days) == 3
     assert fixed.days[-1].day_number == 3
+    assert [a.time_of_day for a in fixed.days[0].activities] == ["morning", "afternoon", "evening"]
+    assert [a.time_of_day for a in fixed.days[-1].activities] == ["morning", "afternoon", "evening"]
 
 
 def test_strip_timing() -> None:

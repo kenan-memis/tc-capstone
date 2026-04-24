@@ -875,7 +875,7 @@ def main() -> None:
             else:
                 transport_msg = str(result.get("transport_message", "")).strip()
                 if transport_msg:
-                    st.caption(transport_msg)
+                    st.caption("Transportation info is not available right now. Please try again shortly.")
                 else:
                     st.caption("No transport suggestions available for this run.")
 

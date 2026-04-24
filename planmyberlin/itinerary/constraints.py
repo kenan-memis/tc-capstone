@@ -55,6 +55,38 @@ def _normalize(s: str) -> str:
     return " ".join(s.lower().split())
 
 
+def _fill_day_slots(activities: list[ItineraryActivity], *, day_number: int) -> list[ItineraryActivity]:
+    by_slot: dict[str, ItineraryActivity] = {}
+    for act in activities:
+        slot = str(act.time_of_day).strip().lower()
+        if slot in {"morning", "afternoon", "evening"} and slot not in by_slot:
+            by_slot[slot] = act
+
+    if "morning" not in by_slot:
+        by_slot["morning"] = ItineraryActivity(
+            time_of_day="morning",
+            title="Morning neighborhood walk",
+            description="Start the day with a relaxed walk and coffee in your selected area.",
+            place_name=None,
+        )
+    if "afternoon" not in by_slot:
+        by_slot["afternoon"] = ItineraryActivity(
+            time_of_day="afternoon",
+            title="Flexible exploration",
+            description="Explore nearby highlights based on your energy and current conditions.",
+            place_name=None,
+        )
+    if "evening" not in by_slot:
+        by_slot["evening"] = ItineraryActivity(
+            time_of_day="evening",
+            title=f"Evening in Berlin (Day {day_number})",
+            description="Wrap up the day with dinner or a scenic evening stroll.",
+            place_name=None,
+        )
+
+    return [by_slot["morning"], by_slot["afternoon"], by_slot["evening"]]
+
+
 def enforce_day_count(itinerary: TripItinerary, expected_days: int) -> tuple[TripItinerary, bool]:
     """Ensure `days` length matches expected_days with day_number 1..N. Returns (updated, changed)."""
     expected_days = max(1, min(14, int(expected_days)))
@@ -75,33 +107,22 @@ def enforce_day_count(itinerary: TripItinerary, expected_days: int) -> tuple[Tri
                 ItineraryDay(
                     day_number=i,
                     theme=d.theme if str(d.theme).strip() else f"Day {i}",
-                    activities=list(d.activities),
+                    activities=_fill_day_slots(list(d.activities), day_number=i),
                 )
             )
+            if len(d.activities) != 3:
+                changed = True
         else:
             changed = True
             new_days.append(
                 ItineraryDay(
                     day_number=i,
                     theme=f"Day {i}",
-                    activities=[
-                        ItineraryActivity(
-                            time_of_day="afternoon",
-                            title="Flexible exploration",
-                            description="Adjust based on energy and weather; use candidate places nearby.",
-                            place_name=None,
-                        )
-                    ],
+                    activities=_fill_day_slots([], day_number=i),
                 )
             )
 
-    notes = list(itinerary.practical_notes)
-    if changed:
-        notes.append(
-            f"Itinerary day count was adjusted to match the requested trip length ({expected_days} day(s))."
-        )
-
-    out = TripItinerary(title=itinerary.title, days=new_days, practical_notes=notes)
+    out = TripItinerary(title=itinerary.title, days=new_days, practical_notes=list(itinerary.practical_notes))
     return out, changed
 
 
