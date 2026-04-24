@@ -435,10 +435,6 @@ def main() -> None:
     st.session_state.setdefault("plan_build_nodes", [])
     st.session_state.setdefault("plan_build_summary", None)
 
-    banner_left, _banner_right = st.columns([0.55, 0.45], gap="large")
-    with banner_left:
-        st.info(str(constants.get("info_banner", "")))
-
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
         default_start = st.session_state.get("plan_start_date", date.today())
