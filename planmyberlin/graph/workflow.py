@@ -82,7 +82,7 @@ def _normalize_profile(state: PlannerState) -> PlannerState:
         profile.include_accommodation,
     )
     return {
-        "profile": profile.model_dump(),
+        "profile": profile.model_dump(mode="json"),
         "trip_track": trip_track,
         "run_accommodation": profile.include_accommodation,
         "routing_trace": ["normalized"],
@@ -96,6 +96,8 @@ def _retrieve_context(state: PlannerState) -> PlannerState:
         raise ValueError("profile must be present before retrieve_context")
 
     profile = TripProfile.model_validate(raw)
+    start_date = str(profile.start_date) if profile.start_date else None
+    end_date = str(profile.end_date) if profile.end_date else None
     retrieval_cfg = get_settings().get("retrieval", {})
     payload = retrieve_context(profile, retrieval_cfg=retrieval_cfg)
 
@@ -164,7 +166,13 @@ def _fetch_weather(state: PlannerState) -> PlannerState:
     units = str(cfg.get("units", "metric"))
     timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
 
-    payload = fetch_weather_context(city=city, units=units, timeout_seconds=timeout_seconds)
+    payload = fetch_weather_context(
+        city=city,
+        units=units,
+        timeout_seconds=timeout_seconds,
+        start_date=start_date,
+        end_date=end_date,
+    )
     out["weather_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
     out["weather_summary"] = str(payload.get("summary", "Weather unavailable."))
     out["weather_condition_main"] = str(payload.get("condition_main", "unknown"))

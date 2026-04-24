@@ -1,4 +1,5 @@
 import pytest
+from datetime import date
 
 from planmyberlin.config.loader import get_interest_options
 from planmyberlin.models.trip_profile import TripProfile
@@ -40,4 +41,16 @@ def test_interest_tag_must_be_allowed() -> None:
             dietary_choice="Doesn't matter / no preference",
             mobility_choice="No specific needs",
             interest_tags=["Not a real tag"],
+        )
+
+
+def test_date_range_must_be_ordered() -> None:
+    with pytest.raises(Exception):
+        TripProfile(
+            days=3,
+            start_date=date(2026, 5, 5),
+            end_date=date(2026, 5, 4),
+            include_accommodation=True,
+            dietary_choice="Doesn't matter / no preference",
+            mobility_choice="No specific needs",
         )

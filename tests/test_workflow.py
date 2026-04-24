@@ -35,16 +35,22 @@ def _stub_itinerary() -> dict:
 
 
 def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr(
-        wf,
-        "fetch_weather_context",
-        lambda **_: {
+    weather_calls: list[dict] = []
+
+    def _weather_stub(**kwargs):
+        weather_calls.append(dict(kwargs))
+        return {
             "status": "ok",
-            "summary": "Current weather in Berlin: rain, about 10.0°C.",
+            "summary": "Forecast for 2026-05-01 to 2026-05-03 in Berlin: rain, about 10.0°C.",
             "condition_main": "rain",
             "temperature_c": 10.0,
             "bias": "indoor",
-        },
+        }
+
+    monkeypatch.setattr(
+        wf,
+        "fetch_weather_context",
+        _weather_stub,
     )
     monkeypatch.setattr(
         wf,
@@ -95,7 +101,16 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     )
     monkeypatch.setattr(wf, "generate_itinerary", lambda _state: _stub_itinerary())
     app = build_planner_graph()
-    out = app.invoke({"profile": _base_profile(days=3, include_accommodation=True)})
+    out = app.invoke(
+        {
+            "profile": _base_profile(
+                days=3,
+                start_date="2026-05-01",
+                end_date="2026-05-03",
+                include_accommodation=True,
+            )
+        }
+    )
     assert out["trip_track"] == "multi_day"
     assert out["accommodation_outcome"] == "accommodation"
     assert "multi_day_context" in out["routing_trace"]
@@ -113,6 +128,10 @@ def test_multi_day_with_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:
     assert out["accommodation_count"] == 1
     assert out["itinerary_status"] == "ok"
     assert any(str(x).startswith("itinerary:") for x in out["routing_trace"])
+    assert weather_calls
+    assert weather_calls[0].get("start_date") == "2026-05-01"
+    assert weather_calls[0].get("end_date") == "2026-05-03"
+    assert isinstance(out["profile"].get("start_date"), str)
 
 
 def test_multi_day_without_accommodation(monkeypatch: pytest.MonkeyPatch) -> None:

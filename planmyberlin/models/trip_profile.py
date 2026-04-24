@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
+from datetime import date
 from typing import Literal
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, model_validator, field_validator
 
 from planmyberlin.config.loader import (
     get_dietary_options,
@@ -22,6 +23,8 @@ class TripProfile(BaseModel):
     """User-facing trip constraints (planner-only; no booking)."""
 
     days: int = Field(ge=1, le=14, description="Trip length in days")
+    start_date: date | None = Field(default=None, description="Trip start date (optional).")
+    end_date: date | None = Field(default=None, description="Trip end date (optional).")
     party_size: int = Field(default=2, ge=1, le=20)
     interest_tags: list[str] = Field(
         default_factory=list,
@@ -90,3 +93,9 @@ class TripProfile(BaseModel):
         if isinstance(v, str):
             return v.strip()
         return v
+
+    @model_validator(mode="after")
+    def validate_date_range(self) -> "TripProfile":
+        if self.start_date and self.end_date and self.end_date < self.start_date:
+            raise ValueError("end_date must be on or after start_date")
+        return self

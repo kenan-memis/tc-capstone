@@ -7,6 +7,7 @@ import html
 import json
 import os
 import uuid
+from datetime import date, timedelta
 from functools import lru_cache
 from pathlib import Path
 
@@ -215,6 +216,9 @@ def _clean_weather_summary(summary: str) -> str:
     prefix = "Current weather in Berlin:"
     if s.lower().startswith(prefix.lower()):
         return s[len(prefix) :].strip()
+    forecast_prefix = "Forecast for "
+    if s.lower().startswith(forecast_prefix.lower()) and ":" in s:
+        return s.split(":", 1)[1].strip()
     return s
 
 
@@ -383,16 +387,31 @@ def main() -> None:
         st.subheader(str(constants.get("section_plan", "Your trip")))
         r1c1, r1c2, r1c3 = st.columns(3)
         with r1c1:
-            days = int(
-                st.number_input(
-                    str(constants.get("label_days", "Days")),
-                    min_value=1,
-                    max_value=14,
-                    value=2,
-                    step=1,
-                )
+            default_start = st.session_state.get("plan_start_date", date.today())
+            if not isinstance(default_start, date):
+                default_start = date.today()
+            start_date = st.date_input(
+                str(constants.get("label_start_date", "Trip start date")),
+                value=default_start,
+                min_value=date.today(),
+                help=str(constants.get("help_start_date", "")),
             )
+            st.session_state["plan_start_date"] = start_date
         with r1c2:
+            default_end = st.session_state.get("plan_end_date")
+            if not isinstance(default_end, date):
+                default_end = start_date + timedelta(days=1)
+            if default_end < start_date:
+                default_end = start_date
+            end_date = st.date_input(
+                str(constants.get("label_end_date", "Trip end date")),
+                value=default_end,
+                min_value=start_date,
+                max_value=start_date + timedelta(days=13),
+                help=str(constants.get("help_end_date", "")),
+            )
+            st.session_state["plan_end_date"] = end_date
+        with r1c3:
             party_size = int(
                 st.number_input(
                     str(constants.get("label_party", "Party size")),
@@ -402,48 +421,54 @@ def main() -> None:
                     step=1,
                 )
             )
-        with r1c3:
+        days = (end_date - start_date).days + 1
+        st.caption(f"Trip length: {days} day(s)")
+
+        r2c1, r2c2 = st.columns(2)
+        with r2c2:
             budget_options = ("low", "moderate", "high")
             budget_tier = st.selectbox(
                 str(constants.get("label_budget", "Budget")),
                 options=budget_options,
                 index=1,
             )
-
-        interest_options = list(get_interest_options())
-        pace_options = ("relaxed", "balanced", "packed")
-        r2c1, r2c2, r2c3 = st.columns(3)
         with r2c1:
-            dietary_choice = st.selectbox(
-                str(constants.get("label_dietary", "Food & diet")),
-                options=list(dietary_opts),
-                index=_default_index(dietary_opts, "Doesn't matter / no preference"),
-                help=str(constants.get("help_dietary", "")),
-            )
-        with r2c2:
-            mobility_choice = st.selectbox(
-                str(constants.get("label_mobility", "Walking & getting around")),
-                options=list(mobility_opts),
-                index=_default_index(mobility_opts, "No specific needs"),
-                help=str(constants.get("help_mobility", "")),
-            )
-        with r2c3:
+            pace_options = ("relaxed", "balanced", "packed")
             pace = st.selectbox(
                 str(constants.get("label_pace", "Pace")),
                 options=pace_options,
                 index=1,
             )
 
-        neighbourhood_options = list(get_neighbourhood_options())
-        r3c1, r3c2 = st.columns(2)
+        interest_options = list(get_interest_options())
+        r3c1, r3c2, r3c3 = st.columns(3)
         with r3c1:
+            dietary_choice = st.selectbox(
+                str(constants.get("label_dietary", "Food & diet")),
+                options=list(dietary_opts),
+                index=_default_index(dietary_opts, "Doesn't matter / no preference"),
+                help=str(constants.get("help_dietary", "")),
+            )
+        with r3c2:
+            mobility_choice = st.selectbox(
+                str(constants.get("label_mobility", "Walking & getting around")),
+                options=list(mobility_opts),
+                index=_default_index(mobility_opts, "No specific needs"),
+                help=str(constants.get("help_mobility", "")),
+            )
+        with r3c3:
+            st.write("")
+
+        neighbourhood_options = list(get_neighbourhood_options())
+        r4c1, r4c2 = st.columns(2)
+        with r4c1:
             interest_tags = st.multiselect(
                 str(constants.get("label_interests", "Interests")),
                 options=interest_options,
                 default=[],
                 help=str(constants.get("help_interests", "")),
             )
-        with r3c2:
+        with r4c2:
             neighbourhoods = st.multiselect(
                 str(constants.get("label_neighbourhoods", "Neighbourhoods")),
                 options=neighbourhood_options,
@@ -493,6 +518,8 @@ def main() -> None:
         st.session_state["plan_build_nodes"] = []
         profile = TripProfile(
             days=days,
+            start_date=start_date,
+            end_date=end_date,
             party_size=party_size,
             interest_tags=interest_tags,
             neighbourhoods=neighbourhoods,
@@ -552,6 +579,9 @@ def main() -> None:
     enriched_items = list(result.get("enriched_items", []))
     retrieval_notice = str(result.get("retrieval_notice", "")).strip()
     itinerary = result.get("itinerary", {})
+    profile_data = result.get("profile", {}) if isinstance(result.get("profile"), dict) else {}
+    trip_start = str(profile_data.get("start_date", "")).strip()
+    trip_end = str(profile_data.get("end_date", "")).strip()
     itinerary_status = str(result.get("itinerary_status", "unavailable"))
     itinerary_message = str(result.get("itinerary_message", "")).strip()
     transport_items = list(result.get("transport_items", []))
@@ -568,6 +598,8 @@ def main() -> None:
     bottom_left, bottom_right = st.columns([0.52, 0.48], gap="large")
     with bottom_left:
         st.markdown("## Plan Preview")
+        if trip_start and trip_end:
+            st.caption(f"Trip dates: {trip_start} to {trip_end}")
         weather_summary = str(result.get("weather_summary", "")).strip()
         weather_bias = str(result.get("weather_bias", "unknown"))
         weather_condition_main = str(result.get("weather_condition_main", ""))

@@ -9,7 +9,12 @@ info_banner: >-
 section_plan: Your trip
 
 label_days: How many days?
+help_days_auto: Calculated from selected trip dates.
 label_party: How many people?
+label_start_date: Trip start date
+help_start_date: When your Berlin trip begins.
+label_end_date: Trip end date
+help_end_date: Last day of your trip (max 14 days total).
 label_interests: What interests you?
 help_interests: Choose everything that applies — you can select multiple.
 label_neighbourhoods: Which parts of Berlin?
