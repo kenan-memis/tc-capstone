@@ -30,6 +30,111 @@ from planmyberlin.prompts.loader import render_prompt
 _log = get_logger(__name__)
 
 
+def _is_local_candidate(item: dict[str, Any], selected_areas: list[str]) -> bool:
+    if not selected_areas:
+        return True
+    district = str(item.get("district", "")).strip().lower()
+    name = str(item.get("name", "")).strip().lower()
+    hay = f"{district} {name}".strip()
+    return any(area in hay or hay in area for area in selected_areas if area)
+
+
+def _hybrid_activity_title(slot: str, place_name: str) -> str:
+    s = (slot or "").strip().lower()
+    if s == "morning":
+        return f"Morning exploration at {place_name}"
+    if s == "afternoon":
+        return f"Afternoon visit at {place_name}"
+    if s == "evening":
+        return f"Evening around {place_name}"
+    return f"Explore {place_name}"
+
+
+def _hybrid_activity_description(slot: str, *, nearby: bool) -> str:
+    s = (slot or "").strip().lower()
+    if nearby:
+        return (
+            "Selected district options were limited for this slot, so this nearby popular option was added."
+        )
+    if s == "morning":
+        return "Start the day with a focused visit in the selected area."
+    if s == "afternoon":
+        return "Use this slot for a core attraction with flexible pacing."
+    if s == "evening":
+        return "Wrap up the day with a relaxed activity and dinner nearby."
+    return "Flexible activity aligned with your selected area."
+
+
+def _apply_hybrid_slot_fallback(
+    itinerary: TripItinerary,
+    *,
+    profile: dict[str, Any],
+    candidates: list[dict[str, Any]],
+) -> TripItinerary:
+    selected = [str(x).strip().lower() for x in profile.get("neighbourhoods", []) if str(x).strip()]
+    used_names = {
+        str(a.place_name).strip().lower()
+        for d in itinerary.days
+        for a in d.activities
+        if str(a.place_name or "").strip()
+    }
+    deduped: list[dict[str, Any]] = []
+    seen: set[str] = set()
+    for item in candidates:
+        name = str(item.get("name", "")).strip()
+        if not name:
+            continue
+        key = name.lower()
+        if key in seen or key in used_names:
+            continue
+        seen.add(key)
+        deduped.append(item)
+
+    local_pool = [x for x in deduped if _is_local_candidate(x, selected)]
+    nearby_pool = [x for x in deduped if x not in local_pool]
+    local_idx = 0
+    nearby_idx = 0
+    used_nearby = False
+
+    new_days: list[Any] = []
+    for day in itinerary.days:
+        acts: list[Any] = []
+        for act in day.activities:
+            if str(act.place_name or "").strip():
+                acts.append(act)
+                continue
+            pick: dict[str, Any] | None = None
+            nearby = False
+            if local_idx < len(local_pool):
+                pick = local_pool[local_idx]
+                local_idx += 1
+            elif nearby_idx < len(nearby_pool):
+                pick = nearby_pool[nearby_idx]
+                nearby_idx += 1
+                nearby = True
+                used_nearby = True
+            if not pick:
+                acts.append(act)
+                continue
+            place_name = str(pick.get("name", "")).strip()
+            acts.append(
+                {
+                    "time_of_day": act.time_of_day,
+                    "title": _hybrid_activity_title(act.time_of_day, place_name),
+                    "description": _hybrid_activity_description(act.time_of_day, nearby=nearby),
+                    "place_name": place_name,
+                }
+            )
+        new_days.append({"day_number": day.day_number, "theme": day.theme, "activities": acts})
+
+    notes = list(itinerary.practical_notes)
+    if used_nearby:
+        note = "Limited matches in selected areas, so nearby popular options were added."
+        if note not in notes:
+            notes.append(note)
+    return TripItinerary.model_validate({"title": itinerary.title, "days": new_days, "practical_notes": notes})
+
+
 def _fallback_itinerary(
     *,
     days: int,
@@ -125,6 +230,7 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
             profile=profile,
         )
         it, _ = enforce_day_count(it, days)
+        it = _apply_hybrid_slot_fallback(it, profile=profile, candidates=candidates)
         it = neighbourhood_coverage_note(profile, it)
         return {
             "itinerary_status": "fallback",
@@ -175,6 +281,7 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
 
         out = strip_itinerary_timing(out)
         out, _struct_changed = enforce_day_count(out, days)
+        out = _apply_hybrid_slot_fallback(out, profile=profile, candidates=candidates)
         out = neighbourhood_coverage_note(profile, out)
 
         violations = find_grounding_violations(out, allowed_norm)
@@ -205,6 +312,7 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
                     )
                     out = strip_itinerary_timing(out)
                     out, _ = enforce_day_count(out, days)
+                    out = _apply_hybrid_slot_fallback(out, profile=profile, candidates=candidates)
                     out = neighbourhood_coverage_note(profile, out)
                     violations = find_grounding_violations(out, allowed_norm)
                     if not violations:
@@ -219,6 +327,7 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
             out = sanitize_place_names(out, allowed_norm, norm_to_canonical)
             out = strip_itinerary_timing(out)
             out, _ = enforce_day_count(out, days)
+            out = _apply_hybrid_slot_fallback(out, profile=profile, candidates=candidates)
             out = neighbourhood_coverage_note(profile, out)
             return {
                 "itinerary_status": "grounded_sanitized",
@@ -235,6 +344,7 @@ def generate_itinerary(state: dict[str, Any]) -> dict[str, Any]:
             profile=profile,
         )
         it, _ = enforce_day_count(it, days)
+        it = _apply_hybrid_slot_fallback(it, profile=profile, candidates=candidates)
         it = neighbourhood_coverage_note(profile, it)
         return {
             "itinerary_status": "fallback",
