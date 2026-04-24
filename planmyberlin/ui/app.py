@@ -347,6 +347,32 @@ def _walk_hint(distance_m: int | float | None) -> str:
     return f"{d}m walk"
 
 
+def _transport_mode_icon(name: str, typ: str) -> str:
+    text = f"{name} {typ}".strip().lower()
+    if text.startswith("u ") or "u-bahn" in text or "ubahn" in text:
+        return "🚇"
+    if text.startswith("s ") or "s-bahn" in text or "sbahn" in text:
+        return "🚆"
+    if "tram" in text or "straßenbahn" in text or "strassenbahn" in text:
+        return "🚋"
+    if "bus" in text:
+        return "🚌"
+    return "🚉"
+
+
+def _is_user_facing_practical_note(note: str) -> bool:
+    n = (note or "").strip().lower()
+    if not n:
+        return False
+    blocked_markers = (
+        "allowed list",
+        "retrieved candidate list",
+        "venue links were removed",
+        "adjusted place names",
+    )
+    return not any(marker in n for marker in blocked_markers)
+
+
 def _build_steps_markdown(completed_nodes: set[str], *, phase: str) -> str:
     completed_phases = {_NODE_TO_PHASE[n] for n in completed_nodes if n in _NODE_TO_PHASE}
     if phase in {"rendering", "ready"}:
@@ -690,10 +716,14 @@ def main() -> None:
 
         with preview_tabs[2]:
             if isinstance(practical_notes, list) and practical_notes:
+                shown_note = False
                 for note in practical_notes:
                     text = str(note).strip()
-                    if text:
+                    if text and _is_user_facing_practical_note(text):
                         st.markdown(f"- {text}")
+                        shown_note = True
+                if not shown_note:
+                    st.caption("No practical notes were generated for this run.")
             else:
                 st.caption("No practical notes were generated for this run.")
 
@@ -783,8 +813,11 @@ def main() -> None:
                     if isinstance(options, list) and options:
                         best = options[0] if isinstance(options[0], dict) else {}
                         if best:
+                            best_name = str(best.get("name", "Nearest stop"))
+                            best_type = str(best.get("type", ""))
+                            best_icon = _transport_mode_icon(best_name, best_type)
                             st.markdown(
-                                f"**Best option:** {best.get('name','Nearest stop')} — {_walk_hint(best.get('distance_m'))}"
+                                f"**Best option:** {best_icon} {best_name} — {_walk_hint(best.get('distance_m'))}"
                             )
                         with st.expander("See additional nearby options", expanded=False):
                             for idx, opt in enumerate(options):
@@ -792,8 +825,11 @@ def main() -> None:
                                     continue
                                 if idx == 0:
                                     continue
+                                opt_name = str(opt.get("name", "Unknown stop"))
+                                opt_type = str(opt.get("type", ""))
+                                opt_icon = _transport_mode_icon(opt_name, opt_type)
                                 st.markdown(
-                                    f"- {opt.get('name','Unknown stop')} — {_walk_hint(opt.get('distance_m'))}"
+                                    f"- {opt_icon} {opt_name} — {_walk_hint(opt.get('distance_m'))}"
                                 )
                     else:
                         st.caption("No nearby stop details available for this place.")
@@ -802,8 +838,11 @@ def main() -> None:
                 for item in transport_items[:10]:
                     distance = item.get("distance_m")
                     distance_text = _walk_hint(distance if isinstance(distance, (int, float)) else None)
+                    name = str(item.get("name", ""))
+                    typ = str(item.get("type", ""))
+                    icon = _transport_mode_icon(name, typ)
                     st.markdown(
-                        f"- **{item.get('name','')}** — near {item.get('query','')} ({distance_text})"
+                        f"- {icon} **{item.get('name','')}** — near {item.get('query','')} ({distance_text})"
                     )
             else:
                 transport_msg = str(result.get("transport_message", "")).strip()
