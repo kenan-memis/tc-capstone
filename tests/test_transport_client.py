@@ -63,3 +63,45 @@ def test_transport_prefers_nearby_lookup(monkeypatch) -> None:
     assert out["transport_items"][0]["distance_m"] == 180
     assert out["transport_by_place"][0]["place_name"] == "Museum Island"
     assert out["transport_by_place"][0]["options"][0]["mode"] == "u_bahn"
+    assert out["transport_by_place"][0]["options"][0]["modes"] == ["u_bahn"]
+
+
+def test_transport_marks_combined_s_u_modes(monkeypatch) -> None:
+    class _Resp:
+        status_code = 200
+
+        def raise_for_status(self) -> None:
+            return None
+
+        def json(self):
+            return [
+                {
+                    "name": "S+U Zoologischer Garten Bhf",
+                    "type": "stop",
+                    "distance": 120,
+                    "location": {"latitude": 52.51, "longitude": 13.33},
+                }
+            ]
+
+    class _Client:
+        def __init__(self, *args, **kwargs):
+            return None
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+        def get(self, url, params=None):  # noqa: ANN001
+            return _Resp()
+
+    monkeypatch.setattr("planmyberlin.transport.client.httpx.Client", _Client)
+    out = fetch_transport_context(
+        items=[],
+        neighbourhoods=[],
+        map_points=[{"name": "Zoo", "latitude": 52.51, "longitude": 13.33}],
+    )
+    assert out["status"] == "ok"
+    first = out["transport_by_place"][0]["options"][0]
+    assert first["modes"] == ["u_bahn", "s_bahn"]

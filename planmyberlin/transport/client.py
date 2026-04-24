@@ -2,22 +2,40 @@
 
 from __future__ import annotations
 
+import re
 from typing import Any
 
 import httpx
 
 
-def _transport_mode(name: str, typ: str) -> str:
+def _detect_modes(name: str, typ: str) -> list[str]:
     text = f"{name} {typ}".strip().lower()
-    if "u-bahn" in text or text.startswith("u ") or " u " in f" {text} ":
-        return "u_bahn"
-    if "s-bahn" in text or text.startswith("s ") or " s " in f" {text} ":
-        return "s_bahn"
-    if "bus" in text:
-        return "bus"
+    modes: list[str] = []
+    if "s+u" in text or "u+s" in text:
+        modes.extend(["u_bahn", "s_bahn"])
+    if "u-bahn" in text or re.search(r"\bu\b", text):
+        modes.append("u_bahn")
+    if "s-bahn" in text or "bahnhof" in text or " bhf" in f" {text}" or re.search(r"\bs\b", text):
+        modes.append("s_bahn")
     if "tram" in text or "straßenbahn" in text or "strassenbahn" in text:
-        return "tram"
-    return "unknown"
+        modes.append("tram")
+    if "bus" in text:
+        modes.append("bus")
+
+    # In transport.rest, many plain "stop" rows are bus/tram stops without explicit labels.
+    if not modes and str(typ).strip().lower() == "stop":
+        modes.append("bus")
+
+    ordered: list[str] = []
+    for m in ("u_bahn", "s_bahn", "bus", "tram"):
+        if m in modes and m not in ordered:
+            ordered.append(m)
+    return ordered
+
+
+def _transport_mode(name: str, typ: str) -> str:
+    modes = _detect_modes(name, typ)
+    return modes[0] if modes else "unknown"
 
 
 def _mode_rank(mode: str) -> int:
@@ -144,6 +162,10 @@ def fetch_transport_context(
                                     str(row.get("name", "")).strip(),
                                     str(row.get("type", "")).strip(),
                                 ),
+                                "modes": _detect_modes(
+                                    str(row.get("name", "")).strip(),
+                                    str(row.get("type", "")).strip(),
+                                ),
                                 "distance_m": row.get("distance")
                                 if isinstance(row.get("distance"), (int, float))
                                 else None,
@@ -192,6 +214,10 @@ def fetch_transport_context(
                                 str(row.get("name", "")).strip(),
                                 str(row.get("type", "")).strip(),
                             ),
+                            "modes": _detect_modes(
+                                str(row.get("name", "")).strip(),
+                                str(row.get("type", "")).strip(),
+                            ),
                             "distance_m": None,
                             "latitude": loc.get("latitude") if isinstance(loc.get("latitude"), (int, float)) else None,
                             "longitude": loc.get("longitude") if isinstance(loc.get("longitude"), (int, float)) else None,
@@ -222,6 +248,10 @@ def fetch_transport_context(
                                 "name": str(row.get("name", "")).strip(),
                                 "type": str(row.get("type", "")).strip(),
                                 "mode": _transport_mode(
+                                    str(row.get("name", "")).strip(),
+                                    str(row.get("type", "")).strip(),
+                                ),
+                                "modes": _detect_modes(
                                     str(row.get("name", "")).strip(),
                                     str(row.get("type", "")).strip(),
                                 ),

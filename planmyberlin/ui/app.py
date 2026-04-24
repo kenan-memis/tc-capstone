@@ -362,17 +362,24 @@ def _walk_hint(distance_m: int | float | None) -> str:
     return f"{d}m walk"
 
 
-def _transport_mode_icon_html(mode: str) -> str:
-    p = _TRANSPORT_ICON_PATHS.get((mode or "").strip().lower())
-    if not p:
+def _transport_mode_icons_html(modes: list[str]) -> str:
+    if not isinstance(modes, list) or not modes:
         return ""
-    uri = _icon_data_uri(str(p))
-    if not uri:
+    chunks: list[str] = []
+    for mode in modes:
+        p = _TRANSPORT_ICON_PATHS.get(str(mode).strip().lower())
+        if not p:
+            continue
+        uri = _icon_data_uri(str(p))
+        if not uri:
+            continue
+        chunks.append(
+            f'<img src="{uri}" alt="{html.escape(str(mode))}" '
+            'style="width:16px;height:16px;vertical-align:-2px;margin-right:4px;border-radius:2px;" />'
+        )
+    if not chunks:
         return ""
-    return (
-        f'<img src="{uri}" alt="{html.escape(mode)}" '
-        'style="width:16px;height:16px;vertical-align:-2px;margin-right:6px;border-radius:2px;" />'
-    )
+    return "".join(chunks) + " "
 
 
 def _is_user_facing_practical_note(note: str) -> bool:
@@ -442,12 +449,7 @@ def main() -> None:
             default_end = default_start + timedelta(days=1)
         if default_end < default_start:
             default_end = default_start
-        preview_days = (default_end - default_start).days + 1
-        show_days_in_title = isinstance(st.session_state.get("plan_build_summary"), str)
-        if show_days_in_title:
-            st.subheader(f"{str(constants.get('section_plan', 'Your trip'))} - {preview_days} day(s)")
-        else:
-            st.subheader(str(constants.get("section_plan", "Your trip")))
+        st.subheader(str(constants.get("section_plan", "Your trip")))
 
         r1c1, r1c2, r1c3 = st.columns(3)
         with r1c1:
@@ -829,8 +831,11 @@ def main() -> None:
                         best = options[0] if isinstance(options[0], dict) else {}
                         if best:
                             best_name = str(best.get("name", "Nearest stop"))
-                            best_mode = str(best.get("mode", ""))
-                            best_icon = _transport_mode_icon_html(best_mode)
+                            best_modes = best.get("modes", [])
+                            if not isinstance(best_modes, list):
+                                fallback_mode = str(best.get("mode", ""))
+                                best_modes = [fallback_mode] if fallback_mode else []
+                            best_icon = _transport_mode_icons_html(best_modes)
                             st.markdown(
                                 f"**Best option:** {best_icon}{best_name} — {_walk_hint(best.get('distance_m'))}",
                                 unsafe_allow_html=True,
@@ -842,8 +847,11 @@ def main() -> None:
                                 if idx == 0:
                                     continue
                                 opt_name = str(opt.get("name", "Unknown stop"))
-                                opt_mode = str(opt.get("mode", ""))
-                                opt_icon = _transport_mode_icon_html(opt_mode)
+                                opt_modes = opt.get("modes", [])
+                                if not isinstance(opt_modes, list):
+                                    fallback_mode = str(opt.get("mode", ""))
+                                    opt_modes = [fallback_mode] if fallback_mode else []
+                                opt_icon = _transport_mode_icons_html(opt_modes)
                                 st.markdown(
                                     f"- {opt_icon}{opt_name} — {_walk_hint(opt.get('distance_m'))}",
                                     unsafe_allow_html=True,
@@ -855,9 +863,11 @@ def main() -> None:
                 for item in transport_items[:10]:
                     distance = item.get("distance_m")
                     distance_text = _walk_hint(distance if isinstance(distance, (int, float)) else None)
-                    name = str(item.get("name", ""))
-                    mode = str(item.get("mode", ""))
-                    icon = _transport_mode_icon_html(mode)
+                    modes = item.get("modes", [])
+                    if not isinstance(modes, list):
+                        fallback_mode = str(item.get("mode", ""))
+                        modes = [fallback_mode] if fallback_mode else []
+                    icon = _transport_mode_icons_html(modes)
                     st.markdown(
                         f"- {icon}<strong>{item.get('name','')}</strong> — near {item.get('query','')} ({distance_text})",
                         unsafe_allow_html=True,
