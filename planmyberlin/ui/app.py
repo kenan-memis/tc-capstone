@@ -222,6 +222,14 @@ def _clean_weather_summary(summary: str) -> str:
     return s
 
 
+def _format_display_date(raw: str) -> str:
+    text = (raw or "").strip()
+    if len(text) == 10 and text[4] == "-" and text[7] == "-":
+        y, m, d = text.split("-")
+        return f"{d}-{m}-{y}"
+    return text
+
+
 def _stream_itinerary_markdown(itinerary: dict, *, model: str, temperature: float, placeholder) -> str:
     system = (
         "You are PlanMyBerlin. Turn the structured itinerary JSON into a friendly Markdown narrative.\n"
@@ -406,6 +414,7 @@ def main() -> None:
                 str(constants.get("label_start_date", "Trip start date")),
                 value=default_start,
                 min_value=date.today(),
+                format="DD-MM-YYYY",
                 help=str(constants.get("help_start_date", "")),
             )
             st.session_state["plan_start_date"] = start_date
@@ -416,6 +425,7 @@ def main() -> None:
                 value=end_value,
                 min_value=start_date,
                 max_value=start_date + timedelta(days=13),
+                format="DD-MM-YYYY",
                 help=str(constants.get("help_end_date", "")),
             )
             st.session_state["plan_end_date"] = end_date
@@ -498,8 +508,8 @@ def main() -> None:
     with top_right:
         st.subheader("Plan builder")
         status_panel = st.empty()
-        steps_panel = st.empty()
         summary_panel = st.empty()
+        steps_panel = st.empty()
         phase = str(st.session_state.get("plan_build_phase", "idle"))
         if phase == "building":
             status_panel.info("Building plan...")
@@ -511,32 +521,37 @@ def main() -> None:
             status_panel.error("Plan build failed.")
         else:
             status_panel.caption("Run the planner to see build progress and step logs.")
-        completed_nodes = set(st.session_state.get("plan_build_nodes", []))
-        if phase in {"building", "rendering", "ready", "error"}:
-            steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
-        else:
-            steps_panel.empty()
         summary_text = st.session_state.get("plan_build_summary")
         if isinstance(summary_text, str) and summary_text.strip():
             summary_panel.markdown(summary_text)
         else:
             summary_panel.empty()
+        completed_nodes = set(st.session_state.get("plan_build_nodes", []))
+        if phase in {"building", "rendering", "ready", "error"}:
+            steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
+        else:
+            steps_panel.empty()
 
     if run_clicked:
         st.session_state["plan_build_phase"] = "building"
         st.session_state["plan_build_nodes"] = []
         interests_short = ", ".join(interest_tags[:2]) + (f" +{len(interest_tags) - 2} more" if len(interest_tags) > 2 else "")
         areas_short = ", ".join(neighbourhoods[:2]) + (f" +{len(neighbourhoods) - 2} more" if len(neighbourhoods) > 2 else "")
+        start_label = start_date.strftime("%d-%m-%Y")
+        end_label = end_date.strftime("%d-%m-%Y")
         summary_lines = [
+            f"**Dates:** {start_label} to {end_label}.",
             f"**Trip summary:** {days} day(s), {party_size} traveler(s), {pace} pace, {budget_tier} budget.",
             f"**Food/mobility:** {dietary_choice}; {mobility_choice}.",
-            f"**Stay ideas:** {'on' if include_accommodation else 'off'}.",
+            f"**Accommodation:** {'requested' if include_accommodation else 'not requested'}.",
         ]
         if interests_short:
             summary_lines.append(f"**Interests:** {interests_short}.")
         if areas_short:
             summary_lines.append(f"**Areas:** {areas_short}.")
-        st.session_state["plan_build_summary"] = "  \n".join(summary_lines)
+        summary_text = "  \n".join(summary_lines)
+        st.session_state["plan_build_summary"] = summary_text
+        summary_panel.markdown(summary_text)
         profile = TripProfile(
             days=days,
             start_date=start_date,
@@ -620,7 +635,7 @@ def main() -> None:
     with bottom_left:
         st.markdown("## Plan Preview")
         if trip_start and trip_end:
-            st.caption(f"Trip dates: {trip_start} to {trip_end}")
+            st.caption(f"Trip dates: {_format_display_date(trip_start)} to {_format_display_date(trip_end)}")
         weather_summary = str(result.get("weather_summary", "")).strip()
         weather_bias = str(result.get("weather_bias", "unknown"))
         weather_condition_main = str(result.get("weather_condition_main", ""))
@@ -791,7 +806,11 @@ def main() -> None:
                         f"- **{item.get('name','')}** — near {item.get('query','')} ({distance_text})"
                     )
             else:
-                st.caption("No transport suggestions available for this run.")
+                transport_msg = str(result.get("transport_message", "")).strip()
+                if transport_msg:
+                    st.caption(transport_msg)
+                else:
+                    st.caption("No transport suggestions available for this run.")
 
         with tabs[3]:
             if accommodation_items:

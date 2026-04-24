@@ -163,6 +163,37 @@ def fetch_transport_context(
                             "longitude": loc.get("longitude") if isinstance(loc.get("longitude"), (int, float)) else None,
                         }
                     )
+            if not out:
+                for query in (f"Berlin Hbf, {city}", f"Alexanderplatz, {city}", city):
+                    resp = client.get(
+                        f"{base_url.rstrip('/')}/locations",
+                        params={
+                            "query": query,
+                            "results": max(1, results_per_query),
+                            "poi": "false",
+                            "addresses": "false",
+                        },
+                    )
+                    resp.raise_for_status()
+                    payload = resp.json()
+                    if not isinstance(payload, list):
+                        continue
+                    for row in payload:
+                        if not isinstance(row, dict):
+                            continue
+                        loc = row.get("location") if isinstance(row.get("location"), dict) else {}
+                        out.append(
+                            {
+                                "query": query,
+                                "name": str(row.get("name", "")).strip(),
+                                "type": str(row.get("type", "")).strip(),
+                                "distance_m": None,
+                                "latitude": loc.get("latitude") if isinstance(loc.get("latitude"), (int, float)) else None,
+                                "longitude": loc.get("longitude") if isinstance(loc.get("longitude"), (int, float)) else None,
+                            }
+                        )
+                    if out:
+                        break
     except httpx.HTTPStatusError as exc:
         return {
             "status": "unavailable",
@@ -180,6 +211,14 @@ def fetch_transport_context(
             "transport_by_place": [],
         }
 
+    if not out:
+        return {
+            "status": "unavailable",
+            "backend": "bvg_rest",
+            "message": "No live transport stops were returned for selected places; try nearby areas or rerun.",
+            "transport_items": [],
+            "transport_by_place": [],
+        }
     by_place = _by_place_summary(out, limit_per_place=2)
     return {
         "status": "ok",
