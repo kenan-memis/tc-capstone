@@ -25,6 +25,12 @@ def test_transport_prefers_nearby_lookup(monkeypatch) -> None:
         def json(self):
             return [
                 {
+                    "name": "Bus 200",
+                    "type": "stop",
+                    "distance": 180,
+                    "location": {"latitude": 52.52, "longitude": 13.40},
+                },
+                {
                     "name": "U Museumsinsel",
                     "type": "stop",
                     "distance": 180,
@@ -53,6 +59,7 @@ def test_transport_prefers_nearby_lookup(monkeypatch) -> None:
         map_points=[{"name": "Museum Island", "latitude": 52.5169, "longitude": 13.4010}],
     )
     assert out["status"] == "ok"
-    assert len(out["transport_items"]) == 1
+    assert len(out["transport_items"]) == 2
     assert out["transport_items"][0]["distance_m"] == 180
     assert out["transport_by_place"][0]["place_name"] == "Museum Island"
+    assert out["transport_by_place"][0]["options"][0]["mode"] == "u_bahn"

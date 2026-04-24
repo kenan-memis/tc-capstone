@@ -7,6 +7,29 @@ from typing import Any
 import httpx
 
 
+def _transport_mode(name: str, typ: str) -> str:
+    text = f"{name} {typ}".strip().lower()
+    if "u-bahn" in text or text.startswith("u ") or " u " in f" {text} ":
+        return "u_bahn"
+    if "s-bahn" in text or text.startswith("s ") or " s " in f" {text} ":
+        return "s_bahn"
+    if "bus" in text:
+        return "bus"
+    if "tram" in text or "straßenbahn" in text or "strassenbahn" in text:
+        return "tram"
+    return "unknown"
+
+
+def _mode_rank(mode: str) -> int:
+    return {
+        "u_bahn": 0,
+        "s_bahn": 1,
+        "bus": 2,
+        "tram": 3,
+        "unknown": 9,
+    }.get(mode, 9)
+
+
 def _by_place_summary(items: list[dict[str, Any]], *, limit_per_place: int = 2) -> list[dict[str, Any]]:
     grouped: dict[str, list[dict[str, Any]]] = {}
     for row in items:
@@ -17,7 +40,10 @@ def _by_place_summary(items: list[dict[str, Any]], *, limit_per_place: int = 2) 
     for place, rows in grouped.items():
         rows_sorted = sorted(
             rows,
-            key=lambda r: r.get("distance_m") if isinstance(r.get("distance_m"), (int, float)) else 10**9,
+            key=lambda r: (
+                r.get("distance_m") if isinstance(r.get("distance_m"), (int, float)) else 10**9,
+                _mode_rank(str(r.get("mode", "unknown"))),
+            ),
         )
         top = rows_sorted[: max(1, limit_per_place)]
         out.append(
@@ -114,6 +140,10 @@ def fetch_transport_context(
                                 "query": place_name,
                                 "name": str(row.get("name", "")).strip(),
                                 "type": str(row.get("type", "")).strip(),
+                                "mode": _transport_mode(
+                                    str(row.get("name", "")).strip(),
+                                    str(row.get("type", "")).strip(),
+                                ),
                                 "distance_m": row.get("distance")
                                 if isinstance(row.get("distance"), (int, float))
                                 else None,
@@ -158,6 +188,10 @@ def fetch_transport_context(
                             "query": query,
                             "name": str(row.get("name", "")).strip(),
                             "type": str(row.get("type", "")).strip(),
+                            "mode": _transport_mode(
+                                str(row.get("name", "")).strip(),
+                                str(row.get("type", "")).strip(),
+                            ),
                             "distance_m": None,
                             "latitude": loc.get("latitude") if isinstance(loc.get("latitude"), (int, float)) else None,
                             "longitude": loc.get("longitude") if isinstance(loc.get("longitude"), (int, float)) else None,
@@ -187,6 +221,10 @@ def fetch_transport_context(
                                 "query": query,
                                 "name": str(row.get("name", "")).strip(),
                                 "type": str(row.get("type", "")).strip(),
+                                "mode": _transport_mode(
+                                    str(row.get("name", "")).strip(),
+                                    str(row.get("type", "")).strip(),
+                                ),
                                 "distance_m": None,
                                 "latitude": loc.get("latitude") if isinstance(loc.get("latitude"), (int, float)) else None,
                                 "longitude": loc.get("longitude") if isinstance(loc.get("longitude"), (int, float)) else None,

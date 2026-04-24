@@ -82,6 +82,21 @@ _TIME_ICON_PATHS: dict[str, Path] = {
     ),
 }
 
+_TRANSPORT_ICON_PATHS: dict[str, Path] = {
+    "s_bahn": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.17.54-04e76c10-a25f-4288-a938-6ae8b3ca3111.png"
+    ),
+    "bus": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.19.01-06db2610-0c2a-4aa3-8c80-d2fda362eb18.png"
+    ),
+    "tram": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.18.18-850fb6bb-18db-4b73-8f4c-951606b03785.png"
+    ),
+    "u_bahn": Path(
+        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.18.02-58c6c510-339f-4933-83e7-9c02752ef81b.png"
+    ),
+}
+
 
 def _default_index(options: tuple[str, ...], prefer: str) -> int:
     try:
@@ -347,17 +362,17 @@ def _walk_hint(distance_m: int | float | None) -> str:
     return f"{d}m walk"
 
 
-def _transport_mode_icon(name: str, typ: str) -> str:
-    text = f"{name} {typ}".strip().lower()
-    if text.startswith("u ") or "u-bahn" in text or "ubahn" in text:
-        return "🚇"
-    if text.startswith("s ") or "s-bahn" in text or "sbahn" in text:
-        return "🚆"
-    if "tram" in text or "straßenbahn" in text or "strassenbahn" in text:
-        return "🚋"
-    if "bus" in text:
-        return "🚌"
-    return "🚉"
+def _transport_mode_icon_html(mode: str) -> str:
+    p = _TRANSPORT_ICON_PATHS.get((mode or "").strip().lower())
+    if not p:
+        return ""
+    uri = _icon_data_uri(str(p))
+    if not uri:
+        return ""
+    return (
+        f'<img src="{uri}" alt="{html.escape(mode)}" '
+        'style="width:16px;height:16px;vertical-align:-2px;margin-right:6px;border-radius:2px;" />'
+    )
 
 
 def _is_user_facing_practical_note(note: str) -> bool:
@@ -814,10 +829,11 @@ def main() -> None:
                         best = options[0] if isinstance(options[0], dict) else {}
                         if best:
                             best_name = str(best.get("name", "Nearest stop"))
-                            best_type = str(best.get("type", ""))
-                            best_icon = _transport_mode_icon(best_name, best_type)
+                            best_mode = str(best.get("mode", ""))
+                            best_icon = _transport_mode_icon_html(best_mode)
                             st.markdown(
-                                f"**Best option:** {best_icon} {best_name} — {_walk_hint(best.get('distance_m'))}"
+                                f"**Best option:** {best_icon}{best_name} — {_walk_hint(best.get('distance_m'))}",
+                                unsafe_allow_html=True,
                             )
                         with st.expander("See additional nearby options", expanded=False):
                             for idx, opt in enumerate(options):
@@ -826,10 +842,11 @@ def main() -> None:
                                 if idx == 0:
                                     continue
                                 opt_name = str(opt.get("name", "Unknown stop"))
-                                opt_type = str(opt.get("type", ""))
-                                opt_icon = _transport_mode_icon(opt_name, opt_type)
+                                opt_mode = str(opt.get("mode", ""))
+                                opt_icon = _transport_mode_icon_html(opt_mode)
                                 st.markdown(
-                                    f"- {opt_icon} {opt_name} — {_walk_hint(opt.get('distance_m'))}"
+                                    f"- {opt_icon}{opt_name} — {_walk_hint(opt.get('distance_m'))}",
+                                    unsafe_allow_html=True,
                                 )
                     else:
                         st.caption("No nearby stop details available for this place.")
@@ -839,10 +856,11 @@ def main() -> None:
                     distance = item.get("distance_m")
                     distance_text = _walk_hint(distance if isinstance(distance, (int, float)) else None)
                     name = str(item.get("name", ""))
-                    typ = str(item.get("type", ""))
-                    icon = _transport_mode_icon(name, typ)
+                    mode = str(item.get("mode", ""))
+                    icon = _transport_mode_icon_html(mode)
                     st.markdown(
-                        f"- {icon} **{item.get('name','')}** — near {item.get('query','')} ({distance_text})"
+                        f"- {icon}<strong>{item.get('name','')}</strong> — near {item.get('query','')} ({distance_text})",
+                        unsafe_allow_html=True,
                     )
             else:
                 transport_msg = str(result.get("transport_message", "")).strip()
