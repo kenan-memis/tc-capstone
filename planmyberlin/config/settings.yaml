@@ -61,3 +61,6 @@ itinerary:
 observability:
   log_level: INFO
   json_logs: false
+
+profiles:
+  sqlite_path: data/app/profiles.db
