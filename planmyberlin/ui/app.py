@@ -30,6 +30,7 @@ from planmyberlin.map import build_preview_map
 from planmyberlin.map.interaction import itinerary_places_linked_to_map
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.observability import bind_run_context, get_logger
+from planmyberlin.profiles import UserProfile, UserProfileUpsert, build_user_profile_repository
 
 
 _ui_log = get_logger(__name__)
@@ -103,6 +104,36 @@ def _default_index(options: tuple[str, ...], prefer: str) -> int:
         return options.index(prefer)
     except ValueError:
         return 0
+
+
+def _default_index_list(options: list[str], prefer: str) -> int:
+    try:
+        return options.index(prefer)
+    except ValueError:
+        return 0
+
+
+def _apply_profile_defaults_to_form(profile: UserProfile) -> None:
+    today = date.today()
+    st.session_state["form_party_size"] = int(profile.party_size_default)
+    st.session_state["form_interest_tags"] = list(profile.interest_tags_default)
+    st.session_state["form_neighbourhoods"] = list(profile.neighbourhoods_default)
+    st.session_state["form_budget_tier"] = str(profile.budget_tier_default)
+    st.session_state["form_pace"] = str(profile.pace_default)
+    st.session_state["form_dietary_choice"] = str(profile.dietary_choice_default)
+    st.session_state["form_mobility_choice"] = str(profile.mobility_choice_default)
+    st.session_state["form_include_accommodation"] = bool(profile.include_accommodation_default)
+    st.session_state["form_extra_details"] = str(profile.extra_details_default)
+    start = st.session_state.get("form_start_date")
+    end = st.session_state.get("form_end_date")
+    if not isinstance(start, date):
+        start = today
+    if not isinstance(end, date):
+        end = start + timedelta(days=1)
+    if end < start:
+        end = start
+    st.session_state["form_start_date"] = start
+    st.session_state["form_end_date"] = end
 
 
 def _weather_recommendation_text(bias: str) -> str:
@@ -434,13 +465,45 @@ def main() -> None:
     st.session_state.setdefault("plan_build_phase", "idle")
     st.session_state.setdefault("plan_build_nodes", [])
     st.session_state.setdefault("plan_build_summary", None)
+    st.session_state.setdefault("profile_selected_name", "Ad-hoc planning")
+    st.session_state.setdefault("loaded_profile_id", None)
+
+    st.session_state.setdefault("form_start_date", date.today())
+    st.session_state.setdefault("form_end_date", date.today() + timedelta(days=1))
+    st.session_state.setdefault("form_party_size", 2)
+    st.session_state.setdefault("form_budget_tier", "moderate")
+    st.session_state.setdefault("form_pace", "balanced")
+    st.session_state.setdefault("form_dietary_choice", "Doesn't matter / no preference")
+    st.session_state.setdefault("form_mobility_choice", "No specific needs")
+    st.session_state.setdefault("form_interest_tags", [])
+    st.session_state.setdefault("form_neighbourhoods", [])
+    st.session_state.setdefault("form_extra_details", "")
+    st.session_state.setdefault("form_include_accommodation", True)
+
+    profile_repo = None
+    saved_profiles: list[UserProfile] = []
+    try:
+        profile_repo = build_user_profile_repository()
+        saved_profiles = profile_repo.list_profiles()
+    except Exception:
+        profile_repo = None
+        saved_profiles = []
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
-        default_start = st.session_state.get("plan_start_date", date.today())
+        profile_names = ["Ad-hoc planning"] + [p.name for p in saved_profiles]
+        selected_profile_name = st.selectbox("Profile", profile_names, key="profile_selected_name")
+        selected_profile = next((p for p in saved_profiles if p.name == selected_profile_name), None)
+        if selected_profile and st.session_state.get("loaded_profile_id") != selected_profile.id:
+            _apply_profile_defaults_to_form(selected_profile)
+            st.session_state["loaded_profile_id"] = selected_profile.id
+        elif selected_profile is None and selected_profile_name == "Ad-hoc planning":
+            st.session_state["loaded_profile_id"] = None
+
+        default_start = st.session_state.get("form_start_date", date.today())
         if not isinstance(default_start, date):
             default_start = date.today()
-        default_end = st.session_state.get("plan_end_date")
+        default_end = st.session_state.get("form_end_date")
         if not isinstance(default_end, date):
             default_end = default_start + timedelta(days=1)
         if default_end < default_start:
@@ -455,8 +518,8 @@ def main() -> None:
                 min_value=date.today(),
                 format="DD-MM-YYYY",
                 help=str(constants.get("help_start_date", "")),
+                key="form_start_date",
             )
-            st.session_state["plan_start_date"] = start_date
         with r1c2:
             end_value = default_end if default_end >= start_date else start_date
             end_date = st.date_input(
@@ -466,16 +529,17 @@ def main() -> None:
                 max_value=start_date + timedelta(days=13),
                 format="DD-MM-YYYY",
                 help=str(constants.get("help_end_date", "")),
+                key="form_end_date",
             )
-            st.session_state["plan_end_date"] = end_date
         with r1c3:
             party_size = int(
                 st.number_input(
                     str(constants.get("label_party", "Party size")),
                     min_value=1,
                     max_value=20,
-                    value=2,
+                    value=int(st.session_state.get("form_party_size", 2)),
                     step=1,
+                    key="form_party_size",
                 )
             )
         days = (end_date - start_date).days + 1
@@ -487,20 +551,23 @@ def main() -> None:
             pace = st.selectbox(
                 str(constants.get("label_pace", "Pace")),
                 options=pace_options,
-                index=1,
+                index=_default_index(pace_options, str(st.session_state.get("form_pace", "balanced"))),
+                key="form_pace",
             )
         with r2c2:
             budget_tier = st.selectbox(
                 str(constants.get("label_budget", "Budget")),
                 options=budget_options,
-                index=1,
+                index=_default_index(budget_options, str(st.session_state.get("form_budget_tier", "moderate"))),
+                key="form_budget_tier",
             )
         with r2c3:
             dietary_choice = st.selectbox(
                 str(constants.get("label_dietary", "Food & diet")),
                 options=list(dietary_opts),
-                index=_default_index(dietary_opts, "Doesn't matter / no preference"),
+                index=_default_index(dietary_opts, str(st.session_state.get("form_dietary_choice", "Doesn't matter / no preference"))),
                 help=str(constants.get("help_dietary", "")),
+                key="form_dietary_choice",
             )
 
         interest_options = list(get_interest_options())
@@ -510,29 +577,33 @@ def main() -> None:
             mobility_choice = st.selectbox(
                 str(constants.get("label_mobility", "Walking & getting around")),
                 options=list(mobility_opts),
-                index=_default_index(mobility_opts, "No specific needs"),
+                index=_default_index(mobility_opts, str(st.session_state.get("form_mobility_choice", "No specific needs"))),
                 help=str(constants.get("help_mobility", "")),
+                key="form_mobility_choice",
             )
         with r3c2:
             interest_tags = st.multiselect(
                 str(constants.get("label_interests", "Interests")),
                 options=interest_options,
-                default=[],
+                default=list(st.session_state.get("form_interest_tags", [])),
                 help=str(constants.get("help_interests", "")),
+                key="form_interest_tags",
             )
         with r3c3:
             neighbourhoods = st.multiselect(
                 str(constants.get("label_neighbourhoods", "Neighbourhoods")),
                 options=neighbourhood_options,
-                default=[],
+                default=list(st.session_state.get("form_neighbourhoods", [])),
                 help=str(constants.get("help_neighbourhoods", "")),
+                key="form_neighbourhoods",
             )
 
         extra_details = st.text_area(
             str(constants.get("label_notes", "Extra context")),
-            value="",
+            value=str(st.session_state.get("form_extra_details", "")),
             height=120,
             help=str(constants.get("help_notes", "")),
+            key="form_extra_details",
         )
 
         default_include_acc = days >= 2
@@ -540,7 +611,36 @@ def main() -> None:
             str(constants.get("label_accommodation", "Include accommodation")),
             value=default_include_acc,
             help=str(constants.get("help_accommodation", "")),
+            key="form_include_accommodation",
         )
+
+        with st.expander("Save current selections as profile", expanded=False):
+            profile_name = st.text_input("Profile name", value="", key="profile_save_name")
+            save_profile_clicked = st.button("Save profile")
+            if save_profile_clicked:
+                if profile_repo is None:
+                    st.error("Profile storage is unavailable right now.")
+                elif not profile_name.strip():
+                    st.warning("Please enter a profile name.")
+                else:
+                    try:
+                        profile_repo.create_profile(
+                            UserProfileUpsert(
+                                name=profile_name.strip(),
+                                party_size_default=party_size,
+                                interest_tags_default=list(interest_tags),
+                                neighbourhoods_default=list(neighbourhoods),
+                                budget_tier_default=budget_tier,  # type: ignore[arg-type]
+                                pace_default=pace,  # type: ignore[arg-type]
+                                dietary_choice_default=dietary_choice,
+                                mobility_choice_default=mobility_choice,
+                                include_accommodation_default=include_accommodation,
+                                extra_details_default=extra_details,
+                            )
+                        )
+                        st.success(f"Profile '{profile_name.strip()}' saved.")
+                    except Exception:
+                        st.error("Could not save profile (name may already exist).")
 
         run_clicked = st.button(str(constants.get("button_run", "Run")), type="primary")
 
