@@ -580,6 +580,90 @@ def main() -> None:
                 st.session_state["auth_onboarding_completed"] = False
                 st.rerun()
 
+        default_pref_profile = profile_repo.get_profile_by_name("Default preferences", user_id=auth_user.id)
+        with st.expander("Profile settings", expanded=False):
+            st.caption("You can update your saved default preferences anytime.")
+            with st.form("profile_settings_form"):
+                p_pace_options = ("relaxed", "balanced", "packed")
+                p_budget_options = ("low", "moderate", "high")
+                p_dietary_default = (
+                    default_pref_profile.dietary_choice_default
+                    if default_pref_profile is not None
+                    else "Doesn't matter / no preference"
+                )
+                p_mobility_default = (
+                    default_pref_profile.mobility_choice_default
+                    if default_pref_profile is not None
+                    else "No specific needs"
+                )
+                p_pace = st.selectbox(
+                    "Preferred pace",
+                    options=p_pace_options,
+                    index=_default_index(
+                        p_pace_options,
+                        default_pref_profile.pace_default if default_pref_profile is not None else "balanced",
+                    ),
+                )
+                p_budget = st.selectbox(
+                    "Preferred budget",
+                    options=p_budget_options,
+                    index=_default_index(
+                        p_budget_options,
+                        default_pref_profile.budget_tier_default if default_pref_profile is not None else "moderate",
+                    ),
+                )
+                p_dietary = st.selectbox(
+                    "Preferred food style",
+                    options=list(dietary_opts),
+                    index=_default_index(dietary_opts, p_dietary_default),
+                )
+                p_mobility = st.selectbox(
+                    "Preferred mobility",
+                    options=list(mobility_opts),
+                    index=_default_index(mobility_opts, p_mobility_default),
+                )
+                p_interests = st.multiselect(
+                    "Preferred interests",
+                    options=list(get_interest_options()),
+                    default=list(default_pref_profile.interest_tags_default) if default_pref_profile else [],
+                )
+                p_neighbourhoods = st.multiselect(
+                    "Preferred areas",
+                    options=list(get_neighbourhood_options()),
+                    default=list(default_pref_profile.neighbourhoods_default) if default_pref_profile else [],
+                )
+                p_include_acc = st.checkbox(
+                    "Prefer accommodation suggestions by default",
+                    value=bool(default_pref_profile.include_accommodation_default) if default_pref_profile else True,
+                )
+                p_saved = st.form_submit_button("Save profile preferences")
+                if p_saved:
+                    payload = UserProfileUpsert(
+                        name="Default preferences",
+                        party_size_default=2,
+                        interest_tags_default=list(p_interests),
+                        neighbourhoods_default=list(p_neighbourhoods),
+                        budget_tier_default=p_budget,  # type: ignore[arg-type]
+                        pace_default=p_pace,  # type: ignore[arg-type]
+                        dietary_choice_default=p_dietary,
+                        mobility_choice_default=p_mobility,
+                        include_accommodation_default=p_include_acc,
+                        extra_details_default="",
+                    )
+                    try:
+                        existing = profile_repo.get_profile_by_name(
+                            "Default preferences",
+                            user_id=auth_user.id,
+                        )
+                        if existing is None:
+                            profile_repo.create_profile(payload, user_id=auth_user.id)
+                        else:
+                            profile_repo.update_profile(existing.id, payload, user_id=auth_user.id)
+                        st.success("Profile preferences saved.")
+                        st.rerun()
+                    except Exception:
+                        st.error("Could not save profile preferences.")
+
         default_start = st.session_state.get("form_start_date", date.today())
         if not isinstance(default_start, date):
             default_start = date.today()
@@ -693,37 +777,9 @@ def main() -> None:
             help=str(constants.get("help_accommodation", "")),
             key="form_include_accommodation",
         )
-
-        with st.expander("Save current selections as profile", expanded=False):
-            profile_name = st.text_input("Profile name", value="", key="profile_save_name")
-            save_profile_clicked = st.button("Save profile")
-            if save_profile_clicked:
-                if profile_repo is None:
-                    st.error("Profile storage is unavailable right now.")
-                elif auth_user is None:
-                    st.warning("Create or select a user account first.")
-                elif not profile_name.strip():
-                    st.warning("Please enter a profile name.")
-                else:
-                    try:
-                        profile_repo.create_profile(
-                            UserProfileUpsert(
-                                name=profile_name.strip(),
-                                party_size_default=party_size,
-                                interest_tags_default=list(interest_tags),
-                                neighbourhoods_default=list(neighbourhoods),
-                                budget_tier_default=budget_tier,  # type: ignore[arg-type]
-                                pace_default=pace,  # type: ignore[arg-type]
-                                dietary_choice_default=dietary_choice,
-                                mobility_choice_default=mobility_choice,
-                                include_accommodation_default=include_accommodation,
-                                extra_details_default=extra_details,
-                            ),
-                            user_id=auth_user.id,
-                        )
-                        st.success(f"Profile '{profile_name.strip()}' saved.")
-                    except Exception:
-                        st.error("Could not save profile (name may already exist).")
+        use_saved_preferences = st.checkbox("Use my saved preferences", value=False)
+        if use_saved_preferences and default_pref_profile is None:
+            st.info("No saved preferences found yet. Planning will use form selections.")
 
         run_clicked = st.button(str(constants.get("button_run", "Run")), type="primary")
 
@@ -757,16 +813,43 @@ def main() -> None:
     if run_clicked:
         st.session_state["plan_build_phase"] = "building"
         st.session_state["plan_build_nodes"] = []
-        interests_short = ", ".join(interest_tags[:2]) + (f" +{len(interest_tags) - 2} more" if len(interest_tags) > 2 else "")
-        areas_short = ", ".join(neighbourhoods[:2]) + (f" +{len(neighbourhoods) - 2} more" if len(neighbourhoods) > 2 else "")
+        effective_party_size = party_size
+        effective_interest_tags = list(interest_tags)
+        effective_neighbourhoods = list(neighbourhoods)
+        effective_budget_tier = budget_tier
+        effective_pace = pace
+        effective_dietary_choice = dietary_choice
+        effective_mobility_choice = mobility_choice
+        effective_include_accommodation = include_accommodation
+        effective_extra_details = extra_details
+        prefs_applied = bool(use_saved_preferences and default_pref_profile is not None)
+        if prefs_applied and default_pref_profile is not None:
+            effective_party_size = int(default_pref_profile.party_size_default)
+            effective_interest_tags = list(default_pref_profile.interest_tags_default)
+            effective_neighbourhoods = list(default_pref_profile.neighbourhoods_default)
+            effective_budget_tier = default_pref_profile.budget_tier_default
+            effective_pace = default_pref_profile.pace_default
+            effective_dietary_choice = default_pref_profile.dietary_choice_default
+            effective_mobility_choice = default_pref_profile.mobility_choice_default
+            effective_include_accommodation = bool(default_pref_profile.include_accommodation_default)
+            if str(default_pref_profile.extra_details_default).strip():
+                effective_extra_details = str(default_pref_profile.extra_details_default).strip()
+
+        interests_short = ", ".join(effective_interest_tags[:2]) + (
+            f" +{len(effective_interest_tags) - 2} more" if len(effective_interest_tags) > 2 else ""
+        )
+        areas_short = ", ".join(effective_neighbourhoods[:2]) + (
+            f" +{len(effective_neighbourhoods) - 2} more" if len(effective_neighbourhoods) > 2 else ""
+        )
         start_label = start_date.strftime("%d-%m-%Y")
         end_label = end_date.strftime("%d-%m-%Y")
         summary_lines = [
             f"**Dates:** {start_label} to {end_label}.",
-            f"**Trip summary:** {days} day(s), {party_size} traveler(s), {pace} pace, {budget_tier} budget.",
-            f"**Food/mobility:** {dietary_choice}; {mobility_choice}.",
-            f"**Accommodation:** {'requested' if include_accommodation else 'not requested'}.",
+            f"**Trip summary:** {days} day(s), {effective_party_size} traveler(s), {effective_pace} pace, {effective_budget_tier} budget.",
+            f"**Food/mobility:** {effective_dietary_choice}; {effective_mobility_choice}.",
+            f"**Accommodation:** {'requested' if effective_include_accommodation else 'not requested'}.",
         ]
+        summary_lines.append(f"**Preference mode:** {'saved preferences applied' if prefs_applied else 'form selections only'}.")
         if interests_short:
             summary_lines.append(f"**Interests:** {interests_short}.")
         if areas_short:
@@ -778,15 +861,15 @@ def main() -> None:
             days=days,
             start_date=start_date,
             end_date=end_date,
-            party_size=party_size,
-            interest_tags=interest_tags,
-            neighbourhoods=neighbourhoods,
-            budget_tier=budget_tier,  # type: ignore[arg-type]
-            pace=pace,  # type: ignore[arg-type]
-            dietary_choice=dietary_choice,
-            mobility_choice=mobility_choice,
-            include_accommodation=include_accommodation,
-            extra_details=extra_details,
+            party_size=effective_party_size,
+            interest_tags=effective_interest_tags,
+            neighbourhoods=effective_neighbourhoods,
+            budget_tier=effective_budget_tier,  # type: ignore[arg-type]
+            pace=effective_pace,  # type: ignore[arg-type]
+            dietary_choice=effective_dietary_choice,
+            mobility_choice=effective_mobility_choice,
+            include_accommodation=effective_include_accommodation,
+            extra_details=effective_extra_details,
         )
         graph = build_planner_graph()
         result: dict = {}
