@@ -484,6 +484,7 @@ def main() -> None:
             signup_username = st.text_input("Username (new account)", key="signup_username")
             signup_password = st.text_input("Password", type="password", key="signup_password")
             signup_password_2 = st.text_input("Confirm password", type="password", key="signup_password_2")
+            st.caption("Username must be at least 3 characters. Password must be at least 8 characters.")
             if st.button("Create account"):
                 if signup_password != signup_password_2:
                     st.error("Passwords do not match.")
@@ -498,6 +499,8 @@ def main() -> None:
                         st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
                         st.success("Account created.")
                         st.rerun()
+                    except ValueError as exc:
+                        st.error(str(exc))
                     except Exception as exc:
                         st.error(f"Could not create account: {type(exc).__name__}")
         return
