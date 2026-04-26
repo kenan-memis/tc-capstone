@@ -12,7 +12,7 @@ def _repo(tmp_path: Path) -> UserProfileRepository:
 
 
 def _user(repo: UserProfileRepository, name: str = "User A") -> str:
-    return repo.create_user(AppUserUpsert(display_name=name)).id
+    return repo.create_user(AppUserUpsert(username=name)).id
 
 
 def test_create_and_get_profile(tmp_path: Path) -> None:
@@ -100,8 +100,8 @@ def test_list_and_delete_profile(tmp_path: Path) -> None:
 
 def test_profile_name_is_unique(tmp_path: Path) -> None:
     repo = _repo(tmp_path)
-    user_a = _user(repo, "A")
-    user_b = _user(repo, "B")
+    user_a = _user(repo, "User A")
+    user_b = _user(repo, "User B")
     repo.create_profile(
         UserProfileUpsert(
             name="Unique Name",
@@ -137,7 +137,17 @@ def test_profile_name_is_unique(tmp_path: Path) -> None:
 
 def test_user_crud(tmp_path: Path) -> None:
     repo = _repo(tmp_path)
-    u = repo.create_user(AppUserUpsert(display_name="Demo User"))
+    u = repo.create_user(AppUserUpsert(username="Demo User"))
     assert repo.get_user(u.id) is not None
     assert repo.get_user_by_name("Demo User") is not None
     assert len(repo.list_users()) == 1
+
+
+def test_authenticate_user_with_hashed_password(tmp_path: Path) -> None:
+    repo = _repo(tmp_path)
+    created = repo.create_user_with_password(username="auth-user", password="StrongPass123")
+    ok = repo.authenticate_user(username="auth-user", password="StrongPass123")
+    bad = repo.authenticate_user(username="auth-user", password="wrong-pass")
+    assert ok is not None
+    assert ok.id == created.id
+    assert bad is None

@@ -38,12 +38,13 @@ class UserProfile(UserProfileUpsert):
 class AppUserUpsert(BaseModel):
     """Payload used for create user operations."""
 
-    display_name: str = Field(min_length=1, max_length=80)
+    username: str = Field(min_length=3, max_length=80)
 
 
 class AppUser(AppUserUpsert):
     """Stored app user row."""
 
     id: str
+    onboarding_completed: bool = False
     created_at: datetime
     updated_at: datetime

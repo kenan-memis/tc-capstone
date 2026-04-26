@@ -30,7 +30,7 @@ from planmyberlin.map import build_preview_map
 from planmyberlin.map.interaction import itinerary_places_linked_to_map
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.observability import bind_run_context, get_logger
-from planmyberlin.profiles import AppUser, AppUserUpsert, UserProfile, UserProfileUpsert, build_user_profile_repository
+from planmyberlin.profiles import AppUser, UserProfileUpsert, build_user_profile_repository
 
 
 _ui_log = get_logger(__name__)
@@ -104,36 +104,6 @@ def _default_index(options: tuple[str, ...], prefer: str) -> int:
         return options.index(prefer)
     except ValueError:
         return 0
-
-
-def _default_index_list(options: list[str], prefer: str) -> int:
-    try:
-        return options.index(prefer)
-    except ValueError:
-        return 0
-
-
-def _apply_profile_defaults_to_form(profile: UserProfile) -> None:
-    today = date.today()
-    st.session_state["form_party_size"] = int(profile.party_size_default)
-    st.session_state["form_interest_tags"] = list(profile.interest_tags_default)
-    st.session_state["form_neighbourhoods"] = list(profile.neighbourhoods_default)
-    st.session_state["form_budget_tier"] = str(profile.budget_tier_default)
-    st.session_state["form_pace"] = str(profile.pace_default)
-    st.session_state["form_dietary_choice"] = str(profile.dietary_choice_default)
-    st.session_state["form_mobility_choice"] = str(profile.mobility_choice_default)
-    st.session_state["form_include_accommodation"] = bool(profile.include_accommodation_default)
-    st.session_state["form_extra_details"] = str(profile.extra_details_default)
-    start = st.session_state.get("form_start_date")
-    end = st.session_state.get("form_end_date")
-    if not isinstance(start, date):
-        start = today
-    if not isinstance(end, date):
-        end = start + timedelta(days=1)
-    if end < start:
-        end = start
-    st.session_state["form_start_date"] = start
-    st.session_state["form_end_date"] = end
 
 
 def _weather_recommendation_text(bias: str) -> str:
@@ -465,11 +435,9 @@ def main() -> None:
     st.session_state.setdefault("plan_build_phase", "idle")
     st.session_state.setdefault("plan_build_nodes", [])
     st.session_state.setdefault("plan_build_summary", None)
-    st.session_state.setdefault("active_user_name", "")
-    st.session_state.setdefault("active_user_id", None)
-    st.session_state.setdefault("profile_selected_name", "Ad-hoc planning")
-    st.session_state.setdefault("loaded_profile_id", None)
-
+    st.session_state.setdefault("auth_user_id", None)
+    st.session_state.setdefault("auth_username", "")
+    st.session_state.setdefault("auth_onboarding_completed", False)
     st.session_state.setdefault("form_start_date", date.today())
     st.session_state.setdefault("form_end_date", date.today() + timedelta(days=1))
     st.session_state.setdefault("form_party_size", 2)
@@ -483,79 +451,134 @@ def main() -> None:
     st.session_state.setdefault("form_include_accommodation", True)
 
     profile_repo = None
-    app_users: list[AppUser] = []
-    active_user: AppUser | None = None
-    saved_profiles: list[UserProfile] = []
+    auth_user: AppUser | None = None
     try:
         profile_repo = build_user_profile_repository()
-        app_users = profile_repo.list_users()
-        current_user_id = st.session_state.get("active_user_id")
+        current_user_id = st.session_state.get("auth_user_id")
         if isinstance(current_user_id, str):
-            active_user = profile_repo.get_user(current_user_id)
-        if active_user is None and app_users:
-            active_user = app_users[0]
-            st.session_state["active_user_id"] = active_user.id
-            st.session_state["active_user_name"] = active_user.display_name
-        if active_user is not None:
-            saved_profiles = profile_repo.list_profiles(user_id=active_user.id)
+            auth_user = profile_repo.get_user(current_user_id)
     except Exception:
         profile_repo = None
-        app_users = []
-        active_user = None
-        saved_profiles = []
+        auth_user = None
+
+    if profile_repo is None:
+        st.error("User storage is unavailable right now.")
+        return
+
+    if auth_user is None:
+        st.subheader("Sign in")
+        tab_login, tab_signup = st.tabs(["Login", "Create account"])
+        with tab_login:
+            login_username = st.text_input("Username", key="login_username")
+            login_password = st.text_input("Password", type="password", key="login_password")
+            if st.button("Login"):
+                user = profile_repo.authenticate_user(username=login_username, password=login_password)
+                if user is None:
+                    st.error("Invalid username or password.")
+                else:
+                    st.session_state["auth_user_id"] = user.id
+                    st.session_state["auth_username"] = user.username
+                    st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
+                    st.rerun()
+        with tab_signup:
+            signup_username = st.text_input("Username (new account)", key="signup_username")
+            signup_password = st.text_input("Password", type="password", key="signup_password")
+            signup_password_2 = st.text_input("Confirm password", type="password", key="signup_password_2")
+            if st.button("Create account"):
+                if signup_password != signup_password_2:
+                    st.error("Passwords do not match.")
+                else:
+                    try:
+                        user = profile_repo.create_user_with_password(
+                            username=signup_username,
+                            password=signup_password,
+                        )
+                        st.session_state["auth_user_id"] = user.id
+                        st.session_state["auth_username"] = user.username
+                        st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
+                        st.success("Account created.")
+                        st.rerun()
+                    except Exception as exc:
+                        st.error(f"Could not create account: {type(exc).__name__}")
+        return
+
+    st.session_state["auth_username"] = auth_user.username
+    st.session_state["auth_onboarding_completed"] = bool(auth_user.onboarding_completed)
+
+    if not auth_user.onboarding_completed:
+        st.subheader("Welcome! Complete onboarding")
+        st.caption("Set your default preferences now, or skip and do it later from profile settings.")
+        c_on_1, c_on_2 = st.columns(2)
+        with c_on_1:
+            if st.button("Skip for now", type="secondary"):
+                profile_repo.set_onboarding_completed(user_id=auth_user.id, completed=True)
+                st.session_state["auth_onboarding_completed"] = True
+                st.rerun()
+        with c_on_2:
+            with st.form("onboarding_preferences_form"):
+                pace_options = ("relaxed", "balanced", "packed")
+                budget_options = ("low", "moderate", "high")
+                pace_default = st.selectbox("Preferred pace", options=pace_options, index=1)
+                budget_default = st.selectbox("Preferred budget", options=budget_options, index=1)
+                dietary_default = st.selectbox(
+                    "Preferred food style",
+                    options=list(dietary_opts),
+                    index=_default_index(dietary_opts, "Doesn't matter / no preference"),
+                )
+                mobility_default = st.selectbox(
+                    "Preferred mobility",
+                    options=list(mobility_opts),
+                    index=_default_index(mobility_opts, "No specific needs"),
+                )
+                interest_default = st.multiselect("Preferred interests", options=list(get_interest_options()), default=[])
+                neighbourhood_default = st.multiselect(
+                    "Preferred areas",
+                    options=list(get_neighbourhood_options()),
+                    default=[],
+                )
+                include_acc_default = st.checkbox("Prefer accommodation suggestions by default", value=True)
+                submitted = st.form_submit_button("Save preferences and continue")
+                if submitted:
+                    try:
+                        existing = profile_repo.get_profile_by_name(
+                            "Default preferences",
+                            user_id=auth_user.id,
+                        )
+                        payload = UserProfileUpsert(
+                            name="Default preferences",
+                            party_size_default=2,
+                            interest_tags_default=list(interest_default),
+                            neighbourhoods_default=list(neighbourhood_default),
+                            budget_tier_default=budget_default,  # type: ignore[arg-type]
+                            pace_default=pace_default,  # type: ignore[arg-type]
+                            dietary_choice_default=dietary_default,
+                            mobility_choice_default=mobility_default,
+                            include_accommodation_default=include_acc_default,
+                            extra_details_default="",
+                        )
+                        if existing is None:
+                            profile_repo.create_profile(payload, user_id=auth_user.id)
+                        else:
+                            profile_repo.update_profile(existing.id, payload, user_id=auth_user.id)
+                        profile_repo.set_onboarding_completed(user_id=auth_user.id, completed=True)
+                        st.session_state["auth_onboarding_completed"] = True
+                        st.success("Onboarding completed.")
+                        st.rerun()
+                    except Exception as exc:
+                        st.error(f"Could not save preferences: {type(exc).__name__}")
+        return
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
-        user_name_options = [u.display_name for u in app_users]
-        if user_name_options:
-            default_user_index = _default_index_list(
-                user_name_options,
-                str(st.session_state.get("active_user_name", user_name_options[0])),
-            )
-            selected_user_name = st.selectbox("User account", user_name_options, index=default_user_index)
-            selected_user = next((u for u in app_users if u.display_name == selected_user_name), None)
-            if selected_user is not None:
-                st.session_state["active_user_name"] = selected_user.display_name
-                st.session_state["active_user_id"] = selected_user.id
-                active_user = selected_user
-                if st.session_state.get("loaded_profile_id") is not None:
-                    st.session_state["loaded_profile_id"] = None
-        else:
-            st.info("Create your first user account to start saving preferences.")
-
-        with st.expander("Create new user account", expanded=False):
-            new_user_name = st.text_input("New user name", value="", key="new_user_name")
-            create_user_clicked = st.button("Create user")
-            if create_user_clicked:
-                if profile_repo is None:
-                    st.error("User storage is unavailable right now.")
-                elif not new_user_name.strip():
-                    st.warning("Please enter a user name.")
-                else:
-                    try:
-                        created_user = profile_repo.create_user(
-                            AppUserUpsert(display_name=new_user_name.strip())
-                        )
-                        st.session_state["active_user_id"] = created_user.id
-                        st.session_state["active_user_name"] = created_user.display_name
-                        st.success(f"User '{created_user.display_name}' created.")
-                        st.rerun()
-                    except Exception:
-                        st.error("Could not create user (name may already exist).")
-
-        if active_user is not None and profile_repo is not None:
-            saved_profiles = profile_repo.list_profiles(user_id=active_user.id)
-        else:
-            saved_profiles = []
-
-        profile_names = ["Ad-hoc planning"] + [p.name for p in saved_profiles]
-        selected_profile_name = st.selectbox("Profile", profile_names, key="profile_selected_name")
-        selected_profile = next((p for p in saved_profiles if p.name == selected_profile_name), None)
-        if selected_profile and st.session_state.get("loaded_profile_id") != selected_profile.id:
-            _apply_profile_defaults_to_form(selected_profile)
-            st.session_state["loaded_profile_id"] = selected_profile.id
-        elif selected_profile is None and selected_profile_name == "Ad-hoc planning":
-            st.session_state["loaded_profile_id"] = None
+        h1, h2 = st.columns([0.75, 0.25])
+        with h1:
+            st.caption(f"Signed in as `{auth_user.username}`")
+        with h2:
+            if st.button("Log out"):
+                st.session_state["auth_user_id"] = None
+                st.session_state["auth_username"] = ""
+                st.session_state["auth_onboarding_completed"] = False
+                st.rerun()
 
         default_start = st.session_state.get("form_start_date", date.today())
         if not isinstance(default_start, date):
@@ -677,7 +700,7 @@ def main() -> None:
             if save_profile_clicked:
                 if profile_repo is None:
                     st.error("Profile storage is unavailable right now.")
-                elif active_user is None:
+                elif auth_user is None:
                     st.warning("Create or select a user account first.")
                 elif not profile_name.strip():
                     st.warning("Please enter a profile name.")
@@ -696,7 +719,7 @@ def main() -> None:
                                 include_accommodation_default=include_accommodation,
                                 extra_details_default=extra_details,
                             ),
-                            user_id=active_user.id,
+                            user_id=auth_user.id,
                         )
                         st.success(f"Profile '{profile_name.strip()}' saved.")
                     except Exception:
