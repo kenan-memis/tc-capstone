@@ -30,5 +30,20 @@ class UserProfile(UserProfileUpsert):
     """Stored profile row."""
 
     id: str
+    user_id: str
+    created_at: datetime
+    updated_at: datetime
+
+
+class AppUserUpsert(BaseModel):
+    """Payload used for create user operations."""
+
+    display_name: str = Field(min_length=1, max_length=80)
+
+
+class AppUser(AppUserUpsert):
+    """Stored app user row."""
+
+    id: str
     created_at: datetime
     updated_at: datetime

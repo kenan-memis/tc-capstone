@@ -30,7 +30,7 @@ from planmyberlin.map import build_preview_map
 from planmyberlin.map.interaction import itinerary_places_linked_to_map
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.observability import bind_run_context, get_logger
-from planmyberlin.profiles import UserProfile, UserProfileUpsert, build_user_profile_repository
+from planmyberlin.profiles import AppUser, AppUserUpsert, UserProfile, UserProfileUpsert, build_user_profile_repository
 
 
 _ui_log = get_logger(__name__)
@@ -465,6 +465,8 @@ def main() -> None:
     st.session_state.setdefault("plan_build_phase", "idle")
     st.session_state.setdefault("plan_build_nodes", [])
     st.session_state.setdefault("plan_build_summary", None)
+    st.session_state.setdefault("active_user_name", "")
+    st.session_state.setdefault("active_user_id", None)
     st.session_state.setdefault("profile_selected_name", "Ad-hoc planning")
     st.session_state.setdefault("loaded_profile_id", None)
 
@@ -481,16 +483,71 @@ def main() -> None:
     st.session_state.setdefault("form_include_accommodation", True)
 
     profile_repo = None
+    app_users: list[AppUser] = []
+    active_user: AppUser | None = None
     saved_profiles: list[UserProfile] = []
     try:
         profile_repo = build_user_profile_repository()
-        saved_profiles = profile_repo.list_profiles()
+        app_users = profile_repo.list_users()
+        current_user_id = st.session_state.get("active_user_id")
+        if isinstance(current_user_id, str):
+            active_user = profile_repo.get_user(current_user_id)
+        if active_user is None and app_users:
+            active_user = app_users[0]
+            st.session_state["active_user_id"] = active_user.id
+            st.session_state["active_user_name"] = active_user.display_name
+        if active_user is not None:
+            saved_profiles = profile_repo.list_profiles(user_id=active_user.id)
     except Exception:
         profile_repo = None
+        app_users = []
+        active_user = None
         saved_profiles = []
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
+        user_name_options = [u.display_name for u in app_users]
+        if user_name_options:
+            default_user_index = _default_index_list(
+                user_name_options,
+                str(st.session_state.get("active_user_name", user_name_options[0])),
+            )
+            selected_user_name = st.selectbox("User account", user_name_options, index=default_user_index)
+            selected_user = next((u for u in app_users if u.display_name == selected_user_name), None)
+            if selected_user is not None:
+                st.session_state["active_user_name"] = selected_user.display_name
+                st.session_state["active_user_id"] = selected_user.id
+                active_user = selected_user
+                if st.session_state.get("loaded_profile_id") is not None:
+                    st.session_state["loaded_profile_id"] = None
+        else:
+            st.info("Create your first user account to start saving preferences.")
+
+        with st.expander("Create new user account", expanded=False):
+            new_user_name = st.text_input("New user name", value="", key="new_user_name")
+            create_user_clicked = st.button("Create user")
+            if create_user_clicked:
+                if profile_repo is None:
+                    st.error("User storage is unavailable right now.")
+                elif not new_user_name.strip():
+                    st.warning("Please enter a user name.")
+                else:
+                    try:
+                        created_user = profile_repo.create_user(
+                            AppUserUpsert(display_name=new_user_name.strip())
+                        )
+                        st.session_state["active_user_id"] = created_user.id
+                        st.session_state["active_user_name"] = created_user.display_name
+                        st.success(f"User '{created_user.display_name}' created.")
+                        st.rerun()
+                    except Exception:
+                        st.error("Could not create user (name may already exist).")
+
+        if active_user is not None and profile_repo is not None:
+            saved_profiles = profile_repo.list_profiles(user_id=active_user.id)
+        else:
+            saved_profiles = []
+
         profile_names = ["Ad-hoc planning"] + [p.name for p in saved_profiles]
         selected_profile_name = st.selectbox("Profile", profile_names, key="profile_selected_name")
         selected_profile = next((p for p in saved_profiles if p.name == selected_profile_name), None)
@@ -620,6 +677,8 @@ def main() -> None:
             if save_profile_clicked:
                 if profile_repo is None:
                     st.error("Profile storage is unavailable right now.")
+                elif active_user is None:
+                    st.warning("Create or select a user account first.")
                 elif not profile_name.strip():
                     st.warning("Please enter a profile name.")
                 else:
@@ -636,7 +695,8 @@ def main() -> None:
                                 mobility_choice_default=mobility_choice,
                                 include_accommodation_default=include_accommodation,
                                 extra_details_default=extra_details,
-                            )
+                            ),
+                            user_id=active_user.id,
                         )
                         st.success(f"Profile '{profile_name.strip()}' saved.")
                     except Exception:
