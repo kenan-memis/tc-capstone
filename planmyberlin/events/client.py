@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from datetime import date
+from collections import defaultdict
+from datetime import date, timedelta
 from typing import Any
 
 import httpx
@@ -128,6 +129,84 @@ def _hints_blob(summary: str, venue: str, admission_en: str, category: str) -> s
     return " | ".join(parts)[:2000]
 
 
+def _event_item_date_key(item: dict[str, Any]) -> date | None:
+    return _as_date(str(item.get("start_local", "") or "")[:10] or None)
+
+
+def _pick_events_across_trip_days(
+    candidates: list[dict[str, Any]],
+    *,
+    trip_start: date | None,
+    trip_end: date | None,
+    max_items: int,
+) -> list[dict[str, Any]]:
+    """
+    Spread results across calendar days in the trip window (round-robin) so a single
+    day does not fill the cap when other days have events too.
+    """
+    cap = max(1, min(max_items, 10))
+    if not candidates:
+        return []
+
+    if not trip_start or not trip_end or trip_start > trip_end:
+        by_day: dict[date, list[dict[str, Any]]] = defaultdict(list)
+        undated: list[dict[str, Any]] = []
+        for it in candidates:
+            dk = _event_item_date_key(it)
+            if dk:
+                by_day[dk].append(it)
+            else:
+                undated.append(it)
+        day_order = sorted(by_day.keys())
+        if len(day_order) <= 1:
+            return candidates[:cap]
+        return _round_robin_days(day_order, by_day, undated, cap)
+
+    # Trip window: one queue per calendar day in range
+    day_list: list[date] = []
+    d = trip_start
+    while d <= trip_end:
+        day_list.append(d)
+        d = d + timedelta(days=1)
+
+    by_day = {d: [] for d in day_list}
+    undated: list[dict[str, Any]] = []
+    for it in candidates:
+        dk = _event_item_date_key(it)
+        if dk and trip_start <= dk <= trip_end and dk in by_day:
+            by_day[dk].append(it)
+        elif not dk:
+            undated.append(it)
+        else:
+            undated.append(it)
+
+    return _round_robin_days(day_list, by_day, undated, cap)
+
+
+def _round_robin_days(
+    day_order: list[date],
+    by_day: dict[date, list[dict[str, Any]]],
+    undated: list[dict[str, Any]],
+    cap: int,
+) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    while len(out) < cap:
+        added = False
+        for d in day_order:
+            if len(out) >= cap:
+                break
+            if by_day.get(d):
+                out.append(by_day[d].pop(0))
+                added = True
+        if not added:
+            while len(out) < cap and undated:
+                out.append(undated.pop(0))
+                added = True
+            if not added:
+                break
+    return out
+
+
 def fetch_events_context(
     *,
     city: str,
@@ -204,7 +283,7 @@ def fetch_events_context(
 
     rows = _find_items(payload)
 
-    out: list[dict[str, Any]] = []
+    candidates: list[dict[str, Any]] = []
     for row in rows:
         name = _event_title(row)
         if not name:
@@ -268,7 +347,7 @@ def fetch_events_context(
             if d and end and d > end:
                 continue
 
-        out.append(
+        candidates.append(
             {
                 "name": name,
                 "start_local": start_local,
@@ -283,8 +362,13 @@ def fetch_events_context(
                 "identifier": identifier,
             }
         )
-        if len(out) >= max(1, min(max_items, 10)):
-            break
+
+    out = _pick_events_across_trip_days(
+        candidates,
+        trip_start=start,
+        trip_end=end,
+        max_items=max_items,
+    )
 
     message = "ok" if out else "No events found for the selected dates."
     return {

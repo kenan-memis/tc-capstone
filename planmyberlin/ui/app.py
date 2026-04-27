@@ -847,6 +847,10 @@ def main() -> None:
         with h1:
             st.caption(f"Signed in as `{auth_user.username}`")
         with h2:
+            # Apply programmatic menu change before the selectbox (cannot set this key after the widget is created).
+            _pending_acct = st.session_state.pop("_account_menu_after_action", None)
+            if _pending_acct in ("Account", "Previous plans", "Profile settings", "Log out"):
+                st.session_state["account_action_menu"] = _pending_acct
             account_action = st.selectbox(
                 "Account",
                 options=["Account", "Previous plans", "Profile settings", "Log out"],
@@ -901,7 +905,6 @@ def main() -> None:
                         plan=pr_state,  # type: ignore[arg-type]
                         label=label,
                     )
-                    st.session_state["account_action_menu"] = "Previous plans"
                     st.session_state["_plan_library_toast"] = "saved"
                     st.rerun()
             if not saved_list:
@@ -925,7 +928,7 @@ def main() -> None:
                         if _loaded and isinstance(_loaded, dict) and _loaded:
                             _hydrate_session_from_plan_result(_loaded)
                             profile_repo.save_latest_plan(user_id=auth_user.id, plan=_loaded)
-                            st.session_state["account_action_menu"] = "Account"
+                            st.session_state["_account_menu_after_action"] = "Account"
                             st.session_state["_plan_library_toast"] = "loaded"
                             st.rerun()
                         else:
@@ -934,7 +937,6 @@ def main() -> None:
                     if st.button("Delete selected", use_container_width=True):
                         _pid = saved_list[pick].id
                         if profile_repo.delete_saved_plan(user_id=auth_user.id, plan_id=_pid):
-                            st.session_state["account_action_menu"] = "Previous plans"
                             st.rerun()
                         else:
                             st.error("Delete failed.")

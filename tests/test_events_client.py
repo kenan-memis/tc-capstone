@@ -159,6 +159,44 @@ def test_events_do_not_filter_by_interest_tags(monkeypatch):
     assert out["events_items"][0]["name"] == "Lake swim day"
 
 
+def test_events_spread_across_trip_days_round_robin(monkeypatch):
+    """Do not let the first calendar day fill max_items when other days have events too."""
+    import planmyberlin.events.client as client
+
+    ev = []
+    for i in range(5):
+        ev.append(
+            {
+                "title": {"en": f"Event A{i}", "de": f"Event A{i}"},
+                "startDate": "2026-05-01",
+                "venue": {"name": f"Venue {i}"},
+            }
+        )
+    for j in range(2):
+        ev.append(
+            {
+                "title": {"en": f"Event B{j}", "de": f"Event B{j}"},
+                "startDate": "2026-05-02",
+                "venue": {"name": f"Other {j}"},
+            }
+        )
+    payload = {"data": {"events": ev}}
+    monkeypatch.setattr(client.httpx, "Client", lambda **_kw: _DummyClient([_DummyResponse(payload)]))
+    out = fetch_events_context(
+        city="Berlin",
+        start_date="2026-05-01",
+        end_date="2026-05-04",
+        interests=[],
+        max_items=3,
+    )
+    assert out["status"] == "ok"
+    assert len(out["events_items"]) == 3
+    dates = [e["start_local"] for e in out["events_items"]]
+    assert dates[0] == "2026-05-01"
+    assert dates[1] == "2026-05-02"
+    assert dates[2] == "2026-05-01"
+
+
 def test_events_unavailable_when_all_endpoints_fail(monkeypatch):
     import planmyberlin.events.client as client
 
