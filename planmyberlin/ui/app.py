@@ -560,7 +560,7 @@ def _plan_builder_trip_summary_markdown(
     effective_include_accommodation = include_accommodation
     prefs_applied = bool(use_saved_preferences and default_pref_profile is not None)
     if prefs_applied and default_pref_profile is not None:
-        effective_party_size = int(default_pref_profile.party_size_default)
+        # Party size always follows the trip form for this run (not saved profile defaults).
         effective_interest_tags = list(default_pref_profile.interest_tags_default)
         effective_neighbourhoods = list(neighbourhoods)
         effective_budget_tier = default_pref_profile.budget_tier_default
@@ -1104,7 +1104,7 @@ def main() -> None:
         effective_extra_details = extra_details
         prefs_applied = bool(use_saved_preferences and default_pref_profile is not None)
         if prefs_applied and default_pref_profile is not None:
-            effective_party_size = int(default_pref_profile.party_size_default)
+            # How many people is a per-trip form choice; saved preferences do not override it.
             effective_interest_tags = list(default_pref_profile.interest_tags_default)
             # Districts are intentionally not part of saved preferences; keep current form choice.
             effective_neighbourhoods = list(neighbourhoods)
