@@ -548,6 +548,29 @@ def _plan_summary_from_result(result: dict[str, object]) -> str:
     return "  \n".join(lines)
 
 
+def _default_saved_plan_label(result: dict) -> str:
+    profile = result.get("profile", {}) if isinstance(result, dict) else {}
+    p = profile if isinstance(profile, dict) else {}
+    start = str(p.get("start_date", "")).strip()
+    end = str(p.get("end_date", "")).strip()
+    if start and end:
+        a = _format_display_date(start)
+        b = _format_display_date(end)
+        return f"Trip {a}–{b}"
+    return "Saved plan"
+
+
+def _hydrate_session_from_plan_result(result: dict) -> None:
+    """Set session state for a plan loaded from storage (latest or saved list)."""
+    st.session_state["plan_result"] = result
+    st.session_state["plan_build_phase"] = "ready"
+    st.session_state["plan_build_summary"] = _plan_summary_from_result(result)
+    st.session_state["plan_build_nodes"] = list(_NODE_TO_PHASE.keys())
+    st.session_state.pop("plan_narrative_md", None)
+    st.session_state["map_highlight_pick"] = "(All places)"
+    st.session_state["plan_map_version"] = str(uuid.uuid4())
+
+
 def _reset_plan_workflow_state() -> None:
     """Clear in-memory plan and build UI; does not touch auth or form defaults."""
     st.session_state["plan_result"] = None
@@ -747,9 +770,7 @@ def main() -> None:
         _latest = profile_repo.get_latest_plan(user_id=auth_user.id)
         st.session_state["loaded_latest_plan_user_id"] = auth_user.id
         if isinstance(_latest, dict) and _latest:
-            st.session_state["plan_result"] = _latest
-            st.session_state["plan_build_phase"] = "ready"
-            st.session_state["plan_build_summary"] = _plan_summary_from_result(_latest)
+            _hydrate_session_from_plan_result(_latest)
         else:
             st.session_state["plan_build_phase"] = "idle"
             st.session_state["plan_build_summary"] = None
@@ -814,6 +835,12 @@ def main() -> None:
                         st.error(f"Could not save preferences: {type(exc).__name__}")
         return
 
+    _lib_toast = st.session_state.pop("_plan_library_toast", None)
+    if _lib_toast == "loaded":
+        st.success("Plan loaded. Scroll down to see your itinerary and map.")
+    elif _lib_toast == "saved":
+        st.success("Plan saved to your list.")
+
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
         h1, h2 = st.columns([0.55, 0.45])
@@ -822,7 +849,7 @@ def main() -> None:
         with h2:
             account_action = st.selectbox(
                 "Account",
-                options=["Account", "Profile settings", "Log out"],
+                options=["Account", "Previous plans", "Profile settings", "Log out"],
                 label_visibility="collapsed",
                 key="account_action_menu",
             )
@@ -847,6 +874,71 @@ def main() -> None:
                 st.rerun()
 
         default_pref_profile = profile_repo.get_profile_by_name("Default preferences", user_id=auth_user.id)
+        if account_action == "Previous plans":
+            st.subheader("Previous plans")
+            st.caption("Save the plan you are viewing, or open an earlier one. Loading replaces the current trip view for this session.")
+            saved_list = profile_repo.list_saved_plans(user_id=auth_user.id)
+            pr_state = st.session_state.get("plan_result")
+            has_current = isinstance(pr_state, dict) and bool(pr_state)
+            save_c1, save_c2 = st.columns([0.4, 0.6], gap="small")
+            with save_c1:
+                st.text_input(
+                    "Label (optional when saving)",
+                    key="saved_plan_label_draft",
+                    placeholder="e.g. Summer weekend",
+                )
+            with save_c2:
+                st.write("")
+                if st.button(
+                    "Save current plan to list",
+                    disabled=not has_current,
+                    use_container_width=True,
+                ):
+                    draft = str(st.session_state.get("saved_plan_label_draft", "")).strip()
+                    label = draft or _default_saved_plan_label(pr_state)
+                    profile_repo.insert_saved_plan(
+                        user_id=auth_user.id,
+                        plan=pr_state,  # type: ignore[arg-type]
+                        label=label,
+                    )
+                    st.session_state["account_action_menu"] = "Previous plans"
+                    st.session_state["_plan_library_toast"] = "saved"
+                    st.rerun()
+            if not saved_list:
+                st.info("No saved plans yet. After **Build my plan** finishes, use **Save current plan to list** above.")
+            else:
+                def _format_saved_entry(i: int) -> str:
+                    it = saved_list[i]
+                    ts = (it.created_at or "")[:16].replace("T", " ")
+                    return f"{it.label}  ·  {ts}"
+
+                pick = st.selectbox(
+                    "Choose a plan to load or remove",
+                    list(range(len(saved_list))),
+                    format_func=_format_saved_entry,
+                )
+                load_col, del_col = st.columns(2)
+                with load_col:
+                    if st.button("Load selected plan", use_container_width=True, type="primary"):
+                        _pid = saved_list[pick].id
+                        _loaded = profile_repo.get_saved_plan(user_id=auth_user.id, plan_id=_pid)
+                        if _loaded and isinstance(_loaded, dict) and _loaded:
+                            _hydrate_session_from_plan_result(_loaded)
+                            profile_repo.save_latest_plan(user_id=auth_user.id, plan=_loaded)
+                            st.session_state["account_action_menu"] = "Account"
+                            st.session_state["_plan_library_toast"] = "loaded"
+                            st.rerun()
+                        else:
+                            st.error("Could not load that plan.")
+                with del_col:
+                    if st.button("Delete selected", use_container_width=True):
+                        _pid = saved_list[pick].id
+                        if profile_repo.delete_saved_plan(user_id=auth_user.id, plan_id=_pid):
+                            st.session_state["account_action_menu"] = "Previous plans"
+                            st.rerun()
+                        else:
+                            st.error("Delete failed.")
+            st.divider()
         if account_action == "Profile settings":
             st.info("Profile settings")
             st.caption("You can update your saved default preferences anytime.")

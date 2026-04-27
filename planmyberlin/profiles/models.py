@@ -48,3 +48,12 @@ class AppUser(AppUserUpsert):
     onboarding_completed: bool = False
     created_at: datetime
     updated_at: datetime
+
+
+class SavedPlanListItem(BaseModel):
+    """A row in the per-user saved-plans list (no plan JSON in list view)."""
+
+    id: str
+    label: str
+    created_at: str
+    updated_at: str

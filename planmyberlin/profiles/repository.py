@@ -11,7 +11,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from planmyberlin.config.loader import get_settings
-from planmyberlin.profiles.models import AppUser, AppUserUpsert, UserProfile, UserProfileUpsert
+from planmyberlin.profiles.models import (
+    AppUser,
+    AppUserUpsert,
+    SavedPlanListItem,
+    UserProfile,
+    UserProfileUpsert,
+)
 
 
 def _utc_now_iso() -> str:
@@ -100,6 +106,23 @@ class UserProfileRepository:
                     FOREIGN KEY (user_id) REFERENCES app_users(id)
                 )
                 """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS saved_user_plans (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT NOT NULL,
+                    label TEXT NOT NULL,
+                    plan_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES app_users(id)
+                )
+                """
+            )
+            conn.execute(
+                "CREATE INDEX IF NOT EXISTS idx_saved_plans_user_updated "
+                "ON saved_user_plans (user_id, updated_at DESC)"
             )
             cols = {
                 str(r["name"])
@@ -329,6 +352,76 @@ class UserProfileRepository:
     def clear_latest_plan(self, *, user_id: str) -> None:
         with self._connect() as conn:
             conn.execute("DELETE FROM latest_user_plan WHERE user_id = ?", (user_id,))
+
+    def list_saved_plans(self, *, user_id: str) -> list[SavedPlanListItem]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, label, created_at, updated_at
+                FROM saved_user_plans
+                WHERE user_id = ?
+                ORDER BY updated_at DESC, created_at DESC
+                """,
+                (user_id,),
+            ).fetchall()
+        out: list[SavedPlanListItem] = []
+        for r in rows:
+            out.append(
+                SavedPlanListItem(
+                    id=str(r["id"]),
+                    label=str(r["label"]),
+                    created_at=str(r["created_at"]),
+                    updated_at=str(r["updated_at"]),
+                )
+            )
+        return out
+
+    def get_saved_plan(self, *, user_id: str, plan_id: str) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT plan_json
+                FROM saved_user_plans
+                WHERE id = ? AND user_id = ?
+                """,
+                (plan_id.strip(), user_id),
+            ).fetchone()
+        if not row:
+            return None
+        try:
+            payload = json.loads(str(row["plan_json"]))
+        except json.JSONDecodeError:
+            return None
+        return payload if isinstance(payload, dict) else None
+
+    def insert_saved_plan(
+        self,
+        *,
+        user_id: str,
+        plan: dict,
+        label: str,
+    ) -> str:
+        now = _utc_now_iso()
+        plan_id = str(uuid.uuid4())
+        lab = (label or "").strip() or "Saved plan"
+        payload = json.dumps(plan, ensure_ascii=True)
+        with self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO saved_user_plans (id, user_id, label, plan_json, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (plan_id, user_id, lab, payload, now, now),
+            )
+        return plan_id
+
+    def delete_saved_plan(self, *, user_id: str, plan_id: str) -> bool:
+        with self._connect() as conn:
+            cur = conn.execute(
+                "DELETE FROM saved_user_plans WHERE id = ? AND user_id = ?",
+                (plan_id.strip(), user_id),
+            )
+            return cur.rowcount > 0
 
     def list_profiles(self, *, user_id: str) -> list[UserProfile]:
         with self._connect() as conn:

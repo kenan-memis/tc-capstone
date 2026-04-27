@@ -183,3 +183,25 @@ def test_latest_plan_roundtrip(tmp_path: Path) -> None:
     assert loaded.get("itinerary_status") == "ok"
     repo.clear_latest_plan(user_id=user.id)
     assert repo.get_latest_plan(user_id=user.id) is None
+
+
+def test_saved_plans_list_insert_load_delete(tmp_path: Path) -> None:
+    repo = _repo(tmp_path)
+    user = repo.create_user_with_password(username="save-plan-user", password="StrongPass123")
+    assert repo.list_saved_plans(user_id=user.id) == []
+    sample = {
+        "itinerary_status": "ok",
+        "itinerary": {"title": "Berlin plan", "days": []},
+        "profile": {"start_date": "2026-06-10", "end_date": "2026-06-14", "days": 5, "party_size": 1},
+    }
+    pid = repo.insert_saved_plan(user_id=user.id, plan=sample, label="My trip")
+    assert pid
+    items = repo.list_saved_plans(user_id=user.id)
+    assert len(items) == 1
+    assert items[0].label == "My trip"
+    assert items[0].id == pid
+    back = repo.get_saved_plan(user_id=user.id, plan_id=pid)
+    assert back == sample
+    assert repo.delete_saved_plan(user_id=user.id, plan_id=pid) is True
+    assert repo.get_saved_plan(user_id=user.id, plan_id=pid) is None
+    assert repo.list_saved_plans(user_id=user.id) == []
