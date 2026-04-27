@@ -1220,7 +1220,6 @@ def main() -> None:
         )
 
         shown_items = _merge_display_items(retrieved_items, enriched_items)
-        transport_guidance_items = [x for x in shown_items if _is_transport_kb_item(x)]
         place_items = [x for x in shown_items if not _is_food_item(x) and not _is_transport_kb_item(x)]
         food_items = [x for x in shown_items if _is_food_item(x)]
         itin_name_set = _itinerary_place_name_set(itinerary) if isinstance(itinerary, dict) else set()
@@ -1278,14 +1277,6 @@ def main() -> None:
                         st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False))
 
         with tabs[2]:
-            if transport_guidance_items:
-                st.markdown("**Getting around — tips**")
-                for item in transport_guidance_items:
-                    st.markdown(
-                        _markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False)
-                    )
-                if transport_by_place or transport_items:
-                    st.divider()
             if transport_by_place:
                 for row in transport_by_place:
                     if not isinstance(row, dict):
@@ -1339,12 +1330,11 @@ def main() -> None:
                         unsafe_allow_html=True,
                     )
             else:
-                if not transport_guidance_items:
-                    transport_msg = str(result.get("transport_message", "")).strip()
-                    if transport_msg:
-                        st.caption("Transportation info is not available right now. Please try again shortly.")
-                    else:
-                        st.caption("No transport suggestions available for this run.")
+                transport_msg = str(result.get("transport_message", "")).strip()
+                if transport_msg:
+                    st.caption("Transportation info is not available right now. Please try again shortly.")
+                else:
+                    st.caption("No transport suggestions available for this run.")
 
         with tabs[3]:
             if accommodation_items:

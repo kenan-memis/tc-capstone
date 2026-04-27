@@ -105,6 +105,8 @@ def fetch_transport_context(
         if s:
             seeds.append(f"{s}, {city}")
     for item in items:
+        if str(item.get("category", "")).strip().lower() == "transport":
+            continue
         name = str(item.get("name", "")).strip()
         if name:
             seeds.append(f"{name}, {city}")
@@ -128,6 +130,8 @@ def fetch_transport_context(
         with httpx.Client(timeout=timeout_seconds) as client:
             # Prefer coordinate-first lookup for higher-quality, localized stops.
             for point in nearby_source[: max(1, max_queries)]:
+                if str(point.get("category", "")).strip().lower() == "transport":
+                    continue
                 lat = point.get("latitude")
                 lng = point.get("longitude")
                 if not isinstance(lat, (int, float)) or not isinstance(lng, (int, float)):
