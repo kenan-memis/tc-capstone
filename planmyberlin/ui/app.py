@@ -799,6 +799,12 @@ def main() -> None:
                 key="account_action_menu",
             )
             if account_action == "Log out":
+                _logout_uid = st.session_state.get("auth_user_id")
+                if isinstance(_logout_uid, str) and str(_logout_uid).strip():
+                    try:
+                        profile_repo.clear_latest_plan(user_id=str(_logout_uid).strip())
+                    except Exception:
+                        pass
                 token = str(st.session_state.get("auth_session_token", "")).strip()
                 if token:
                     profile_repo.revoke_session(token=token)
@@ -1039,24 +1045,40 @@ def main() -> None:
                 summary_panel.markdown(_plan_summary_from_result(st.session_state.get("plan_result", {})))
             else:
                 summary_panel.empty()
+        elif phase == "idle" and not has_existing_plan:
+            # No plan yet: do not mirror the trip form in the right column; keep Plan builder clean until a run.
+            summary_panel.empty()
+        elif phase == "error":
+            err_summary = st.session_state.get("plan_build_summary")
+            if isinstance(err_summary, str) and err_summary.strip():
+                summary_panel.markdown(err_summary)
+            else:
+                summary_panel.empty()
         else:
-            summary_panel.markdown(
-                _plan_builder_trip_summary_markdown(
-                    start_date=start_date,
-                    end_date=end_date,
-                    days=days,
-                    party_size=party_size,
-                    interest_tags=interest_tags,
-                    neighbourhoods=neighbourhoods,
-                    budget_tier=budget_tier,
-                    pace=pace,
-                    dietary_choice=dietary_choice,
-                    mobility_choice=mobility_choice,
-                    include_accommodation=include_accommodation,
-                    use_saved_preferences=use_saved_preferences,
-                    default_pref_profile=default_pref_profile,
+            # "ready" or a restored "idle" edge with an existing result
+            summary_text = st.session_state.get("plan_build_summary")
+            if isinstance(summary_text, str) and summary_text.strip():
+                summary_panel.markdown(summary_text)
+            elif has_existing_plan:
+                summary_panel.markdown(_plan_summary_from_result(st.session_state.get("plan_result", {})))
+            else:
+                summary_panel.markdown(
+                    _plan_builder_trip_summary_markdown(
+                        start_date=start_date,
+                        end_date=end_date,
+                        days=days,
+                        party_size=party_size,
+                        interest_tags=interest_tags,
+                        neighbourhoods=neighbourhoods,
+                        budget_tier=budget_tier,
+                        pace=pace,
+                        dietary_choice=dietary_choice,
+                        mobility_choice=mobility_choice,
+                        include_accommodation=include_accommodation,
+                        use_saved_preferences=use_saved_preferences,
+                        default_pref_profile=default_pref_profile,
+                    )
                 )
-            )
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
         if has_existing_plan and phase == "ready":
             # Restored plans may not carry full node completion history in session.
