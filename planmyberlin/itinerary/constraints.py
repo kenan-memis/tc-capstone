@@ -27,8 +27,21 @@ def format_constraint_instructions(profile: dict[str, Any]) -> str:
     }
     pace_hint = pace_hints.get(pace, pace_hints["balanced"])
 
+    flex_budget = max(0, days - 2) if days >= 3 else 0
+    uniq_rule = (
+        "- **Venue names:** use each candidate venue at most once in the entire trip (no repeats). "
+        "If the trip is **1–2 days**, every morning/afternoon/evening slot should name a distinct venue when candidates allow. "
+        + (
+            f"- **Flexible outdoor blocks:** for trips of **3+ days**, allow **{flex_budget}** afternoon slot(s) "
+            "(from day 3 onward) as weather-friendly walking/biking/park time **without** naming a single venue."
+            if flex_budget
+            else ""
+        )
+    )
+
     lines: list[str] = [
         f"- **Trip length:** produce exactly **{days}** calendar day(s). The `days` array must have length **{days}** with `day_number` **1** through **{days}** (one object per day).",
+        uniq_rule,
         f"- **Pace ({pace}):** {pace_hint}",
         f"- **Budget style ({budget}):** bias restaurant/café suggestions accordingly (simple language only; no prices unless from candidates).",
         f"- **Party size ({party}):** mention group-friendly pacing if party > 2 (e.g. seating, simpler logistics).",
