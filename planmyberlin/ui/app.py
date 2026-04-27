@@ -413,6 +413,39 @@ def _build_steps_markdown(completed_nodes: set[str], *, phase: str) -> str:
     return "  \n".join(lines)
 
 
+def _plan_summary_from_result(result: dict[str, object]) -> str:
+    profile = result.get("profile", {}) if isinstance(result, dict) else {}
+    p = profile if isinstance(profile, dict) else {}
+    start = _format_display_date(str(p.get("start_date", "")).strip())
+    end = _format_display_date(str(p.get("end_date", "")).strip())
+    days = int(p.get("days", 0) or 0)
+    party = int(p.get("party_size", 0) or 0)
+    pace = str(p.get("pace", "")).strip()
+    budget = str(p.get("budget_tier", "")).strip()
+    dietary = str(p.get("dietary_choice", "")).strip()
+    mobility = str(p.get("mobility_choice", "")).strip()
+    include_acc = bool(p.get("include_accommodation", False))
+    interests = p.get("interest_tags", [])
+    areas = p.get("neighbourhoods", [])
+    interests_list = [str(x).strip() for x in interests if str(x).strip()] if isinstance(interests, list) else []
+    areas_list = [str(x).strip() for x in areas if str(x).strip()] if isinstance(areas, list) else []
+    interests_short = ", ".join(interests_list[:2]) + (f" +{len(interests_list) - 2} more" if len(interests_list) > 2 else "")
+    areas_short = ", ".join(areas_list[:2]) + (f" +{len(areas_list) - 2} more" if len(areas_list) > 2 else "")
+    lines = []
+    if start and end:
+        lines.append(f"**Dates:** {start} to {end}.")
+    if days:
+        lines.append(f"**Trip summary:** {days} day(s), {party} traveler(s), {pace} pace, {budget} budget.")
+    if dietary or mobility:
+        lines.append(f"**Food/mobility:** {dietary}; {mobility}.")
+    lines.append(f"**Accommodation:** {'requested' if include_acc else 'not requested'}.")
+    if interests_short:
+        lines.append(f"**Interests:** {interests_short}.")
+    if areas_short:
+        lines.append(f"**Areas:** {areas_short}.")
+    return "  \n".join(lines)
+
+
 def main() -> None:
     settings = get_settings()
     constants = get_constants()
@@ -532,6 +565,8 @@ def main() -> None:
         if isinstance(latest, dict) and latest:
             st.session_state["plan_result"] = latest
             st.session_state["loaded_latest_plan_user_id"] = auth_user.id
+            st.session_state["plan_build_phase"] = "ready"
+            st.session_state["plan_build_summary"] = _plan_summary_from_result(latest)
 
     if not auth_user.onboarding_completed:
         st.subheader("Welcome! Complete onboarding")
@@ -823,6 +858,7 @@ def main() -> None:
         summary_panel = st.empty()
         steps_panel = st.empty()
         phase = str(st.session_state.get("plan_build_phase", "idle"))
+        has_existing_plan = isinstance(st.session_state.get("plan_result"), dict) and bool(st.session_state.get("plan_result"))
         if phase == "building":
             status_panel.info("Building plan...")
         elif phase == "rendering":
@@ -832,15 +868,22 @@ def main() -> None:
         elif phase == "error":
             status_panel.error("Plan build failed.")
         else:
-            status_panel.caption("Run the planner to see build progress and step logs.")
+            if has_existing_plan:
+                status_panel.success("Plan ready.")
+            else:
+                status_panel.caption("Run the planner to see build progress and step logs.")
         summary_text = st.session_state.get("plan_build_summary")
         if isinstance(summary_text, str) and summary_text.strip():
             summary_panel.markdown(summary_text)
+        elif has_existing_plan:
+            summary_panel.markdown(_plan_summary_from_result(st.session_state.get("plan_result", {})))
         else:
             summary_panel.empty()
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
         if phase in {"building", "rendering", "ready", "error"}:
             steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
+        elif has_existing_plan:
+            steps_panel.markdown(_build_steps_markdown(set(_NODE_TO_PHASE.keys()), phase="ready"))
         else:
             steps_panel.empty()
 
