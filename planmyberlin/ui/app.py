@@ -1084,8 +1084,6 @@ def main() -> None:
                 "🚇 How to Get Around",
                 "🏨 Stay Options",
                 "🛠️ Developer Diagnostics",
-                "🗂️ Raw Data",
-                "📦 Structured itinerary (JSON)",
             ]
         )
 
@@ -1246,6 +1244,15 @@ def main() -> None:
                 st.caption("Accommodation suggestions are not enabled for this run.")
 
         with tabs[4]:
+            with st.expander("Raw Data", expanded=False):
+                st.json(result)
+
+            with st.expander("Structured Itinerary (JSON)", expanded=False):
+                if isinstance(itinerary, dict) and itinerary:
+                    st.json(itinerary)
+                else:
+                    st.caption("No itinerary JSON for this run.")
+
             st.caption("Temporary build-time diagnostics. Remove before final presentation.")
             st.markdown(
                 "- Retrieval backend: "
@@ -1299,18 +1306,6 @@ def main() -> None:
                 st.caption("Generate PNG with: `uv run planmyberlin-export-graphs`")
             else:
                 st.caption("Graph export not found. Run: `uv run planmyberlin-export-graphs`")
-
-        with tabs[5]:
-            with st.expander("Raw result payload", expanded=False):
-                st.json(result)
-
-        with tabs[6]:
-            st.caption("Developer-oriented structured itinerary. Remove before final presentation.")
-            if isinstance(itinerary, dict) and itinerary:
-                with st.expander("Structured itinerary JSON", expanded=False):
-                    st.json(itinerary)
-            else:
-                st.caption("No itinerary JSON for this run.")
 
 
 
