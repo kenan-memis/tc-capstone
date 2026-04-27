@@ -243,6 +243,7 @@ def _fetch_events(state: PlannerState) -> PlannerState:
     out = dict(state)
     cfg = get_settings().get("events", {})
     city = str(cfg.get("city", "Berlin"))
+    base_url = str(cfg.get("base_url", "https://api.kulturdaten.berlin"))
     timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
     max_items = int(cfg.get("max_items", 4))
     profile = out.get("profile", {})
@@ -256,9 +257,10 @@ def _fetch_events(state: PlannerState) -> PlannerState:
         interests=list(interests) if isinstance(interests, list) else [],
         max_items=max_items,
         timeout_seconds=timeout_seconds,
+        base_url=base_url,
     )
     out["events_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
-    out["events_backend"] = str(payload.get("backend", "ticketmaster"))
+    out["events_backend"] = str(payload.get("backend", "kulturdaten"))
     out["events_message"] = str(payload.get("message", ""))
     out["events_items"] = list(payload.get("events_items", []))
     out["events_count"] = len(out["events_items"])

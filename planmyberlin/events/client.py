@@ -1,9 +1,8 @@
-"""Berlin events client (Ticketmaster Discovery API)."""
+"""Berlin events client (Kulturdaten public API)."""
 
 from __future__ import annotations
 
 from datetime import date
-import os
 from typing import Any
 
 import httpx
@@ -26,83 +25,130 @@ def fetch_events_context(
     interests: list[str] | None = None,
     max_items: int = 4,
     timeout_seconds: float = 8.0,
+    base_url: str = "https://api.kulturdaten.berlin",
 ) -> dict[str, Any]:
-    api_key = os.getenv("TICKETMASTER_API_KEY")
-    if not api_key:
-        return {
-            "status": "unavailable",
-            "backend": "ticketmaster",
-            "message": "Events unavailable right now.",
-            "events_items": [],
-        }
-
     start = _as_date(start_date)
     end = _as_date(end_date)
-    params: dict[str, Any] = {
-        "apikey": api_key,
-        "city": city,
-        "size": max(1, min(max_items, 10)),
-        "sort": "date,asc",
-    }
-    if start:
-        params["startDateTime"] = f"{start.isoformat()}T00:00:00Z"
-    if end:
-        params["endDateTime"] = f"{end.isoformat()}T23:59:59Z"
-    if interests:
-        # Keep broad matching with a simple OR-like keyword string.
-        params["keyword"] = " ".join(str(x) for x in interests[:4] if str(x).strip())
+    base = base_url.rstrip("/")
+    endpoints = [f"{base}/api/events", f"{base}/events", f"{base}/api/public/events"]
+    params = {"page": 1, "limit": max(10, max_items * 4)}
 
-    url = "https://app.ticketmaster.com/discovery/v2/events.json"
+    payload: dict[str, Any] | list[Any] | None = None
+    last_err = ""
     try:
         with httpx.Client(timeout=timeout_seconds) as client:
-            resp = client.get(url, params=params)
-            resp.raise_for_status()
-            payload = resp.json()
-    except Exception:
+            for url in endpoints:
+                try:
+                    resp = client.get(url, params=params)
+                    resp.raise_for_status()
+                    payload = resp.json()
+                    break
+                except Exception as exc:
+                    last_err = type(exc).__name__
+                    continue
+    except Exception as exc:
+        last_err = type(exc).__name__
+
+    if payload is None:
         return {
             "status": "unavailable",
-            "backend": "ticketmaster",
-            "message": "Events unavailable right now.",
+            "backend": "kulturdaten",
+            "message": "Events are temporarily unavailable right now.",
             "events_items": [],
+            "debug": last_err,
         }
 
-    events = payload.get("_embedded", {}).get("events", [])
-    if not isinstance(events, list):
-        events = []
+    def _dig(obj: Any, keys: list[str]) -> Any:
+        cur: Any = obj
+        for k in keys:
+            if not isinstance(cur, dict):
+                return None
+            cur = cur.get(k)
+        return cur
+
+    def _find_items(obj: Any) -> list[dict[str, Any]]:
+        if isinstance(obj, list):
+            return [x for x in obj if isinstance(x, dict)]
+        if not isinstance(obj, dict):
+            return []
+        for key in ("events", "items", "results", "data"):
+            v = obj.get(key)
+            if isinstance(v, list):
+                return [x for x in v if isinstance(x, dict)]
+            if isinstance(v, dict):
+                inner = _find_items(v)
+                if inner:
+                    return inner
+        return []
+
+    rows = _find_items(payload)
+    wants = [str(x).strip().lower() for x in (interests or []) if str(x).strip()]
+
     out: list[dict[str, Any]] = []
-    for row in events[: max(1, min(max_items, 10))]:
-        if not isinstance(row, dict):
+    for row in rows:
+        name = str(row.get("name") or row.get("title") or "").strip()
+        if not name:
             continue
-        dates = row.get("dates", {}) if isinstance(row.get("dates"), dict) else {}
-        start_block = dates.get("start", {}) if isinstance(dates.get("start"), dict) else {}
-        venues = (
-            row.get("_embedded", {}).get("venues", [])
-            if isinstance(row.get("_embedded"), dict)
-            else []
-        )
-        venue = venues[0] if isinstance(venues, list) and venues and isinstance(venues[0], dict) else {}
-        images = row.get("images", [])
-        image_url = ""
-        if isinstance(images, list) and images:
-            for img in images:
-                if isinstance(img, dict) and str(img.get("url", "")).strip():
-                    image_url = str(img["url"]).strip()
-                    break
+        venue = str(
+            _dig(row, ["location", "name"])
+            or _dig(row, ["venue", "name"])
+            or row.get("locationName")
+            or row.get("venue")
+            or ""
+        ).strip()
+        start_local = str(
+            row.get("startDate")
+            or row.get("start_date")
+            or row.get("date")
+            or _dig(row, ["date", "start"])
+            or _dig(row, ["schedule", "startDate"])
+            or ""
+        ).strip()
+        start_local = start_local[:10] if len(start_local) >= 10 else start_local
+        url = str(
+            row.get("url") or row.get("link") or row.get("website") or row.get("frontendUrl") or ""
+        ).strip()
+        category = str(row.get("category") or row.get("genre") or "").strip()
+        summary = str(row.get("description") or row.get("summary") or "").strip()
+        image_url = str(
+            row.get("image") or row.get("image_url") or _dig(row, ["image", "url"]) or ""
+        ).strip()
+
+        if city and city.lower() not in f"{venue} {summary} {name}".lower():
+            # Keep Berlin-focused results where metadata allows this check.
+            if any(k in row for k in ("city", "town", "region")):
+                place = str(row.get("city") or row.get("town") or row.get("region") or "").lower()
+                if city.lower() not in place:
+                    continue
+        if start_local:
+            d = _as_date(start_local)
+            if d and start and d < start:
+                continue
+            if d and end and d > end:
+                continue
+        if wants:
+            blob = f"{name} {summary} {category}".lower()
+            if not any(w in blob for w in wants):
+                continue
+
         out.append(
             {
-                "name": str(row.get("name", "")).strip(),
-                "start_local": str(start_block.get("localDate", "")).strip(),
-                "venue": str(venue.get("name", "")).strip(),
-                "url": str(row.get("url", "")).strip(),
-                "category": "",
-                "summary": "Popular Berlin event during your selected dates.",
+                "name": name,
+                "start_local": start_local,
+                "venue": venue,
+                "url": url,
+                "category": category,
+                "summary": summary or "Cultural event in Berlin during your selected dates.",
                 "image_url": image_url,
             }
         )
+        if len(out) >= max(1, min(max_items, 10)):
+            break
 
+    message = "ok" if out else "No events found for selected dates and interests."
     return {
         "status": "ok",
-        "backend": "ticketmaster",
-        "message": "ok" if out else "No events found for selected dates.",
+        "backend": "kulturdaten",
+        "message": message,
         "events_items": out,
     }
