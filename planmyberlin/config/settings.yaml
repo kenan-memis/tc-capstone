@@ -37,7 +37,8 @@ weather:
 events:
   backend: kulturdaten
   city: Berlin
-  base_url: https://api.kulturdaten.berlin
+  # Production discover API lives on api-v2 (see api-v2.kulturdaten.berlin/api/docs).
+  base_url: https://api-v2.kulturdaten.berlin
   timeout_seconds: 8
   max_items: 4
 

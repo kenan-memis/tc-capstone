@@ -17,6 +17,7 @@ venv/
 .idea/
 .vscode/
 .DS_Store
+.cursor/
 
 # Tests / coverage
 .pytest_cache/

@@ -38,7 +38,22 @@ def _event_title(row: dict) -> str:
         if t:
             return t
     name = row.get("name")
-    return _localized_text(name) if name is not None else ""
+    if name is not None:
+        t = _localized_text(name)
+        if t:
+            return t
+    # Kulturdaten API v2: human-readable label on the first attraction.
+    attractions = row.get("attractions")
+    if isinstance(attractions, list):
+        for att in attractions:
+            if not isinstance(att, dict):
+                continue
+            raw = att.get("referenceLabel")
+            if raw is not None:
+                t = _localized_text(raw)
+                if t:
+                    return t
+    return ""
 
 
 def _event_description(row: dict) -> str:
@@ -51,6 +66,68 @@ def _event_description(row: dict) -> str:
     return ""
 
 
+def _clock_display_part(value: object) -> str:
+    raw = str(value or "").strip()
+    if not raw:
+        return ""
+    if raw.startswith("00:00"):
+        return ""
+    parts = raw.split(":")
+    if len(parts) >= 2 and parts[0].isdigit() and parts[1].isdigit():
+        h, m = int(parts[0]), int(parts[1])
+        return f"{h:02d}:{m:02d}"
+    return ""
+
+
+def _time_range_display(schedule: dict[str, Any]) -> str:
+    st = _clock_display_part(schedule.get("startTime"))
+    et = _clock_display_part(schedule.get("endTime"))
+    if st and et:
+        return f"{st}–{et}"
+    if st:
+        return f"Starts {st}"
+    return ""
+
+
+def _admission_hint_en(row: dict[str, Any]) -> str:
+    adm = row.get("admission")
+    if not isinstance(adm, dict):
+        return ""
+    tt = str(adm.get("ticketType") or "").lower()
+    if "free" in tt or "freeofcharge" in tt.replace("_", ""):
+        return "Free admission."
+    return ""
+
+
+def _find_image_url(obj: Any, depth: int = 0) -> str:
+    if depth > 5:
+        return ""
+    if isinstance(obj, str) and obj.startswith("http") and any(
+        ext in obj.lower() for ext in (".jpg", ".jpeg", ".png", ".webp", ".gif")
+    ):
+        return obj.strip()
+    if isinstance(obj, dict):
+        for key in ("url", "src", "href", "thumbnailUrl", "imageUrl", "posterUrl"):
+            v = obj.get(key)
+            if isinstance(v, str) and v.startswith("http"):
+                return v.strip()
+        for v in obj.values():
+            found = _find_image_url(v, depth + 1)
+            if found:
+                return found
+    if isinstance(obj, list):
+        for v in obj:
+            found = _find_image_url(v, depth + 1)
+            if found:
+                return found
+    return ""
+
+
+def _hints_blob(summary: str, venue: str, admission_en: str, category: str) -> str:
+    parts = [p for p in (summary.strip(), venue.strip(), admission_en.strip(), category.strip()) if p]
+    return " | ".join(parts)[:2000]
+
+
 def fetch_events_context(
     *,
     city: str,
@@ -59,7 +136,7 @@ def fetch_events_context(
     interests: list[str] | None = None,
     max_items: int = 4,
     timeout_seconds: float = 8.0,
-    base_url: str = "https://api.kulturdaten.berlin",
+    base_url: str = "https://api-v2.kulturdaten.berlin",
 ) -> dict[str, Any]:
     # `interests` is accepted for API compatibility but not used to filter results:
     # trip interest labels rarely match event text and would hide valid listings.
@@ -132,13 +209,24 @@ def fetch_events_context(
         name = _event_title(row)
         if not name:
             continue
-        venue = str(
+        venue = (
             _dig(row, ["location", "name"])
             or _dig(row, ["venue", "name"])
             or row.get("locationName")
             or row.get("venue")
             or ""
-        ).strip()
+        )
+        if not str(venue).strip():
+            locations = row.get("locations")
+            if isinstance(locations, list):
+                for loc in locations:
+                    if not isinstance(loc, dict):
+                        continue
+                    raw = loc.get("referenceLabel")
+                    if raw is not None:
+                        venue = _localized_text(raw)
+                        break
+        venue = str(venue).strip()
         start_raw = (
             row.get("startDate")
             or row.get("start_date")
@@ -150,6 +238,9 @@ def fetch_events_context(
         start_local = str(start_raw).strip()
         if len(start_local) >= 10 and start_local[4] == "-" and start_local[7] == "-":
             start_local = start_local[:10]
+        sched = row.get("schedule")
+        schedule = sched if isinstance(sched, dict) else {}
+        time_range_display = _time_range_display(schedule)
         url = str(
             row.get("url") or row.get("link") or row.get("website") or row.get("frontendUrl") or ""
         ).strip()
@@ -158,6 +249,11 @@ def fetch_events_context(
         image_url = str(
             row.get("image") or row.get("image_url") or _dig(row, ["image", "url"]) or ""
         ).strip()
+        if not image_url:
+            image_url = _find_image_url(row) or ""
+        identifier = str(row.get("identifier", "")).strip()
+        admission_en = _admission_hint_en(row)
+        hints = _hints_blob(summary, venue, admission_en, category)
 
         if city and city.lower() not in f"{venue} {summary} {name}".lower():
             # Keep Berlin-focused results where metadata allows this check.
@@ -176,11 +272,15 @@ def fetch_events_context(
             {
                 "name": name,
                 "start_local": start_local,
+                "time_range_display": time_range_display,
                 "venue": venue,
                 "url": url,
                 "category": category,
                 "summary": summary or "Cultural event in Berlin during your selected dates.",
+                "admission_hint_en": admission_en,
+                "hints_blob": hints,
                 "image_url": image_url,
+                "identifier": identifier,
             }
         )
         if len(out) >= max(1, min(max_items, 10)):

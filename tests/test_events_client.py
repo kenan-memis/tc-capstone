@@ -92,6 +92,45 @@ def test_events_requests_use_page_size_and_date_range(monkeypatch):
     assert "limit" not in captured["params"]
 
 
+def test_events_api_v2_attraction_label_without_title(monkeypatch):
+    """Real Kulturdaten v2 payloads often omit title; name lives on attractions[].referenceLabel."""
+    import planmyberlin.events.client as client
+
+    payload = {
+        "success": True,
+        "data": {
+            "page": 1,
+            "pageSize": 30,
+            "totalCount": 1,
+            "events": [
+                {
+                    "type": "type.Event",
+                    "identifier": "E_TEST",
+                    "schedule": {"startDate": "2026-05-20", "startTime": "19:00"},
+                    "attractions": [
+                        {
+                            "referenceLabel": {"de": "Konzert X", "en": "Concert X"},
+                        }
+                    ],
+                    "locations": [{"referenceLabel": {"de": "Theater Y", "en": "Theater Y"}}],
+                }
+            ],
+        },
+    }
+    monkeypatch.setattr(client.httpx, "Client", lambda **_kw: _DummyClient([_DummyResponse(payload)]))
+    out = fetch_events_context(
+        city="Berlin",
+        start_date="2026-05-19",
+        end_date="2026-05-23",
+        interests=[],
+        max_items=4,
+    )
+    assert out["status"] == "ok"
+    assert len(out["events_items"]) == 1
+    assert out["events_items"][0]["name"] == "Concert X"
+    assert "Theater Y" in out["events_items"][0]["venue"]
+
+
 def test_events_do_not_filter_by_interest_tags(monkeypatch):
     """Trip interest labels are not substring-matched against event titles (too strict)."""
     import planmyberlin.events.client as client

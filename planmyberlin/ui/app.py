@@ -1168,19 +1168,67 @@ def main() -> None:
 
         with preview_tabs[3]:
             if events_items:
-                for row in events_items[:4]:
+                if not os.getenv("OPENAI_API_KEY"):
+                    st.caption(
+                        "Optional: set OPENAI_API_KEY for one-line English summaries when organizer text is only in German."
+                    )
+                for idx, row in enumerate(events_items[:4]):
                     if not isinstance(row, dict):
                         continue
-                    ev_name = str(row.get("name", "")).strip()
+                    ev_name = html.escape(str(row.get("name", "")).strip())
+                    info_en = html.escape(str(row.get("info_en") or row.get("summary", "")).strip())
                     ev_date = _format_display_date(str(row.get("start_local", "")).strip())
-                    ev_venue = str(row.get("venue", "")).strip()
+                    time_rng = str(row.get("time_range_display", "")).strip()
+                    ev_venue = html.escape(str(row.get("venue", "")).strip())
                     ev_url = str(row.get("url", "")).strip()
-                    parts = [p for p in [ev_date, ev_venue] if p]
-                    tail = " · ".join(parts)
+                    photo_url = str(row.get("image_url", "")).strip()
+                    when_line = " · ".join([p for p in [ev_date, time_rng] if p])
+                    icon = (
+                        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" '
+                        'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+                        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+                        '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'
+                        '<polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>'
+                        "</svg>"
+                    )
+                    link = ""
                     if ev_url:
-                        st.markdown(f"- **{ev_name}** — {tail} ([link]({ev_url}))")
-                    else:
-                        st.markdown(f"- **{ev_name}** — {tail}")
+                        link = (
+                            f'<a href="{html.escape(ev_url, quote=True)}" target="_blank" rel="noopener noreferrer" '
+                            f'title="Open in new tab" style="text-decoration:none;margin-left:6px;">{icon}</a>'
+                        )
+                    c_img, c_txt = st.columns([0.24, 0.76], gap="small")
+                    with c_img:
+                        if photo_url:
+                            st.markdown(
+                                (
+                                    '<img src="'
+                                    + html.escape(photo_url, quote=True)
+                                    + '" alt="Event image" '
+                                    + 'style="width:180px;height:120px;object-fit:cover;object-position:center;'
+                                    + 'border-radius:10px;display:block;margin-bottom:6px;" />'
+                                ),
+                                unsafe_allow_html=True,
+                            )
+                        else:
+                            st.markdown(
+                                '<div style="width:180px;height:120px;border-radius:10px;'
+                                'background:#f2f4f7;color:#667085;display:flex;align-items:center;'
+                                'justify-content:center;font-size:12px;text-align:center;padding:6px;">No image</div>',
+                                unsafe_allow_html=True,
+                            )
+                    with c_txt:
+                        st.markdown(
+                            f"**{ev_name}**  \n"
+                            f"<span style='color:#475467;font-size:0.95rem;'>{when_line}"
+                            + (f" · {ev_venue}" if ev_venue else "")
+                            + "</span>  \n"
+                            f"<span style='color:#344054;'>{info_en}</span>  \n"
+                            f"{link}",
+                            unsafe_allow_html=True,
+                        )
+                    if idx < min(4, len(events_items)) - 1:
+                        st.markdown("<div style='height:12px;'></div>", unsafe_allow_html=True)
             else:
                 st.caption(events_message or "No events available for the selected dates.")
 
