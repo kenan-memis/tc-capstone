@@ -169,3 +169,17 @@ def test_create_user_with_duplicate_username_raises_value_error(tmp_path: Path) 
     repo.create_user_with_password(username="same-user", password="StrongPass123")
     with pytest.raises(ValueError):
         repo.create_user_with_password(username="same-user", password="StrongPass123")
+
+
+def test_latest_plan_roundtrip(tmp_path: Path) -> None:
+    repo = _repo(tmp_path)
+    user = repo.create_user_with_password(username="plan-user", password="StrongPass123")
+    repo.save_latest_plan(
+        user_id=user.id,
+        plan={"itinerary_status": "ok", "itinerary": {"title": "Berlin plan", "days": []}},
+    )
+    loaded = repo.get_latest_plan(user_id=user.id)
+    assert isinstance(loaded, dict)
+    assert loaded.get("itinerary_status") == "ok"
+    repo.clear_latest_plan(user_id=user.id)
+    assert repo.get_latest_plan(user_id=user.id) is None

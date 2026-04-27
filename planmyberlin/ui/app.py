@@ -450,6 +450,7 @@ def main() -> None:
     st.session_state.setdefault("form_neighbourhoods", [])
     st.session_state.setdefault("form_extra_details", "")
     st.session_state.setdefault("form_include_accommodation", True)
+    st.session_state.setdefault("loaded_latest_plan_user_id", None)
 
     profile_repo = None
     auth_user: AppUser | None = None
@@ -522,6 +523,15 @@ def main() -> None:
 
     st.session_state["auth_username"] = auth_user.username
     st.session_state["auth_onboarding_completed"] = bool(auth_user.onboarding_completed)
+
+    if (
+        st.session_state.get("plan_result") is None
+        and st.session_state.get("loaded_latest_plan_user_id") != auth_user.id
+    ):
+        latest = profile_repo.get_latest_plan(user_id=auth_user.id)
+        if isinstance(latest, dict) and latest:
+            st.session_state["plan_result"] = latest
+            st.session_state["loaded_latest_plan_user_id"] = auth_user.id
 
     if not auth_user.onboarding_completed:
         st.subheader("Welcome! Complete onboarding")
@@ -601,6 +611,8 @@ def main() -> None:
                 st.session_state["auth_username"] = ""
                 st.session_state["auth_onboarding_completed"] = False
                 st.session_state["auth_session_token"] = ""
+                st.session_state["plan_result"] = None
+                st.session_state["loaded_latest_plan_user_id"] = None
                 if "auth_token" in st.query_params:
                     del st.query_params["auth_token"]
                 st.session_state["account_action_menu"] = "Account"
@@ -928,6 +940,7 @@ def main() -> None:
             st.error(f"Planning failed: {type(exc).__name__}")
             return
         st.session_state["plan_result"] = result
+        profile_repo.save_latest_plan(user_id=auth_user.id, plan=result)
         st.session_state.pop("plan_narrative_md", None)
         st.session_state["map_highlight_pick"] = "(All places)"
         st.session_state["plan_map_version"] = str(uuid.uuid4())

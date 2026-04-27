@@ -91,6 +91,16 @@ class UserProfileRepository:
                 )
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS latest_user_plan (
+                    user_id TEXT PRIMARY KEY,
+                    plan_json TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES app_users(id)
+                )
+                """
+            )
             cols = {
                 str(r["name"])
                 for r in conn.execute("PRAGMA table_info(user_profiles)").fetchall()
@@ -286,6 +296,39 @@ class UserProfileRepository:
     def revoke_session(self, *, token: str) -> None:
         with self._connect() as conn:
             conn.execute("DELETE FROM user_sessions WHERE token = ?", (token.strip(),))
+
+    def save_latest_plan(self, *, user_id: str, plan: dict) -> None:
+        now = _utc_now_iso()
+        payload = json.dumps(plan, ensure_ascii=True)
+        with self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO latest_user_plan (user_id, plan_json, updated_at)
+                VALUES (?, ?, ?)
+                ON CONFLICT(user_id) DO UPDATE SET
+                    plan_json=excluded.plan_json,
+                    updated_at=excluded.updated_at
+                """,
+                (user_id, payload, now),
+            )
+
+    def get_latest_plan(self, *, user_id: str) -> dict | None:
+        with self._connect() as conn:
+            row = conn.execute(
+                "SELECT plan_json FROM latest_user_plan WHERE user_id = ?",
+                (user_id,),
+            ).fetchone()
+        if not row:
+            return None
+        try:
+            payload = json.loads(str(row["plan_json"]))
+        except json.JSONDecodeError:
+            return None
+        return payload if isinstance(payload, dict) else None
+
+    def clear_latest_plan(self, *, user_id: str) -> None:
+        with self._connect() as conn:
+            conn.execute("DELETE FROM latest_user_plan WHERE user_id = ?", (user_id,))
 
     def list_profiles(self, *, user_id: str) -> list[UserProfile]:
         with self._connect() as conn:
