@@ -10,6 +10,7 @@ import uuid
 from datetime import date, timedelta
 from functools import lru_cache
 from pathlib import Path
+from typing import Any
 
 import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv + logging
 import streamlit as st
@@ -519,6 +520,64 @@ def _plan_summary_from_result(result: dict[str, object]) -> str:
     return "  \n".join(lines)
 
 
+def _plan_builder_trip_summary_markdown(
+    *,
+    start_date: date,
+    end_date: date,
+    days: int,
+    party_size: int,
+    interest_tags: list[str],
+    neighbourhoods: list[str],
+    budget_tier: str,
+    pace: str,
+    dietary_choice: str,
+    mobility_choice: str,
+    include_accommodation: bool,
+    use_saved_preferences: bool,
+    default_pref_profile: Any,
+) -> str:
+    """Same trip-summary copy as the Run handler (live form + optional saved prefs)."""
+    effective_party_size = party_size
+    effective_interest_tags = list(interest_tags)
+    effective_neighbourhoods = list(neighbourhoods)
+    effective_budget_tier = budget_tier
+    effective_pace = pace
+    effective_dietary_choice = dietary_choice
+    effective_mobility_choice = mobility_choice
+    effective_include_accommodation = include_accommodation
+    prefs_applied = bool(use_saved_preferences and default_pref_profile is not None)
+    if prefs_applied and default_pref_profile is not None:
+        effective_party_size = int(default_pref_profile.party_size_default)
+        effective_interest_tags = list(default_pref_profile.interest_tags_default)
+        effective_neighbourhoods = list(neighbourhoods)
+        effective_budget_tier = default_pref_profile.budget_tier_default
+        effective_pace = default_pref_profile.pace_default
+        effective_dietary_choice = default_pref_profile.dietary_choice_default
+        effective_mobility_choice = default_pref_profile.mobility_choice_default
+        effective_include_accommodation = bool(default_pref_profile.include_accommodation_default)
+
+    interests_short = ", ".join(effective_interest_tags[:2]) + (
+        f" +{len(effective_interest_tags) - 2} more" if len(effective_interest_tags) > 2 else ""
+    )
+    areas_short = ", ".join(effective_neighbourhoods[:2]) + (
+        f" +{len(effective_neighbourhoods) - 2} more" if len(effective_neighbourhoods) > 2 else ""
+    )
+    start_label = start_date.strftime("%d-%m-%Y")
+    end_label = end_date.strftime("%d-%m-%Y")
+    summary_lines = [
+        f"**Dates:** {start_label} to {end_label}.",
+        f"**Trip summary:** {days} day(s), {effective_party_size} traveler(s), {effective_pace} pace, {effective_budget_tier} budget.",
+        f"**Food/mobility:** {effective_dietary_choice}; {effective_mobility_choice}.",
+        f"**Accommodation:** {'requested' if effective_include_accommodation else 'not requested'}.",
+        f"**Preference mode:** {'saved preferences applied' if prefs_applied else 'form selections only'}.",
+    ]
+    if interests_short:
+        summary_lines.append(f"**Interests:** {interests_short}.")
+    if areas_short:
+        summary_lines.append(f"**Areas:** {areas_short}.")
+    return "  \n".join(summary_lines)
+
+
 def main() -> None:
     settings = get_settings()
     constants = get_constants()
@@ -948,13 +1007,32 @@ def main() -> None:
                 status_panel.success("Plan ready.")
             else:
                 status_panel.caption("Run the planner to see build progress and step logs.")
-        summary_text = st.session_state.get("plan_build_summary")
-        if isinstance(summary_text, str) and summary_text.strip():
-            summary_panel.markdown(summary_text)
-        elif has_existing_plan:
-            summary_panel.markdown(_plan_summary_from_result(st.session_state.get("plan_result", {})))
+        if phase in {"building", "rendering"}:
+            summary_text = st.session_state.get("plan_build_summary")
+            if isinstance(summary_text, str) and summary_text.strip():
+                summary_panel.markdown(summary_text)
+            elif has_existing_plan:
+                summary_panel.markdown(_plan_summary_from_result(st.session_state.get("plan_result", {})))
+            else:
+                summary_panel.empty()
         else:
-            summary_panel.empty()
+            summary_panel.markdown(
+                _plan_builder_trip_summary_markdown(
+                    start_date=start_date,
+                    end_date=end_date,
+                    days=days,
+                    party_size=party_size,
+                    interest_tags=interest_tags,
+                    neighbourhoods=neighbourhoods,
+                    budget_tier=budget_tier,
+                    pace=pace,
+                    dietary_choice=dietary_choice,
+                    mobility_choice=mobility_choice,
+                    include_accommodation=include_accommodation,
+                    use_saved_preferences=use_saved_preferences,
+                    default_pref_profile=default_pref_profile,
+                )
+            )
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
         if has_existing_plan and phase == "ready":
             # Restored plans may not carry full node completion history in session.
@@ -992,26 +1070,21 @@ def main() -> None:
             if str(default_pref_profile.extra_details_default).strip():
                 effective_extra_details = str(default_pref_profile.extra_details_default).strip()
 
-        interests_short = ", ".join(effective_interest_tags[:2]) + (
-            f" +{len(effective_interest_tags) - 2} more" if len(effective_interest_tags) > 2 else ""
+        summary_text = _plan_builder_trip_summary_markdown(
+            start_date=start_date,
+            end_date=end_date,
+            days=days,
+            party_size=party_size,
+            interest_tags=interest_tags,
+            neighbourhoods=neighbourhoods,
+            budget_tier=budget_tier,
+            pace=pace,
+            dietary_choice=dietary_choice,
+            mobility_choice=mobility_choice,
+            include_accommodation=include_accommodation,
+            use_saved_preferences=use_saved_preferences,
+            default_pref_profile=default_pref_profile,
         )
-        areas_short = ", ".join(effective_neighbourhoods[:2]) + (
-            f" +{len(effective_neighbourhoods) - 2} more" if len(effective_neighbourhoods) > 2 else ""
-        )
-        start_label = start_date.strftime("%d-%m-%Y")
-        end_label = end_date.strftime("%d-%m-%Y")
-        summary_lines = [
-            f"**Dates:** {start_label} to {end_label}.",
-            f"**Trip summary:** {days} day(s), {effective_party_size} traveler(s), {effective_pace} pace, {effective_budget_tier} budget.",
-            f"**Food/mobility:** {effective_dietary_choice}; {effective_mobility_choice}.",
-            f"**Accommodation:** {'requested' if effective_include_accommodation else 'not requested'}.",
-        ]
-        summary_lines.append(f"**Preference mode:** {'saved preferences applied' if prefs_applied else 'form selections only'}.")
-        if interests_short:
-            summary_lines.append(f"**Interests:** {interests_short}.")
-        if areas_short:
-            summary_lines.append(f"**Areas:** {areas_short}.")
-        summary_text = "  \n".join(summary_lines)
         st.session_state["plan_build_summary"] = summary_text
         summary_panel.markdown(summary_text)
         profile = TripProfile(
