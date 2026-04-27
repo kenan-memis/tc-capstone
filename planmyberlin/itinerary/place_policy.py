@@ -8,6 +8,38 @@ from planmyberlin.itinerary.grounding import candidate_name_allowlist
 from planmyberlin.itinerary.models import ItineraryActivity, ItineraryDay, TripItinerary
 
 
+_CITYWIDE_DEFAULT_CANDIDATES: list[dict[str, str]] = [
+    {"name": "Brandenburg Gate", "category": "places", "district": "Mitte"},
+    {"name": "Museum Island", "category": "places", "district": "Mitte"},
+    {"name": "Berlin Cathedral", "category": "places", "district": "Mitte"},
+    {"name": "East Side Gallery", "category": "places", "district": "Friedrichshain"},
+    {"name": "Tiergarten", "category": "places", "district": "Tiergarten"},
+    {"name": "Tempelhofer Feld", "category": "places", "district": "Tempelhof"},
+    {"name": "Charlottenburg Palace", "category": "places", "district": "Charlottenburg"},
+    {"name": "Hackescher Markt", "category": "places", "district": "Mitte"},
+    {"name": "Burgermeister", "category": "food", "district": "Kreuzberg"},
+    {"name": "Mustafa's Gemuse Kebap", "category": "food", "district": "Kreuzberg"},
+    {"name": "Five Elephant", "category": "food", "district": "Kreuzberg"},
+    {"name": "Cafe am Neuen See", "category": "food", "district": "Tiergarten"},
+]
+
+
+def _is_poor_display_name(raw: str) -> bool:
+    """True for quirky question-style or sentence-like venue names that read badly as a 'Place' label."""
+    name = (raw or "").strip()
+    if not name:
+        return True
+    lower = name.lower()
+    if "?" in name:
+        return True
+    if lower.startswith(("what ", "why ", "how ", "when ", "where ", "who ")):
+        return True
+    wc = len(name.split())
+    if wc >= 10:
+        return True
+    return False
+
+
 def merge_retrieval_candidates(state: dict[str, Any]) -> list[dict[str, Any]]:
     """Merge enriched + retrieved items, preserving first-seen order and unique names."""
     merged: list[dict[str, Any]] = []
@@ -27,6 +59,20 @@ def merge_retrieval_candidates(state: dict[str, Any]) -> list[dict[str, Any]]:
                 continue
             seen.add(k)
             merged.append(item)
+    # Keep itinerary generation robust even when retrieval APIs are sparse for selected districts.
+    # These are only used as a citywide backup pool after local district candidates are consumed.
+    if len(merged) < 12:
+        for item in _CITYWIDE_DEFAULT_CANDIDATES:
+            name = str(item.get("name", "")).strip()
+            if not name:
+                continue
+            k = name.lower()
+            if k in seen:
+                continue
+            seen.add(k)
+            merged.append(dict(item))
+            if len(merged) >= 12:
+                break
     return merged
 
 
@@ -81,23 +127,34 @@ def _hybrid_title(slot: str, place_name: str) -> str:
     if s == "afternoon":
         return f"Afternoon visit at {place_name}"
     if s == "evening":
-        return f"Evening around {place_name}"
+        return f"Evening at {place_name}"
     return f"Explore {place_name}"
 
 
-def _hybrid_description(slot: str, *, nearby: bool) -> str:
+def _hybrid_description(
+    slot: str,
+    place_name: str,
+    *,
+    nearby: bool,
+    reused: bool,
+) -> str:
+    pn = (place_name or "").strip()
     if nearby:
+        return "Your selected districts had limited matches, so this popular Berlin option was added."
+    if reused and pn:
         return (
-            "Selected district options were limited for this slot, so this nearby popular option was added."
+            f"Another stop at {pn} — useful when the shortlist cannot cover every slot with a new name."
         )
     s = (slot or "").strip().lower()
     if s == "morning":
-        return "Start the day with a focused visit in the selected area."
+        return f"Start the day at {pn} with a focused visit and easy pacing."
     if s == "afternoon":
-        return "Use this slot for a core attraction with flexible pacing."
+        return f"Spend the afternoon around {pn}; adjust pacing to energy and weather."
     if s == "evening":
-        return "Wrap up the day with a relaxed meal or scenic evening nearby."
-    return "Flexible activity aligned with your selected area."
+        return (
+            f"Wind down at {pn} — plan for dinner or drinks that fit your group and dietary preference."
+        )
+    return f"Flexible time around {pn}, aligned with your selected areas."
 
 
 def _normalize(p: str) -> str:
@@ -170,12 +227,14 @@ def _pick_from_pool(
     used_norm: set[str],
     *,
     prefer_food: bool,
+    allow_poor_names: bool,
 ) -> tuple[dict[str, Any] | None, bool]:
     """Pick one unused item from pool (removed in-place). Prefer food venues when prefer_food is True."""
     eligible = [
         i
         for i, it in enumerate(pool)
         if _normalize(str(it.get("name", ""))) not in used_norm
+        and (allow_poor_names or not _is_poor_display_name(str(it.get("name", ""))))
     ]
     if not eligible:
         return None, False
@@ -191,6 +250,47 @@ def _pick_from_pool(
     return item, True
 
 
+def _prefer_slot_score(item: dict[str, Any], prefer_food: bool) -> int:
+    """Higher = better fit for this time-of-day preference."""
+    f = _is_foodish(item)
+    if prefer_food:
+        return 2 if f else 0
+    return 2 if not f else 0
+
+
+def _pick_reuse_least_used(
+    master: list[dict[str, Any]],
+    use_counts: dict[str, int],
+    *,
+    prefer_food: bool,
+    allow_poor_names: bool,
+) -> tuple[dict[str, Any] | None, bool]:
+    """
+    When unique names are exhausted, pick again from the full shortlist (repeats allowed).
+    Chooses the least-used venue so repeats are spread out; avoids poor display names when possible.
+    """
+    pool = master
+    if not allow_poor_names:
+        good = [m for m in master if not _is_poor_display_name(str(m.get("name", "")))]
+        if good:
+            pool = good
+
+    best: dict[str, Any] | None = None
+    best_key: tuple[int, int, str] | None = None
+    for it in pool:
+        name = str(it.get("name", "")).strip()
+        if not name:
+            continue
+        nk = _normalize(name)
+        uses = use_counts.get(nk, 0)
+        ps = _prefer_slot_score(it, prefer_food)
+        key = (uses, -ps, nk)
+        if best_key is None or key < best_key:
+            best_key = key
+            best = it
+    return (best, True) if best else (None, False)
+
+
 def apply_unique_place_policy(
     itinerary: TripItinerary,
     *,
@@ -199,8 +299,9 @@ def apply_unique_place_policy(
     weather_bias: str = "",
 ) -> TripItinerary:
     """
-    Enforce trip-wide unique venue names, optional flexible non-venue slots for longer trips,
-    and fill remaining slots from the candidate pool (local first, then city-wide).
+    Prefer trip-wide distinct venues; optional flexible non-venue afternoons on longer trips.
+    When the shortlist is shorter than named slots, repeats least-used venues (spread out) rather than
+    leaving Place empty. Skips awkward sentence-like venue labels when alternatives exist.
     """
     days = len(itinerary.days)
     budget = flexible_slot_budget(days)
@@ -209,8 +310,7 @@ def apply_unique_place_policy(
     selected = [str(x).strip().lower() for x in profile.get("neighbourhoods", []) if str(x).strip()]
     allowed_norm, norm_to_canonical = candidate_name_allowlist(candidates)
 
-    local: list[dict[str, Any]] = []
-    nearby: list[dict[str, Any]] = []
+    all_ordered: list[dict[str, Any]] = []
     seen_build: set[str] = set()
     for item in candidates:
         name = str(item.get("name", "")).strip()
@@ -220,6 +320,11 @@ def apply_unique_place_policy(
         if k in seen_build:
             continue
         seen_build.add(k)
+        all_ordered.append(dict(item))
+
+    local: list[dict[str, Any]] = []
+    nearby: list[dict[str, Any]] = []
+    for item in all_ordered:
         if _is_local_candidate(item, selected):
             local.append(dict(item))
         else:
@@ -228,11 +333,20 @@ def apply_unique_place_policy(
     pool_local = list(local)
     pool_nearby = list(nearby)
     used_norm: set[str] = set()
+    use_counts: dict[str, int] = {}
     used_nearby_fill = False
     shortage_note = False
+    reuse_note = False
 
     flex_counter = 0
     new_days: list[ItineraryDay] = []
+
+    def _record_assignment(norm_key: str) -> bool:
+        """Register use of a venue; returns True if this name was already used earlier in the trip."""
+        before = use_counts.get(norm_key, 0)
+        use_counts[norm_key] = before + 1
+        used_norm.add(norm_key)
+        return before > 0
 
     for day in sorted(itinerary.days, key=lambda d: d.day_number):
         acts_out: list[ItineraryActivity] = []
@@ -253,62 +367,150 @@ def apply_unique_place_policy(
                 continue
 
             canon = _snap_place_name(act.place_name, allowed_norm, norm_to_canonical)
-            if canon and _normalize(canon) not in used_norm:
-                used_norm.add(_normalize(canon))
-                acts_out.append(
-                    ItineraryActivity(
-                        time_of_day=act.time_of_day,
-                        title=act.title,
-                        description=act.description,
-                        place_name=canon,
+            if canon and not _is_poor_display_name(canon):
+                nk = _normalize(canon)
+                if nk not in used_norm:
+                    _record_assignment(nk)
+                    acts_out.append(
+                        ItineraryActivity(
+                            time_of_day=act.time_of_day,
+                            title=act.title,
+                            description=act.description,
+                            place_name=canon,
+                        )
                     )
-                )
-                continue
+                    continue
 
             prefer_food = _profile_wants_food(profile) and slot == "evening"
             pick = None
             nearby_used = False
 
-            def try_pools(pf: bool) -> None:
+            def try_pools(pf: bool, *, allow_bad: bool) -> None:
                 nonlocal pick, nearby_used, used_nearby_fill
                 if pick is not None:
                     return
                 if pool_local:
-                    cand, ok = _pick_from_pool(pool_local, used_norm, prefer_food=pf)
+                    cand, ok = _pick_from_pool(
+                        pool_local,
+                        used_norm,
+                        prefer_food=pf,
+                        allow_poor_names=allow_bad,
+                    )
                     if ok and cand:
                         pick = cand
                         return
                 if pool_nearby:
-                    cand, ok = _pick_from_pool(pool_nearby, used_norm, prefer_food=pf)
+                    cand, ok = _pick_from_pool(
+                        pool_nearby,
+                        used_norm,
+                        prefer_food=pf,
+                        allow_poor_names=allow_bad,
+                    )
                     if ok and cand:
                         pick = cand
                         nearby_used = True
                         used_nearby_fill = True
 
-            try_pools(prefer_food)
-            try_pools(not prefer_food)
+            try_pools(prefer_food, allow_bad=False)
+            try_pools(not prefer_food, allow_bad=False)
+            try_pools(prefer_food, allow_bad=True)
+            try_pools(not prefer_food, allow_bad=True)
 
             if pick:
                 pname = str(pick.get("name", "")).strip()
-                used_norm.add(_normalize(pname))
+                nk = _normalize(pname)
+                reused = _record_assignment(nk)
+                if reused:
+                    reuse_note = True
                 acts_out.append(
                     ItineraryActivity(
                         time_of_day=act.time_of_day,
                         title=_hybrid_title(act.time_of_day, pname),
-                        description=_hybrid_description(act.time_of_day, nearby=nearby_used),
+                        description=_hybrid_description(
+                            act.time_of_day,
+                            pname,
+                            nearby=nearby_used,
+                            reused=reused,
+                        ),
                         place_name=pname,
                     )
                 )
-            else:
-                shortage_note = True
+                continue
+
+            reuse_pick = None
+            ru_nearby = False
+            rp, ok = _pick_reuse_least_used(
+                all_ordered,
+                use_counts,
+                prefer_food=prefer_food,
+                allow_poor_names=False,
+            )
+            if ok and rp:
+                reuse_pick = rp
+                ru_nearby = not _is_local_candidate(rp, selected)
+            if reuse_pick is None:
+                rp2, ok2 = _pick_reuse_least_used(
+                    all_ordered,
+                    use_counts,
+                    prefer_food=prefer_food,
+                    allow_poor_names=True,
+                )
+                if ok2 and rp2:
+                    reuse_pick = rp2
+                    ru_nearby = not _is_local_candidate(rp2, selected)
+            if reuse_pick is None:
+                rp3, ok3 = _pick_reuse_least_used(
+                    all_ordered,
+                    use_counts,
+                    prefer_food=not prefer_food,
+                    allow_poor_names=False,
+                )
+                if ok3 and rp3:
+                    reuse_pick = rp3
+                    ru_nearby = not _is_local_candidate(rp3, selected)
+            if reuse_pick is None:
+                rp4, ok4 = _pick_reuse_least_used(
+                    all_ordered,
+                    use_counts,
+                    prefer_food=not prefer_food,
+                    allow_poor_names=True,
+                )
+                if ok4 and rp4:
+                    reuse_pick = rp4
+                    ru_nearby = not _is_local_candidate(rp4, selected)
+
+            if reuse_pick:
+                pname = str(reuse_pick.get("name", "")).strip()
+                nk = _normalize(pname)
+                reused = _record_assignment(nk)
+                if reused:
+                    reuse_note = True
+                if ru_nearby:
+                    used_nearby_fill = True
                 acts_out.append(
                     ItineraryActivity(
                         time_of_day=act.time_of_day,
-                        title=act.title,
-                        description=act.description,
-                        place_name=None,
+                        title=_hybrid_title(act.time_of_day, pname),
+                        description=_hybrid_description(
+                            act.time_of_day,
+                            pname,
+                            nearby=ru_nearby,
+                            reused=reused,
+                        ),
+                        place_name=pname,
                     )
                 )
+                continue
+
+            shortage_note = True
+            acts_out.append(
+                ItineraryActivity(
+                    time_of_day=act.time_of_day,
+                    title=act.title,
+                    description=act.description,
+                    place_name=None,
+                )
+            )
 
         new_days.append(
             ItineraryDay(day_number=day.day_number, theme=day.theme, activities=acts_out)
@@ -316,13 +518,18 @@ def apply_unique_place_policy(
 
     notes = list(itinerary.practical_notes)
     if used_nearby_fill:
-        note = "Limited matches in selected areas, so nearby popular options were added."
+        note = "Your selected districts had limited matches, so popular options from other parts of Berlin were added."
         if note not in notes:
             notes.append(note)
+    if reuse_note:
+        note_r = (
+            "Some places were reused because available unique matches were not enough for every named time slot."
+        )
+        if note_r not in notes:
+            notes.append(note_r)
     if shortage_note:
         note2 = (
-            "Not enough distinct candidate venues matched every slot uniquely — try widening interests "
-            "or neighbourhoods for fuller coverage."
+            "We could not find enough place matches for every slot. Try broader interests or districts."
         )
         if note2 not in notes:
             notes.append(note2)

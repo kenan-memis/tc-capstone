@@ -73,4 +73,4 @@ def test_hybrid_fallback_adds_nearby_popular_note_when_local_sparse(monkeypatch:
         }
     )
     notes = out["itinerary"].get("practical_notes", [])
-    assert any("nearby popular options were added" in str(n).lower() for n in notes)
+    assert any("other parts of berlin were added" in str(n).lower() for n in notes)

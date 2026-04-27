@@ -12,7 +12,7 @@ retrieval:
   # chroma: require chroma index (raise if unavailable)
   # seed: deterministic metadata retriever only
   backend: auto
-  seed_limit: 8
+  seed_limit: 36
   chroma_persist_dir: data/vectorstore/chroma
   chroma_collection: berlin_seed_v1
   chroma_force_rebuild: false
@@ -27,7 +27,7 @@ places:
   backend: google_places
   city: Berlin
   timeout_seconds: 8
-  max_items: 6
+  max_items: 24
 
 weather:
   city: Berlin

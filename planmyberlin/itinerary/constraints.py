@@ -29,8 +29,9 @@ def format_constraint_instructions(profile: dict[str, Any]) -> str:
 
     flex_budget = max(0, days - 2) if days >= 3 else 0
     uniq_rule = (
-        "- **Venue names:** use each candidate venue at most once in the entire trip (no repeats). "
-        "If the trip is **1–2 days**, every morning/afternoon/evening slot should name a distinct venue when candidates allow. "
+        "- **Venue names:** prefer each candidate venue **once** across the trip; avoid repeating the same stop "
+        "unless the candidate list is short. "
+        "If the trip is **1–2 days**, aim for a distinct venue in every slot when candidates allow. "
         + (
             f"- **Flexible outdoor blocks:** for trips of **3+ days**, allow **{flex_budget}** afternoon slot(s) "
             "(from day 3 onward) as weather-friendly walking/biking/park time **without** naming a single venue."
