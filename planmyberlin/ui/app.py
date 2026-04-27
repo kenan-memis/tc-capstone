@@ -27,7 +27,7 @@ from planmyberlin.config.loader import (
 )
 from planmyberlin.graph.workflow import build_planner_graph
 from planmyberlin.map import build_preview_map
-from planmyberlin.map.interaction import itinerary_places_linked_to_map
+from planmyberlin.map.interaction import itinerary_places_linked_to_map, normalize_place_label
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.observability import bind_run_context, get_logger
 from planmyberlin.profiles import AppUser, UserProfileUpsert, build_user_profile_repository
@@ -284,9 +284,74 @@ def _map_highlight_option_list(linked: list[dict], map_points: list[dict]) -> li
     return ["(All places)"] + ordered
 
 
+_MAX_MORE_SUGGESTIONS = 12
+
+
 def _is_food_item(item: dict) -> bool:
     category = str(item.get("category", "")).strip().lower()
     return any(k in category for k in ("restaurant", "cafe", "bar", "food"))
+
+
+def _itinerary_place_name_set(itinerary: dict) -> set[str]:
+    """Normalized place_name values from the structured itinerary."""
+    names: set[str] = set()
+    for day in itinerary.get("days", []) or []:
+        if not isinstance(day, dict):
+            continue
+        for act in day.get("activities", []) or []:
+            if not isinstance(act, dict):
+                continue
+            pn = str(act.get("place_name") or "").strip()
+            if pn:
+                names.add(normalize_place_label(pn))
+    return names
+
+
+def _display_item_matches_itinerary(item: dict, itinerary_names: set[str]) -> bool:
+    nm = normalize_place_label(str(item.get("name", "")))
+    if not nm:
+        return False
+    if nm in itinerary_names:
+        return True
+    for x in itinerary_names:
+        if not x:
+            continue
+        if nm in x or x in nm:
+            return True
+    return False
+
+
+def _days_caption_for_linked_item(name: str, linked_days: dict[str, list]) -> str:
+    """Match item name to linked_days keys (itinerary + map canonical names)."""
+    if not name.strip() or not linked_days:
+        return ""
+    n = normalize_place_label(name)
+    days: list | None = None
+    if name in linked_days:
+        days = linked_days[name]
+    else:
+        for k, d in linked_days.items():
+            if normalize_place_label(str(k)) == n:
+                days = d
+                break
+        if days is None:
+            for k, d in linked_days.items():
+                kn = normalize_place_label(str(k))
+                if kn and n and (n in kn or kn in n):
+                    days = d
+                    break
+    if not days:
+        return ""
+    return f" · *Itinerary days: {', '.join(str(x) for x in days)}*"
+
+
+def _markdown_place_or_food_line(item: dict, *, linked_days: dict[str, list], show_itinerary_days: bool) -> str:
+    nm = str(item.get("name", "")).strip()
+    extra = _days_caption_for_linked_item(nm, linked_days) if show_itinerary_days else ""
+    return (
+        f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
+        f" — {item.get('summary','')}{extra}"
+    )
 
 
 def _merge_map_with_stays(
@@ -1152,37 +1217,55 @@ def main() -> None:
         shown_items = _merge_display_items(retrieved_items, enriched_items)
         place_items = [x for x in shown_items if not _is_food_item(x)]
         food_items = [x for x in shown_items if _is_food_item(x)]
+        itin_name_set = _itinerary_place_name_set(itinerary) if isinstance(itinerary, dict) else set()
+        place_on_plan = [x for x in place_items if _display_item_matches_itinerary(x, itin_name_set)]
+        place_more = [x for x in place_items if not _display_item_matches_itinerary(x, itin_name_set)][
+            : _MAX_MORE_SUGGESTIONS
+        ]
+        food_on_plan = [x for x in food_items if _display_item_matches_itinerary(x, itin_name_set)]
+        food_more = [x for x in food_items if not _display_item_matches_itinerary(x, itin_name_set)][
+            : _MAX_MORE_SUGGESTIONS
+        ]
+
         with tabs[0]:
-            if place_items:
-                for item in place_items:
-                    nm = str(item.get("name", "")).strip()
-                    extra = ""
-                    if nm in linked_days:
-                        extra = (
-                            f" · *Itinerary days: {', '.join(str(d) for d in linked_days[nm])}*"
-                        )
-                    st.markdown(
-                        f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
-                        f" — {item.get('summary','')}{extra}"
-                    )
+            st.markdown("**On your itinerary**")
+            if place_on_plan:
+                for item in place_on_plan:
+                    st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=True))
+            elif place_items:
+                st.caption(
+                    "No KB rows matched your itinerary place names exactly — open **More suggestions** below."
+                )
             else:
                 st.caption("No visit places found for this run.")
+            if place_more:
+                with st.expander(
+                    f"More suggestions ({len(place_more)}) — not part of the printed itinerary",
+                    expanded=False,
+                ):
+                    st.caption("Extra places from retrieval for browsing; your map stays itinerary-only.")
+                    for item in place_more:
+                        st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False))
 
         with tabs[1]:
-            if food_items:
-                for item in food_items:
-                    nm = str(item.get("name", "")).strip()
-                    extra = ""
-                    if nm in linked_days:
-                        extra = (
-                            f" · *Itinerary days: {', '.join(str(d) for d in linked_days[nm])}*"
-                        )
-                    st.markdown(
-                        f"- **{item.get('name','')}** ({item.get('category','')}, {item.get('district','')})"
-                        f" — {item.get('summary','')}{extra}"
-                    )
+            st.markdown("**On your itinerary**")
+            if food_on_plan:
+                for item in food_on_plan:
+                    st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=True))
+            elif food_items:
+                st.caption(
+                    "No food rows matched your itinerary place names exactly — open **More suggestions** below."
+                )
             else:
                 st.caption("No food & drink suggestions found for this run.")
+            if food_more:
+                with st.expander(
+                    f"More suggestions ({len(food_more)}) — not part of the printed itinerary",
+                    expanded=False,
+                ):
+                    st.caption("Extra food & drink from retrieval for browsing; your map stays itinerary-only.")
+                    for item in food_more:
+                        st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False))
 
         with tabs[2]:
             if transport_by_place:
