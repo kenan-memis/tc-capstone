@@ -195,6 +195,28 @@ def _time_of_day_icon_html(time_of_day: str) -> str:
     )
 
 
+def _day_number_int(raw: Any) -> int:
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _is_generic_day_theme(theme: str, day_number: int) -> bool:
+    """True if the day theme is empty or only a stand-in (e.g. 'Day 2', 'Day 2 highlights')."""
+    t = (theme or "").strip()
+    if not t:
+        return True
+    if day_number < 1:
+        return False
+    tl = t.lower()
+    if tl == f"day {day_number}" or tl == f"day{day_number}":
+        return True
+    if tl == f"day {day_number} highlights":
+        return True
+    return False
+
+
 def _format_itinerary_markdown(itinerary: dict) -> str:
     days = itinerary.get("days", [])
     day_list = days if isinstance(days, list) else []
@@ -204,12 +226,18 @@ def _format_itinerary_markdown(itinerary: dict) -> str:
         if not isinstance(day, dict):
             continue
         dn = day.get("day_number", "")
-        theme = html.escape(str(day.get("theme", "")).strip())
+        n = _day_number_int(dn)
+        raw_theme = str(day.get("theme", "")).strip()
         if single_day:
-            if theme:
-                lines.append(f"### {theme}")
+            if raw_theme and not _is_generic_day_theme(raw_theme, n):
+                lines.append(f"### {html.escape(raw_theme)}")
+            else:
+                lines.append(f"### Day {dn}:")
         else:
-            lines.append(f"### Day {dn}: {theme}".strip())
+            if raw_theme and not _is_generic_day_theme(raw_theme, n):
+                lines.append(f"### Day {dn}: {html.escape(raw_theme)}")
+            else:
+                lines.append(f"### Day {dn}:")
         lines.append("")
         for act in day.get("activities", []) if isinstance(day.get("activities"), list) else []:
             if not isinstance(act, dict):
