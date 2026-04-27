@@ -520,6 +520,19 @@ def _plan_summary_from_result(result: dict[str, object]) -> str:
     return "  \n".join(lines)
 
 
+def _reset_plan_workflow_state() -> None:
+    """Clear in-memory plan and build UI; does not touch auth or form defaults."""
+    st.session_state["plan_result"] = None
+    st.session_state["loaded_latest_plan_user_id"] = None
+    st.session_state["plan_build_phase"] = "idle"
+    st.session_state["plan_build_nodes"] = []
+    st.session_state["plan_build_summary"] = None
+    st.session_state.pop("plan_narrative_md", None)
+    st.session_state["map_highlight_pick"] = "(All places)"
+    st.session_state["plan_map_version"] = str(uuid.uuid4())
+    st.session_state.pop("plan_persist_user_id", None)
+
+
 def _plan_builder_trip_summary_markdown(
     *,
     start_date: date,
@@ -628,6 +641,7 @@ def main() -> None:
         if qs_token and not st.session_state.get("auth_user_id"):
             user_by_session = profile_repo.get_user_by_session(token=qs_token)
             if user_by_session is not None:
+                _reset_plan_workflow_state()
                 st.session_state["auth_user_id"] = user_by_session.id
                 st.session_state["auth_username"] = user_by_session.username
                 st.session_state["auth_onboarding_completed"] = bool(user_by_session.onboarding_completed)
@@ -654,6 +668,7 @@ def main() -> None:
                 if user is None:
                     st.error("Invalid username or password.")
                 else:
+                    _reset_plan_workflow_state()
                     session_token = profile_repo.create_session(user_id=user.id, ttl_days=30)
                     st.session_state["auth_user_id"] = user.id
                     st.session_state["auth_username"] = user.username
@@ -675,6 +690,7 @@ def main() -> None:
                             username=signup_username,
                             password=signup_password,
                         )
+                        _reset_plan_workflow_state()
                         st.session_state["auth_user_id"] = user.id
                         st.session_state["auth_username"] = user.username
                         st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
@@ -692,16 +708,25 @@ def main() -> None:
     st.session_state["auth_username"] = auth_user.username
     st.session_state["auth_onboarding_completed"] = bool(auth_user.onboarding_completed)
 
-    if (
-        st.session_state.get("plan_result") is None
-        and st.session_state.get("loaded_latest_plan_user_id") != auth_user.id
-    ):
-        latest = profile_repo.get_latest_plan(user_id=auth_user.id)
-        if isinstance(latest, dict) and latest:
-            st.session_state["plan_result"] = latest
-            st.session_state["loaded_latest_plan_user_id"] = auth_user.id
+    # If the browser session was used by another user before, do not keep their plan.
+    _prev_owner = st.session_state.get("plan_persist_user_id")
+    if _prev_owner is not None and _prev_owner != auth_user.id:
+        _reset_plan_workflow_state()
+    st.session_state["plan_persist_user_id"] = auth_user.id
+
+    # When no plan is in memory, load the latest saved run from the DB (covers login, refresh, new tab).
+    if st.session_state.get("plan_result") is None:
+        _latest = profile_repo.get_latest_plan(user_id=auth_user.id)
+        st.session_state["loaded_latest_plan_user_id"] = auth_user.id
+        if isinstance(_latest, dict) and _latest:
+            st.session_state["plan_result"] = _latest
             st.session_state["plan_build_phase"] = "ready"
-            st.session_state["plan_build_summary"] = _plan_summary_from_result(latest)
+            st.session_state["plan_build_summary"] = _plan_summary_from_result(_latest)
+        else:
+            st.session_state["plan_build_phase"] = "idle"
+            st.session_state["plan_build_summary"] = None
+            st.session_state["plan_build_nodes"] = []
+            st.session_state.pop("plan_narrative_md", None)
 
     if not auth_user.onboarding_completed:
         st.subheader("Welcome! Complete onboarding")
@@ -781,8 +806,7 @@ def main() -> None:
                 st.session_state["auth_username"] = ""
                 st.session_state["auth_onboarding_completed"] = False
                 st.session_state["auth_session_token"] = ""
-                st.session_state["plan_result"] = None
-                st.session_state["loaded_latest_plan_user_id"] = None
+                _reset_plan_workflow_state()
                 if "auth_token" in st.query_params:
                     del st.query_params["auth_token"]
                 st.session_state["_clear_account_menu_after_logout"] = True
