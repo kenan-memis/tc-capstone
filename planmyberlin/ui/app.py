@@ -558,6 +558,9 @@ def main() -> None:
     st.session_state.setdefault("form_include_accommodation", True)
     st.session_state.setdefault("loaded_latest_plan_user_id", None)
 
+    if st.session_state.pop("_clear_account_menu_after_logout", False):
+        st.session_state.pop("account_action_menu", None)
+
     profile_repo = None
     auth_user: AppUser | None = None
     try:
@@ -723,7 +726,7 @@ def main() -> None:
                 st.session_state["loaded_latest_plan_user_id"] = None
                 if "auth_token" in st.query_params:
                     del st.query_params["auth_token"]
-                st.session_state["account_action_menu"] = "Account"
+                st.session_state["_clear_account_menu_after_logout"] = True
                 st.rerun()
 
         default_pref_profile = profile_repo.get_profile_by_name("Default preferences", user_id=auth_user.id)
