@@ -1145,7 +1145,7 @@ def main() -> None:
 
         with tabs[3]:
             if accommodation_items:
-                for item in accommodation_items[:5]:
+                for idx, item in enumerate(accommodation_items[:5]):
                     name = html.escape(str(item.get("name", "")))
                     typ = html.escape(str(item.get("type", "")))
                     district = html.escape(str(item.get("district", "")))
@@ -1181,7 +1181,7 @@ def main() -> None:
                                     + html.escape(photo_url, quote=True)
                                     + '" alt="Accommodation thumbnail" '
                                     + 'style="width:180px;height:120px;object-fit:cover;object-position:center;'
-                                    + 'border-radius:10px;display:block;" />'
+                                    + 'border-radius:10px;display:block;margin-bottom:6px;" />'
                                 ),
                                 unsafe_allow_html=True,
                             )
@@ -1199,6 +1199,8 @@ def main() -> None:
                             f"  - {address} {link}",
                             unsafe_allow_html=True,
                         )
+                    if idx < min(5, len(accommodation_items)) - 1:
+                        st.markdown("<div style='height:10px;'></div>", unsafe_allow_html=True)
             else:
                 st.caption("Accommodation suggestions are not enabled for this run.")
 
