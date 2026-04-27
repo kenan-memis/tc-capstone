@@ -151,3 +151,10 @@ def test_authenticate_user_with_hashed_password(tmp_path: Path) -> None:
     assert ok is not None
     assert ok.id == created.id
     assert bad is None
+
+
+def test_create_user_with_duplicate_username_raises_value_error(tmp_path: Path) -> None:
+    repo = _repo(tmp_path)
+    repo.create_user_with_password(username="same-user", password="StrongPass123")
+    with pytest.raises(ValueError):
+        repo.create_user_with_password(username="same-user", password="StrongPass123")

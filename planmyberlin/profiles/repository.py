@@ -183,15 +183,23 @@ class UserProfileRepository:
             raise ValueError("username must be at least 3 characters")
         if len(password) < 8:
             raise ValueError("password must be at least 8 characters")
+        if self.get_user_by_name(username) is not None:
+            raise ValueError("username already exists")
         now = _utc_now_iso()
         user_id = str(uuid.uuid4())
         salt_hex = os.urandom(16).hex()
         hashed = self._hash_password(password, salt_hex=salt_hex)
-        with self._connect() as conn:
-            conn.execute(
-                "INSERT INTO app_users (id, username, password_salt, password_hash, onboarding_completed, created_at, updated_at) VALUES (?, ?, ?, ?, 0, ?, ?)",
-                (user_id, username, salt_hex, hashed, now, now),
-            )
+        try:
+            with self._connect() as conn:
+                conn.execute(
+                    "INSERT INTO app_users (id, username, password_salt, password_hash, onboarding_completed, created_at, updated_at) VALUES (?, ?, ?, ?, 0, ?, ?)",
+                    (user_id, username, salt_hex, hashed, now, now),
+                )
+        except sqlite3.IntegrityError as exc:
+            msg = str(exc).lower()
+            if "username" in msg or "unique" in msg:
+                raise ValueError("username already exists") from exc
+            raise
         out = self.get_user(user_id)
         if out is None:
             raise RuntimeError("failed to read created user")
