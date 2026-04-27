@@ -534,11 +534,6 @@ def main() -> None:
                     index=_default_index(mobility_opts, "No specific needs"),
                 )
                 interest_default = st.multiselect("Preferred interests", options=list(get_interest_options()), default=[])
-                neighbourhood_default = st.multiselect(
-                    "Preferred areas",
-                    options=list(get_neighbourhood_options()),
-                    default=[],
-                )
                 include_acc_default = st.checkbox("Prefer accommodation suggestions by default", value=True)
                 submitted = st.form_submit_button("Save preferences and continue")
                 if submitted:
@@ -551,7 +546,7 @@ def main() -> None:
                             name="Default preferences",
                             party_size_default=2,
                             interest_tags_default=list(interest_default),
-                            neighbourhoods_default=list(neighbourhood_default),
+                            neighbourhoods_default=[],
                             budget_tier_default=budget_default,  # type: ignore[arg-type]
                             pace_default=pace_default,  # type: ignore[arg-type]
                             dietary_choice_default=dietary_default,
@@ -573,18 +568,26 @@ def main() -> None:
 
     top_left, top_right = st.columns([0.55, 0.45], gap="large")
     with top_left:
-        h1, h2 = st.columns([0.75, 0.25])
+        h1, h2 = st.columns([0.55, 0.45])
         with h1:
             st.caption(f"Signed in as `{auth_user.username}`")
         with h2:
-            if st.button("Log out"):
+            account_action = st.selectbox(
+                "Account",
+                options=["Account", "Profile settings", "Log out"],
+                label_visibility="collapsed",
+                key="account_action_menu",
+            )
+            if account_action == "Log out":
                 st.session_state["auth_user_id"] = None
                 st.session_state["auth_username"] = ""
                 st.session_state["auth_onboarding_completed"] = False
+                st.session_state["account_action_menu"] = "Account"
                 st.rerun()
 
         default_pref_profile = profile_repo.get_profile_by_name("Default preferences", user_id=auth_user.id)
-        with st.expander("Profile settings", expanded=False):
+        if account_action == "Profile settings":
+            st.info("Profile settings")
             st.caption("You can update your saved default preferences anytime.")
             with st.form("profile_settings_form"):
                 p_pace_options = ("relaxed", "balanced", "packed")
@@ -630,11 +633,6 @@ def main() -> None:
                     options=list(get_interest_options()),
                     default=list(default_pref_profile.interest_tags_default) if default_pref_profile else [],
                 )
-                p_neighbourhoods = st.multiselect(
-                    "Preferred areas",
-                    options=list(get_neighbourhood_options()),
-                    default=list(default_pref_profile.neighbourhoods_default) if default_pref_profile else [],
-                )
                 p_include_acc = st.checkbox(
                     "Prefer accommodation suggestions by default",
                     value=bool(default_pref_profile.include_accommodation_default) if default_pref_profile else True,
@@ -645,7 +643,7 @@ def main() -> None:
                         name="Default preferences",
                         party_size_default=2,
                         interest_tags_default=list(p_interests),
-                        neighbourhoods_default=list(p_neighbourhoods),
+                        neighbourhoods_default=[],
                         budget_tier_default=p_budget,  # type: ignore[arg-type]
                         pace_default=p_pace,  # type: ignore[arg-type]
                         dietary_choice_default=p_dietary,
@@ -829,7 +827,8 @@ def main() -> None:
         if prefs_applied and default_pref_profile is not None:
             effective_party_size = int(default_pref_profile.party_size_default)
             effective_interest_tags = list(default_pref_profile.interest_tags_default)
-            effective_neighbourhoods = list(default_pref_profile.neighbourhoods_default)
+            # Districts are intentionally not part of saved preferences; keep current form choice.
+            effective_neighbourhoods = list(neighbourhoods)
             effective_budget_tier = default_pref_profile.budget_tier_default
             effective_pace = default_pref_profile.pace_default
             effective_dietary_choice = default_pref_profile.dietary_choice_default
