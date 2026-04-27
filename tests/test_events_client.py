@@ -61,6 +61,65 @@ def test_events_kulturdaten_ok(monkeypatch):
     assert out["events_items"][0]["name"] == "Berlin Jazz Night"
 
 
+def test_events_requests_use_page_size_and_date_range(monkeypatch):
+    import planmyberlin.events.client as client
+
+    captured: dict = {}
+
+    class _Mgr:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            return False
+
+        def get(self, _url, params=None):
+            captured["params"] = dict(params or {})
+            return _DummyResponse({"data": {"events": []}})
+
+    monkeypatch.setattr(client.httpx, "Client", lambda **_kw: _Mgr())
+    fetch_events_context(
+        city="Berlin",
+        start_date="2026-05-25",
+        end_date="2026-05-28",
+        interests=["Museums & galleries"],
+        max_items=4,
+    )
+    assert captured["params"]["page"] == 1
+    assert captured["params"]["pageSize"] >= 30
+    assert captured["params"]["startDate"] == "2026-05-25"
+    assert captured["params"]["endDate"] == "2026-05-28"
+    assert "limit" not in captured["params"]
+
+
+def test_events_do_not_filter_by_interest_tags(monkeypatch):
+    """Trip interest labels are not substring-matched against event titles (too strict)."""
+    import planmyberlin.events.client as client
+
+    payload = {
+        "data": {
+            "events": [
+                {
+                    "title": {"en": "Lake swim day", "de": "Badetag"},
+                    "schedule": {"startDate": "2026-05-26", "startTime": "10:00"},
+                    "description": {"en": "Outdoor swim in Berlin."},
+                    "venue": {"name": "Badesee"},
+                }
+            ]
+        }
+    }
+    monkeypatch.setattr(client.httpx, "Client", lambda timeout: _DummyClient([_DummyResponse(payload)]))
+    out = fetch_events_context(
+        city="Berlin",
+        start_date="2026-05-24",
+        end_date="2026-05-30",
+        interests=["Museums & galleries", "Coffee & cafés"],
+    )
+    assert out["status"] == "ok"
+    assert len(out["events_items"]) == 1
+    assert out["events_items"][0]["name"] == "Lake swim day"
+
+
 def test_events_unavailable_when_all_endpoints_fail(monkeypatch):
     import planmyberlin.events.client as client
 

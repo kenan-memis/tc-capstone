@@ -17,6 +17,40 @@ def _as_date(value: str | None) -> date | None:
         return None
 
 
+def _localized_text(value: Any) -> str:
+    """Kulturdaten uses per-language dicts: {\"de\": \"...\", \"en\": \"...\"}."""
+    if isinstance(value, dict):
+        for key in ("en", "de"):
+            raw = value.get(key)
+            if isinstance(raw, str) and raw.strip():
+                return raw.strip()
+        for raw in value.values():
+            if isinstance(raw, str) and raw.strip():
+                return raw.strip()
+        return ""
+    return str(value or "").strip()
+
+
+def _event_title(row: dict) -> str:
+    title = row.get("title")
+    if title is not None:
+        t = _localized_text(title)
+        if t:
+            return t
+    name = row.get("name")
+    return _localized_text(name) if name is not None else ""
+
+
+def _event_description(row: dict) -> str:
+    for key in ("description", "summary", "pleaseNote"):
+        raw = row.get(key)
+        if raw is not None:
+            t = _localized_text(raw)
+            if t:
+                return t
+    return ""
+
+
 def fetch_events_context(
     *,
     city: str,
@@ -27,11 +61,21 @@ def fetch_events_context(
     timeout_seconds: float = 8.0,
     base_url: str = "https://api.kulturdaten.berlin",
 ) -> dict[str, Any]:
+    # `interests` is accepted for API compatibility but not used to filter results:
+    # trip interest labels rarely match event text and would hide valid listings.
+    _ = interests
     start = _as_date(start_date)
     end = _as_date(end_date)
     base = base_url.rstrip("/")
     endpoints = [f"{base}/api/events", f"{base}/events", f"{base}/api/public/events"]
-    params = {"page": 1, "limit": max(10, max_items * 4)}
+    # OpenAPI: pageSize + startDate/endDate (not `limit`). Without server-side dates,
+    # the API returns arbitrary upcoming pages and local-only filtering yields zero rows.
+    page_size = max(30, max_items * 6)
+    params: dict[str, Any] = {"page": 1, "pageSize": page_size}
+    if start:
+        params["startDate"] = start.isoformat()
+    if end:
+        params["endDate"] = end.isoformat()
 
     payload: dict[str, Any] | list[Any] | None = None
     last_err = ""
@@ -82,11 +126,10 @@ def fetch_events_context(
         return []
 
     rows = _find_items(payload)
-    wants = [str(x).strip().lower() for x in (interests or []) if str(x).strip()]
 
     out: list[dict[str, Any]] = []
     for row in rows:
-        name = str(row.get("name") or row.get("title") or "").strip()
+        name = _event_title(row)
         if not name:
             continue
         venue = str(
@@ -96,20 +139,22 @@ def fetch_events_context(
             or row.get("venue")
             or ""
         ).strip()
-        start_local = str(
+        start_raw = (
             row.get("startDate")
             or row.get("start_date")
             or row.get("date")
             or _dig(row, ["date", "start"])
             or _dig(row, ["schedule", "startDate"])
             or ""
-        ).strip()
-        start_local = start_local[:10] if len(start_local) >= 10 else start_local
+        )
+        start_local = str(start_raw).strip()
+        if len(start_local) >= 10 and start_local[4] == "-" and start_local[7] == "-":
+            start_local = start_local[:10]
         url = str(
             row.get("url") or row.get("link") or row.get("website") or row.get("frontendUrl") or ""
         ).strip()
         category = str(row.get("category") or row.get("genre") or "").strip()
-        summary = str(row.get("description") or row.get("summary") or "").strip()
+        summary = _event_description(row)
         image_url = str(
             row.get("image") or row.get("image_url") or _dig(row, ["image", "url"]) or ""
         ).strip()
@@ -126,10 +171,6 @@ def fetch_events_context(
                 continue
             if d and end and d > end:
                 continue
-        if wants:
-            blob = f"{name} {summary} {category}".lower()
-            if not any(w in blob for w in wants):
-                continue
 
         out.append(
             {
@@ -145,7 +186,7 @@ def fetch_events_context(
         if len(out) >= max(1, min(max_items, 10)):
             break
 
-    message = "ok" if out else "No events found for selected dates and interests."
+    message = "ok" if out else "No events found for the selected dates."
     return {
         "status": "ok",
         "backend": "kulturdaten",
