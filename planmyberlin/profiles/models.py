@@ -57,3 +57,4 @@ class SavedPlanListItem(BaseModel):
     label: str
     created_at: str
     updated_at: str
+    is_favourite: bool = False

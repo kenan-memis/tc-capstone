@@ -881,7 +881,12 @@ def main() -> None:
         if account_action == "Previous plans":
             st.subheader("Previous plans")
             st.caption("Save the plan you are viewing, or open an earlier one. Loading replaces the current trip view for this session.")
-            saved_list = profile_repo.list_saved_plans(user_id=auth_user.id)
+            fav_only = st.checkbox(
+                "Show favourites only",
+                key="saved_plans_favourites_only",
+                help="Only list saved plans you marked as favourites (★).",
+            )
+            saved_list = profile_repo.list_saved_plans(user_id=auth_user.id, favourites_only=fav_only)
             pr_state = st.session_state.get("plan_result")
             has_current = isinstance(pr_state, dict) and bool(pr_state)
             save_c1, save_c2 = st.columns([0.4, 0.6], gap="small")
@@ -908,19 +913,25 @@ def main() -> None:
                     st.session_state["_plan_library_toast"] = "saved"
                     st.rerun()
             if not saved_list:
-                st.info("No saved plans yet. After **Build my plan** finishes, use **Save current plan to list** above.")
+                if fav_only:
+                    st.info(
+                        "No favourite plans match this filter. Uncheck **Show favourites only** or mark a saved plan as a favourite."
+                    )
+                else:
+                    st.info("No saved plans yet. After **Build my plan** finishes, use **Save current plan to list** above.")
             else:
                 def _format_saved_entry(i: int) -> str:
                     it = saved_list[i]
                     ts = (it.created_at or "")[:16].replace("T", " ")
-                    return f"{it.label}  ·  {ts}"
+                    star = "★ " if it.is_favourite else ""
+                    return f"{star}{it.label}  ·  {ts}"
 
                 pick = st.selectbox(
                     "Choose a plan to load or remove",
                     list(range(len(saved_list))),
                     format_func=_format_saved_entry,
                 )
-                load_col, del_col = st.columns(2)
+                load_col, del_col, fav_col = st.columns(3)
                 with load_col:
                     if st.button("Load selected plan", use_container_width=True, type="primary"):
                         _pid = saved_list[pick].id
@@ -940,6 +951,16 @@ def main() -> None:
                             st.rerun()
                         else:
                             st.error("Delete failed.")
+                with fav_col:
+                    _cur = saved_list[pick]
+                    _fav_btn = "Remove favourite" if _cur.is_favourite else "Mark as favourite"
+                    if st.button(_fav_btn, use_container_width=True):
+                        profile_repo.set_saved_plan_favourite(
+                            user_id=auth_user.id,
+                            plan_id=_cur.id,
+                            favourite=not _cur.is_favourite,
+                        )
+                        st.rerun()
             st.divider()
         if account_action == "Profile settings":
             st.info("Profile settings")

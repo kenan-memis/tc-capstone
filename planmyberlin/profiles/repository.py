@@ -116,6 +116,7 @@ class UserProfileRepository:
                     plan_json TEXT NOT NULL,
                     created_at TEXT NOT NULL,
                     updated_at TEXT NOT NULL,
+                    is_favourite INTEGER NOT NULL DEFAULT 0,
                     FOREIGN KEY (user_id) REFERENCES app_users(id)
                 )
                 """
@@ -124,6 +125,15 @@ class UserProfileRepository:
                 "CREATE INDEX IF NOT EXISTS idx_saved_plans_user_updated "
                 "ON saved_user_plans (user_id, updated_at DESC)"
             )
+            saved_cols = {
+                str(r["name"])
+                for r in conn.execute("PRAGMA table_info(saved_user_plans)").fetchall()
+                if isinstance(r, sqlite3.Row)
+            }
+            if "is_favourite" not in saved_cols:
+                conn.execute(
+                    "ALTER TABLE saved_user_plans ADD COLUMN is_favourite INTEGER NOT NULL DEFAULT 0"
+                )
             cols = {
                 str(r["name"])
                 for r in conn.execute("PRAGMA table_info(user_profiles)").fetchall()
@@ -353,25 +363,37 @@ class UserProfileRepository:
         with self._connect() as conn:
             conn.execute("DELETE FROM latest_user_plan WHERE user_id = ?", (user_id,))
 
-    def list_saved_plans(self, *, user_id: str) -> list[SavedPlanListItem]:
+    def list_saved_plans(
+        self,
+        *,
+        user_id: str,
+        favourites_only: bool = False,
+    ) -> list[SavedPlanListItem]:
+        extra = " AND is_favourite = 1" if favourites_only else ""
         with self._connect() as conn:
             rows = conn.execute(
-                """
-                SELECT id, label, created_at, updated_at
+                f"""
+                SELECT id, label, created_at, updated_at, is_favourite
                 FROM saved_user_plans
-                WHERE user_id = ?
-                ORDER BY updated_at DESC, created_at DESC
+                WHERE user_id = ?{extra}
+                ORDER BY is_favourite DESC, updated_at DESC, created_at DESC
                 """,
                 (user_id,),
             ).fetchall()
         out: list[SavedPlanListItem] = []
         for r in rows:
+            fav = r["is_favourite"]
+            try:
+                fav_b = bool(int(fav))
+            except (TypeError, ValueError):
+                fav_b = False
             out.append(
                 SavedPlanListItem(
                     id=str(r["id"]),
                     label=str(r["label"]),
                     created_at=str(r["created_at"]),
                     updated_at=str(r["updated_at"]),
+                    is_favourite=fav_b,
                 )
             )
         return out
@@ -408,12 +430,33 @@ class UserProfileRepository:
         with self._connect() as conn:
             conn.execute(
                 """
-                INSERT INTO saved_user_plans (id, user_id, label, plan_json, created_at, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO saved_user_plans (
+                    id, user_id, label, plan_json, created_at, updated_at, is_favourite
+                )
+                VALUES (?, ?, ?, ?, ?, ?, 0)
                 """,
                 (plan_id, user_id, lab, payload, now, now),
             )
         return plan_id
+
+    def set_saved_plan_favourite(
+        self,
+        *,
+        user_id: str,
+        plan_id: str,
+        favourite: bool,
+    ) -> bool:
+        now = _utc_now_iso()
+        with self._connect() as conn:
+            cur = conn.execute(
+                """
+                UPDATE saved_user_plans
+                SET is_favourite = ?, updated_at = ?
+                WHERE id = ? AND user_id = ?
+                """,
+                (1 if favourite else 0, now, plan_id.strip(), user_id),
+            )
+            return cur.rowcount > 0
 
     def delete_saved_plan(self, *, user_id: str, plan_id: str) -> bool:
         with self._connect() as conn:

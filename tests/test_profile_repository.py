@@ -200,6 +200,13 @@ def test_saved_plans_list_insert_load_delete(tmp_path: Path) -> None:
     assert len(items) == 1
     assert items[0].label == "My trip"
     assert items[0].id == pid
+    assert items[0].is_favourite is False
+    assert repo.set_saved_plan_favourite(user_id=user.id, plan_id=pid, favourite=True) is True
+    items_f = repo.list_saved_plans(user_id=user.id, favourites_only=True)
+    assert len(items_f) == 1
+    assert items_f[0].is_favourite is True
+    assert repo.set_saved_plan_favourite(user_id=user.id, plan_id=pid, favourite=False) is True
+    assert repo.list_saved_plans(user_id=user.id, favourites_only=True) == []
     back = repo.get_saved_plan(user_id=user.id, plan_id=pid)
     assert back == sample
     assert repo.delete_saved_plan(user_id=user.id, plan_id=pid) is True
