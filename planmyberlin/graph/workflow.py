@@ -210,6 +210,8 @@ def _build_map_points(state: PlannerState) -> PlannerState:
 
     points: list[dict[str, Any]] = []
     for item in source:
+        if str(item.get("category", "")).strip().lower() == "transport":
+            continue
         lat = item.get("latitude")
         lng = item.get("longitude")
         if isinstance(lat, (int, float)) and isinstance(lng, (int, float)):

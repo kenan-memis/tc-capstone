@@ -292,6 +292,11 @@ def _is_food_item(item: dict) -> bool:
     return any(k in category for k in ("restaurant", "cafe", "bar", "food"))
 
 
+def _is_transport_kb_item(item: dict) -> bool:
+    """Curated KB rows (e.g. berlin_transport.yaml) — not browseable places."""
+    return str(item.get("category", "")).strip().lower() == "transport"
+
+
 def _itinerary_place_name_set(itinerary: dict) -> set[str]:
     """Normalized place_name values from the structured itinerary."""
     names: set[str] = set()
@@ -1215,7 +1220,8 @@ def main() -> None:
         )
 
         shown_items = _merge_display_items(retrieved_items, enriched_items)
-        place_items = [x for x in shown_items if not _is_food_item(x)]
+        transport_guidance_items = [x for x in shown_items if _is_transport_kb_item(x)]
+        place_items = [x for x in shown_items if not _is_food_item(x) and not _is_transport_kb_item(x)]
         food_items = [x for x in shown_items if _is_food_item(x)]
         itin_name_set = _itinerary_place_name_set(itinerary) if isinstance(itinerary, dict) else set()
         place_on_plan = [x for x in place_items if _display_item_matches_itinerary(x, itin_name_set)]
@@ -1234,7 +1240,7 @@ def main() -> None:
                     st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=True))
             elif place_items:
                 st.caption(
-                    "No KB rows matched your itinerary place names exactly — open **More suggestions** below."
+                    "We did not find an exact match to your itinerary stops — see **More suggestions** below."
                 )
             else:
                 st.caption("No visit places found for this run.")
@@ -1243,7 +1249,9 @@ def main() -> None:
                     f"More suggestions ({len(place_more)}) — not part of the printed itinerary",
                     expanded=False,
                 ):
-                    st.caption("Extra places from retrieval for browsing; your map stays itinerary-only.")
+                    st.caption(
+                        "These are extra ideas to explore — not on your plan. The map only highlights the places in your itinerary."
+                    )
                     for item in place_more:
                         st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False))
 
@@ -1254,7 +1262,7 @@ def main() -> None:
                     st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=True))
             elif food_items:
                 st.caption(
-                    "No food rows matched your itinerary place names exactly — open **More suggestions** below."
+                    "We did not find an exact match to your itinerary stops — see **More suggestions** below."
                 )
             else:
                 st.caption("No food & drink suggestions found for this run.")
@@ -1263,11 +1271,21 @@ def main() -> None:
                     f"More suggestions ({len(food_more)}) — not part of the printed itinerary",
                     expanded=False,
                 ):
-                    st.caption("Extra food & drink from retrieval for browsing; your map stays itinerary-only.")
+                    st.caption(
+                        "These are extra food and drink ideas — not on your plan. The map only highlights the places in your itinerary."
+                    )
                     for item in food_more:
                         st.markdown(_markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False))
 
         with tabs[2]:
+            if transport_guidance_items:
+                st.markdown("**Getting around — tips**")
+                for item in transport_guidance_items:
+                    st.markdown(
+                        _markdown_place_or_food_line(item, linked_days=linked_days, show_itinerary_days=False)
+                    )
+                if transport_by_place or transport_items:
+                    st.divider()
             if transport_by_place:
                 for row in transport_by_place:
                     if not isinstance(row, dict):
@@ -1321,11 +1339,12 @@ def main() -> None:
                         unsafe_allow_html=True,
                     )
             else:
-                transport_msg = str(result.get("transport_message", "")).strip()
-                if transport_msg:
-                    st.caption("Transportation info is not available right now. Please try again shortly.")
-                else:
-                    st.caption("No transport suggestions available for this run.")
+                if not transport_guidance_items:
+                    transport_msg = str(result.get("transport_message", "")).strip()
+                    if transport_msg:
+                        st.caption("Transportation info is not available right now. Please try again shortly.")
+                    else:
+                        st.caption("No transport suggestions available for this run.")
 
         with tabs[3]:
             if accommodation_items:
