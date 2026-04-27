@@ -153,6 +153,17 @@ def test_authenticate_user_with_hashed_password(tmp_path: Path) -> None:
     assert bad is None
 
 
+def test_session_create_and_resolve_user(tmp_path: Path) -> None:
+    repo = _repo(tmp_path)
+    user = repo.create_user_with_password(username="session-user", password="StrongPass123")
+    token = repo.create_session(user_id=user.id, ttl_days=1)
+    resolved = repo.get_user_by_session(token=token)
+    assert resolved is not None
+    assert resolved.id == user.id
+    repo.revoke_session(token=token)
+    assert repo.get_user_by_session(token=token) is None
+
+
 def test_create_user_with_duplicate_username_raises_value_error(tmp_path: Path) -> None:
     repo = _repo(tmp_path)
     repo.create_user_with_password(username="same-user", password="StrongPass123")

@@ -34,6 +34,11 @@ weather:
   units: metric
   timeout_seconds: 8
 
+events:
+  city: Berlin
+  timeout_seconds: 8
+  max_items: 4
+
 transport:
   backend: bvg_rest
   city: Berlin

@@ -8,6 +8,7 @@ from langgraph.graph import END, START, StateGraph
 
 from planmyberlin.accommodation import fetch_accommodation_suggestions
 from planmyberlin.config.loader import get_settings
+from planmyberlin.events import fetch_events_context
 from planmyberlin.itinerary import generate_itinerary
 from planmyberlin.observability import get_logger
 from planmyberlin.models.trip_profile import TripProfile
@@ -45,6 +46,12 @@ class PlannerState(TypedDict, total=False):
     weather_condition_main: str
     weather_temperature_c: float | None
     weather_bias: Literal["indoor", "outdoor_or_mixed", "unknown"]
+
+    events_status: Literal["ok", "unavailable"]
+    events_backend: str
+    events_message: str
+    events_items: list[dict[str, Any]]
+    events_count: int
 
     map_status: Literal["ok", "no_coordinates"]
     map_points: list[dict[str, Any]]
@@ -232,6 +239,41 @@ def _build_map_points(state: PlannerState) -> PlannerState:
     return out
 
 
+def _fetch_events(state: PlannerState) -> PlannerState:
+    out = dict(state)
+    cfg = get_settings().get("events", {})
+    city = str(cfg.get("city", "Berlin"))
+    timeout_seconds = float(cfg.get("timeout_seconds", 8.0))
+    max_items = int(cfg.get("max_items", 4))
+    profile = out.get("profile", {})
+    start_date = str(profile.get("start_date", "")) if isinstance(profile, dict) else ""
+    end_date = str(profile.get("end_date", "")) if isinstance(profile, dict) else ""
+    interests = profile.get("interest_tags", []) if isinstance(profile, dict) else []
+    payload = fetch_events_context(
+        city=city,
+        start_date=start_date or None,
+        end_date=end_date or None,
+        interests=list(interests) if isinstance(interests, list) else [],
+        max_items=max_items,
+        timeout_seconds=timeout_seconds,
+    )
+    out["events_status"] = str(payload.get("status", "unavailable"))  # type: ignore[assignment]
+    out["events_backend"] = str(payload.get("backend", "ticketmaster"))
+    out["events_message"] = str(payload.get("message", ""))
+    out["events_items"] = list(payload.get("events_items", []))
+    out["events_count"] = len(out["events_items"])
+    trace = list(out.get("routing_trace", []))
+    trace.append(f"events:{out['events_status']}:{out['events_count']}")
+    out["routing_trace"] = trace
+    _log.info(
+        "graph node=fetch_events backend=%s status=%s count=%d",
+        out["events_backend"],
+        out["events_status"],
+        out["events_count"],
+    )
+    return out
+
+
 def _fetch_transport(state: PlannerState) -> PlannerState:
     out = dict(state)
     cfg = get_settings().get("transport", {})
@@ -398,6 +440,7 @@ def build_planner_graph():
     g.add_node("retrieve_context", _retrieve_context)
     g.add_node("enrich_places", _enrich_places)
     g.add_node("fetch_weather", _fetch_weather)
+    g.add_node("fetch_events", _fetch_events)
     g.add_node("build_map_points", _build_map_points)
     g.add_node("fetch_transport", _fetch_transport)
     g.add_node("multi_day_track", _multi_day_track)
@@ -411,7 +454,8 @@ def build_planner_graph():
     g.add_edge("normalize_profile", "retrieve_context")
     g.add_edge("retrieve_context", "enrich_places")
     g.add_edge("enrich_places", "fetch_weather")
-    g.add_edge("fetch_weather", "build_map_points")
+    g.add_edge("fetch_weather", "fetch_events")
+    g.add_edge("fetch_events", "build_map_points")
     g.add_edge("build_map_points", "fetch_transport")
     g.add_conditional_edges(
         "fetch_transport",

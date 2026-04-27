@@ -438,6 +438,7 @@ def main() -> None:
     st.session_state.setdefault("auth_user_id", None)
     st.session_state.setdefault("auth_username", "")
     st.session_state.setdefault("auth_onboarding_completed", False)
+    st.session_state.setdefault("auth_session_token", "")
     st.session_state.setdefault("form_start_date", date.today())
     st.session_state.setdefault("form_end_date", date.today() + timedelta(days=1))
     st.session_state.setdefault("form_party_size", 2)
@@ -454,6 +455,14 @@ def main() -> None:
     auth_user: AppUser | None = None
     try:
         profile_repo = build_user_profile_repository()
+        qs_token = str(st.query_params.get("auth_token", "")).strip()
+        if qs_token and not st.session_state.get("auth_user_id"):
+            user_by_session = profile_repo.get_user_by_session(token=qs_token)
+            if user_by_session is not None:
+                st.session_state["auth_user_id"] = user_by_session.id
+                st.session_state["auth_username"] = user_by_session.username
+                st.session_state["auth_onboarding_completed"] = bool(user_by_session.onboarding_completed)
+                st.session_state["auth_session_token"] = qs_token
         current_user_id = st.session_state.get("auth_user_id")
         if isinstance(current_user_id, str):
             auth_user = profile_repo.get_user(current_user_id)
@@ -476,9 +485,12 @@ def main() -> None:
                 if user is None:
                     st.error("Invalid username or password.")
                 else:
+                    session_token = profile_repo.create_session(user_id=user.id, ttl_days=30)
                     st.session_state["auth_user_id"] = user.id
                     st.session_state["auth_username"] = user.username
                     st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
+                    st.session_state["auth_session_token"] = session_token
+                    st.query_params["auth_token"] = session_token
                     st.rerun()
         with tab_signup:
             signup_username = st.text_input("Username (new account)", key="signup_username")
@@ -497,6 +509,9 @@ def main() -> None:
                         st.session_state["auth_user_id"] = user.id
                         st.session_state["auth_username"] = user.username
                         st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
+                        session_token = profile_repo.create_session(user_id=user.id, ttl_days=30)
+                        st.session_state["auth_session_token"] = session_token
+                        st.query_params["auth_token"] = session_token
                         st.success("Account created.")
                         st.rerun()
                     except ValueError as exc:
@@ -579,9 +594,15 @@ def main() -> None:
                 key="account_action_menu",
             )
             if account_action == "Log out":
+                token = str(st.session_state.get("auth_session_token", "")).strip()
+                if token:
+                    profile_repo.revoke_session(token=token)
                 st.session_state["auth_user_id"] = None
                 st.session_state["auth_username"] = ""
                 st.session_state["auth_onboarding_completed"] = False
+                st.session_state["auth_session_token"] = ""
+                if "auth_token" in st.query_params:
+                    del st.query_params["auth_token"]
                 st.session_state["account_action_menu"] = "Account"
                 st.rerun()
 
@@ -929,6 +950,8 @@ def main() -> None:
     itinerary_message = str(result.get("itinerary_message", "")).strip()
     transport_items = list(result.get("transport_items", []))
     transport_by_place = list(result.get("transport_by_place", []))
+    events_items = list(result.get("events_items", []))
+    events_message = str(result.get("events_message", "")).strip()
     accommodation_items = list(result.get("accommodation_items", []))
     map_points = list(result.get("map_points", []))
     map_status = str(result.get("map_status", "no_coordinates"))
@@ -947,7 +970,7 @@ def main() -> None:
         weather_bias = str(result.get("weather_bias", "unknown"))
         weather_condition_main = str(result.get("weather_condition_main", ""))
         practical_notes = itinerary.get("practical_notes", []) if isinstance(itinerary, dict) else []
-        preview_tabs = st.tabs(["🗓️ Berlin Itinerary", "🌤️ Weather", "📝 Practical Notes"])
+        preview_tabs = st.tabs(["🗓️ Berlin Itinerary", "🌤️ Weather", "📝 Practical Notes", "🎟️ Events"])
 
         with preview_tabs[0]:
             if isinstance(itinerary, dict) and itinerary:
@@ -1007,6 +1030,24 @@ def main() -> None:
                     st.caption("No practical notes were generated for this run.")
             else:
                 st.caption("No practical notes were generated for this run.")
+
+        with preview_tabs[3]:
+            if events_items:
+                for row in events_items[:4]:
+                    if not isinstance(row, dict):
+                        continue
+                    ev_name = str(row.get("name", "")).strip()
+                    ev_date = _format_display_date(str(row.get("start_local", "")).strip())
+                    ev_venue = str(row.get("venue", "")).strip()
+                    ev_url = str(row.get("url", "")).strip()
+                    parts = [p for p in [ev_date, ev_venue] if p]
+                    tail = " · ".join(parts)
+                    if ev_url:
+                        st.markdown(f"- **{ev_name}** — {tail} ([link]({ev_url}))")
+                    else:
+                        st.markdown(f"- **{ev_name}** — {tail}")
+            else:
+                st.caption(events_message or "No events available for the selected dates.")
 
     with bottom_right:
         st.subheader("Map & Trip Details")

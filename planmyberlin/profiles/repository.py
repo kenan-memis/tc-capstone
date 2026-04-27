@@ -61,6 +61,17 @@ class UserProfileRepository:
             )
             conn.execute(
                 """
+                CREATE TABLE IF NOT EXISTS user_sessions (
+                    token TEXT PRIMARY KEY,
+                    user_id TEXT NOT NULL,
+                    expires_at TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    FOREIGN KEY (user_id) REFERENCES app_users(id)
+                )
+                """
+            )
+            conn.execute(
+                """
                 CREATE TABLE IF NOT EXISTS user_profiles (
                     id TEXT PRIMARY KEY,
                     user_id TEXT NOT NULL,
@@ -104,6 +115,7 @@ class UserProfileRepository:
             conn.execute("UPDATE app_users SET password_salt = '' WHERE password_salt IS NULL")
             conn.execute("UPDATE app_users SET password_hash = '' WHERE password_hash IS NULL")
             conn.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_app_users_username ON app_users(username)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_user_sessions_user ON user_sessions(user_id)")
             conn.execute("CREATE INDEX IF NOT EXISTS idx_user_profiles_user ON user_profiles(user_id)")
             conn.execute("CREATE UNIQUE INDEX IF NOT EXISTS idx_user_profiles_user_name ON user_profiles(user_id, name)")
 
@@ -229,6 +241,51 @@ class UserProfileRepository:
                 "UPDATE app_users SET onboarding_completed = ?, updated_at = ? WHERE id = ?",
                 (1 if completed else 0, now, user_id),
             )
+
+    def create_session(self, *, user_id: str, ttl_days: int = 30) -> str:
+        now = datetime.now(tz=timezone.utc)
+        from datetime import timedelta
+        expires_at = (now + timedelta(days=max(1, ttl_days))).isoformat()
+        token = uuid.uuid4().hex + uuid.uuid4().hex
+        with self._connect() as conn:
+            conn.execute(
+                "INSERT INTO user_sessions (token, user_id, expires_at, created_at) VALUES (?, ?, ?, ?)",
+                (token, user_id, expires_at, now.isoformat()),
+            )
+        return token
+
+    def get_user_by_session(self, *, token: str) -> AppUser | None:
+        tok = token.strip()
+        if not tok:
+            return None
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT u.*
+                FROM user_sessions s
+                JOIN app_users u ON u.id = s.user_id
+                WHERE s.token = ?
+                """,
+                (tok,),
+            ).fetchone()
+            sess = conn.execute(
+                "SELECT expires_at FROM user_sessions WHERE token = ?",
+                (tok,),
+            ).fetchone()
+        if not row or not sess:
+            return None
+        try:
+            expires_at = datetime.fromisoformat(str(sess["expires_at"]))
+        except ValueError:
+            return None
+        if expires_at <= datetime.now(tz=timezone.utc):
+            self.revoke_session(token=tok)
+            return None
+        return self._row_to_user(row)
+
+    def revoke_session(self, *, token: str) -> None:
+        with self._connect() as conn:
+            conn.execute("DELETE FROM user_sessions WHERE token = ?", (token.strip(),))
 
     def list_profiles(self, *, user_id: str) -> list[UserProfile]:
         with self._connect() as conn:
