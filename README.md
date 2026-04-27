@@ -42,6 +42,8 @@ docker compose up --build
 
 Open Streamlit at `http://localhost:8080`. Production images build with `INSTALL_DEV=false` (omit pytest/ruff); Compose sets `INSTALL_DEV=true` so you can optionally `docker compose run --rm app pytest` once a test command is wired into the image, or run tests on the host with `uv run pytest`.
 
+The **Dockerfile** runs `planmyberlin-build-index` during the image build, so **production containers include the Chroma vector index** derived from `data/raw/` (no separate manual index step on the server unless you exclude `data/vectorstore/` from the image and choose to build at startup instead).
+
 Build a production-style image locally:
 
 ```bash
