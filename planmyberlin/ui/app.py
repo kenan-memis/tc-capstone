@@ -880,6 +880,9 @@ def main() -> None:
         else:
             summary_panel.empty()
         completed_nodes = set(st.session_state.get("plan_build_nodes", []))
+        if has_existing_plan and phase == "ready":
+            # Restored plans may not carry full node completion history in session.
+            completed_nodes = set(_NODE_TO_PHASE.keys())
         if phase in {"building", "rendering", "ready", "error"}:
             steps_panel.markdown(_build_steps_markdown(completed_nodes, phase=phase))
         elif has_existing_plan:
