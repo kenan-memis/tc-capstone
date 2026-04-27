@@ -1175,7 +1175,23 @@ def main() -> None:
                     c_img, c_txt = st.columns([0.24, 0.76], gap="small")
                     with c_img:
                         if photo_url:
-                            st.image(photo_url, use_container_width=True)
+                            st.markdown(
+                                (
+                                    '<img src="'
+                                    + html.escape(photo_url, quote=True)
+                                    + '" alt="Accommodation thumbnail" '
+                                    + 'style="width:180px;height:120px;object-fit:cover;object-position:center;'
+                                    + 'border-radius:10px;display:block;" />'
+                                ),
+                                unsafe_allow_html=True,
+                            )
+                        else:
+                            st.markdown(
+                                '<div style="width:180px;height:120px;border-radius:10px;'
+                                'background:#f2f4f7;color:#667085;display:flex;align-items:center;'
+                                'justify-content:center;font-size:12px;">No photo</div>',
+                                unsafe_allow_html=True,
+                            )
                     with c_txt:
                         st.markdown(
                             f"- **{name}** ({typ}, {district}) — {reason}  \n"
