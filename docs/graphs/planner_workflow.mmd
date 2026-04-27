@@ -9,24 +9,32 @@ graph TD;
 	retrieve_context(retrieve_context)
 	enrich_places(enrich_places)
 	fetch_weather(fetch_weather)
+	fetch_events(fetch_events)
+	build_map_points(build_map_points)
+	fetch_transport(fetch_transport)
 	multi_day_track(multi_day_track)
 	single_day_track(single_day_track)
 	merge(merge)
 	accommodation(accommodation)
 	skip_accommodation(skip_accommodation)
+	generate_itinerary(generate_itinerary)
 	__end__([<p>__end__</p>]):::last
 	__start__ --> normalize_profile;
+	accommodation --> generate_itinerary;
+	build_map_points --> fetch_transport;
 	enrich_places --> fetch_weather;
-	fetch_weather -. &nbsp;multi_day&nbsp; .-> multi_day_track;
-	fetch_weather -. &nbsp;single_day&nbsp; .-> single_day_track;
+	fetch_events --> build_map_points;
+	fetch_transport -. &nbsp;multi_day&nbsp; .-> multi_day_track;
+	fetch_transport -. &nbsp;single_day&nbsp; .-> single_day_track;
+	fetch_weather --> fetch_events;
 	merge -.-> accommodation;
 	merge -.-> skip_accommodation;
 	multi_day_track --> merge;
 	normalize_profile --> retrieve_context;
 	retrieve_context --> enrich_places;
 	single_day_track --> merge;
-	accommodation --> __end__;
-	skip_accommodation --> __end__;
+	skip_accommodation --> generate_itinerary;
+	generate_itinerary --> __end__;
 	classDef default fill:#f2f0ff,line-height:1.2
 	classDef first fill-opacity:0
 	classDef last fill:#bfb6fc
