@@ -197,7 +197,7 @@ docker build -t planmyberlin:prod .
 
 ## Deployment
 
-**Live app (production):** _to be added_
+**Live app (production):** [https://planmyberlin-671153735897.europe-west10.run.app/](https://planmyberlin-671153735897.europe-west10.run.app/)
 
 ---
 

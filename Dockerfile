@@ -17,9 +17,6 @@ RUN if [ "$INSTALL_DEV" = "true" ]; then uv sync --frozen; else uv sync --frozen
 
 ENV PATH="/app/.venv/bin:${PATH}"
 
-# Ship a Chroma index built from data/raw so retrieval.backend=auto uses vectors in production.
-RUN uv run planmyberlin-build-index
-
 RUN chmod +x /app/docker-entrypoint.sh
 
 EXPOSE 8080
