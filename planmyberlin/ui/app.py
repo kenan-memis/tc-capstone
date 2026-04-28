@@ -10,13 +10,20 @@ import uuid
 from datetime import date, timedelta
 from functools import lru_cache
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import planmyberlin.env  # noqa: F401 — side-effect: load_dotenv + logging
 import streamlit as st
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI
 from streamlit_folium import st_folium
+try:
+    from langsmith import traceable
+except Exception:
+    def traceable(*_args: Any, **_kwargs: Any):  # type: ignore[misc]
+        def _wrap(fn):
+            return fn
+        return _wrap
 
 from planmyberlin.config.loader import (
     get_constants,
@@ -569,6 +576,30 @@ def _hydrate_session_from_plan_result(result: dict) -> None:
     st.session_state.pop("plan_narrative_md", None)
     st.session_state["map_highlight_pick"] = "(All places)"
     st.session_state["plan_map_version"] = str(uuid.uuid4())
+
+
+@traceable(name="planmyberlin.streamlit.graph_run", run_type="chain")
+def _run_graph_stream(
+    *,
+    graph: Any,
+    profile_payload: dict[str, Any],
+    run_id: str,
+    on_node_update: Callable[[str], None],
+) -> dict[str, Any]:
+    """Run planner graph stream and emit node updates to the UI callback."""
+    result: dict[str, Any] = {}
+    for event in graph.stream(
+        {"profile": profile_payload},
+        {"metadata": {"run_id": run_id, "source": "streamlit"}},
+        stream_mode="updates",
+    ):
+        if not isinstance(event, dict):
+            continue
+        for node_name, delta in event.items():
+            on_node_update(str(node_name))
+            if isinstance(delta, dict):
+                result.update(delta)
+    return result
 
 
 def _reset_plan_workflow_state() -> None:
@@ -1291,27 +1322,24 @@ def main() -> None:
             extra_details=effective_extra_details,
         )
         graph = build_planner_graph()
-        result: dict = {}
         run_id = str(uuid.uuid4())
         try:
             with bind_run_context(run_id):
                 _ui_log.info("streamlit planner_stream_started days=%d", profile.days)
                 status_panel.info("Building plan...")
-                for event in graph.stream(
-                    {"profile": profile.model_dump()},
-                    {"metadata": {"run_id": run_id, "source": "streamlit"}},
-                    stream_mode="updates",
-                ):
-                    if not isinstance(event, dict):
-                        continue
-                    for node_name, delta in event.items():
-                        if str(node_name) not in st.session_state["plan_build_nodes"]:
-                            st.session_state["plan_build_nodes"].append(str(node_name))
-                        steps_panel.markdown(
-                            _build_steps_markdown(set(st.session_state["plan_build_nodes"]), phase="building")
-                        )
-                        if isinstance(delta, dict):
-                            result.update(delta)
+                def _on_node(node_name: str) -> None:
+                    if node_name not in st.session_state["plan_build_nodes"]:
+                        st.session_state["plan_build_nodes"].append(node_name)
+                    steps_panel.markdown(
+                        _build_steps_markdown(set(st.session_state["plan_build_nodes"]), phase="building")
+                    )
+
+                result = _run_graph_stream(
+                    graph=graph,
+                    profile_payload=profile.model_dump(),
+                    run_id=run_id,
+                    on_node_update=_on_node,
+                )
                 _ui_log.info(
                     "streamlit planner_stream_finished itinerary_status=%s",
                     result.get("itinerary_status"),
