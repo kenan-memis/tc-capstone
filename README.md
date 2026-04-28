@@ -201,6 +201,14 @@ docker build -t planmyberlin:prod .
 
 ---
 
+## Observability (LangSmith tracing)
+
+- LangGraph planner runs are instrumented with LangSmith tracing (including per-node timing in waterfall view).
+- Tracing works in local development and can be enabled in Cloud Run via environment variables / secrets.
+- Current trace project name: `planmyberlin`.
+
+---
+
 ## Privacy, ethics, and limitations
 
 - This app is **informational only**; it does not perform reservations or purchases.
