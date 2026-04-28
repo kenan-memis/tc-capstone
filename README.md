@@ -1,8 +1,20 @@
 # PlanMyBerlin (Capstone)
 
-This project builds a **Berlin trip planning assistant** that combines curated knowledge with live APIs for transport, places, and weather. It uses **LangGraph** for agent-style orchestration (conditional routing and tool calls), **Streamlit** for the UI, and **YAML** for prompts and configuration. The assistant is **informational only**: it suggests where to go, how to move, what to eat, and where to stay using **links** — it does **not** perform bookings.
+## Project description (evaluation)
 
-The repository currently includes a **LangGraph workflow** (normalize profile → retrieval → places enrichment → weather signal → map points → transport context → multi-day vs single-day branches → accommodation gate), a Streamlit **preferences form** (YAML-driven copy; predefined interests and Berlin areas), and a **structured seed RAG corpus** under `data/raw/` for places/restaurants/transport context. Retrieval backend is configurable: `auto` (prefer Chroma index if available, fallback to seed), `chroma`, or `seed`. Places enrichment is backend-configurable (`google_places` preferred, `serpapi` optional), weather uses OpenWeather (`OPENWEATHER_API_KEY`), and transport suggestions use a transport.rest-compatible BVG endpoint. Retrieved/enriched items and weather bias are shown in the preview for transparency. When coordinates are available, the UI also renders an interactive map preview with markers.
+- **Goal:** Help people plan a short Berlin visit with **structured, explainable suggestions** (places, food, transport, weather, events, optional stays) in one place, without pretending to book anything for them.
+- **Problem it solves:** Trip planning is scattered across many sites; this app **aggregates** curated local knowledge, **retrieved context** (RAG), and **live signals** (weather, transport, cultural events) into a **day-by-day itinerary** the user can review and adjust.
+- **How it works:** Users set trip parameters in a **Streamlit** UI. A **LangGraph** pipeline **normalises** the profile, **retrieves** from a **Chroma** (or seed) knowledge base, **enriches** place ideas, fetches **weather** and **events** (Kulturdaten API), builds **map** context and **transport** hints, runs **single- vs multi-day** logic, optionally adds **accommodation** ideas, then **generates** a structured itinerary via an LLM with constraints and grounding. **Signed-in users** can persist a **latest** run, **save multiple plans**, and mark **favourites** (SQLite). Everything remains **informational** (links and suggestions only).
+
+The assistant is **informational only**: it suggests where to go, how to move, what to eat, and where to stay using **links** — it does **not** perform bookings. For **privacy and ethics**: passwords are **hashed**; session tokens are **revoked** on logout; the app does not sell user data; third-party APIs (maps, weather, events) are subject to their **providers’ terms** (users should verify hours, prices, and availability with official sources).
+
+### Stack and architecture (summary)
+
+- **LangGraph** workflow: normalize profile → **RAG** retrieval → enrich places → **weather** → **events** → **map** points → **transport** → multi/single-day **merge** → **accommodation** (optional) → **generate itinerary** → end.
+- **RAG:** Structured seed corpus in `data/raw/`; retrieval mode `auto` / `chroma` / `seed` in settings.
+- **Streamlit** UI: preferences, plan progress, map, detail panels, optional narrative; **user profiles** and **saved plans** in **SQLite** (`settings` → `profiles.sqlite_path`).
+
+Deployment notes (e.g. Cloud Run, secrets) can be added in this section when ready.
 
 ## Run locally
 
@@ -32,9 +44,9 @@ uv run pytest
 
 Copy `.env.example` to `.env` and set API keys (`OPENAI_API_KEY`, optionally `GEMINI_API_KEY` / `GOOGLE_API_KEY`, `OPENWEATHER_API_KEY`, and `SERPAPI_API_KEY`). For production on Google Cloud Run, inject the **same variable names** via Secret Manager.
 
-## Docker (local, same layout as Sprint 3)
+## Docker (local)
 
-From this directory (`capstone-project/`), with `.env` present:
+From the project root, with `.env` present:
 
 ```bash
 docker compose up --build
