@@ -82,9 +82,21 @@ _NODE_TO_PHASE = {
     "build_map_points": "phase_prepare",
 }
 
-_TIME_ICON_PATHS: dict[str, Path] = {}
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+_ICON_DIR = _REPO_ROOT / "planmyberlin" / "assets" / "icons"
 
-_TRANSPORT_ICON_PATHS: dict[str, Path] = {}
+_TIME_ICON_PATHS: dict[str, Path] = {
+    "morning": _ICON_DIR / "morning.png",
+    "afternoon": _ICON_DIR / "afternoon.png",
+    "evening": _ICON_DIR / "evening.png",
+}
+
+_TRANSPORT_ICON_PATHS: dict[str, Path] = {
+    "u_bahn": _ICON_DIR / "u_bahn.png",
+    "s_bahn": _ICON_DIR / "s_bahn.png",
+    "bus": _ICON_DIR / "bus.png",
+    "tram": _ICON_DIR / "tram.png",
+}
 _TRANSPORT_MODE_BADGES: dict[str, str] = {
     "u_bahn": "Ⓤ",
     "s_bahn": "Ⓢ",
