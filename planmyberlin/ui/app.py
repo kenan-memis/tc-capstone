@@ -82,31 +82,14 @@ _NODE_TO_PHASE = {
     "build_map_points": "phase_prepare",
 }
 
-_TIME_ICON_PATHS: dict[str, Path] = {
-    "morning": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/morning-6bb8cac5-de7c-4030-b367-be3ec132a85b.png"
-    ),
-    "afternoon": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/afternoon-fc911002-3c3d-410b-94ff-26e65fa5292e.png"
-    ),
-    "evening": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/evening-3a9f9fd8-6d10-4eeb-86de-4c8678a91b3c.png"
-    ),
-}
+_TIME_ICON_PATHS: dict[str, Path] = {}
 
-_TRANSPORT_ICON_PATHS: dict[str, Path] = {
-    "s_bahn": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.17.54-04e76c10-a25f-4288-a938-6ae8b3ca3111.png"
-    ),
-    "bus": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.19.01-06db2610-0c2a-4aa3-8c80-d2fda362eb18.png"
-    ),
-    "tram": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.18.18-850fb6bb-18db-4b73-8f4c-951606b03785.png"
-    ),
-    "u_bahn": Path(
-        "/Users/kenan/.cursor/projects/Users-kenan-Workshop-turing-college-projects-capstone/assets/Screenshot_2026-04-24_at_16.18.02-58c6c510-339f-4933-83e7-9c02752ef81b.png"
-    ),
+_TRANSPORT_ICON_PATHS: dict[str, Path] = {}
+_TRANSPORT_MODE_BADGES: dict[str, str] = {
+    "u_bahn": "Ⓤ",
+    "s_bahn": "Ⓢ",
+    "bus": "🚌",
+    "tram": "🚋",
 }
 
 
@@ -477,16 +460,23 @@ def _transport_mode_icons_html(modes: list[str]) -> str:
         return ""
     chunks: list[str] = []
     for mode in modes:
-        p = _TRANSPORT_ICON_PATHS.get(str(mode).strip().lower())
-        if not p:
-            continue
-        uri = _icon_data_uri(str(p))
-        if not uri:
-            continue
-        chunks.append(
-            f'<img src="{uri}" alt="{html.escape(str(mode))}" '
-            'style="width:16px;height:16px;vertical-align:-2px;margin-right:4px;border-radius:2px;" />'
-        )
+        m = str(mode).strip().lower()
+        p = _TRANSPORT_ICON_PATHS.get(m)
+        if p:
+            uri = _icon_data_uri(str(p))
+            if uri:
+                chunks.append(
+                    f'<img src="{uri}" alt="{html.escape(str(mode))}" '
+                    'style="width:16px;height:16px;vertical-align:-2px;margin-right:4px;border-radius:2px;" />'
+                )
+                continue
+        badge = _TRANSPORT_MODE_BADGES.get(m)
+        if badge:
+            chunks.append(
+                f'<span aria-label="{html.escape(m)}" '
+                'style="display:inline-block;min-width:16px;margin-right:4px;font-weight:700;">'
+                f"{html.escape(badge)}</span>"
+            )
     if not chunks:
         return ""
     return "".join(chunks) + " "

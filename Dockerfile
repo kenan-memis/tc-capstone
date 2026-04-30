@@ -17,6 +17,9 @@ RUN if [ "$INSTALL_DEV" = "true" ]; then uv sync --frozen; else uv sync --frozen
 
 ENV PATH="/app/.venv/bin:${PATH}"
 
+# Ensure graph artifacts are present in production UI.
+RUN uv run planmyberlin-export-graphs
+
 RUN chmod +x /app/docker-entrypoint.sh
 
 EXPOSE 8080
