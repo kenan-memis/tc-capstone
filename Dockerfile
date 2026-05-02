@@ -16,6 +16,8 @@ ARG INSTALL_DEV=false
 RUN if [ "$INSTALL_DEV" = "true" ]; then uv sync --frozen; else uv sync --frozen --no-dev; fi
 
 ENV PATH="/app/.venv/bin:${PATH}"
+# Session cookie: Secure flag (required for cookies on https://; Cloud Run is HTTPS)
+ENV COOKIE_SECURE=true
 
 # Ensure graph artifacts are present in production UI.
 RUN uv run planmyberlin-export-graphs

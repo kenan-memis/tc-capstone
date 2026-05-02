@@ -109,6 +109,8 @@ SERPAPI_API_KEY=...
 
 `GEMINI_API_KEY` / `GOOGLE_API_KEY` are optional in current code paths. Keep **`.env` out of version control**.
 
+For local use on **http://localhost**, leave **`COOKIE_SECURE` unset** (or `false`) so the session cookie can be set. The production Docker image sets **`COOKIE_SECURE=true`** for HTTPS on Cloud Run.
+
 ---
 
 ## Development (Docker)
@@ -198,6 +200,8 @@ docker build -t planmyberlin:prod .
 ## Deployment
 
 **Live app (production):** [https://planmyberlin-671153735897.europe-west10.run.app/](https://planmyberlin-671153735897.europe-west10.run.app/)
+
+The production image sets **`COOKIE_SECURE=true`** so the session cookie is marked **Secure** (HTTPS). Sign-in no longer puts the session token in the URL; it is stored in a browser cookie and validated against SQLite (same as before server-side).
 
 ---
 

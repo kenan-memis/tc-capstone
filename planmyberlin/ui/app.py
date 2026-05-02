@@ -39,6 +39,11 @@ from planmyberlin.map.interaction import itinerary_places_linked_to_map, normali
 from planmyberlin.models.trip_profile import TripProfile
 from planmyberlin.observability import bind_run_context, get_logger
 from planmyberlin.profiles import AppUser, UserProfileUpsert, build_user_profile_repository
+from planmyberlin.ui.session_cookie import (
+    clear_session_token_cookie,
+    read_session_token_from_cookie,
+    set_session_token_cookie,
+)
 
 
 _ui_log = get_logger(__name__)
@@ -617,6 +622,22 @@ def _reset_plan_workflow_state() -> None:
     st.session_state.pop("plan_persist_user_id", None)
 
 
+def _session_login_from_token(profile_repo: Any, token: str) -> AppUser | None:
+    """Resolve SQLite session token into auth session state; returns user or None."""
+    t = str(token or "").strip()
+    if not t:
+        return None
+    user_by_session = profile_repo.get_user_by_session(token=t)
+    if user_by_session is None:
+        return None
+    _reset_plan_workflow_state()
+    st.session_state["auth_user_id"] = user_by_session.id
+    st.session_state["auth_username"] = user_by_session.username
+    st.session_state["auth_onboarding_completed"] = bool(user_by_session.onboarding_completed)
+    st.session_state["auth_session_token"] = t
+    return user_by_session
+
+
 def _plan_builder_trip_summary_markdown(
     *,
     start_date: date,
@@ -721,15 +742,24 @@ def main() -> None:
     auth_user: AppUser | None = None
     try:
         profile_repo = build_user_profile_repository()
-        qs_token = str(st.query_params.get("auth_token", "")).strip()
-        if qs_token and not st.session_state.get("auth_user_id"):
-            user_by_session = profile_repo.get_user_by_session(token=qs_token)
-            if user_by_session is not None:
-                _reset_plan_workflow_state()
-                st.session_state["auth_user_id"] = user_by_session.id
-                st.session_state["auth_username"] = user_by_session.username
-                st.session_state["auth_onboarding_completed"] = bool(user_by_session.onboarding_completed)
-                st.session_state["auth_session_token"] = qs_token
+        if not st.session_state.get("auth_user_id"):
+            legacy_qs = str(st.query_params.get("auth_token", "")).strip()
+            if legacy_qs:
+                user_legacy = _session_login_from_token(profile_repo, legacy_qs)
+                if user_legacy is not None:
+                    set_session_token_cookie(legacy_qs)
+                if "auth_token" in st.query_params:
+                    del st.query_params["auth_token"]
+                if user_legacy is not None:
+                    st.rerun()
+
+            if not st.session_state.get("auth_user_id"):
+                ck = read_session_token_from_cookie()
+                if ck:
+                    user_ck = _session_login_from_token(profile_repo, ck)
+                    if user_ck is None:
+                        clear_session_token_cookie()
+
         current_user_id = st.session_state.get("auth_user_id")
         if isinstance(current_user_id, str):
             auth_user = profile_repo.get_user(current_user_id)
@@ -758,7 +788,7 @@ def main() -> None:
                     st.session_state["auth_username"] = user.username
                     st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
                     st.session_state["auth_session_token"] = session_token
-                    st.query_params["auth_token"] = session_token
+                    set_session_token_cookie(session_token)
                     st.rerun()
         with tab_signup:
             signup_username = st.text_input("Username (new account)", key="signup_username")
@@ -780,7 +810,7 @@ def main() -> None:
                         st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
                         session_token = profile_repo.create_session(user_id=user.id, ttl_days=30)
                         st.session_state["auth_session_token"] = session_token
-                        st.query_params["auth_token"] = session_token
+                        set_session_token_cookie(session_token)
                         st.success("Account created.")
                         st.rerun()
                     except ValueError as exc:
@@ -905,6 +935,7 @@ def main() -> None:
                 st.session_state["auth_onboarding_completed"] = False
                 st.session_state["auth_session_token"] = ""
                 _reset_plan_workflow_state()
+                clear_session_token_cookie()
                 if "auth_token" in st.query_params:
                     del st.query_params["auth_token"]
                 st.session_state["_clear_account_menu_after_logout"] = True
@@ -1368,7 +1399,6 @@ def main() -> None:
     result = plan_result
     retrieved_items = list(result.get("retrieved_items", []))
     enriched_items = list(result.get("enriched_items", []))
-    retrieval_notice = str(result.get("retrieval_notice", "")).strip()
     itinerary = result.get("itinerary", {})
     profile_data = result.get("profile", {}) if isinstance(result.get("profile"), dict) else {}
     trip_start = str(profile_data.get("start_date", "")).strip()
