@@ -742,7 +742,15 @@ def main() -> None:
     auth_user: AppUser | None = None
     try:
         profile_repo = build_user_profile_repository()
-        if not st.session_state.get("auth_user_id"):
+    except Exception:
+        profile_repo = None
+
+    if profile_repo is None:
+        st.error("User storage is unavailable right now.")
+        return
+
+    if not st.session_state.get("auth_user_id"):
+        try:
             legacy_qs = str(st.query_params.get("auth_token", "")).strip()
             if legacy_qs:
                 user_legacy = _session_login_from_token(profile_repo, legacy_qs)
@@ -759,17 +767,23 @@ def main() -> None:
                     user_ck = _session_login_from_token(profile_repo, ck)
                     if user_ck is None:
                         clear_session_token_cookie()
+                    else:
+                        st.session_state.pop("_cookie_hydration_pass", None)
+                else:
+                    # extra-streamlit-components CookieManager often yields {} on the first script run
+                    # after a cold load; one rerun lets getAll() receive browser cookies.
+                    if int(st.session_state.get("_cookie_hydration_pass", 0) or 0) < 1:
+                        st.session_state["_cookie_hydration_pass"] = 1
+                        st.rerun()
+        except Exception as exc:
+            _ui_log.warning("Session restore (cookie or legacy URL) failed: %s", exc, exc_info=True)
 
-        current_user_id = st.session_state.get("auth_user_id")
-        if isinstance(current_user_id, str):
+    current_user_id = st.session_state.get("auth_user_id")
+    if isinstance(current_user_id, str):
+        try:
             auth_user = profile_repo.get_user(current_user_id)
-    except Exception:
-        profile_repo = None
-        auth_user = None
-
-    if profile_repo is None:
-        st.error("User storage is unavailable right now.")
-        return
+        except Exception:
+            auth_user = None
 
     if auth_user is None:
         st.subheader("Sign in")
@@ -788,6 +802,7 @@ def main() -> None:
                     st.session_state["auth_username"] = user.username
                     st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
                     st.session_state["auth_session_token"] = session_token
+                    st.session_state.pop("_cookie_hydration_pass", None)
                     set_session_token_cookie(session_token)
                     st.rerun()
         with tab_signup:
@@ -810,6 +825,7 @@ def main() -> None:
                         st.session_state["auth_onboarding_completed"] = bool(user.onboarding_completed)
                         session_token = profile_repo.create_session(user_id=user.id, ttl_days=30)
                         st.session_state["auth_session_token"] = session_token
+                        st.session_state.pop("_cookie_hydration_pass", None)
                         set_session_token_cookie(session_token)
                         st.success("Account created.")
                         st.rerun()
